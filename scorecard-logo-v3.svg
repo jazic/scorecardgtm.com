@@ -1,0 +1,132 @@
+<svg xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc" viewBox="0 0 4900 777">
+  <title id="title">Scorecard</title>
+  <desc id="desc">Scorecard logo with overlapping score distributions, stacked account blocks, and a selected high-fit curve.</desc>
+  <style>
+    .wordmark {
+      fill: #03153A;
+      font-family: "Inter", Arial, sans-serif;
+      font-size: 520px;
+      font-weight: 900;
+    }
+  </style>
+  <defs>
+    <path id="yellow-curve-path" d="M8 742 C134 740 238 678 326 548 C430 394 510 294 628 282 C756 270 876 388 974 552 C1034 654 1088 720 1170 742 Z"/>
+    <path id="green-curve-path" d="M366 742 C532 738 644 646 736 474 C862 238 980 132 1106 124 C1276 114 1398 304 1450 514 C1490 686 1388 736 1226 742 Z"/>
+    <path id="blue-curve-path" d="M740 742 C916 738 1018 602 1148 340 C1262 112 1368 26 1500 14 C1662 0 1778 144 1868 378 C1942 576 2004 686 2100 742 Z"/>
+
+    <clipPath id="yellow-clip">
+      <use href="#yellow-curve-path"/>
+    </clipPath>
+    <clipPath id="green-clip">
+      <use href="#green-curve-path"/>
+    </clipPath>
+    <clipPath id="blue-clip">
+      <use href="#blue-curve-path"/>
+    </clipPath>
+
+    <linearGradient id="yellow-fill" x1="0" x2="0" y1="280" y2="742" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFE780"/>
+      <stop offset=".52" stop-color="#FDB425"/>
+      <stop offset="1" stop-color="#FFD65A"/>
+    </linearGradient>
+    <linearGradient id="green-fill" x1="420" x2="1370" y1="140" y2="742" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#9BE0B6"/>
+      <stop offset=".45" stop-color="#A8D862"/>
+      <stop offset="1" stop-color="#56CABA"/>
+    </linearGradient>
+    <linearGradient id="blue-fill" x1="800" x2="1980" y1="20" y2="742" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#8CE7F6"/>
+      <stop offset=".36" stop-color="#43C8EA"/>
+      <stop offset=".76" stop-color="#5F9BEA"/>
+      <stop offset="1" stop-color="#8C87E6"/>
+    </linearGradient>
+  </defs>
+
+  <g id="logo">
+    <g id="icon">
+      <g id="yellow-curve" opacity=".76">
+        <use href="#yellow-curve-path" fill="url(#yellow-fill)"/>
+        <g id="yellow-account-blocks" clip-path="url(#yellow-clip)">
+          <rect x="128" y="658" width="84" height="84" fill="#FFE780" opacity=".16"/>
+          <rect x="232" y="658" width="84" height="84" fill="#FDB425" opacity=".2"/>
+          <rect x="336" y="658" width="84" height="84" fill="#FFE06A" opacity=".18"/>
+          <rect x="336" y="554" width="84" height="84" fill="#FFC13A" opacity=".16"/>
+          <rect x="440" y="658" width="84" height="84" fill="#FFC13A" opacity=".21"/>
+          <rect x="440" y="554" width="84" height="84" fill="#FFE780" opacity=".16"/>
+          <rect x="440" y="450" width="84" height="84" fill="#FDB425" opacity=".14"/>
+          <rect x="544" y="658" width="84" height="84" fill="#FFE06A" opacity=".18"/>
+          <rect x="544" y="554" width="84" height="84" fill="#FDB425" opacity=".16"/>
+          <rect x="544" y="450" width="84" height="84" fill="#FFE780" opacity=".14"/>
+          <rect x="648" y="658" width="84" height="84" fill="#FFD65A" opacity=".16"/>
+          <rect x="648" y="554" width="84" height="84" fill="#FFE277" opacity=".13"/>
+          <rect x="752" y="658" width="84" height="84" fill="#FDB425" opacity=".13"/>
+        </g>
+      </g>
+
+      <g id="green-curve" opacity=".72">
+        <use href="#green-curve-path" fill="url(#green-fill)"/>
+        <g id="green-account-blocks" clip-path="url(#green-clip)">
+          <rect x="472" y="650" width="92" height="92" fill="#B6DF79" opacity=".12"/>
+          <rect x="584" y="650" width="92" height="92" fill="#8DDFA6" opacity=".16"/>
+          <rect x="584" y="538" width="92" height="92" fill="#A8D862" opacity=".14"/>
+          <rect x="696" y="650" width="92" height="92" fill="#75D0BF" opacity=".18"/>
+          <rect x="696" y="538" width="92" height="92" fill="#B6DF79" opacity=".16"/>
+          <rect x="696" y="426" width="92" height="92" fill="#8DDFA6" opacity=".12"/>
+          <rect x="808" y="650" width="92" height="92" fill="#5FCBBA" opacity=".2"/>
+          <rect x="808" y="538" width="92" height="92" fill="#A8D862" opacity=".18"/>
+          <rect x="808" y="426" width="92" height="92" fill="#75D0BF" opacity=".15"/>
+          <rect x="808" y="314" width="92" height="92" fill="#B6DF79" opacity=".12"/>
+          <rect x="920" y="650" width="92" height="92" fill="#A8D862" opacity=".17"/>
+          <rect x="920" y="538" width="92" height="92" fill="#8DDFA6" opacity=".16"/>
+          <rect x="920" y="426" width="92" height="92" fill="#5FCBBA" opacity=".14"/>
+          <rect x="920" y="314" width="92" height="92" fill="#B6DF79" opacity=".11"/>
+          <rect x="1032" y="650" width="92" height="92" fill="#75D0BF" opacity=".16"/>
+          <rect x="1032" y="538" width="92" height="92" fill="#A8D862" opacity=".15"/>
+          <rect x="1032" y="426" width="92" height="92" fill="#8DDFA6" opacity=".12"/>
+          <rect x="1144" y="650" width="92" height="92" fill="#5FCBBA" opacity=".14"/>
+          <rect x="1144" y="538" width="92" height="92" fill="#8DDFA6" opacity=".12"/>
+          <rect x="1256" y="650" width="92" height="92" fill="#75D0BF" opacity=".1"/>
+        </g>
+      </g>
+
+      <g id="blue-curve" opacity=".82">
+        <use href="#blue-curve-path" fill="url(#blue-fill)"/>
+        <g id="blue-account-blocks" clip-path="url(#blue-clip)">
+          <rect x="844" y="646" width="96" height="96" fill="#9BE7F6" opacity=".11"/>
+          <rect x="960" y="646" width="96" height="96" fill="#43C8EA" opacity=".15"/>
+          <rect x="960" y="530" width="96" height="96" fill="#8FE4F5" opacity=".12"/>
+          <rect x="1076" y="646" width="96" height="96" fill="#68D5EE" opacity=".18"/>
+          <rect x="1076" y="530" width="96" height="96" fill="#55BFE8" opacity=".16"/>
+          <rect x="1076" y="414" width="96" height="96" fill="#A5EAF7" opacity=".11"/>
+          <rect x="1192" y="646" width="96" height="96" fill="#5FD2EE" opacity=".2"/>
+          <rect x="1192" y="530" width="96" height="96" fill="#86DFF3" opacity=".18"/>
+          <rect x="1192" y="414" width="96" height="96" fill="#47C9EA" opacity=".15"/>
+          <rect x="1192" y="298" width="96" height="96" fill="#9BE7F6" opacity=".11"/>
+          <rect x="1308" y="646" width="96" height="96" fill="#48CBEA" opacity=".2"/>
+          <rect x="1308" y="530" width="96" height="96" fill="#8FE4F5" opacity=".17"/>
+          <rect x="1308" y="414" width="96" height="96" fill="#5FCDEB" opacity=".14"/>
+          <rect x="1308" y="298" width="96" height="96" fill="#B8F0FA" opacity=".1"/>
+          <rect x="1424" y="646" width="96" height="96" fill="#74DAF1" opacity=".18"/>
+          <rect x="1424" y="530" width="96" height="96" fill="#43C8EA" opacity=".16"/>
+          <rect x="1424" y="414" width="96" height="96" fill="#9BE7F6" opacity=".12"/>
+          <rect x="1540" y="646" width="96" height="96" fill="#68B9EA" opacity=".16"/>
+          <rect x="1540" y="530" width="96" height="96" fill="#87DDF2" opacity=".14"/>
+          <rect x="1540" y="414" width="96" height="96" fill="#5AA8E8" opacity=".11"/>
+          <rect x="1656" y="646" width="96" height="96" fill="#669DE8" opacity=".13"/>
+          <rect x="1656" y="530" width="96" height="96" fill="#78C4EC" opacity=".11"/>
+          <rect x="1772" y="646" width="96" height="96" fill="#8D88E6" opacity=".1"/>
+        </g>
+      </g>
+
+      <g id="green-blue-overlap" clip-path="url(#green-clip)" opacity=".2">
+        <g clip-path="url(#blue-clip)">
+          <rect x="720" y="128" width="910" height="614" fill="#22C5CB"/>
+        </g>
+      </g>
+      <path id="baseline" d="M14 748 H2100" fill="none" stroke="#03153A" stroke-width="16" stroke-linecap="round"/>
+      <path id="selected-boundary" d="M760 742 C930 736 1022 600 1148 340 C1262 112 1368 26 1500 14 C1662 0 1778 144 1868 378 C1940 570 1996 680 2078 742" fill="none" stroke="#03153A" stroke-width="27" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+
+    <text class="wordmark" x="2168" y="690">Scorecard</text>
+  </g>
+</svg>

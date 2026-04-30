@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Scorecard — Design System</title>
+  <meta name="description" content="A reference for everyone shipping Scorecard surfaces. Logo, color, type, components, and motifs." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink:      #03153A;
+      --bg:       #FAFBFC;
+      --surface:  #FFFFFF;
+      --border:   rgba(100,116,139,0.18);
+      --hairline: rgba(100,116,139,0.12);
+      --body:     #475569;
+      --muted:    #64748B;
+      --faint:    #94A3B8;
+      --whisper:  #CBD5E1;
+      --gold:     #FCAF0F;
+      --green:    #A8D862;
+      --blue:     #649BE4;
+      --purple:   #B493EA;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    a { color: inherit; }
+    button { font-family: inherit; }
+    code { font-family: 'JetBrains Mono', monospace; font-size: 12px; }
+
+    .header-wrap {
+      position: sticky; top: 0; z-index: 10;
+      background: rgba(250,251,252,0.85);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--hairline);
+    }
+    .header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 22px 48px;
+      max-width: 1280px; margin: 0 auto; width: 100%;
+    }
+    .logo { height: 36px; width: auto; display: block; }
+    .header nav { display: flex; gap: 28px; font-size: 14px; font-weight: 500; }
+    .header nav a { text-decoration: none; color: var(--body); }
+    .header nav a.active { color: var(--ink); font-weight: 600; }
+
+    main {
+      max-width: 1280px; margin: 0 auto;
+      padding: 64px 48px;
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 48px;
+    }
+
+    aside.toc {
+      position: sticky; top: 110px; align-self: start;
+    }
+    aside.toc .label {
+      font-size: 11px; font-weight: 500; color: var(--muted);
+      letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 14px;
+    }
+    aside.toc ul {
+      list-style: none; margin: 0; padding: 0;
+      display: flex; flex-direction: column; gap: 10px;
+    }
+    aside.toc a {
+      text-decoration: none; color: var(--ink); font-size: 13px; font-weight: 500;
+      display: flex; align-items: center; gap: 8px;
+    }
+    aside.toc a .num {
+      color: var(--faint); font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    }
+
+    .intro { margin-bottom: 80px; }
+    .intro .eyebrow {
+      font-size: 12px; font-weight: 500; color: var(--muted);
+      letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 16px;
+    }
+    .intro h1 {
+      font-size: 64px; font-weight: 700; letter-spacing: -0.035em; line-height: 1.05;
+      color: var(--ink); margin: 0 0 18px; text-wrap: balance; max-width: 760px;
+    }
+    .intro p {
+      font-size: 18px; line-height: 1.55; color: var(--body); max-width: 640px;
+      margin: 0; text-wrap: pretty;
+    }
+
+    section { margin-bottom: 96px; scroll-margin-top: 100px; }
+    .section-head { margin-bottom: 36px; }
+    .section-head .eyebrow {
+      font-size: 12px; font-weight: 500; color: var(--muted);
+      letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 8px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .section-head .eyebrow .pip {
+      width: 6px; height: 6px; border-radius: 3px; background: var(--purple);
+    }
+    .section-head h2 {
+      font-size: 38px; font-weight: 700; letter-spacing: -0.025em;
+      color: var(--ink); margin: 0 0 12px; line-height: 1.1;
+    }
+    .section-head p {
+      font-size: 16px; line-height: 1.6; color: var(--body); max-width: 680px; margin: 0;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 28px;
+    }
+    .card.flush { padding: 0; overflow: hidden; }
+    .card.tight { padding: 20px; }
+    .card.lg    { padding: 32px; }
+    .card.xl    { padding: 48px; }
+
+    .card-title {
+      font-size: 13px; font-weight: 600; color: var(--ink); margin-bottom: 16px;
+    }
+    .card-title.tight { margin-bottom: 12px; }
+
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .grid-5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; }
+    .grid-7 { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; }
+
+    .row-gap-20 { display: grid; gap: 20px; }
+
+    .mono { font-family: 'JetBrains Mono', monospace; }
+    .label-mono {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px; color: var(--muted); letter-spacing: 0.02em;
+    }
+
+    /* ---------- Logo section ---------- */
+    .logo-primary {
+      display: grid; place-items: center; min-height: 280px;
+    }
+    .logo-mark {
+      display: grid; place-items: center;
+    }
+    .logo-mark .crop {
+      overflow: hidden; width: 160px; height: 120px;
+      display: grid; place-items: center;
+    }
+    .logo-mark .crop img { height: 96px; transform: translateX(-26%); }
+    .logo-size { padding: 20px; }
+    .logo-size .frame { height: 110px; display: grid; place-items: center; }
+    .logo-size .name { font-size: 13px; font-weight: 600; color: var(--ink); margin-top: 12px; }
+    .logo-size .use  { font-size: 12px; color: var(--muted); margin-top: 2px; }
+    .logo-surface { padding: 0; overflow: hidden; }
+    .logo-surface .swatch { height: 140px; display: grid; place-items: center; }
+    .logo-surface .swatch img { height: 48px; }
+    .logo-surface .meta { padding: 16px; }
+    .logo-surface .name { font-size: 13px; font-weight: 600; color: var(--ink); }
+    .logo-surface .note { font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+    .clearspace {
+      position: relative; height: 140px;
+      background: rgba(180,147,234,0.08);
+      border-radius: 8px; display: grid; place-items: center;
+    }
+    .clearspace .dash {
+      position: absolute; inset: 18px;
+      border: 1px dashed var(--whisper); border-radius: 4px;
+    }
+
+    .donts {
+      margin: 0; padding: 0 0 0 18px;
+      font-size: 13px; line-height: 1.8; color: var(--body);
+    }
+
+    /* ---------- Color section ---------- */
+    .swatch-brand {
+      border-radius: 12px; padding: 20px;
+      min-height: 200px; display: flex; flex-direction: column; justify-content: space-between;
+      border: 1px solid var(--border);
+    }
+    .swatch-brand .name { font-size: 18px; font-weight: 700; }
+    .swatch-brand .hex  { font-family: 'JetBrains Mono', monospace; font-size: 12px; opacity: 0.85; }
+    .swatch-brand .sem  { font-size: 12px; opacity: 0.85; margin-top: 4px; }
+    .ramp { display: flex; border-radius: 8px; overflow: hidden; height: 56px; }
+    .ramp .stop { flex: 1; }
+    .ramp-key {
+      display: flex; justify-content: space-between;
+      font-size: 11px; color: var(--muted); margin-top: 8px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .neutral {
+      border: 1px solid var(--border); border-radius: 8px; overflow: hidden;
+    }
+    .neutral .bar { height: 72px; }
+    .neutral .meta { padding: 10px 12px; background: var(--surface); }
+    .neutral .name { font-size: 12px; font-weight: 600; color: var(--ink); }
+    .neutral .hex  { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--muted); margin-top: 2px; }
+
+    /* ---------- Type section ---------- */
+    .type-aa {
+      font-size: 96px; font-weight: 700; letter-spacing: -0.04em;
+      line-height: 1; color: var(--ink);
+    }
+    .type-cols {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 24px;
+    }
+    .type-cols .h { font-size: 13px; font-weight: 600; color: var(--ink); }
+    .type-cols .desc { font-size: 12px; color: var(--muted); margin-bottom: 8px; }
+    .type-cols .sample-inter {
+      font-size: 18px; color: var(--body); line-height: 1.5;
+    }
+    .type-cols .sample-mono {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 18px; color: var(--ink); line-height: 1.4;
+    }
+
+    table.scale {
+      width: 100%; border-collapse: collapse; font-family: 'Inter', sans-serif;
+    }
+    table.scale th, table.scale td {
+      padding: 14px 22px; text-align: left;
+      border-bottom: 1px solid var(--hairline);
+    }
+    table.scale th {
+      font-size: 11px; font-weight: 500; color: var(--muted);
+      text-transform: uppercase; letter-spacing: 0.08em;
+    }
+    table.scale td { font-size: 13px; color: var(--body); }
+    table.scale td.token { font-weight: 600; color: var(--ink); }
+    table.scale td.mono { font-family: 'JetBrains Mono', monospace; font-size: 12px; }
+    table.scale tr:last-child td { border-bottom: none; }
+
+    /* ---------- Components ---------- */
+    .btn {
+      background: var(--ink); color: #FFF; border: none; border-radius: 8px;
+      padding: 11px 18px; font-size: 14px; font-weight: 500; cursor: pointer;
+    }
+    .btn.lg { font-size: 15px; padding: 14px 22px; }
+    .ghost-link {
+      text-decoration: none; color: var(--body);
+      font-size: 14px; font-weight: 500;
+      border-bottom: 1px solid rgba(71,85,105,0.25); padding-bottom: 2px;
+    }
+    .ghost-link .arrow { margin-left: 6px; color: var(--purple); }
+    .nav-link { text-decoration: none; color: var(--ink); font-size: 14px; font-weight: 500; }
+    .row-wrap { display: flex; gap: 22px; align-items: center; flex-wrap: wrap; }
+
+    .tier-badge {
+      width: 32px; height: 32px; border-radius: 8px;
+      font-size: 14px; font-weight: 700;
+      display: grid; place-items: center; color: var(--ink);
+    }
+    .tier-row { display: flex; align-items: center; gap: 10px; }
+    .tier-row .lbl { font-size: 13px; color: var(--body); }
+
+    .pulse-dot {
+      width: 8px; height: 8px; border-radius: 4px; background: var(--green);
+      box-shadow: 0 0 0 4px rgba(168,216,98,0.22);
+      animation: pulseDS 1.6s ease-in-out infinite;
+    }
+    @keyframes pulseDS { 0%,100% { opacity: 1 } 50% { opacity: 0.45 } }
+    .live-row { display: flex; align-items: center; gap: 10px; }
+    .live-row .live-label { font-size: 13px; font-weight: 600; color: var(--ink); }
+    .live-row .live-month { font-size: 12px; color: var(--muted); }
+
+    .eyebrow-row {
+      display: inline-flex; align-items: center; gap: 14px;
+      font-size: 12px; font-weight: 500; color: var(--muted);
+      letter-spacing: 0.08em; text-transform: uppercase;
+    }
+    .eyebrow-row .pip { width: 6px; height: 6px; border-radius: 3px; background: var(--purple); }
+    .eyebrow-row strong { color: var(--ink); font-weight: 600; letter-spacing: 0.05em; }
+
+    .prospect {
+      display: grid; grid-template-columns: 1fr auto auto;
+      align-items: center; gap: 14px;
+      padding: 11px 12px; border-radius: 8px;
+    }
+    .prospect.active { background: rgba(100,155,228,0.08); }
+    .prospect .name { font-size: 13.5px; font-weight: 600; color: var(--ink); }
+    .prospect .meta { font-size: 11.5px; color: var(--muted); margin-top: 2px; }
+    .prospect .score {
+      font-family: 'JetBrains Mono', monospace; font-size: 18px; font-weight: 700;
+      color: var(--ink); min-width: 30px; text-align: right; letter-spacing: -0.02em;
+    }
+    .tier-chip {
+      width: 22px; height: 22px; border-radius: 6px;
+      font-size: 11px; font-weight: 700;
+      display: grid; place-items: center; color: var(--ink);
+    }
+    .tier-A, .swatch-A { background: var(--green); }
+    .tier-B, .swatch-B { background: var(--blue); }
+    .tier-C, .swatch-C { background: var(--purple); }
+    .tier-D, .swatch-D { background: var(--gold); }
+
+    .dist-frame { height: 84px; position: relative; }
+    .dist-frame svg { display: block; width: 100%; height: 84px; }
+    .caption { font-size: 12px; color: var(--muted); margin-top: 10px; line-height: 1.6; }
+
+    /* Motifs */
+    .motif-tile { padding: 0; overflow: hidden; }
+    .motif-tile .frame { height: 200px; position: relative; background: var(--bg); overflow: hidden; }
+    .motif-tile .frame > svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+    .motif-tile .meta { padding: 18px; }
+    .motif-tile .name { font-size: 14px; font-weight: 600; color: var(--ink); }
+    .motif-tile .desc { font-size: 12px; color: var(--muted); margin-top: 4px; }
+
+    /* Voice */
+    .voice-card .h { font-size: 16px; font-weight: 600; color: var(--ink); margin-bottom: 8px; }
+    .voice-card .b { font-size: 14px; line-height: 1.6; color: var(--body); }
+
+    .footer-line {
+      border-top: 1px solid var(--hairline);
+      padding-top: 28px; margin-top: 40px;
+      font-size: 12px; color: var(--muted);
+    }
+
+    @media (max-width: 960px) {
+      main { grid-template-columns: 1fr; padding: 40px 24px; gap: 32px; }
+      aside.toc { position: static; }
+      .header { padding: 18px 24px; }
+      .intro h1 { font-size: 44px; }
+      .grid-5 { grid-template-columns: repeat(2, 1fr); }
+      .grid-4 { grid-template-columns: repeat(2, 1fr); }
+      .grid-3 { grid-template-columns: 1fr; }
+      .grid-2 { grid-template-columns: 1fr; }
+      .grid-7 { grid-template-columns: repeat(3, 1fr); }
+      .type-cols { grid-template-columns: 1fr; gap: 20px; }
+      .section-head h2 { font-size: 30px; }
+      table.scale th, table.scale td { padding: 12px 14px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="header-wrap">
+    <header class="header">
+      <a href="index.html" aria-label="Scorecard home"><img class="logo" src="scorecard-logo.svg" alt="Scorecard" /></a>
+      <nav>
+        <a href="index.html">← Back to product</a>
+        <a href="#" class="active">System</a>
+      </nav>
+    </header>
+  </div>
+
+  <main>
+    <aside class="toc">
+      <div class="label">Contents</div>
+      <ul>
+        <li><a href="#logo"><span class="num">01</span><span>Logo</span></a></li>
+        <li><a href="#color"><span class="num">02</span><span>Color</span></a></li>
+        <li><a href="#type"><span class="num">03</span><span>Type</span></a></li>
+        <li><a href="#components"><span class="num">04</span><span>Components</span></a></li>
+        <li><a href="#motifs"><span class="num">05</span><span>Motifs</span></a></li>
+        <li><a href="#voice"><span class="num">06</span><span>Voice</span></a></li>
+      </ul>
+    </aside>
+
+    <div>
+      <div class="intro">
+        <div class="eyebrow">Scorecard · Design System</div>
+        <h1>The signal in the noise — encoded.</h1>
+        <p>A reference for everyone shipping Scorecard surfaces. Logo, color, type, components, and motifs — all built around a single visual idea: most prospects are noise, a few are the signal.</p>
+      </div>
+
+      <!-- 01 LOGO -->
+      <section id="logo">
+        <div class="section-head">
+          <div class="eyebrow"><span class="pip"></span>01 · Logo</div>
+          <h2>The mark</h2>
+          <p>Three overlapping curves form a distribution silhouette — two muted bumps for the noise, one tall colored bump for the signal. The wordmark sits at the same baseline as the curves' base.</p>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 20px;">
+          <div class="card xl logo-primary">
+            <img src="scorecard-logo.svg" alt="Scorecard" style="height: 88px;" />
+          </div>
+          <div class="card logo-mark">
+            <div class="crop"><img src="scorecard-logo.svg" alt="" /></div>
+            <span class="label-mono">mark only</span>
+          </div>
+        </div>
+
+        <div class="grid-4" style="margin-top: 20px;">
+          <div class="card logo-size">
+            <div class="frame"><img src="scorecard-logo.svg" alt="" style="height: 24px;" /></div>
+            <div class="name">Inline · 24px</div><div class="use">Inline runs, footers</div>
+          </div>
+          <div class="card logo-size">
+            <div class="frame"><img src="scorecard-logo.svg" alt="" style="height: 36px;" /></div>
+            <div class="name">Header · 36px</div><div class="use">Top nav (default)</div>
+          </div>
+          <div class="card logo-size">
+            <div class="frame"><img src="scorecard-logo.svg" alt="" style="height: 64px;" /></div>
+            <div class="name">Page · 64px</div><div class="use">Marketing hero, signup</div>
+          </div>
+          <div class="card logo-size">
+            <div class="frame"><img src="scorecard-logo.svg" alt="" style="height: 96px;" /></div>
+            <div class="name">Display · 96px</div><div class="use">About, splash, login</div>
+          </div>
+        </div>
+
+        <div class="grid-3" style="margin-top: 20px;">
+          <div class="card logo-surface">
+            <div class="swatch" style="background: var(--bg);"><img src="scorecard-logo.svg" alt="" /></div>
+            <div class="meta"><div class="name">Light surface</div><div class="note">Default — use everywhere.</div></div>
+          </div>
+          <div class="card logo-surface">
+            <div class="swatch" style="background: #03153A;"><img src="scorecard-logo.svg" alt="" /></div>
+            <div class="meta"><div class="name">Ink surface</div><div class="note">Reserved — needs review for press use.</div></div>
+          </div>
+          <div class="card logo-surface">
+            <div class="swatch" style="background: #A8D862;"><img src="scorecard-logo.svg" alt="" /></div>
+            <div class="meta"><div class="name">Brand color surface</div><div class="note">Avoid — colors clash with mark fill.</div></div>
+          </div>
+        </div>
+
+        <div class="grid-2" style="margin-top: 20px;">
+          <div class="card" style="padding: 24px;">
+            <div class="card-title tight">Clearspace</div>
+            <div class="clearspace">
+              <div class="dash"></div>
+              <img src="scorecard-logo.svg" alt="" style="height: 56px;" />
+            </div>
+            <div class="caption">Maintain clearspace equal to the height of the wordmark's cap-height on all sides.</div>
+          </div>
+          <div class="card" style="padding: 24px;">
+            <div class="card-title tight">Don't</div>
+            <ul class="donts">
+              <li>Don't recolor the curves outside the brand palette</li>
+              <li>Don't outline, drop-shadow, or emboss the mark</li>
+              <li>Don't separate the curves from the wordmark in lockup contexts</li>
+              <li>Don't place on busy or saturated photography</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- 02 COLOR -->
+      <section id="color">
+        <div class="section-head">
+          <div class="eyebrow"><span class="pip"></span>02 · Color</div>
+          <h2>Palette &amp; semantics</h2>
+          <p>Five brand colors mapped to the signal/noise model. The right (signal) bump uses Green→Blue→Purple top-to-bottom; the noise region uses Gold. Ink anchors structure and text.</p>
+        </div>
+
+        <div class="grid-5" style="margin-bottom: 24px;">
+          <div class="swatch-brand" style="background: #FCAF0F; color: #03153A;">
+            <div class="name">Gold</div>
+            <div><div class="hex">#FCAF0F</div><div class="sem">Noise · low-score region</div></div>
+          </div>
+          <div class="swatch-brand" style="background: #A8D862; color: #03153A;">
+            <div class="name">Green</div>
+            <div><div class="hex">#A8D862</div><div class="sem">Tier A · ideal · signal peak</div></div>
+          </div>
+          <div class="swatch-brand" style="background: #649BE4; color: #03153A;">
+            <div class="name">Blue</div>
+            <div><div class="hex">#649BE4</div><div class="sem">Tier B · strong · signal mid</div></div>
+          </div>
+          <div class="swatch-brand" style="background: #B493EA; color: #03153A;">
+            <div class="name">Purple</div>
+            <div><div class="hex">#B493EA</div><div class="sem">Tier C · accent · signal base</div></div>
+          </div>
+          <div class="swatch-brand" style="background: #03153A; color: #FAFBFC;">
+            <div class="name">Ink</div>
+            <div><div class="hex">#03153A</div><div class="sem">Primary text · structure</div></div>
+          </div>
+        </div>
+
+        <div class="card" style="padding: 24px; margin-bottom: 24px;">
+          <div class="card-title">Mosaic ramp</div>
+          <div class="ramp" id="mosaic-ramp"></div>
+          <div class="ramp-key">
+            <span>Gold · noise</span>
+            <span>Green · peak</span>
+            <span>Blue · mid</span>
+            <span>Purple · base</span>
+          </div>
+          <div class="caption" style="font-size: 13px; color: var(--body); margin-top: 12px;">
+            Used for the logo fill, hero curves, and any ramp visualization. Sample with <code>mosaicColorAt(u)</code> where u is 0–1.
+          </div>
+        </div>
+
+        <div>
+          <div class="card-title">Neutrals</div>
+          <div class="grid-7">
+            <div class="neutral"><div class="bar" style="background: #FAFBFC;"></div><div class="meta"><div class="name">Bg</div><div class="hex">#FAFBFC</div></div></div>
+            <div class="neutral"><div class="bar" style="background: #FFFFFF;"></div><div class="meta"><div class="name">Surface</div><div class="hex">#FFFFFF</div></div></div>
+            <div class="neutral"><div class="bar" style="background: #CBD5E1;"></div><div class="meta"><div class="name">Whisper</div><div class="hex">#CBD5E1</div></div></div>
+            <div class="neutral"><div class="bar" style="background: #94A3B8;"></div><div class="meta"><div class="name">Faint</div><div class="hex">#94A3B8</div></div></div>
+            <div class="neutral"><div class="bar" style="background: #64748B;"></div><div class="meta"><div class="name">Muted</div><div class="hex">#64748B</div></div></div>
+            <div class="neutral"><div class="bar" style="background: #475569;"></div><div class="meta"><div class="name">Body</div><div class="hex">#475569</div></div></div>
+            <div class="neutral"><div class="bar" style="background: #03153A;"></div><div class="meta"><div class="name">Text</div><div class="hex">#03153A</div></div></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 03 TYPE -->
+      <section id="type">
+        <div class="section-head">
+          <div class="eyebrow"><span class="pip"></span>03 · Type</div>
+          <h2>Inter &amp; JetBrains Mono</h2>
+          <p>Inter handles all display and body text. JetBrains Mono is reserved for numeric data — scores, counts, IDs, version chips.</p>
+        </div>
+
+        <div class="card lg" style="margin-bottom: 20px;">
+          <div class="type-aa">Aa</div>
+          <div class="type-cols">
+            <div>
+              <div class="h">Inter</div>
+              <div class="desc">Display &amp; body — weights 400 / 500 / 600 / 700</div>
+              <div class="sample-inter">Find more of your ideal customers — calibrated from your won deals.</div>
+            </div>
+            <div>
+              <div class="h">JetBrains Mono</div>
+              <div class="desc">Data only — weights 400 / 500 / 600 / 700</div>
+              <div class="sample-mono">SCORE 87 · TIER A · 8,481</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card flush">
+          <table class="scale">
+            <thead>
+              <tr>
+                <th>Token</th><th>Sample</th><th>Size</th><th>Weight</th><th>Tracking</th><th>Use</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="token">Display</td>
+                <td><span style="font-size: 32px; font-weight: 700; letter-spacing: -0.035em; line-height: 1; color: var(--ink);">The quick brown fox</span></td>
+                <td class="mono">68px</td><td class="mono">700</td><td class="mono">-0.035em</td><td>Hero H1</td>
+              </tr>
+              <tr>
+                <td class="token">H2</td>
+                <td><span style="font-size: 32px; font-weight: 700; letter-spacing: -0.025em; line-height: 1.1; color: var(--ink);">The quick brown fox</span></td>
+                <td class="mono">38px</td><td class="mono">700</td><td class="mono">-0.025em</td><td>Section title</td>
+              </tr>
+              <tr>
+                <td class="token">H3</td>
+                <td><span style="font-size: 24px; font-weight: 600; letter-spacing: -0.015em; line-height: 1.2; color: var(--ink);">The quick brown fox</span></td>
+                <td class="mono">24px</td><td class="mono">600</td><td class="mono">-0.015em</td><td>Card title</td>
+              </tr>
+              <tr>
+                <td class="token">Body L</td>
+                <td><span style="font-size: 18px; font-weight: 400; line-height: 1.55; color: var(--ink);">The quick brown fox</span></td>
+                <td class="mono">18px</td><td class="mono">400</td><td class="mono">0</td><td>Lede paragraph</td>
+              </tr>
+              <tr>
+                <td class="token">Body</td>
+                <td><span style="font-size: 15px; font-weight: 400; line-height: 1.6; color: var(--ink);">The quick brown fox</span></td>
+                <td class="mono">15px</td><td class="mono">400</td><td class="mono">0</td><td>Default copy</td>
+              </tr>
+              <tr>
+                <td class="token">Eyebrow</td>
+                <td><span style="font-size: 12px; font-weight: 500; letter-spacing: 0.08em; line-height: 1.4; color: var(--ink); text-transform: uppercase;">Eyebrow</span></td>
+                <td class="mono">12px</td><td class="mono">500</td><td class="mono">0.08em</td><td>Caps label</td>
+              </tr>
+              <tr>
+                <td class="token">Mono</td>
+                <td><span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500; line-height: 1.4; color: var(--ink);">The quick brown fox</span></td>
+                <td class="mono">13px</td><td class="mono">500</td><td class="mono">0</td><td>Scores, IDs, data</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- 04 COMPONENTS -->
+      <section id="components">
+        <div class="section-head">
+          <div class="eyebrow"><span class="pip"></span>04 · Components</div>
+          <h2>Building blocks</h2>
+          <p>Live examples. Padding, radius, and color tokens are consistent across the system.</p>
+        </div>
+
+        <div class="card" style="margin-bottom: 20px;">
+          <div class="card-title">Buttons &amp; links</div>
+          <div class="row-wrap">
+            <button class="btn" type="button">Book intro call</button>
+            <button class="btn lg" type="button">Book a 30‑min intro</button>
+            <a href="#" class="ghost-link">See a sample model<span class="arrow">→</span></a>
+            <a href="#" class="nav-link">Nav link</a>
+          </div>
+        </div>
+
+        <div class="card" style="margin-bottom: 20px;">
+          <div class="card-title">Tier badges</div>
+          <div class="row-wrap" style="gap: 18px;">
+            <div class="tier-row"><div class="tier-badge tier-A">A</div><span class="lbl">A — Ideal</span></div>
+            <div class="tier-row"><div class="tier-badge tier-B">B</div><span class="lbl">B — Strong</span></div>
+            <div class="tier-row"><div class="tier-badge tier-C">C</div><span class="lbl">C — Possible</span></div>
+            <div class="tier-row"><div class="tier-badge tier-D">D</div><span class="lbl">D — Weak</span></div>
+          </div>
+        </div>
+
+        <div class="grid-2" style="margin-bottom: 20px;">
+          <div class="card">
+            <div class="card-title">Live status</div>
+            <div class="live-row">
+              <span class="pulse-dot" aria-hidden="true"></span>
+              <span class="live-label">Live scoring</span>
+              <span class="live-month">· April 2026</span>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-title">Eyebrow</div>
+            <div class="eyebrow-row">
+              <span class="pip"></span>
+              <span>Trusted across</span>
+              <strong>Private&nbsp;Equity&nbsp;·&nbsp;Manufacturing</strong>
+            </div>
+          </div>
+        </div>
+
+        <div class="card tight" style="margin-bottom: 20px;">
+          <div class="card-title" style="padding-left: 12px; margin-bottom: 12px;">Prospect row</div>
+          <div class="prospect active">
+            <div><div class="name">Northwind Industrial</div><div class="meta">Manufacturing · 280 staff · Seattle</div></div>
+            <div class="score">92</div>
+            <div class="tier-chip tier-A">A</div>
+          </div>
+          <div class="prospect">
+            <div><div class="name">Halcyon Field Services</div><div class="meta">Field services · 140 staff · Phoenix</div></div>
+            <div class="score">84</div>
+            <div class="tier-chip tier-B">B</div>
+          </div>
+          <div class="prospect">
+            <div><div class="name">Meridian Logistics</div><div class="meta">Distribution · 90 staff · Atlanta</div></div>
+            <div class="score">71</div>
+            <div class="tier-chip tier-C">C</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Distribution chart</div>
+          <div class="dist-frame">
+            <svg viewBox="0 0 400 84" preserveAspectRatio="none" aria-hidden="true">
+              <defs>
+                <linearGradient id="dsNoise" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stop-color="#94A3B8" stop-opacity="0.55" />
+                  <stop offset="100%" stop-color="#94A3B8" stop-opacity="0.18" />
+                </linearGradient>
+                <linearGradient id="dsSignal" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stop-color="#A8D862" stop-opacity="1" />
+                  <stop offset="100%" stop-color="#649BE4" stop-opacity="0.85" />
+                </linearGradient>
+              </defs>
+              <g id="dist-large"></g>
+            </svg>
+          </div>
+          <div class="caption">Three Gaussian bumps mirroring the logo silhouette. Two gray "noise" bumps + one tall brand-colored "signal" bump.</div>
+        </div>
+      </section>
+
+      <!-- 05 MOTIFS -->
+      <section id="motifs">
+        <div class="section-head">
+          <div class="eyebrow"><span class="pip"></span>05 · Motifs</div>
+          <h2>Visual idioms</h2>
+          <p>The 3-bump silhouette is the system's connective tissue. It can be expressed as a heatmap, contour ridgeline, or mosaic curves — depending on context.</p>
+        </div>
+
+        <div class="grid-3">
+          <div class="card motif-tile">
+            <div class="frame" id="motif-curves"></div>
+            <div class="meta"><div class="name">Curves</div><div class="desc">Soft mosaic curves — default hero treatment.</div></div>
+          </div>
+          <div class="card motif-tile">
+            <div class="frame" id="motif-scoregrid"></div>
+            <div class="meta"><div class="name">Score grid</div><div class="desc">Heatmap of scored prospects — data-forward.</div></div>
+          </div>
+          <div class="card motif-tile">
+            <div class="frame" id="motif-ridgeline"></div>
+            <div class="meta"><div class="name">Ridgeline</div><div class="desc">Layered silhouettes — editorial / poster.</div></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 06 VOICE -->
+      <section id="voice">
+        <div class="section-head">
+          <div class="eyebrow"><span class="pip"></span>06 · Voice</div>
+          <h2>Tone principles</h2>
+          <p>Four rules of thumb for copy and visual decisions.</p>
+        </div>
+        <div class="grid-2">
+          <div class="card voice-card">
+            <div class="h">Plain over poetic</div>
+            <div class="b">Say "find more of your ideal customers" — not "unlock latent revenue." Read every line out loud; if it sounds like ad copy, rewrite.</div>
+          </div>
+          <div class="card voice-card">
+            <div class="h">Numbers earn their place</div>
+            <div class="b">A score, a count, or a calibration figure should always be specific and honest. "8,481 scored, 127 cleared" beats "thousands of qualified leads."</div>
+          </div>
+          <div class="card voice-card">
+            <div class="h">Show the model, don't market it</div>
+            <div class="b">When in doubt, expose the rubric. The product is more credible when the user can see what the score is made of.</div>
+          </div>
+          <div class="card voice-card">
+            <div class="h">Quiet by default</div>
+            <div class="b">Soft neutrals carry most surfaces. Brand color appears where it adds meaning — the signal peak, a tier badge, a status pulse — not as decoration.</div>
+          </div>
+        </div>
+      </section>
+
+      <div class="footer-line">v1.0 · Last updated April 2026 · Maintained by the Scorecard team.</div>
+    </div>
+  </main>
+
+  <script>
+    // Mosaic ramp
+    (function () {
+      const stops = ['#FCAF0F','#F5C44A','#D9D460','#A8D862','#8FCF8C','#7DC7B5','#6EB8D8','#649BE4','#86A6E5','#9F9DE5','#B493EA'];
+      const host = document.getElementById('mosaic-ramp');
+      host.innerHTML = stops.map(c => `<div class="stop" style="background:${c}"></div>`).join('');
+    })();
+
+    // Distribution chart (large 400x84)
+    (function () {
+      const bins = 80;
+      const bumps = [
+        { mu: 0.12, sd: 0.06, amp: 0.32 },
+        { mu: 0.32, sd: 0.08, amp: 0.55 },
+        { mu: 0.68, sd: 0.13, amp: 1.00 },
+      ];
+      const W = 400, H = 84;
+      const w = W / bins;
+      let html = '';
+      for (let i = 0; i < bins; i++) {
+        const u = i / (bins - 1);
+        let y = 0;
+        bumps.forEach(b => { y += b.amp * Math.exp(-Math.pow((u - b.mu) / b.sd, 2)); });
+        const h = Math.min(1, y) * 76;
+        const isSignal = u >= 0.50;
+        const x = (i / bins) * W;
+        html += `<rect x="${(x + 0.4).toFixed(2)}" y="${(H - h).toFixed(2)}" width="${(w - 0.8).toFixed(2)}" height="${h.toFixed(2)}" fill="url(#${isSignal ? 'dsSignal' : 'dsNoise'})"/>`;
+      }
+      document.getElementById('dist-large').innerHTML = html;
+    })();
+
+    // ----- Shared bg helpers -----
+    const BG_W = 1600, BG_H = 900;
+    const rng = (a, b, salt = 0) => {
+      const s = ((a * 73856093) ^ (b * 19349663) ^ (salt * 83492791)) >>> 0;
+      return (s % 100000) / 100000;
+    };
+    const rightBumpY = (x) => {
+      const mu = 1440, sd = 280, peakY = 100, baseY = 820;
+      const t = Math.exp(-Math.pow((x - mu) / sd, 2));
+      return baseY - (baseY - peakY) * t;
+    };
+    const hexToRgb = (hex) => {
+      const h = hex.replace('#', '');
+      return [parseInt(h.slice(0,2),16), parseInt(h.slice(2,4),16), parseInt(h.slice(4,6),16)];
+    };
+    const rampColor = (ramp, t) => {
+      const tc = Math.max(0, Math.min(1, t));
+      const n = ramp.length - 1;
+      const x = tc * n;
+      const i = Math.floor(x);
+      const f = x - i;
+      const a = hexToRgb(ramp[i]);
+      const b = hexToRgb(ramp[Math.min(n, i + 1)]);
+      return `rgb(${Math.round(a[0]+(b[0]-a[0])*f)}, ${Math.round(a[1]+(b[1]-a[1])*f)}, ${Math.round(a[2]+(b[2]-a[2])*f)})`;
+    };
+
+    // Score grid motif
+    function renderScoreGrid(host) {
+      const COLS = 80, ROWS = 44;
+      const CW = BG_W / COLS, CH = BG_H / ROWS;
+      const cells = [];
+      for (let r = 0; r < ROWS; r++) {
+        for (let c = 0; c < COLS; c++) {
+          if (rng(c, r, 1) < 0.06) continue;
+          const x = c * CW, y = r * CH;
+          const cx = x + CW / 2, cy = y + CH / 2;
+          const yR = rightBumpY(cx);
+          const insideRight = cy > yR && cx > 840 && cx < 2040;
+          const leftMu = 780, leftSd = 200, leftPeak = 380;
+          const midMu = 1100, midSd = 240, midPeak = 200;
+          const yL = 820 - (820 - leftPeak) * Math.exp(-Math.pow((cx - leftMu) / leftSd, 2));
+          const yM = 820 - (820 - midPeak) * Math.exp(-Math.pow((cx - midMu) / midSd, 2));
+          const insideLeft = cy > yL && cx > 200 && cx < 1360;
+          const insideMid = cy > yM && cx > 500 && cx < 1700;
+          let color = '#CBD5E1', opacity = 0.18 + rng(c, r, 2) * 0.12;
+          if (insideRight) {
+            const t = (cy - 100) / (820 - 100);
+            if (t < 0.30) color = '#A8D862';
+            else if (t < 0.55) color = '#649BE4';
+            else if (t < 0.80) color = '#B493EA';
+            else color = '#94A3B8';
+            opacity = 0.55 + rng(c, r, 3) * 0.35;
+          } else if (insideMid) { color = '#A8D862'; opacity = 0.32 + rng(c, r, 4) * 0.18; }
+          else if (insideLeft) { color = '#FCAF0F'; opacity = 0.32 + rng(c, r, 5) * 0.18; }
+          cells.push(`<rect x="${x}" y="${y}" width="${CW - 1.5}" height="${CH - 1.5}" fill="${color}" fill-opacity="${opacity}" rx="1"/>`);
+        }
+      }
+      host.innerHTML = `
+        <svg viewBox="0 0 ${BG_W} ${BG_H}" preserveAspectRatio="xMidYMid slice">
+          <defs>
+            <linearGradient id="sgBot" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="55%" stop-color="#FAFBFC" stop-opacity="0"/>
+              <stop offset="100%" stop-color="#FAFBFC" stop-opacity="0.85"/>
+            </linearGradient>
+            <filter id="sgSoft" x="-2%" y="-2%" width="104%" height="104%"><feGaussianBlur stdDeviation="0.6"/></filter>
+          </defs>
+          <g filter="url(#sgSoft)" opacity="0.7">${cells.join('')}</g>
+          <rect x="0" y="0" width="${BG_W}" height="${BG_H}" fill="url(#sgBot)" pointer-events="none"/>
+        </svg>`;
+    }
+
+    // Curves motif (mosaic-tiled three bumps)
+    function renderCurves(host) {
+      const TILE = 36;
+      const COLS = Math.ceil(BG_W / TILE) + 2;
+      const ROWS = Math.ceil(BG_H / TILE) + 2;
+      const RAMPS = {
+        left:  ['#FCD562', '#FCAF0F', '#E89A0A'],
+        mid:   ['#C5E58A', '#A8D862', '#7DC050'],
+        right: ['#9CC8F0', '#649BE4', '#8E8AE0', '#B493EA'],
+      };
+      const buildTiles = (ramp, salt) => {
+        const out = [];
+        for (let r = -1; r < ROWS; r++) {
+          for (let c = -1; c < COLS; c++) {
+            const x = c * TILE, y = r * TILE;
+            if (rng(c, r, salt) < 0.039) continue;
+            const tBase = y / BG_H;
+            const jitter = (rng(c, r, salt + 1) - 0.5) * 0.234;
+            const t = Math.max(0, Math.min(1, tBase + jitter));
+            const color = rampColor(ramp, t);
+            const alpha = 0.74 + rng(c, r, salt + 2) * 0.26;
+            out.push(`<rect x="${x}" y="${y}" width="${TILE}" height="${TILE}" fill="${color}" fill-opacity="${alpha}"/>`);
+          }
+        }
+        return out.join('');
+      };
+      const leftPath  = "M 200 820 C 500 820, 500 380, 780 380 C 1060 380, 1060 820, 1360 820 Z";
+      const midPath   = "M 500 820 C 800 820, 800 200, 1100 200 C 1400 200, 1400 820, 1700 820 Z";
+      const rightPath = "M 840 820 C 1140 820, 1140 100, 1440 100 C 1740 100, 1740 820, 2040 820 Z";
+      host.innerHTML = `
+        <svg viewBox="0 0 ${BG_W} ${BG_H}" preserveAspectRatio="xMidYMid slice">
+          <defs>
+            <clipPath id="ccLeft"><path d="${leftPath}"/></clipPath>
+            <clipPath id="ccMid"><path d="${midPath}"/></clipPath>
+            <clipPath id="ccRight"><path d="${rightPath}"/></clipPath>
+            <filter id="ccBlur" x="-5%" y="-5%" width="110%" height="110%"><feGaussianBlur stdDeviation="3.5"/></filter>
+            <linearGradient id="ccBot" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="60%" stop-color="#FAFBFC" stop-opacity="0"/>
+              <stop offset="100%" stop-color="#FAFBFC" stop-opacity="0.85"/>
+            </linearGradient>
+          </defs>
+          <g filter="url(#ccBlur)" opacity="0.55">
+            <g clip-path="url(#ccLeft)">${buildTiles(RAMPS.left, 10)}</g>
+            <g clip-path="url(#ccMid)">${buildTiles(RAMPS.mid, 20)}</g>
+            <g clip-path="url(#ccRight)">${buildTiles(RAMPS.right, 30)}</g>
+          </g>
+          <rect x="0" y="0" width="${BG_W}" height="${BG_H}" fill="url(#ccBot)" pointer-events="none"/>
+        </svg>`;
+    }
+
+    // Ridgeline motif
+    function renderRidgeline(host) {
+      const layers = 6;
+      const combined =
+        'M 200 820 C 500 820, 500 380, 780 380 C 1060 380, 1060 820, 1360 820 ' +
+        'M 500 820 C 800 820, 800 200, 1100 200 C 1400 200, 1400 820, 1700 820 ' +
+        'M 840 820 C 1140 820, 1140 100, 1440 100 C 1740 100, 1740 820, 2040 820';
+      let layerHtml = '';
+      for (let i = 0; i < layers; i++) {
+        const t = i / (layers - 1);
+        const scaleY = 0.55 + t * 0.55;
+        const shiftX = (t - 0.5) * 80;
+        const isFront = i === layers - 1;
+        const stroke = isFront ? '#03153A' : '#94A3B8';
+        const strokeOpacity = isFront ? 0.55 : (0.22 + t * 0.18);
+        const fill = isFront ? 'url(#rdSig)' : '#94A3B8';
+        const fillOpacity = isFront ? 0.55 : (0.06 + t * 0.05);
+        const strokeWidth = isFront ? 2 : 1.2;
+        layerHtml += `<g transform="translate(${shiftX} ${820 * (1 - scaleY)}) scale(1 ${scaleY})"><path d="${combined} Z" fill="${fill}" fill-opacity="${fillOpacity}" stroke="${stroke}" stroke-opacity="${strokeOpacity}" stroke-width="${strokeWidth}"/></g>`;
+      }
+      host.innerHTML = `
+        <svg viewBox="0 0 ${BG_W} ${BG_H}" preserveAspectRatio="xMidYMid slice">
+          <defs>
+            <linearGradient id="rdSig" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#A8D862" stop-opacity="0.85"/>
+              <stop offset="60%" stop-color="#649BE4" stop-opacity="0.65"/>
+              <stop offset="100%" stop-color="#B493EA" stop-opacity="0.45"/>
+            </linearGradient>
+            <linearGradient id="rdBot" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="55%" stop-color="#FAFBFC" stop-opacity="0"/>
+              <stop offset="100%" stop-color="#FAFBFC" stop-opacity="0.92"/>
+            </linearGradient>
+          </defs>
+          ${layerHtml}
+          <rect x="0" y="0" width="${BG_W}" height="${BG_H}" fill="url(#rdBot)" pointer-events="none"/>
+        </svg>`;
+    }
+
+    renderCurves(document.getElementById('motif-curves'));
+    renderScoreGrid(document.getElementById('motif-scoregrid'));
+    renderRidgeline(document.getElementById('motif-ridgeline'));
+  </script>
+</body>
+</html>

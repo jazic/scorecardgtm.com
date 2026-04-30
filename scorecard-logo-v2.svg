@@ -1,0 +1,104 @@
+<svg xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc" viewBox="0 0 4650 777">
+  <title id="title">Scorecard v2</title>
+  <desc id="desc">Scorecard v2 logo with sharper signal peaks, richer overlap, and texture resolving from noise into clarity.</desc>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Inter:wght@900&amp;display=swap");
+    .wordmark {
+      fill: #03153A;
+      font-family: "Inter", Arial, sans-serif;
+      font-size: 520px;
+      font-weight: 900;
+    }
+  </style>
+  <defs>
+    <path id="left-shape" d="M8 742 C136 740 232 680 318 562 C414 430 480 316 612 302 C738 288 852 390 948 548 C1008 648 1060 716 1152 742 Z"/>
+    <path id="middle-shape" d="M366 742 C528 738 632 652 724 492 C842 286 946 164 1092 158 C1252 152 1370 310 1424 514 C1470 690 1380 736 1230 742 Z"/>
+    <path id="right-shape" d="M748 742 C916 736 1026 616 1140 378 C1248 152 1338 42 1474 32 C1622 22 1738 146 1840 382 C1918 562 1990 684 2084 742 Z"/>
+
+    <clipPath id="left-clip"><use href="#left-shape"/></clipPath>
+    <clipPath id="middle-clip"><use href="#middle-shape"/></clipPath>
+    <clipPath id="right-clip"><use href="#right-shape"/></clipPath>
+
+    <linearGradient id="left-fill" x1="0" x2="0" y1="290" y2="742" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFE16E"/>
+      <stop offset="0.48" stop-color="#FCAF0F"/>
+      <stop offset="1" stop-color="#FFD34A"/>
+    </linearGradient>
+    <linearGradient id="middle-fill" x1="430" x2="1350" y1="185" y2="742" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#97DDB0"/>
+      <stop offset="0.45" stop-color="#A8D862"/>
+      <stop offset="1" stop-color="#69C6BA"/>
+    </linearGradient>
+    <linearGradient id="right-fill" x1="840" x2="1960" y1="55" y2="742" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#8EE1F4"/>
+      <stop offset="0.38" stop-color="#4FC5E8"/>
+      <stop offset="0.72" stop-color="#579AE8"/>
+      <stop offset="1" stop-color="#9B86E6"/>
+    </linearGradient>
+    <linearGradient id="right-clarity" x1="0" x2="0" y1="45" y2="742" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#BDEBFA" stop-opacity=".44"/>
+      <stop offset=".34" stop-color="#BDEBFA" stop-opacity=".18"/>
+      <stop offset="1" stop-color="#BDEBFA" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="right-texture-fade" x1="0" x2="0" y1="45" y2="742" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="white" stop-opacity=".18"/>
+      <stop offset=".38" stop-color="white" stop-opacity=".56"/>
+      <stop offset="1" stop-color="white" stop-opacity="1"/>
+    </linearGradient>
+    <mask id="right-texture-mask" maskUnits="userSpaceOnUse" x="730" y="40" width="1380" height="720">
+      <rect x="730" y="40" width="1380" height="720" fill="url(#right-texture-fade)"/>
+    </mask>
+
+    <pattern id="left-tiles" width="180" height="180" patternUnits="userSpaceOnUse" patternTransform="translate(18 8)">
+      <rect width="180" height="180" fill="none"/>
+      <rect x="0" y="0" width="90" height="90" fill="#FFE071" opacity=".54"/>
+      <rect x="90" y="0" width="90" height="90" fill="#F6B11B" opacity=".43"/>
+      <rect x="0" y="90" width="90" height="90" fill="#FCAF0F" opacity=".48"/>
+      <rect x="90" y="90" width="90" height="90" fill="#FFE58B" opacity=".36"/>
+    </pattern>
+    <pattern id="middle-tiles" width="188" height="188" patternUnits="userSpaceOnUse" patternTransform="translate(31 22)">
+      <rect width="188" height="188" fill="none"/>
+      <rect x="0" y="0" width="94" height="94" fill="#B6DF76" opacity=".42"/>
+      <rect x="94" y="0" width="94" height="94" fill="#85CFB7" opacity=".4"/>
+      <rect x="0" y="94" width="94" height="94" fill="#A8D862" opacity=".34"/>
+      <rect x="94" y="94" width="94" height="94" fill="#8ED5BB" opacity=".44"/>
+    </pattern>
+    <pattern id="right-tiles" width="200" height="200" patternUnits="userSpaceOnUse" patternTransform="translate(23 10)">
+      <rect width="200" height="200" fill="none"/>
+      <rect x="0" y="0" width="100" height="100" fill="#9BDFF4" opacity=".34"/>
+      <rect x="100" y="0" width="100" height="100" fill="#62C9EA" opacity=".3"/>
+      <rect x="0" y="100" width="100" height="100" fill="#5BADEB" opacity=".44"/>
+      <rect x="100" y="100" width="100" height="100" fill="#A997EA" opacity=".36"/>
+    </pattern>
+  </defs>
+
+  <g>
+    <g id="mark">
+      <use href="#left-shape" fill="url(#left-fill)" opacity=".82"/>
+      <g clip-path="url(#left-clip)">
+        <rect x="-20" y="280" width="1160" height="480" fill="url(#left-tiles)"/>
+      </g>
+
+      <use href="#middle-shape" fill="url(#middle-fill)" opacity=".8"/>
+      <g clip-path="url(#middle-clip)">
+        <rect x="390" y="160" width="1010" height="600" fill="url(#middle-tiles)"/>
+      </g>
+
+      <use href="#right-shape" fill="url(#right-fill)" opacity=".88"/>
+      <g clip-path="url(#right-clip)">
+        <rect x="730" y="40" width="1380" height="720" fill="url(#right-tiles)" mask="url(#right-texture-mask)"/>
+        <rect x="730" y="40" width="1380" height="720" fill="url(#right-clarity)"/>
+      </g>
+      <g clip-path="url(#middle-clip)">
+        <g clip-path="url(#right-clip)">
+          <rect x="720" y="150" width="880" height="600" fill="#43C5D6" opacity=".28"/>
+        </g>
+      </g>
+
+      <path d="M748 742 C916 736 1026 616 1140 378 C1248 152 1338 42 1474 32 C1622 22 1738 146 1840 382 C1918 562 1990 684 2084 742" fill="none" stroke="#03153A" stroke-width="28" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M14 748 H2084" fill="none" stroke="#03153A" stroke-width="16" stroke-linecap="round"/>
+    </g>
+
+    <text class="wordmark" x="2168" y="690">Scorecard</text>
+  </g>
+</svg>

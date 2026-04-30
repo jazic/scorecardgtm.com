@@ -1,0 +1,104 @@
+<svg xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc" viewBox="0 0 4650 777">
+  <title id="title">Scorecard expressive logo</title>
+  <desc id="desc">An expressive Scorecard logo with more visible data texture in the three distribution curves.</desc>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Inter:wght@900&amp;display=swap");
+    .wordmark {
+      fill: #03153A;
+      font-family: "Inter", Arial, sans-serif;
+      font-size: 520px;
+      font-weight: 900;
+    }
+  </style>
+  <defs>
+    <path id="left-shape" d="M8 742 C136 740 232 682 318 566 C412 439 474 322 602 306 C732 290 844 392 938 548 C996 644 1052 716 1140 742 Z"/>
+    <path id="middle-shape" d="M370 742 C526 738 630 658 720 500 C835 300 940 178 1084 176 C1240 174 1358 318 1414 518 C1462 690 1374 736 1234 742 Z"/>
+    <path id="right-shape" d="M760 742 C920 736 1028 623 1138 392 C1242 174 1328 56 1464 44 C1606 32 1718 150 1818 380 C1896 560 1968 684 2050 742 Z"/>
+
+    <clipPath id="left-clip"><use href="#left-shape"/></clipPath>
+    <clipPath id="middle-clip"><use href="#middle-shape"/></clipPath>
+    <clipPath id="right-clip"><use href="#right-shape"/></clipPath>
+
+    <linearGradient id="left-fill" x1="0" x2="0" y1="290" y2="742" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFE072"/>
+      <stop offset="0.48" stop-color="#FCAF0F"/>
+      <stop offset="1" stop-color="#FFD957"/>
+    </linearGradient>
+    <linearGradient id="middle-fill" x1="430" x2="1350" y1="185" y2="742" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#9FDCB5"/>
+      <stop offset="0.45" stop-color="#A8D862"/>
+      <stop offset="1" stop-color="#78C7B4"/>
+    </linearGradient>
+    <linearGradient id="right-fill" x1="840" x2="1960" y1="55" y2="742" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#97DFF2"/>
+      <stop offset="0.38" stop-color="#64C7E6"/>
+      <stop offset="0.72" stop-color="#659FE7"/>
+      <stop offset="1" stop-color="#A191E6"/>
+    </linearGradient>
+    <linearGradient id="right-clarity" x1="0" x2="0" y1="45" y2="742" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#BDEBFA" stop-opacity=".42"/>
+      <stop offset=".34" stop-color="#BDEBFA" stop-opacity=".2"/>
+      <stop offset="1" stop-color="#BDEBFA" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="right-texture-fade" x1="0" x2="0" y1="45" y2="742" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="white" stop-opacity=".16"/>
+      <stop offset=".34" stop-color="white" stop-opacity=".46"/>
+      <stop offset="1" stop-color="white" stop-opacity="1"/>
+    </linearGradient>
+    <mask id="right-texture-mask" maskUnits="userSpaceOnUse" x="730" y="40" width="1380" height="720">
+      <rect x="730" y="40" width="1380" height="720" fill="url(#right-texture-fade)"/>
+    </mask>
+
+    <pattern id="left-tiles" width="148" height="148" patternUnits="userSpaceOnUse" patternTransform="translate(12 6)">
+      <rect width="148" height="148" fill="none"/>
+      <rect x="0" y="0" width="74" height="74" fill="#FFE071" opacity=".44"/>
+      <rect x="74" y="0" width="74" height="74" fill="#F7B41B" opacity=".38"/>
+      <rect x="0" y="74" width="74" height="74" fill="#FCAF0F" opacity=".4"/>
+      <rect x="74" y="74" width="74" height="74" fill="#FFE58B" opacity=".32"/>
+    </pattern>
+    <pattern id="middle-tiles" width="156" height="156" patternUnits="userSpaceOnUse" patternTransform="translate(26 18)">
+      <rect width="156" height="156" fill="none"/>
+      <rect x="0" y="0" width="78" height="78" fill="#B6DF76" opacity=".36"/>
+      <rect x="78" y="0" width="78" height="78" fill="#85CFB7" opacity=".36"/>
+      <rect x="0" y="78" width="78" height="78" fill="#A8D862" opacity=".31"/>
+      <rect x="78" y="78" width="78" height="78" fill="#9AD7B3" opacity=".38"/>
+    </pattern>
+    <pattern id="right-tiles" width="160" height="160" patternUnits="userSpaceOnUse" patternTransform="translate(20 8)">
+      <rect width="160" height="160" fill="none"/>
+      <rect x="0" y="0" width="80" height="80" fill="#A7DDF4" opacity=".32"/>
+      <rect x="80" y="0" width="80" height="80" fill="#78CAE9" opacity=".28"/>
+      <rect x="0" y="80" width="80" height="80" fill="#6EAFE9" opacity=".38"/>
+      <rect x="80" y="80" width="80" height="80" fill="#AFA2E9" opacity=".34"/>
+    </pattern>
+  </defs>
+
+  <g>
+    <g id="mark">
+      <use href="#left-shape" fill="url(#left-fill)" opacity=".7"/>
+      <g clip-path="url(#left-clip)">
+        <rect x="-20" y="280" width="1160" height="480" fill="url(#left-tiles)"/>
+      </g>
+
+      <use href="#middle-shape" fill="url(#middle-fill)" opacity=".7"/>
+      <g clip-path="url(#middle-clip)">
+        <rect x="390" y="160" width="1010" height="600" fill="url(#middle-tiles)"/>
+      </g>
+
+      <use href="#right-shape" fill="url(#right-fill)" opacity=".76"/>
+      <g clip-path="url(#right-clip)">
+        <rect x="730" y="40" width="1380" height="720" fill="url(#right-tiles)" mask="url(#right-texture-mask)"/>
+        <rect x="730" y="40" width="1380" height="720" fill="url(#right-clarity)"/>
+      </g>
+      <g clip-path="url(#middle-clip)">
+        <g clip-path="url(#right-clip)">
+          <rect x="730" y="170" width="780" height="580" fill="#67C8D8" opacity=".2"/>
+        </g>
+      </g>
+
+      <path d="M760 742 C920 736 1028 623 1138 392 C1242 174 1328 56 1464 44 C1606 32 1718 150 1818 380 C1896 560 1968 684 2050 742" fill="none" stroke="#03153A" stroke-width="30" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M14 748 H2050" fill="none" stroke="#03153A" stroke-width="18" stroke-linecap="round"/>
+    </g>
+
+    <text class="wordmark" x="2120" y="690">Scorecard</text>
+  </g>
+</svg>

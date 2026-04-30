@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Scorecard — Find more of your ideal customers.</title>
+  <meta name="description" content="Scorecard learns the ICP hidden in your won deals and delivers a recurring stream of prequalified prospects — sharper every month based on what your team actually closes." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #FAFBFC;
+      color: #03153A;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    a { color: inherit; }
+    button { font-family: inherit; }
+
+    .page {
+      min-height: 100vh;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .bg svg { width: 100%; height: 100%; display: block; }
+
+    /* Header */
+    .header-wrap {
+      position: relative;
+      z-index: 2;
+      background: rgba(250,251,252,0.7);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(100,116,139,0.12);
+    }
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 22px 48px;
+      max-width: 1280px;
+      margin: 0 auto;
+      width: 100%;
+    }
+    .logo { height: 36px; width: auto; display: block; }
+    .nav {
+      display: flex;
+      gap: 32px;
+      font-size: 14px;
+      font-weight: 500;
+    }
+    .nav a, .header a {
+      text-decoration: none;
+      color: #03153A;
+    }
+    .header-cta {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+    .signin { color: #64748B !important; font-size: 14px; font-weight: 500; }
+    .btn-primary {
+      background: #03153A;
+      color: #FFF;
+      border: none;
+      border-radius: 8px;
+      padding: 11px 18px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+    }
+    .btn-primary.lg { font-size: 15px; padding: 14px 22px; }
+
+    /* Main */
+    .main {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 56px;
+      padding: 72px 48px 64px;
+      max-width: 1280px;
+      margin: 0 auto;
+      width: 100%;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
+    .copy h1 {
+      font-size: 68px;
+      font-weight: 700;
+      letter-spacing: -0.035em;
+      line-height: 1.0;
+      margin: 0 0 22px;
+      color: #03153A;
+      text-wrap: balance;
+    }
+    .copy p {
+      font-size: 18px;
+      line-height: 1.55;
+      color: #475569;
+      max-width: 520px;
+      margin: 0;
+      text-wrap: pretty;
+    }
+    .cta-row {
+      display: flex;
+      gap: 22px;
+      margin-top: 36px;
+      align-items: center;
+    }
+    .ghost-link {
+      text-decoration: none;
+      color: #475569;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      border-bottom: 1px solid rgba(71,85,105,0.25);
+      padding-bottom: 2px;
+    }
+    .ghost-link .arrow { margin-left: 6px; color: #B493EA; }
+    .trust {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      font-size: 12px;
+      font-weight: 500;
+      color: #64748B;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-top: 44px;
+    }
+    .trust .dot {
+      width: 6px; height: 6px; border-radius: 3px; background: #B493EA;
+    }
+    .trust strong {
+      color: #03153A;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+    }
+
+    /* Card */
+    .card-wrap { position: relative; }
+    .card {
+      background: #FFFFFF;
+      border: 1px solid rgba(100,116,139,0.18);
+      border-radius: 14px;
+      box-shadow: 0 30px 80px -30px rgba(3,21,58,0.18), 0 4px 12px -6px rgba(3,21,58,0.06);
+      position: relative;
+      z-index: 1;
+    }
+    .card-head {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 22px;
+      border-bottom: 1px solid rgba(100,116,139,0.14);
+    }
+    .live {
+      display: flex; align-items: center; gap: 10px;
+    }
+    .live .pulse {
+      width: 8px; height: 8px; border-radius: 4px; background: #A8D862;
+      box-shadow: 0 0 0 4px rgba(168,216,98,0.22);
+      animation: pulse 1.6s ease-in-out infinite;
+    }
+    .live-label { font-size: 13px; font-weight: 600; }
+    .live-month { font-size: 12px; color: #64748B; }
+    .scored-count {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: #64748B;
+    }
+    .scored-count .num { color: #03153A; font-weight: 700; }
+
+    .rubric {
+      padding: 18px 22px 10px;
+    }
+    .rubric-row {
+      display: flex; align-items: baseline; justify-content: space-between; gap: 12px;
+    }
+    .rubric-title { font-size: 16px; font-weight: 600; }
+    .cleared {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 600;
+      color: #03153A;
+    }
+    .cleared .pip { color: #A8D862; }
+    .cleared .total { color: #94A3B8; font-weight: 500; }
+
+    .dist {
+      margin-top: 14px;
+      position: relative;
+      height: 60px;
+    }
+    .dist svg { display: block; width: 100%; height: 60px; }
+
+    .prospects {
+      padding: 6px 10px 10px;
+    }
+    .prospect {
+      display: grid;
+      grid-template-columns: 1fr auto auto;
+      align-items: center;
+      gap: 14px;
+      padding: 11px 12px;
+      border-radius: 8px;
+      background: transparent;
+      transition: background 240ms ease;
+    }
+    .prospect.active { background: rgba(100,155,228,0.08); }
+    .prospect .name {
+      font-size: 13.5px; font-weight: 600;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+      min-width: 0;
+    }
+    .prospect .meta {
+      font-size: 11.5px; color: #64748B; margin-top: 2px;
+    }
+    .prospect .info { min-width: 0; }
+    .prospect .score {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 18px; font-weight: 700;
+      color: #03153A;
+      min-width: 30px;
+      text-align: right;
+      letter-spacing: -0.02em;
+    }
+    .tier {
+      width: 22px; height: 22px; border-radius: 6px;
+      font-size: 11px; font-weight: 700;
+      display: grid; place-items: center;
+      color: #03153A;
+    }
+    .tier.A { background: #A8D862; }
+    .tier.B { background: #649BE4; }
+    .tier.C { background: #B493EA; }
+    .tier.D { background: #FCAF0F; }
+
+    .card-foot {
+      border-top: 1px solid rgba(100,116,139,0.14);
+      padding: 12px 22px;
+      font-size: 12px;
+      color: #64748B;
+      text-align: center;
+    }
+    .card-foot strong { color: #03153A; font-weight: 600; }
+
+    /* Footer pillars */
+    .pillars-wrap {
+      border-top: 1px solid rgba(100,116,139,0.12);
+      background: rgba(255,255,255,0.7);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      position: relative;
+      z-index: 2;
+    }
+    .pillars {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 36px 48px;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 40px;
+    }
+    .pillar { display: flex; gap: 14px; }
+    .pillar .badge {
+      width: 30px; height: 30px; border-radius: 8px;
+      flex-shrink: 0;
+      display: grid; place-items: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 700; font-size: 12px; color: #03153A;
+    }
+    .pillar.define .badge { background: #FCAF0F; }
+    .pillar.test .badge   { background: #A8D862; }
+    .pillar.scale .badge  { background: #649BE4; }
+    .pillar h3 { font-weight: 600; font-size: 14px; margin: 0 0 3px; }
+    .pillar p  { font-size: 12.5px; color: #64748B; line-height: 1.5; margin: 0; }
+
+    .legal {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 48px 28px;
+      font-size: 11px;
+      color: #94A3B8;
+      letter-spacing: 0.04em;
+    }
+
+    @keyframes pulse {
+      0%,100% { box-shadow: 0 0 0 4px rgba(168,216,98,0.22); }
+      50%     { box-shadow: 0 0 0 7px rgba(168,216,98,0.10); }
+    }
+
+    @media (max-width: 960px) {
+      .header { padding: 18px 24px; }
+      .nav { display: none; }
+      .main {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        padding: 48px 24px 48px;
+      }
+      .copy h1 { font-size: 44px; }
+      .copy p { font-size: 16px; }
+      .pillars {
+        grid-template-columns: 1fr;
+        gap: 24px;
+        padding: 28px 24px;
+      }
+      .legal { padding: 0 24px 24px; }
+    }
+    @media (max-width: 520px) {
+      .header-cta .signin { display: none; }
+      .copy h1 { font-size: 36px; }
+      .cta-row { flex-direction: column; align-items: flex-start; gap: 16px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="bg" id="bg"></div>
+
+    <div class="header-wrap">
+      <header class="header">
+        <a href="/" aria-label="Scorecard home">
+          <img class="logo" src="scorecard-logo.svg" alt="Scorecard" />
+        </a>
+        <nav class="nav">
+          <a href="#how">How it works</a>
+          <a href="#method">Method</a>
+          <a href="#customers">Customers</a>
+          <a href="#pricing">Pricing</a>
+        </nav>
+        <div class="header-cta">
+          <a href="#signin" class="signin">Sign in</a>
+          <button class="btn-primary" type="button">Book intro call</button>
+        </div>
+      </header>
+    </div>
+
+    <main class="main">
+      <div class="copy">
+        <h1>Find more of your ideal customers.</h1>
+        <p>Scorecard learns the ICP hidden in your won deals and delivers a recurring stream of prequalified prospects — sharper every month based on what your team actually closes.</p>
+        <div class="cta-row">
+          <button class="btn-primary lg" type="button">Book a 30‑min intro</button>
+          <a href="#sample" class="ghost-link">See a sample model<span class="arrow">→</span></a>
+        </div>
+        <div class="trust">
+          <span class="dot" aria-hidden="true"></span>
+          <span>Trusted across</span>
+          <strong>Private&nbsp;Equity&nbsp;·&nbsp;Manufacturing&nbsp;·&nbsp;SaaS&nbsp;·&nbsp;Field&nbsp;Services</strong>
+        </div>
+      </div>
+
+      <div class="card-wrap">
+        <div class="card" role="figure" aria-label="Live scoring preview">
+          <div class="card-head">
+            <div class="live">
+              <span class="pulse" aria-hidden="true"></span>
+              <span class="live-label">Live scoring</span>
+              <span class="live-month">· April 2026</span>
+            </div>
+            <span class="scored-count">
+              <span class="num" id="scored-num">8,472</span> scored
+            </span>
+          </div>
+
+          <div class="rubric">
+            <div class="rubric-row">
+              <span class="rubric-title">Mid‑market field services</span>
+              <span class="cleared">
+                <span class="pip">●</span>&nbsp;<span id="cleared-num">127</span>
+                <span class="total">&nbsp;cleared&nbsp;/ <span id="cleared-total">8,472</span></span>
+              </span>
+            </div>
+            <div class="dist">
+              <svg viewBox="0 0 400 60" preserveAspectRatio="none" aria-hidden="true">
+                <defs>
+                  <linearGradient id="distNoise" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stop-color="#94A3B8" stop-opacity="0.55" />
+                    <stop offset="100%" stop-color="#94A3B8" stop-opacity="0.18" />
+                  </linearGradient>
+                  <linearGradient id="distSignal" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stop-color="#A8D862" stop-opacity="1" />
+                    <stop offset="100%" stop-color="#649BE4" stop-opacity="0.85" />
+                  </linearGradient>
+                </defs>
+                <g id="dist-bars"></g>
+              </svg>
+            </div>
+          </div>
+
+          <div class="prospects" id="prospects"></div>
+
+          <div class="card-foot">
+            Calibrated from <strong>112 of your won deals</strong>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <section class="pillars-wrap" id="how">
+      <div class="pillars">
+        <div class="pillar define">
+          <div class="badge">D</div>
+          <div>
+            <h3>Define</h3>
+            <p>Cluster your won deals to surface the real ICPs hiding inside one sales motion.</p>
+          </div>
+        </div>
+        <div class="pillar test">
+          <div class="badge">T</div>
+          <div>
+            <h3>Test</h3>
+            <p>Score a small batch. You tell us what's right, what's missing. We tune until the model reflects your judgment.</p>
+          </div>
+        </div>
+        <div class="pillar scale">
+          <div class="badge">S</div>
+          <div>
+            <h3>Scale</h3>
+            <p>Recurring delivery into Salesforce, Slack, or your dashboard — sharper every month.</p>
+          </div>
+        </div>
+      </div>
+      <div class="legal">&copy; 2026 Scorecard GTM, LLC</div>
+    </section>
+  </div>
+
+  <script>
+    // ------- Score grid background -------
+    (function renderBg() {
+      const W = 1600, H = 900;
+      const COLS = 80, ROWS = 44;
+      const CW = W / COLS, CH = H / ROWS;
+
+      // Deterministic pseudo-random per (col, row, salt)
+      const rng = (a, b, salt = 0) => {
+        const s = ((a * 73856093) ^ (b * 19349663) ^ (salt * 83492791)) >>> 0;
+        return (s % 100000) / 100000;
+      };
+
+      // Right (signal) bump y(x) — peak at x=1440, base 820
+      const rightBumpY = (x) => {
+        const mu = 1440, sd = 280, peakY = 100, baseY = 820;
+        const t = Math.exp(-Math.pow((x - mu) / sd, 2));
+        return baseY - (baseY - peakY) * t;
+      };
+
+      const cells = [];
+      for (let r = 0; r < ROWS; r++) {
+        for (let c = 0; c < COLS; c++) {
+          if (rng(c, r, 1) < 0.06) continue;
+          const x = c * CW;
+          const y = r * CH;
+          const cx = x + CW / 2;
+          const cy = y + CH / 2;
+
+          const yR = rightBumpY(cx);
+          const insideRight = cy > yR && cx > 840 && cx < 2040;
+
+          const leftMu = 780, leftSd = 200, leftPeak = 380;
+          const midMu = 1100, midSd = 240, midPeak = 200;
+          const yL = 820 - (820 - leftPeak) * Math.exp(-Math.pow((cx - leftMu) / leftSd, 2));
+          const yM = 820 - (820 - midPeak) * Math.exp(-Math.pow((cx - midMu) / midSd, 2));
+          const insideLeft = cy > yL && cx > 200 && cx < 1360;
+          const insideMid = cy > yM && cx > 500 && cx < 1700;
+
+          let color = '#CBD5E1';
+          let opacity = 0.18 + rng(c, r, 2) * 0.12;
+
+          if (insideRight) {
+            const t = (cy - 100) / (820 - 100);
+            if (t < 0.30) color = '#A8D862';
+            else if (t < 0.55) color = '#649BE4';
+            else if (t < 0.80) color = '#B493EA';
+            else color = '#94A3B8';
+            opacity = 0.55 + rng(c, r, 3) * 0.35;
+          } else if (insideMid) {
+            color = '#A8D862';
+            opacity = 0.32 + rng(c, r, 4) * 0.18;
+          } else if (insideLeft) {
+            color = '#FCAF0F';
+            opacity = 0.32 + rng(c, r, 5) * 0.18;
+          }
+
+          cells.push({ x, y, w: CW - 1.5, h: CH - 1.5, color, opacity });
+        }
+      }
+
+      const svgNS = 'http://www.w3.org/2000/svg';
+      const svg = document.createElementNS(svgNS, 'svg');
+      svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+      svg.setAttribute('preserveAspectRatio', 'xMidYMid slice');
+
+      const defs = document.createElementNS(svgNS, 'defs');
+      defs.innerHTML = `
+        <linearGradient id="gridLeftFade" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#FAFBFC" stop-opacity="1" />
+          <stop offset="30%" stop-color="#FAFBFC" stop-opacity="0" />
+        </linearGradient>
+        <linearGradient id="gridBottomFade" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="55%" stop-color="#FAFBFC" stop-opacity="0" />
+          <stop offset="100%" stop-color="#FAFBFC" stop-opacity="0.85" />
+        </linearGradient>
+        <filter id="gridSoft" x="-2%" y="-2%" width="104%" height="104%">
+          <feGaussianBlur stdDeviation="0.6" />
+        </filter>
+      `;
+      svg.appendChild(defs);
+
+      const g = document.createElementNS(svgNS, 'g');
+      g.setAttribute('filter', 'url(#gridSoft)');
+      g.setAttribute('opacity', '0.7');
+      const cellMarkup = cells.map(cell =>
+        `<rect x="${cell.x}" y="${cell.y}" width="${cell.w}" height="${cell.h}" fill="${cell.color}" fill-opacity="${cell.opacity}" rx="1"/>`
+      ).join('');
+      g.innerHTML = cellMarkup;
+      svg.appendChild(g);
+
+      const fadeL = document.createElementNS(svgNS, 'rect');
+      fadeL.setAttribute('x', '0'); fadeL.setAttribute('y', '0');
+      fadeL.setAttribute('width', String(W)); fadeL.setAttribute('height', String(H));
+      fadeL.setAttribute('fill', 'url(#gridLeftFade)');
+      fadeL.setAttribute('pointer-events', 'none');
+      svg.appendChild(fadeL);
+
+      const fadeB = document.createElementNS(svgNS, 'rect');
+      fadeB.setAttribute('x', '0'); fadeB.setAttribute('y', '0');
+      fadeB.setAttribute('width', String(W)); fadeB.setAttribute('height', String(H));
+      fadeB.setAttribute('fill', 'url(#gridBottomFade)');
+      fadeB.setAttribute('pointer-events', 'none');
+      svg.appendChild(fadeB);
+
+      document.getElementById('bg').appendChild(svg);
+    })();
+
+    // ------- Distribution bars -------
+    (function renderDistribution() {
+      const bins = 80;
+      const arr = [];
+      const bumps = [
+        { mu: 0.12, sd: 0.06, amp: 0.32 },
+        { mu: 0.32, sd: 0.08, amp: 0.55 },
+        { mu: 0.68, sd: 0.13, amp: 1.00 },
+      ];
+      for (let i = 0; i < bins; i++) {
+        const x = i / (bins - 1);
+        let y = 0;
+        bumps.forEach(b => { y += b.amp * Math.exp(-Math.pow((x - b.mu) / b.sd, 2)); });
+        arr.push(Math.min(1, y));
+      }
+      const host = document.getElementById('dist-bars');
+      const W = 400;
+      const w = W / bins;
+      let html = '';
+      for (let i = 0; i < bins; i++) {
+        const u = i / (bins - 1);
+        const isSignal = u >= 0.50;
+        const h = arr[i] * 54;
+        const x = (i / bins) * W;
+        html += `<rect x="${(x + 0.4).toFixed(2)}" y="${(60 - h).toFixed(2)}" width="${(w - 0.8).toFixed(2)}" height="${h.toFixed(2)}" fill="url(#${isSignal ? 'distSignal' : 'distNoise'})"/>`;
+      }
+      host.innerHTML = html;
+    })();
+
+    // ------- Prospect list + live ticker -------
+    const prospects = [
+      { name: 'Hartwell Industrial Supply',  meta: '$48M ARR · 220 emp · OH', score: 94, tier: 'A' },
+      { name: 'Meridian Plumbing Co.',        meta: '$12M ARR · 64 emp · TX',  score: 88, tier: 'A' },
+      { name: 'Northpoint Capital Partners',  meta: '$210M AUM · PE · NY',     score: 76, tier: 'B' },
+      { name: 'Ferris & Lane Tax Advisors',   meta: '$6M ARR · 38 emp · IL',   score: 64, tier: 'C' },
+      { name: 'Kestrel HVAC Services',        meta: '$3M ARR · 22 emp · AZ',   score: 41, tier: 'D' },
+    ];
+
+    (function renderProspects() {
+      const host = document.getElementById('prospects');
+      host.innerHTML = prospects.map((p, i) => `
+        <div class="prospect${i === 0 ? ' active' : ''}" data-idx="${i}">
+          <div class="info">
+            <div class="name">${p.name}</div>
+            <div class="meta">${p.meta}</div>
+          </div>
+          <div class="score">${p.score}</div>
+          <div class="tier ${p.tier}">${p.tier}</div>
+        </div>
+      `).join('');
+    })();
+
+    let scored = 8472;
+    const scoredNum = document.getElementById('scored-num');
+    const clearedNum = document.getElementById('cleared-num');
+    const clearedTotal = document.getElementById('cleared-total');
+    function refreshCounts() {
+      scoredNum.textContent = scored.toLocaleString();
+      clearedNum.textContent = Math.floor(scored * 0.015).toLocaleString();
+      clearedTotal.textContent = scored.toLocaleString();
+    }
+    refreshCounts();
+    setInterval(() => { scored += 1; refreshCounts(); }, 600);
+
+    let activeIdx = 0;
+    setInterval(() => {
+      activeIdx = (activeIdx + 1) % prospects.length;
+      document.querySelectorAll('.prospect').forEach((el, i) => {
+        el.classList.toggle('active', i === activeIdx);
+      });
+    }, 2200);
+  </script>
+</body>
+</html>

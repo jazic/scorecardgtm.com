@@ -1,2 +1,5 @@
 .DS_Store
 .gstack/
+
+# Build output (assembled by the GH Pages workflow)
+_site/

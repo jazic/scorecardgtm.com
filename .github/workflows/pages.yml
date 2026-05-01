@@ -17,9 +17,21 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
+
+      # Assemble the published site:
+      #   - everything in website/ becomes the deploy root (so / serves index.html)
+      #   - design-system/ is copied alongside so design-system/assets/* paths resolve
+      #   The website/design-system symlink (used for local dev) is excluded
+      #   from the rsync and replaced by the real design-system/ contents.
+      - name: Assemble _site
+        run: |
+          mkdir -p _site
+          rsync -a --exclude='design-system' website/ _site/
+          cp -R design-system _site/design-system
+
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: .
+          path: _site
       - id: deployment
         uses: actions/deploy-pages@v4

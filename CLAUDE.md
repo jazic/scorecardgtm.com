@@ -6,39 +6,61 @@ This repo is the marketing surface for **Scorecard** — public website, design 
 
 ```
 /
-├── CLAUDE.md                  ← this file
-├── index.html                 ← scorecardgtm.com landing page (canonical)
+├── CLAUDE.md                       ← this file
 │
-├── docs/                      ← high-level vision + plans + tasks
-│   ├── vision.md              ← what we sell, who it's for, principles
-│   ├── plans/                 ← multi-step plans
-│   └── tasks/                 ← smaller scoped items
+├── website/                        ← scorecardgtm.com publish root
+│   ├── index.html                  ← canonical landing page
+│   └── design-system → ../design-system  (symlink, for local dev)
 │
-├── design-system/             ← shared visual language
-│   ├── system.html            ← live design-system page (tokens, type, components)
+├── design-system/                  ← shared visual language
+│   ├── tokens.css                  ← canonical design tokens (linked by both pages)
+│   ├── system.html                 ← live design-system page (logo, color, type, components)
 │   ├── scorecard-logo-compare.html
-│   └── assets/                ← canonical logos and shared images
-│       ├── scorecard-logo.svg            ← full logo (mark + wordmark)
-│       ├── scorecard-logo-mark-light.svg ← mark only, for light backgrounds
-│       ├── scorecard-logo-mark-dark.svg  ← mark only, for dark backgrounds
+│   └── assets/                     ← canonical logos and shared images
+│       ├── scorecard-logo.svg              ← full logo (mark + wordmark)
+│       ├── scorecard-logo-mark-light.svg   ← mark only, light backgrounds
+│       ├── scorecard-logo-mark-dark.svg    ← mark only, dark backgrounds
 │       ├── scorecard-logo-v2.svg
 │       ├── scorecard-logo-v3.svg
 │       ├── scorecard-logo-expressive.svg
 │       └── scorecard-logo.png
 │
-└── .github/workflows/pages.yml ← deploys repo root to GitHub Pages on push to main
+├── docs/                           ← high-level vision + plans + tasks
+│   ├── vision.md                   ← what we sell, who it's for, principles
+│   ├── plans/                      ← multi-step plans
+│   └── tasks/                      ← smaller scoped items
+│
+└── .github/workflows/pages.yml     ← assembles website/ + design-system/ into _site/
 ```
 
 ## How to work in here
 
-- **Start from `docs/vision.md`** for what Scorecard is and who it's for. Anything in `index.html` or `design-system/` should serve that.
-- **The landing page is `index.html` at the repo root.** Edit it in place. If a major redesign is needed, branch and PR rather than creating versioned siblings.
-- **Logos and shared images live in `design-system/assets/`.** From the root `index.html`, reference them as `design-system/assets/scorecard-logo.svg`. From `design-system/system.html`, reference them as `assets/scorecard-logo.svg`.
+- **Start from `docs/vision.md`** for what Scorecard is and who it's for. Anything in `website/` or `design-system/` should serve that.
+- **The landing page is `website/index.html`.** Edit it in place. If a major redesign is needed, branch and PR rather than creating versioned siblings.
+- **Design tokens live in `design-system/tokens.css`** — the single source of truth, linked by both `website/index.html` and `design-system/system.html`. Two tiers: brand primitives (`--sc-gold/green/blue/purple/ink`) and semantic tokens (`--bg-1..2`, `--fg-1..5`, `--border`, `--hairline`, `--shadow-soft/card/modal`, etc.). Edit tokens here; both pages pick them up automatically.
+- **Logos and shared images live in `design-system/assets/`.** From `website/index.html`, reference them as `design-system/assets/scorecard-logo.svg` (a symlink at `website/design-system → ../design-system` makes that path resolve in local dev). From `design-system/system.html`, reference them as `assets/scorecard-logo.svg`.
 - **Plans go in `docs/plans/`, tasks in `docs/tasks/`.** Don't drop loose plan files at the repo root.
 
 ## Deploy
 
-GitHub Pages serves the entire repo root from the `main` branch (`.github/workflows/pages.yml`). The canonical landing page is `index.html` at the repo root, so `scorecardgtm.com/` lands directly on it.
+GitHub Pages publishes from `main`. The workflow (`.github/workflows/pages.yml`) does a small assembly step:
+
+```
+mkdir -p _site
+rsync -a --exclude='design-system' website/ _site/   # everything in website/ → deploy root
+cp -R design-system _site/design-system               # design-system/ alongside it
+```
+
+So `scorecardgtm.com/` lands on `website/index.html`, and `design-system/...` paths resolve to the real `design-system/` directory at the deploy root. Internal docs (`docs/`, `CLAUDE.md`, `.github/`) stay out of the artifact.
+
+## Local dev
+
+```
+python3 -m http.server 8000          # from repo root
+open http://localhost:8000/website/
+```
+
+The `website/design-system` symlink makes `design-system/...` paths in `website/index.html` resolve to the real `design-system/` directory. Same paths work in production after the workflow's assembly step.
 
 ## Expansion plan — when, not now
 

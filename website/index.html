@@ -2150,17 +2150,20 @@
         </div>
       `).join('');
     })();
-    let scored = 8472;
-    const scoredNum = document.getElementById('scored-num');
-    const clearedNum = document.getElementById('cleared-num');
-    const clearedTotal = document.getElementById('cleared-total');
-    function refreshCounts() {
-      scoredNum.textContent = scored.toLocaleString();
-      clearedNum.textContent = Math.floor(scored * 0.015).toLocaleString();
-      clearedTotal.textContent = scored.toLocaleString();
-    }
-    refreshCounts();
-    setInterval(() => { scored += 1; refreshCounts(); }, 600);
+    // Live ticker for the hero card's "cleared / total" counter.
+    // Null-safe: silently skips if the live card isn't on the page.
+    (function tickCounters() {
+      let scored = 8472;
+      const clearedNum = document.getElementById('cleared-num');
+      const clearedTotal = document.getElementById('cleared-total');
+      if (!clearedNum || !clearedTotal) return;
+      const refresh = () => {
+        clearedNum.textContent = Math.floor(scored * 0.015).toLocaleString();
+        clearedTotal.textContent = scored.toLocaleString();
+      };
+      refresh();
+      setInterval(() => { scored += 1; refresh(); }, 600);
+    })();
 
     let activeIdx = 0;
     setInterval(() => {

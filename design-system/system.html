@@ -140,13 +140,13 @@
       display: grid; place-items: center; min-height: 280px;
     }
     .logo-mark {
-      display: grid; place-items: center;
+      display: grid; place-items: center; gap: 14px;
     }
     .logo-mark .crop {
-      overflow: hidden; width: 160px; height: 120px;
+      width: 100%; max-width: 220px; height: 96px;
       display: grid; place-items: center;
     }
-    .logo-mark .crop img { height: 96px; transform: translateX(-26%); }
+    .logo-mark .crop img { height: 80px; width: auto; }
     .logo-size { padding: 20px; }
     .logo-size .frame { height: 110px; display: grid; place-items: center; }
     .logo-size .name { font-size: 13px; font-weight: 600; color: var(--fg-1); margin-top: 12px; }
@@ -438,7 +438,7 @@
             <img src="assets/scorecard-logo.svg" alt="Scorecard" style="height: 88px;" />
           </div>
           <div class="card logo-mark">
-            <div class="crop"><img src="assets/scorecard-logo.svg" alt="" /></div>
+            <div class="crop"><img src="assets/scorecard-logo-mark-light.svg" alt="" /></div>
             <span class="label-mono">mark only</span>
           </div>
         </div>

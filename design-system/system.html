@@ -21,7 +21,10 @@
       color: var(--fg-1);
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
     }
+    img, svg { max-width: 100%; height: auto; }
+    code { word-break: break-word; overflow-wrap: anywhere; }
     a { color: inherit; }
     button { font-family: inherit; }
     code { font-family: 'JetBrains Mono', monospace; font-size: 12px; }
@@ -322,10 +325,72 @@
       .grid-4 { grid-template-columns: repeat(2, 1fr); }
       .grid-3 { grid-template-columns: 1fr; }
       .grid-2 { grid-template-columns: 1fr; }
-      .grid-7 { grid-template-columns: repeat(3, 1fr); }
+      .grid-7 { grid-template-columns: repeat(4, 1fr); }
       .type-cols { grid-template-columns: 1fr; gap: 20px; }
       .section-head h2 { font-size: 30px; }
       table.scale th, table.scale td { padding: 12px 14px; }
+      .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    }
+    @media (max-width: 640px) {
+      main { padding: 32px 16px; gap: 24px; }
+      .header { padding: 14px 16px; }
+      .header nav { gap: 16px; }
+      .intro { margin-bottom: 56px; }
+      .intro h1 { font-size: 34px; line-height: 1.08; }
+      .intro p { font-size: 16px; }
+      section { margin-bottom: 64px; }
+      .section-head h2 { font-size: 26px; }
+      .section-head p { font-size: 15px; }
+      .card { padding: 20px; }
+      .card.lg, .card.xl { padding: 24px; }
+      .card.tight { padding: 16px; }
+      .grid-5 { grid-template-columns: 1fr; gap: 12px; }
+      .grid-4 { grid-template-columns: 1fr; gap: 12px; }
+      .grid-7 { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+
+      /* Logo block: stack the 2fr|1fr split into a single column */
+      [style*="grid-template-columns: 2fr 1fr"] { grid-template-columns: 1fr !important; }
+      .logo-primary { min-height: 200px; }
+      .logo-mark .crop { width: 100%; }
+
+      /* Brand swatches: compact */
+      .swatch-brand { min-height: 140px; padding: 16px; }
+      .swatch-brand .name { font-size: 16px; }
+
+      /* Type scale: hide low-priority columns; let the rest fit */
+      table.scale th:nth-child(4),
+      table.scale td:nth-child(4),
+      table.scale th:nth-child(5),
+      table.scale td:nth-child(5) { display: none; }
+      table.scale th, table.scale td { padding: 10px 10px; font-size: 12px; }
+      table.scale td span { font-size: 18px !important; line-height: 1.15 !important; }
+
+      /* Type samples: scale down so they don't overflow */
+      .type-aa { font-size: 96px !important; }
+      .sample-inter { font-size: 18px !important; }
+      .sample-mono { font-size: 14px !important; }
+
+      /* Components row helpers */
+      .row-wrap { gap: 10px; }
+      .live-row { flex-wrap: wrap; }
+      .eyebrow-row { flex-wrap: wrap; gap: 8px; font-size: 11px; }
+
+      /* Prospect rows: keep three columns, just tighten spacing */
+      .prospect { gap: 10px; padding: 10px 10px; }
+      .prospect .score { font-size: 16px; min-width: 26px; }
+
+      /* Motif tiles */
+      .motif-tile .frame { height: 160px; }
+
+      /* TOC: compact horizontal pills */
+      aside.toc ul { flex-direction: row; flex-wrap: wrap; gap: 8px; }
+      aside.toc a {
+        background: var(--bg-2);
+        border: 1px solid var(--hairline);
+        padding: 8px 12px;
+        border-radius: 999px;
+        font-size: 12px;
+      }
     }
   </style>
 </head>
@@ -543,7 +608,7 @@
           </div>
         </div>
 
-        <div class="card flush">
+        <div class="card flush table-scroll">
           <table class="scale">
             <thead>
               <tr>
@@ -706,25 +771,92 @@
       <section id="voice">
         <div class="section-head">
           <div class="eyebrow"><span class="pip"></span>06 · Voice</div>
-          <h2>Tone principles</h2>
-          <p>Four rules of thumb for copy and visual decisions.</p>
+          <h2>How Scorecard sounds.</h2>
+          <p>Direct, confident, lightly skeptical of marketing-speak. Plainspoken operator energy. We sell by showing, not telling — "we'd rather show the work than pitch it."</p>
         </div>
+
+        <div class="grid-2" style="margin-bottom: 20px;">
+          <div class="card voice-card">
+            <div class="h">Tone</div>
+            <div class="b">Direct. Confident. Plainspoken. Slight wry undertone when alternatives are dressed up — "lists go stale on day one," "tools fight each other for the same job." Comfortable saying what we are <em>not</em>: not a list provider, not a tool, not another agency.</div>
+          </div>
+          <div class="card voice-card">
+            <div class="h">Personality</div>
+            <div class="b">Operator-grade. Specific. Plainspoken. Skeptical-of-hype. Confidently picky. We don't take every customer; we say so on the page.</div>
+          </div>
+        </div>
+
+        <div class="card-title" style="margin-bottom: 14px;">Style rules</div>
+        <div class="grid-3" style="margin-bottom: 28px;">
+          <div class="card voice-card">
+            <div class="h">Short sentences</div>
+            <div class="b">Two-clause max. Period beats em dash when the rhythm permits. Vary length — but lean tight.</div>
+          </div>
+          <div class="card voice-card">
+            <div class="h">Specific numbers</div>
+            <div class="b">"30–150 won deals," "500–2,000 names," "Week 1–2." Numbers earn their place. Round numbers are usually a tell that we're guessing.</div>
+          </div>
+          <div class="card voice-card">
+            <div class="h">Active voice</div>
+            <div class="b">"Your reps close deals." Not "deals are closed by your reps." Subject does the work.</div>
+          </div>
+          <div class="card voice-card">
+            <div class="h">Concrete over abstract</div>
+            <div class="b">"The day disappears into list-building" beats "improving sales productivity." Imagery the buyer recognizes from their own week.</div>
+          </div>
+          <div class="card voice-card">
+            <div class="h">No exclamation. No emoji.</div>
+            <div class="b">No "!". No "🚀" / "✅". The work speaks; we don't decorate it.</div>
+          </div>
+          <div class="card voice-card">
+            <div class="h">Em dashes earn their use</div>
+            <div class="b">Em dashes wrap a real parenthetical or sharpen a contrast. Not a tic. A comma or a period is usually fine.</div>
+          </div>
+        </div>
+
+        <div class="card-title" style="margin-bottom: 14px;">Voice rules of thumb</div>
+        <div class="grid-2" style="margin-bottom: 28px;">
+          <div class="card voice-card">
+            <div class="h">Lead with the customer's problem in their language</div>
+            <div class="b">Open with what their week looks like. "Reps spend half their week building the list and the other half pretending the list is good." If the buyer doesn't recognize their own day, the page won't earn the read.</div>
+          </div>
+          <div class="card voice-card">
+            <div class="h">Quantify wherever possible</div>
+            <div class="b">Deals, weeks, dollars, prospects. "First batch in week 1–2, monthly delivery from week 4." Specific commitments build trust where logos and testimonials would.</div>
+          </div>
+          <div class="card voice-card">
+            <div class="h">Show, don't pitch</div>
+            <div class="b">The intro call walks through sample names on their data. Not slides. Not a demo loop. The product is most credible when the buyer sees the work.</div>
+          </div>
+          <div class="card voice-card">
+            <div class="h">Earn the claim</div>
+            <div class="b">Every differentiator pairs with the operating principle behind it. Not "best-in-class scoring" — "every score is explainable, line by line."</div>
+          </div>
+          <div class="card voice-card">
+            <div class="h">Define what we're <em>not</em>, crisply</div>
+            <div class="b">"Not a list provider. Not a tool. Not another agency." Negation sharpens the positive — a dropped category is the fastest way to position the next sentence.</div>
+          </div>
+          <div class="card voice-card">
+            <div class="h">Outcome over mechanism</div>
+            <div class="b">"More paying customers" leads. "Scoring rubric" follows only when the buyer needs the why. Mechanism words (rubric, motion, calibrate) sit inside the explanation, never in the headline.</div>
+          </div>
+        </div>
+
         <div class="grid-2">
-          <div class="card voice-card">
-            <div class="h">Plain over poetic</div>
-            <div class="b">Say "find more of your ideal customers" — not "unlock latent revenue." Read every line out loud; if it sounds like ad copy, rewrite.</div>
+          <div class="card voice-card" style="border-left: 3px solid var(--sc-green);">
+            <div class="h" style="color: var(--fg-1);">Words we use</div>
+            <div class="b">
+              <strong>Customers, deals, reps, names, queue, batch, ICP, tier, week, month.</strong> Buyer vocabulary. Sales-team vernacular. Specific enough to argue with.
+            </div>
           </div>
-          <div class="card voice-card">
-            <div class="h">Numbers earn their place</div>
-            <div class="b">A score, a count, or a calibration figure should always be specific and honest. "8,481 scored, 127 cleared" beats "thousands of qualified leads."</div>
-          </div>
-          <div class="card voice-card">
-            <div class="h">Show the model, don't market it</div>
-            <div class="b">When in doubt, expose the rubric. The product is more credible when the user can see what the score is made of.</div>
-          </div>
-          <div class="card voice-card">
-            <div class="h">Quiet by default</div>
-            <div class="b">Soft neutrals carry most surfaces. Brand color appears where it adds meaning — the signal peak, a tier badge, a status pulse — not as decoration.</div>
+          <div class="card voice-card" style="border-left: 3px solid #C25A48;">
+            <div class="h" style="color: var(--fg-1);">Words we avoid</div>
+            <div class="b">
+              <strong>Disrupt, revolutionize, 10x.</strong> Empty intensifiers.<br>
+              <strong>Empower, unlock, leverage, synergize.</strong> Generic SaaS verbs.<br>
+              <strong>Per-lead pricing, cost per lead.</strong> Wrong frame — we sell a managed service, not a list.<br>
+              <strong>Model, ML, algorithm, machine learning.</strong> Buyer is a sales team, not an engineer. Use "scoring," "rubric," or just "the work."
+            </div>
           </div>
         </div>
       </section>

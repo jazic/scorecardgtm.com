@@ -1,0 +1,57 @@
+/* ============================================================================
+   Scorecard design tokens — canonical source of truth.
+   Both index.html and design-system/system.html consume this file.
+   Naming follows the W3C Design Tokens Community Group spec (semantic +
+   reference layer), kept simple for a static-HTML, no-build site.
+
+   Two tiers:
+     1. BRAND PRIMITIVES (--sc-*) — raw brand colors, the immutable hex values.
+     2. SEMANTIC TOKENS — purpose-bound: backgrounds, foreground steps,
+        borders, surfaces, shadows. Use these in components, not the
+        primitives directly.
+
+   Foreground/background scales are Radix-style numbered ladders:
+     --fg-1 = darkest (primary text), --fg-5 = lightest (subtle hairlines)
+     --bg-1 = page surface, --bg-2 = elevated card surface
+   ========================================================================= */
+
+:root {
+  /* -- Brand primitives (reference layer) ------------------------------- */
+  --sc-gold:        #FCAF0F;
+  --sc-green:       #A8D862;
+  --sc-blue:        #649BE4;
+  --sc-purple:      #B493EA;
+  --sc-ink:         #03153A;
+
+  /* -- Semantic surfaces ------------------------------------------------- */
+  --bg-1:           #FAFBFC;       /* page background */
+  --bg-2:           #FFFFFF;       /* elevated surface (cards, modal) */
+  --bg-active:      rgba(100,155,228,0.08); /* active list/row state */
+
+  /* -- Semantic foreground (numbered step scale) ------------------------ */
+  --fg-1:           #03153A;       /* primary ink — headlines, body emphasis */
+  --fg-2:           #475569;       /* body copy */
+  --fg-3:           #64748B;       /* muted, captions */
+  --fg-4:           #94A3B8;       /* subtle, faint */
+  --fg-5:           #CBD5E1;       /* hairline-tier foreground (icons, dots) */
+
+  /* -- Lines ------------------------------------------------------------- */
+  --border:         rgba(100,116,139,0.18);  /* card / control borders */
+  --hairline:       rgba(100,116,139,0.12);  /* section dividers */
+  --underline:      rgba(71,85,105,0.25);    /* link / ghost-link underline */
+
+  /* -- Glows / pulses ---------------------------------------------------- */
+  --pulse-glow:     rgba(168,216,98,0.22);   /* live indicator halo */
+
+  /* -- Elevation / shadow ------------------------------------------------ */
+  --shadow-soft:    0 4px 12px -6px rgba(3,21,58,0.06);
+  --shadow-card:    0 30px 80px -30px rgba(3,21,58,0.18), 0 4px 12px -6px rgba(3,21,58,0.06);
+  --shadow-modal:   0 40px 120px -20px rgba(3,21,58,0.45), 0 8px 24px -8px rgba(3,21,58,0.18);
+}
+
+/* Type stack — used directly in font-family declarations (not yet wrapped in
+   custom properties so the existing CSS in index.html stays unchanged). When
+   we extract more comprehensively, these can move into :root above:
+     --font-sans:  'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+     --font-mono:  'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+ */

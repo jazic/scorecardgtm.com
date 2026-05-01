@@ -8,29 +8,17 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="tokens.css" />
   <style>
-    :root {
-      --ink:      #03153A;
-      --bg:       #FAFBFC;
-      --surface:  #FFFFFF;
-      --border:   rgba(100,116,139,0.18);
-      --hairline: rgba(100,116,139,0.12);
-      --body:     #475569;
-      --muted:    #64748B;
-      --faint:    #94A3B8;
-      --whisper:  #CBD5E1;
-      --gold:     #FCAF0F;
-      --green:    #A8D862;
-      --blue:     #649BE4;
-      --purple:   #B493EA;
-    }
+    /* Tokens: defined in design-system/tokens.css (linked above). */
+
     * { box-sizing: border-box; }
     html, body { margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: var(--bg);
-      color: var(--ink);
+      background: var(--bg-1);
+      color: var(--fg-1);
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
     }
@@ -52,8 +40,8 @@
     }
     .logo { height: 36px; width: auto; display: block; }
     .header nav { display: flex; gap: 28px; font-size: 14px; font-weight: 500; }
-    .header nav a { text-decoration: none; color: var(--body); }
-    .header nav a.active { color: var(--ink); font-weight: 600; }
+    .header nav a { text-decoration: none; color: var(--fg-2); }
+    .header nav a.active { color: var(--fg-1); font-weight: 600; }
 
     main {
       max-width: 1280px; margin: 0 auto;
@@ -67,7 +55,7 @@
       position: sticky; top: 110px; align-self: start;
     }
     aside.toc .label {
-      font-size: 11px; font-weight: 500; color: var(--muted);
+      font-size: 11px; font-weight: 500; color: var(--fg-3);
       letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 14px;
     }
     aside.toc ul {
@@ -75,47 +63,47 @@
       display: flex; flex-direction: column; gap: 10px;
     }
     aside.toc a {
-      text-decoration: none; color: var(--ink); font-size: 13px; font-weight: 500;
+      text-decoration: none; color: var(--fg-1); font-size: 13px; font-weight: 500;
       display: flex; align-items: center; gap: 8px;
     }
     aside.toc a .num {
-      color: var(--faint); font-family: 'JetBrains Mono', monospace; font-size: 11px;
+      color: var(--fg-4); font-family: 'JetBrains Mono', monospace; font-size: 11px;
     }
 
     .intro { margin-bottom: 80px; }
     .intro .eyebrow {
-      font-size: 12px; font-weight: 500; color: var(--muted);
+      font-size: 12px; font-weight: 500; color: var(--fg-3);
       letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 16px;
     }
     .intro h1 {
       font-size: 64px; font-weight: 700; letter-spacing: -0.035em; line-height: 1.05;
-      color: var(--ink); margin: 0 0 18px; text-wrap: balance; max-width: 760px;
+      color: var(--fg-1); margin: 0 0 18px; text-wrap: balance; max-width: 760px;
     }
     .intro p {
-      font-size: 18px; line-height: 1.55; color: var(--body); max-width: 640px;
+      font-size: 18px; line-height: 1.55; color: var(--fg-2); max-width: 640px;
       margin: 0; text-wrap: pretty;
     }
 
     section { margin-bottom: 96px; scroll-margin-top: 100px; }
     .section-head { margin-bottom: 36px; }
     .section-head .eyebrow {
-      font-size: 12px; font-weight: 500; color: var(--muted);
+      font-size: 12px; font-weight: 500; color: var(--fg-3);
       letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 8px;
       display: flex; align-items: center; gap: 10px;
     }
     .section-head .eyebrow .pip {
-      width: 6px; height: 6px; border-radius: 3px; background: var(--purple);
+      width: 6px; height: 6px; border-radius: 3px; background: var(--sc-purple);
     }
     .section-head h2 {
       font-size: 38px; font-weight: 700; letter-spacing: -0.025em;
-      color: var(--ink); margin: 0 0 12px; line-height: 1.1;
+      color: var(--fg-1); margin: 0 0 12px; line-height: 1.1;
     }
     .section-head p {
-      font-size: 16px; line-height: 1.6; color: var(--body); max-width: 680px; margin: 0;
+      font-size: 16px; line-height: 1.6; color: var(--fg-2); max-width: 680px; margin: 0;
     }
 
     .card {
-      background: var(--surface);
+      background: var(--bg-2);
       border: 1px solid var(--border);
       border-radius: 14px;
       padding: 28px;
@@ -126,7 +114,7 @@
     .card.xl    { padding: 48px; }
 
     .card-title {
-      font-size: 13px; font-weight: 600; color: var(--ink); margin-bottom: 16px;
+      font-size: 13px; font-weight: 600; color: var(--fg-1); margin-bottom: 16px;
     }
     .card-title.tight { margin-bottom: 12px; }
 
@@ -141,7 +129,7 @@
     .mono { font-family: 'JetBrains Mono', monospace; }
     .label-mono {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 11px; color: var(--muted); letter-spacing: 0.02em;
+      font-size: 11px; color: var(--fg-3); letter-spacing: 0.02em;
     }
 
     /* ---------- Logo section ---------- */
@@ -158,14 +146,14 @@
     .logo-mark .crop img { height: 96px; transform: translateX(-26%); }
     .logo-size { padding: 20px; }
     .logo-size .frame { height: 110px; display: grid; place-items: center; }
-    .logo-size .name { font-size: 13px; font-weight: 600; color: var(--ink); margin-top: 12px; }
-    .logo-size .use  { font-size: 12px; color: var(--muted); margin-top: 2px; }
+    .logo-size .name { font-size: 13px; font-weight: 600; color: var(--fg-1); margin-top: 12px; }
+    .logo-size .use  { font-size: 12px; color: var(--fg-3); margin-top: 2px; }
     .logo-surface { padding: 0; overflow: hidden; }
     .logo-surface .swatch { height: 140px; display: grid; place-items: center; }
     .logo-surface .swatch img { height: 48px; }
     .logo-surface .meta { padding: 16px; }
-    .logo-surface .name { font-size: 13px; font-weight: 600; color: var(--ink); }
-    .logo-surface .note { font-size: 12px; color: var(--muted); margin-top: 2px; }
+    .logo-surface .name { font-size: 13px; font-weight: 600; color: var(--fg-1); }
+    .logo-surface .note { font-size: 12px; color: var(--fg-3); margin-top: 2px; }
 
     .clearspace {
       position: relative; height: 140px;
@@ -174,12 +162,12 @@
     }
     .clearspace .dash {
       position: absolute; inset: 18px;
-      border: 1px dashed var(--whisper); border-radius: 4px;
+      border: 1px dashed var(--fg-5); border-radius: 4px;
     }
 
     .donts {
       margin: 0; padding: 0 0 0 18px;
-      font-size: 13px; line-height: 1.8; color: var(--body);
+      font-size: 13px; line-height: 1.8; color: var(--fg-2);
     }
 
     /* ---------- Color section ---------- */
@@ -195,33 +183,33 @@
     .ramp .stop { flex: 1; }
     .ramp-key {
       display: flex; justify-content: space-between;
-      font-size: 11px; color: var(--muted); margin-top: 8px;
+      font-size: 11px; color: var(--fg-3); margin-top: 8px;
       font-family: 'JetBrains Mono', monospace;
     }
     .neutral {
       border: 1px solid var(--border); border-radius: 8px; overflow: hidden;
     }
     .neutral .bar { height: 72px; }
-    .neutral .meta { padding: 10px 12px; background: var(--surface); }
-    .neutral .name { font-size: 12px; font-weight: 600; color: var(--ink); }
-    .neutral .hex  { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--muted); margin-top: 2px; }
+    .neutral .meta { padding: 10px 12px; background: var(--bg-2); }
+    .neutral .name { font-size: 12px; font-weight: 600; color: var(--fg-1); }
+    .neutral .hex  { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--fg-3); margin-top: 2px; }
 
     /* ---------- Type section ---------- */
     .type-aa {
       font-size: 96px; font-weight: 700; letter-spacing: -0.04em;
-      line-height: 1; color: var(--ink);
+      line-height: 1; color: var(--fg-1);
     }
     .type-cols {
       display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 24px;
     }
-    .type-cols .h { font-size: 13px; font-weight: 600; color: var(--ink); }
-    .type-cols .desc { font-size: 12px; color: var(--muted); margin-bottom: 8px; }
+    .type-cols .h { font-size: 13px; font-weight: 600; color: var(--fg-1); }
+    .type-cols .desc { font-size: 12px; color: var(--fg-3); margin-bottom: 8px; }
     .type-cols .sample-inter {
-      font-size: 18px; color: var(--body); line-height: 1.5;
+      font-size: 18px; color: var(--fg-2); line-height: 1.5;
     }
     .type-cols .sample-mono {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 18px; color: var(--ink); line-height: 1.4;
+      font-size: 18px; color: var(--fg-1); line-height: 1.4;
     }
 
     table.scale {
@@ -232,54 +220,54 @@
       border-bottom: 1px solid var(--hairline);
     }
     table.scale th {
-      font-size: 11px; font-weight: 500; color: var(--muted);
+      font-size: 11px; font-weight: 500; color: var(--fg-3);
       text-transform: uppercase; letter-spacing: 0.08em;
     }
-    table.scale td { font-size: 13px; color: var(--body); }
-    table.scale td.token { font-weight: 600; color: var(--ink); }
+    table.scale td { font-size: 13px; color: var(--fg-2); }
+    table.scale td.token { font-weight: 600; color: var(--fg-1); }
     table.scale td.mono { font-family: 'JetBrains Mono', monospace; font-size: 12px; }
     table.scale tr:last-child td { border-bottom: none; }
 
     /* ---------- Components ---------- */
     .btn {
-      background: var(--ink); color: #FFF; border: none; border-radius: 8px;
+      background: var(--fg-1); color: #FFF; border: none; border-radius: 8px;
       padding: 11px 18px; font-size: 14px; font-weight: 500; cursor: pointer;
     }
     .btn.lg { font-size: 15px; padding: 14px 22px; }
     .ghost-link {
-      text-decoration: none; color: var(--body);
+      text-decoration: none; color: var(--fg-2);
       font-size: 14px; font-weight: 500;
       border-bottom: 1px solid rgba(71,85,105,0.25); padding-bottom: 2px;
     }
-    .ghost-link .arrow { margin-left: 6px; color: var(--purple); }
-    .nav-link { text-decoration: none; color: var(--ink); font-size: 14px; font-weight: 500; }
+    .ghost-link .arrow { margin-left: 6px; color: var(--sc-purple); }
+    .nav-link { text-decoration: none; color: var(--fg-1); font-size: 14px; font-weight: 500; }
     .row-wrap { display: flex; gap: 22px; align-items: center; flex-wrap: wrap; }
 
     .tier-badge {
       width: 32px; height: 32px; border-radius: 8px;
       font-size: 14px; font-weight: 700;
-      display: grid; place-items: center; color: var(--ink);
+      display: grid; place-items: center; color: var(--fg-1);
     }
     .tier-row { display: flex; align-items: center; gap: 10px; }
-    .tier-row .lbl { font-size: 13px; color: var(--body); }
+    .tier-row .lbl { font-size: 13px; color: var(--fg-2); }
 
     .pulse-dot {
-      width: 8px; height: 8px; border-radius: 4px; background: var(--green);
+      width: 8px; height: 8px; border-radius: 4px; background: var(--sc-green);
       box-shadow: 0 0 0 4px rgba(168,216,98,0.22);
       animation: pulseDS 1.6s ease-in-out infinite;
     }
     @keyframes pulseDS { 0%,100% { opacity: 1 } 50% { opacity: 0.45 } }
     .live-row { display: flex; align-items: center; gap: 10px; }
-    .live-row .live-label { font-size: 13px; font-weight: 600; color: var(--ink); }
-    .live-row .live-month { font-size: 12px; color: var(--muted); }
+    .live-row .live-label { font-size: 13px; font-weight: 600; color: var(--fg-1); }
+    .live-row .live-month { font-size: 12px; color: var(--fg-3); }
 
     .eyebrow-row {
       display: inline-flex; align-items: center; gap: 14px;
-      font-size: 12px; font-weight: 500; color: var(--muted);
+      font-size: 12px; font-weight: 500; color: var(--fg-3);
       letter-spacing: 0.08em; text-transform: uppercase;
     }
-    .eyebrow-row .pip { width: 6px; height: 6px; border-radius: 3px; background: var(--purple); }
-    .eyebrow-row strong { color: var(--ink); font-weight: 600; letter-spacing: 0.05em; }
+    .eyebrow-row .pip { width: 6px; height: 6px; border-radius: 3px; background: var(--sc-purple); }
+    .eyebrow-row strong { color: var(--fg-1); font-weight: 600; letter-spacing: 0.05em; }
 
     .prospect {
       display: grid; grid-template-columns: 1fr auto auto;
@@ -287,42 +275,42 @@
       padding: 11px 12px; border-radius: 8px;
     }
     .prospect.active { background: rgba(100,155,228,0.08); }
-    .prospect .name { font-size: 13.5px; font-weight: 600; color: var(--ink); }
-    .prospect .meta { font-size: 11.5px; color: var(--muted); margin-top: 2px; }
+    .prospect .name { font-size: 13.5px; font-weight: 600; color: var(--fg-1); }
+    .prospect .meta { font-size: 11.5px; color: var(--fg-3); margin-top: 2px; }
     .prospect .score {
       font-family: 'JetBrains Mono', monospace; font-size: 18px; font-weight: 700;
-      color: var(--ink); min-width: 30px; text-align: right; letter-spacing: -0.02em;
+      color: var(--fg-1); min-width: 30px; text-align: right; letter-spacing: -0.02em;
     }
     .tier-chip {
       width: 22px; height: 22px; border-radius: 6px;
       font-size: 11px; font-weight: 700;
-      display: grid; place-items: center; color: var(--ink);
+      display: grid; place-items: center; color: var(--fg-1);
     }
-    .tier-A, .swatch-A { background: var(--green); }
-    .tier-B, .swatch-B { background: var(--blue); }
-    .tier-C, .swatch-C { background: var(--purple); }
-    .tier-D, .swatch-D { background: var(--gold); }
+    .tier-A, .swatch-A { background: var(--sc-green); }
+    .tier-B, .swatch-B { background: var(--sc-blue); }
+    .tier-C, .swatch-C { background: var(--sc-purple); }
+    .tier-D, .swatch-D { background: var(--sc-gold); }
 
     .dist-frame { height: 84px; position: relative; }
     .dist-frame svg { display: block; width: 100%; height: 84px; }
-    .caption { font-size: 12px; color: var(--muted); margin-top: 10px; line-height: 1.6; }
+    .caption { font-size: 12px; color: var(--fg-3); margin-top: 10px; line-height: 1.6; }
 
     /* Motifs */
     .motif-tile { padding: 0; overflow: hidden; }
-    .motif-tile .frame { height: 200px; position: relative; background: var(--bg); overflow: hidden; }
+    .motif-tile .frame { height: 200px; position: relative; background: var(--bg-1); overflow: hidden; }
     .motif-tile .frame > svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
     .motif-tile .meta { padding: 18px; }
-    .motif-tile .name { font-size: 14px; font-weight: 600; color: var(--ink); }
-    .motif-tile .desc { font-size: 12px; color: var(--muted); margin-top: 4px; }
+    .motif-tile .name { font-size: 14px; font-weight: 600; color: var(--fg-1); }
+    .motif-tile .desc { font-size: 12px; color: var(--fg-3); margin-top: 4px; }
 
     /* Voice */
-    .voice-card .h { font-size: 16px; font-weight: 600; color: var(--ink); margin-bottom: 8px; }
-    .voice-card .b { font-size: 14px; line-height: 1.6; color: var(--body); }
+    .voice-card .h { font-size: 16px; font-weight: 600; color: var(--fg-1); margin-bottom: 8px; }
+    .voice-card .b { font-size: 14px; line-height: 1.6; color: var(--fg-2); }
 
     .footer-line {
       border-top: 1px solid var(--hairline);
       padding-top: 28px; margin-top: 40px;
-      font-size: 12px; color: var(--muted);
+      font-size: 12px; color: var(--fg-3);
     }
 
     @media (max-width: 960px) {
@@ -411,16 +399,29 @@
 
         <div class="grid-3" style="margin-top: 20px;">
           <div class="card logo-surface">
-            <div class="swatch" style="background: var(--bg);"><img src="assets/scorecard-logo.svg" alt="" /></div>
-            <div class="meta"><div class="name">Light surface</div><div class="note">Default — use everywhere.</div></div>
+            <div class="swatch" style="background: var(--bg-1);"><img src="assets/scorecard-logo.svg" alt="" /></div>
+            <div class="meta"><div class="name">Light surface — full lockup</div><div class="note"><code>scorecard-logo.svg</code> · default mark + wordmark.</div></div>
           </div>
           <div class="card logo-surface">
-            <div class="swatch" style="background: #03153A;"><img src="assets/scorecard-logo.svg" alt="" /></div>
-            <div class="meta"><div class="name">Ink surface</div><div class="note">Reserved — needs review for press use.</div></div>
+            <div class="swatch" style="background: #03153A;"><img src="assets/scorecard-logo-mark-dark.svg" alt="" /></div>
+            <div class="meta"><div class="name">Ink surface — dark mark</div><div class="note"><code>scorecard-logo-mark-dark.svg</code> · white baseline + boundary; mark only.</div></div>
           </div>
           <div class="card logo-surface">
             <div class="swatch" style="background: #A8D862;"><img src="assets/scorecard-logo.svg" alt="" /></div>
-            <div class="meta"><div class="name">Brand color surface</div><div class="note">Avoid — colors clash with mark fill.</div></div>
+            <div class="meta"><div class="name">Brand color surface</div><div class="note">Avoid — fill colors clash with brand backgrounds.</div></div>
+          </div>
+        </div>
+
+        <div class="card-title" style="margin-top: 32px;">Mark-only variants</div>
+        <p style="font-size: 13px; color: var(--fg-3); margin: 0 0 14px; line-height: 1.55;">When the wordmark is implied (in-app icons, dark CTA decorations, social favicons, app shortcuts) reach for the mark-only files. Pick the variant that matches the surface it sits on.</p>
+        <div class="grid-2">
+          <div class="card logo-surface">
+            <div class="swatch" style="background: var(--bg-1);"><img src="assets/scorecard-logo-mark-light.svg" alt="" style="height: 88px;" /></div>
+            <div class="meta"><div class="name">Light variant</div><div class="note"><code>scorecard-logo-mark-light.svg</code> · ink baseline + boundary, full opacity curves.</div></div>
+          </div>
+          <div class="card logo-surface">
+            <div class="swatch" style="background: #03153A;"><img src="assets/scorecard-logo-mark-dark.svg" alt="" style="height: 88px;" /></div>
+            <div class="meta"><div class="name">Dark variant</div><div class="note"><code>scorecard-logo-mark-dark.svg</code> · white baseline + boundary, slightly punched-up curve opacity for navy backgrounds.</div></div>
           </div>
         </div>
 
@@ -456,23 +457,23 @@
         <div class="grid-5" style="margin-bottom: 24px;">
           <div class="swatch-brand" style="background: #FCAF0F; color: #03153A;">
             <div class="name">Gold</div>
-            <div><div class="hex">#FCAF0F</div><div class="sem">Noise · low-score region</div></div>
+            <div><div class="hex">--sc-gold · #FCAF0F</div><div class="sem">Noise · low-score region</div></div>
           </div>
           <div class="swatch-brand" style="background: #A8D862; color: #03153A;">
             <div class="name">Green</div>
-            <div><div class="hex">#A8D862</div><div class="sem">Tier A · ideal · signal peak</div></div>
+            <div><div class="hex">--sc-green · #A8D862</div><div class="sem">Tier A · ideal · signal peak</div></div>
           </div>
           <div class="swatch-brand" style="background: #649BE4; color: #03153A;">
             <div class="name">Blue</div>
-            <div><div class="hex">#649BE4</div><div class="sem">Tier B · strong · signal mid</div></div>
+            <div><div class="hex">--sc-blue · #649BE4</div><div class="sem">Tier B · strong · signal mid</div></div>
           </div>
           <div class="swatch-brand" style="background: #B493EA; color: #03153A;">
             <div class="name">Purple</div>
-            <div><div class="hex">#B493EA</div><div class="sem">Tier C · accent · signal base</div></div>
+            <div><div class="hex">--sc-purple · #B493EA</div><div class="sem">Tier C · accent · signal base</div></div>
           </div>
           <div class="swatch-brand" style="background: #03153A; color: #FAFBFC;">
             <div class="name">Ink</div>
-            <div><div class="hex">#03153A</div><div class="sem">Primary text · structure</div></div>
+            <div><div class="hex">--sc-ink · #03153A</div><div class="sem">Primary text · structure</div></div>
           </div>
         </div>
 
@@ -485,21 +486,35 @@
             <span>Blue · mid</span>
             <span>Purple · base</span>
           </div>
-          <div class="caption" style="font-size: 13px; color: var(--body); margin-top: 12px;">
+          <div class="caption" style="font-size: 13px; color: var(--fg-2); margin-top: 12px;">
             Used for the logo fill, hero curves, and any ramp visualization. Sample with <code>mosaicColorAt(u)</code> where u is 0–1.
           </div>
         </div>
 
         <div>
-          <div class="card-title">Neutrals</div>
+          <div class="card-title">Surfaces &amp; foreground steps</div>
+          <p style="font-size: 13px; color: var(--fg-3); margin: 0 0 14px; line-height: 1.55;">Two surfaces (<code>--bg-1</code>, <code>--bg-2</code>) and a five-step foreground ladder (<code>--fg-1</code> = primary text, <code>--fg-5</code> = subtle hairlines). Numbered scales let you reach for the right contrast without inventing a new name.</p>
           <div class="grid-7">
-            <div class="neutral"><div class="bar" style="background: #FAFBFC;"></div><div class="meta"><div class="name">Bg</div><div class="hex">#FAFBFC</div></div></div>
-            <div class="neutral"><div class="bar" style="background: #FFFFFF;"></div><div class="meta"><div class="name">Surface</div><div class="hex">#FFFFFF</div></div></div>
-            <div class="neutral"><div class="bar" style="background: #CBD5E1;"></div><div class="meta"><div class="name">Whisper</div><div class="hex">#CBD5E1</div></div></div>
-            <div class="neutral"><div class="bar" style="background: #94A3B8;"></div><div class="meta"><div class="name">Faint</div><div class="hex">#94A3B8</div></div></div>
-            <div class="neutral"><div class="bar" style="background: #64748B;"></div><div class="meta"><div class="name">Muted</div><div class="hex">#64748B</div></div></div>
-            <div class="neutral"><div class="bar" style="background: #475569;"></div><div class="meta"><div class="name">Body</div><div class="hex">#475569</div></div></div>
-            <div class="neutral"><div class="bar" style="background: #03153A;"></div><div class="meta"><div class="name">Text</div><div class="hex">#03153A</div></div></div>
+            <div class="neutral"><div class="bar" style="background: #FAFBFC;"></div><div class="meta"><div class="name">--bg-1</div><div class="hex">#FAFBFC</div></div></div>
+            <div class="neutral"><div class="bar" style="background: #FFFFFF;"></div><div class="meta"><div class="name">--bg-2</div><div class="hex">#FFFFFF</div></div></div>
+            <div class="neutral"><div class="bar" style="background: #CBD5E1;"></div><div class="meta"><div class="name">--fg-5</div><div class="hex">#CBD5E1</div></div></div>
+            <div class="neutral"><div class="bar" style="background: #94A3B8;"></div><div class="meta"><div class="name">--fg-4</div><div class="hex">#94A3B8</div></div></div>
+            <div class="neutral"><div class="bar" style="background: #64748B;"></div><div class="meta"><div class="name">--fg-3</div><div class="hex">#64748B</div></div></div>
+            <div class="neutral"><div class="bar" style="background: #475569;"></div><div class="meta"><div class="name">--fg-2</div><div class="hex">#475569</div></div></div>
+            <div class="neutral"><div class="bar" style="background: #03153A;"></div><div class="meta"><div class="name">--fg-1</div><div class="hex">#03153A</div></div></div>
+          </div>
+        </div>
+
+        <div style="margin-top: 32px;">
+          <div class="card-title">Lines, glows &amp; elevation</div>
+          <p style="font-size: 13px; color: var(--fg-3); margin: 0 0 14px; line-height: 1.55;">Derived tokens for borders, hairlines, the live-state pulse halo, and the three shadow tiers used across cards and the modal.</p>
+          <div class="grid-3">
+            <div class="card tight"><div class="card-title tight"><code>--border</code></div><div style="height: 32px; border: 1px solid var(--border); border-radius: 6px;"></div><div style="font-size: 11.5px; color: var(--fg-3); margin-top: 8px;">rgba(100,116,139,0.18) · card / control borders</div></div>
+            <div class="card tight"><div class="card-title tight"><code>--hairline</code></div><div style="height: 32px; border-top: 1px solid var(--hairline); margin-top: 16px;"></div><div style="font-size: 11.5px; color: var(--fg-3); margin-top: 8px;">rgba(100,116,139,0.12) · section dividers</div></div>
+            <div class="card tight"><div class="card-title tight"><code>--underline</code></div><div style="height: 32px; display: flex; align-items: center;"><span style="font-size: 14px; color: var(--fg-2); border-bottom: 1px solid var(--underline); padding-bottom: 2px;">link example</span></div><div style="font-size: 11.5px; color: var(--fg-3); margin-top: 8px;">rgba(71,85,105,0.25) · ghost-link underline</div></div>
+            <div class="card tight"><div class="card-title tight"><code>--bg-active</code></div><div style="height: 32px; background: var(--bg-active); border-radius: 6px;"></div><div style="font-size: 11.5px; color: var(--fg-3); margin-top: 8px;">rgba(100,155,228,0.08) · active list-row state</div></div>
+            <div class="card tight"><div class="card-title tight"><code>--pulse-glow</code></div><div style="height: 32px; display: flex; align-items: center; gap: 12px;"><span style="width: 8px; height: 8px; border-radius: 50%; background: var(--sc-green); box-shadow: 0 0 0 4px var(--pulse-glow);"></span><span style="font-size: 12px; color: var(--fg-3);">live indicator halo</span></div><div style="font-size: 11.5px; color: var(--fg-3); margin-top: 8px;">rgba(168,216,98,0.22)</div></div>
+            <div class="card tight"><div class="card-title tight"><code>--shadow-soft</code> · <code>--shadow-card</code> · <code>--shadow-modal</code></div><div style="display: flex; gap: 10px; height: 36px;"><span style="flex: 1; background: var(--bg-2); border: 1px solid var(--border); border-radius: 4px; box-shadow: var(--shadow-soft);"></span><span style="flex: 1; background: var(--bg-2); border: 1px solid var(--border); border-radius: 4px; box-shadow: var(--shadow-card);"></span><span style="flex: 1; background: var(--bg-2); border: 1px solid var(--border); border-radius: 4px; box-shadow: var(--shadow-modal);"></span></div><div style="font-size: 11.5px; color: var(--fg-3); margin-top: 8px;">soft → card → modal</div></div>
           </div>
         </div>
       </section>
@@ -538,37 +553,37 @@
             <tbody>
               <tr>
                 <td class="token">Display</td>
-                <td><span style="font-size: 32px; font-weight: 700; letter-spacing: -0.035em; line-height: 1; color: var(--ink);">The quick brown fox</span></td>
+                <td><span style="font-size: 32px; font-weight: 700; letter-spacing: -0.035em; line-height: 1; color: var(--fg-1);">The quick brown fox</span></td>
                 <td class="mono">68px</td><td class="mono">700</td><td class="mono">-0.035em</td><td>Hero H1</td>
               </tr>
               <tr>
                 <td class="token">H2</td>
-                <td><span style="font-size: 32px; font-weight: 700; letter-spacing: -0.025em; line-height: 1.1; color: var(--ink);">The quick brown fox</span></td>
+                <td><span style="font-size: 32px; font-weight: 700; letter-spacing: -0.025em; line-height: 1.1; color: var(--fg-1);">The quick brown fox</span></td>
                 <td class="mono">38px</td><td class="mono">700</td><td class="mono">-0.025em</td><td>Section title</td>
               </tr>
               <tr>
                 <td class="token">H3</td>
-                <td><span style="font-size: 24px; font-weight: 600; letter-spacing: -0.015em; line-height: 1.2; color: var(--ink);">The quick brown fox</span></td>
+                <td><span style="font-size: 24px; font-weight: 600; letter-spacing: -0.015em; line-height: 1.2; color: var(--fg-1);">The quick brown fox</span></td>
                 <td class="mono">24px</td><td class="mono">600</td><td class="mono">-0.015em</td><td>Card title</td>
               </tr>
               <tr>
                 <td class="token">Body L</td>
-                <td><span style="font-size: 18px; font-weight: 400; line-height: 1.55; color: var(--ink);">The quick brown fox</span></td>
+                <td><span style="font-size: 18px; font-weight: 400; line-height: 1.55; color: var(--fg-1);">The quick brown fox</span></td>
                 <td class="mono">18px</td><td class="mono">400</td><td class="mono">0</td><td>Lede paragraph</td>
               </tr>
               <tr>
                 <td class="token">Body</td>
-                <td><span style="font-size: 15px; font-weight: 400; line-height: 1.6; color: var(--ink);">The quick brown fox</span></td>
+                <td><span style="font-size: 15px; font-weight: 400; line-height: 1.6; color: var(--fg-1);">The quick brown fox</span></td>
                 <td class="mono">15px</td><td class="mono">400</td><td class="mono">0</td><td>Default copy</td>
               </tr>
               <tr>
                 <td class="token">Eyebrow</td>
-                <td><span style="font-size: 12px; font-weight: 500; letter-spacing: 0.08em; line-height: 1.4; color: var(--ink); text-transform: uppercase;">Eyebrow</span></td>
+                <td><span style="font-size: 12px; font-weight: 500; letter-spacing: 0.08em; line-height: 1.4; color: var(--fg-1); text-transform: uppercase;">Eyebrow</span></td>
                 <td class="mono">12px</td><td class="mono">500</td><td class="mono">0.08em</td><td>Caps label</td>
               </tr>
               <tr>
                 <td class="token">Mono</td>
-                <td><span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500; line-height: 1.4; color: var(--ink);">The quick brown fox</span></td>
+                <td><span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500; line-height: 1.4; color: var(--fg-1);">The quick brown fox</span></td>
                 <td class="mono">13px</td><td class="mono">500</td><td class="mono">0</td><td>Scores, IDs, data</td>
               </tr>
             </tbody>

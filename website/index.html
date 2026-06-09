@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Scorecard — Sell more. Prospect less.</title>
+  <title>Scorecard — Sell like a company ten times your size.</title>
   <meta name="description" content="AI sources and pre-qualifies high-fit prospects that look like your best customers — so your reps spend more time closing deals and less time building lists. Your pipeline gets sharper every month." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -1318,6 +1318,85 @@
     }
     details.q .answer strong { color: var(--fg-1); font-weight: 600; }
 
+    /* ---------- old way vs scorecard ---------- */
+    .compare-wrap {
+      border-top: 1px solid var(--hairline);
+      background: var(--bg-1);
+      position: relative;
+      z-index: 1;
+    }
+    .compare {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 120px 48px 96px;
+      display: flex;
+      flex-direction: column;
+      gap: 56px;
+    }
+    .compare-rows { display: flex; flex-direction: column; }
+    .cmp-row {
+      display: grid;
+      grid-template-columns: 72px 1fr 200px;
+      gap: 40px;
+      align-items: center;
+      padding: 30px 0;
+      border-bottom: 1px solid var(--hairline);
+    }
+    .cmp-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 26px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1;
+    }
+    .cmp-num.gold   { color: var(--sc-gold); }
+    .cmp-num.blue   { color: var(--sc-blue); }
+    .cmp-num.purple { color: var(--sc-purple); }
+    .cmp-body { display: flex; flex-direction: column; gap: 8px; max-width: 640px; }
+    .cmp-body h3 {
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      margin: 0;
+      color: var(--fg-1);
+    }
+    .cmp-body p {
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--fg-2);
+      margin: 0;
+    }
+    .cmp-cost {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      color: var(--fg-3);
+      justify-self: end;
+      text-align: right;
+    }
+    .cmp-row.scorecard {
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 30px 32px;
+      margin-top: 16px;
+      box-shadow: var(--shadow-card);
+    }
+    .cmp-row.scorecard .cmp-cost { color: #5A8B2A; }
+    .cmp-num.check {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: rgba(168,216,98,0.16);
+      border-radius: 10px;
+      color: #5A8B2A;
+      font-size: 22px;
+    }
+
     /* ---------- dark CTA band ---------- */
     .cta-wrap {
       background: var(--fg-1);
@@ -1443,6 +1522,8 @@
       .faq { grid-template-columns: 1fr; gap: 32px; }
       .faq .head h2 { font-size: 40px; }
       details.q summary .qtitle { font-size: 18px; }
+      .cmp-row { grid-template-columns: 56px 1fr; gap: 12px 24px; }
+      .cmp-cost { grid-column: 2; justify-self: start; text-align: left; }
       .cta { flex-direction: column; align-items: flex-start; gap: 32px; padding: 80px 24px; }
       .cta .copy h2 { font-size: 56px; }
       .cta .actions { align-items: flex-start; }
@@ -1455,7 +1536,8 @@
       .quote .quote-body .glyph { font-size: 120px; margin-top: 0; }
       .quote .quote-body .text { font-size: 38px; }
       .quote .quote-sub { font-size: 16px; }
-      .loop, .customers, .faq { padding: 72px 24px; }
+      .loop, .customers, .faq, .compare { padding: 72px 24px; }
+      .cmp-row.scorecard { padding: 24px; }
       .cta .copy h2 { font-size: 40px; }
       .cta .cta-logo { display: none; }
     }
@@ -1486,9 +1568,9 @@
     <main id="top">
       <section class="hero">
         <div class="copy">
-          <h1>Sell more. Prospect less.</h1>
+          <h1>Sell like a company ten times your size.</h1>
           <p class="wedge"><span class="pip" aria-hidden="true">●</span> Managed prospecting. More paying customers, every month.</p>
-          <p class="lede">Your reps get a <strong>ranked</strong> batch of pre‑qualified prospects every month, built from the customers you already won. They close deals. They don't build lists.</p>
+          <p class="lede">We hand your reps the accounts worth pitching — <strong>sourced, scored, and ranked</strong> from the patterns in the customers you already won, each with the likely buyer named. Big teams pay a department to do this. We do it for you.</p>
           <div class="cta-row">
             <button class="btn-primary lg" type="button" data-open-book>Book a 30‑min intro</button>
             <a href="#how" class="ghost-link">See how it works<span class="arrow">→</span></a>
@@ -1557,8 +1639,8 @@
             <span class="label">List quality</span>
           </div>
           <div class="body">
-            <h3>Lists don't match your ICP.</h3>
-            <p>Vendors sell against their categories — NAICS, SIC, employee bands — not your real ICP. You buy 50,000 names, but your reps can't tell which ones are worth calling before they pick up the phone.</p>
+            <h3>Lists don't match who you actually sell to.</h3>
+            <p>Vendors sell against their categories — industry codes, headcount bands — not the companies you actually sell to. A genuine fit gets filed under the wrong category, so a normal search walks right past it. And the filters that exist don't combine: a four‑of‑five fit drops out while a weaker account scrapes through — and your reps can't tell before they dial.</p>
           </div>
           <div class="evidence">
             <span class="ev-label">A typical 50k vendor list</span>
@@ -1578,7 +1660,7 @@
           </div>
           <div class="body">
             <h3>Tools fight each other for the same job.</h3>
-            <p>Most teams run a stack of overlapping tools — one for data, one for enrichment, one for sequencing, one for scoring. Each promises clarity. Together, they bury it. When something stops working, nobody can tell which tool is broken.</p>
+            <p>Most teams run a pile of overlapping tools — one to find companies, one to fill in the details, one to send the emails, one to grade them. Each promises clarity. Together they bury it. When something stops working, nobody can tell which tool is to blame.</p>
           </div>
           <div class="ev-toolstack" aria-hidden="true">
             <div class="ev-tool-grid">
@@ -1602,7 +1684,7 @@
           </div>
           <div class="body">
             <h3>Strategy gets revisited once a quarter, if that.</h3>
-            <p>Pulling close‑rate data, reconciling it against ICP, adjusting sequences and lists. Days of stitching dashboards. By the time the analysis lands, the quarter is over and the market has moved.</p>
+            <p>Pulling your win rates, checking them against who you thought you were selling to, redoing the lists. Days of work. By the time it's done, the quarter is over and the market has moved.</p>
           </div>
           <div class="evidence">
             <span class="ev-label">5% lift, applied · per year</span>
@@ -1652,7 +1734,7 @@
           <span class="glyph" aria-hidden="true">"</span>
           <h2 class="text">A pipeline built from the customers <em>you already win.</em></h2>
         </div>
-        <p class="quote-sub">Scorecard gives your reps a ranked queue every month. Every close tightens it. Every disqualification prunes it. Your reps don't learn a new tool. They just notice the names are getting better.</p>
+        <p class="quote-sub">Your reps get a ranked list every month. Every deal you win sharpens it. Every dead end drops off. Nobody has to learn a new tool — they just notice the names keep getting better.</p>
       </div>
     </section>
 
@@ -1662,8 +1744,8 @@
         <div class="section-head">
           <div class="head-copy">
             <span class="eyebrow"><span class="pip">●</span> How it works</span>
-            <h2>Find them. Rank them. Refine the ICP every cycle.</h2>
-            <p class="head-lede">Personalized to your sales motion, not the median customer. We surface the names traditional lists miss, prioritize them against the patterns in your won deals, and tighten the ICP — yours if you have one, ours to test if you don't.</p>
+            <h2>Find them. Rank them. Get sharper every month.</h2>
+            <p class="head-lede">Built around how you actually sell, not some average customer. We find the companies the big lists miss, rank them against the deals you've already won, and get sharper every month — starting from your best customers if you know them, or finding the pattern if you don't.</p>
           </div>
           <div class="head-meta">First cycle → 4 weeks</div>
         </div>
@@ -1672,26 +1754,26 @@
         <div class="flow">
           <div class="step s1">
             <span class="week-tag"><span class="tick"></span>Week 1</span>
-            <span class="step-name">Map the ICP</span>
-            <p class="step-desc">Start from the ICP you have, or the one you're testing. We pull the patterns hiding in your won deals.</p>
+            <span class="step-name">Learn who you sell to</span>
+            <p class="step-desc">We start with the customers you've already won and find what your best ones have in common.</p>
             <span class="step-arrow" aria-hidden="true">→</span>
           </div>
           <div class="step s2">
             <span class="week-tag"><span class="tick"></span>Week 2</span>
             <span class="step-name">Find the names</span>
-            <p class="step-desc">Precision sourcing across the open web — including the names traditional lists can't surface.</p>
+            <p class="step-desc">We search the whole web for companies that match — including the ones the big lists never show you.</p>
             <span class="step-arrow" aria-hidden="true">→</span>
           </div>
           <div class="step s3">
             <span class="week-tag"><span class="tick"></span>Week 3</span>
             <span class="step-name">Rank against your wins</span>
-            <p class="step-desc">Your team walks the top names line by line. We tune the priority order until it matches your judgment.</p>
+            <p class="step-desc">Your team walks the top names line by line. We tune the order until it matches your gut.</p>
             <span class="step-arrow" aria-hidden="true">→</span>
           </div>
           <div class="step s4">
             <span class="week-tag"><span class="tick"></span>Week 4</span>
             <span class="step-name">Deliver &amp; refine</span>
-            <p class="step-desc">A ranked queue lands in your CRM, Slack, or dashboard. Next cycle refines the ICP on what closed.</p>
+            <p class="step-desc">A ranked list — 30–50 names, about a week of outreach per rep — lands in your CRM, Slack, or inbox. Each month it sharpens on what actually closed.</p>
           </div>
         </div>
 
@@ -1708,11 +1790,11 @@
           <div class="compound-head">
             <div class="left">
               <span class="tag">Score distribution, by month</span>
-              <h3>Same ICP, sharper every cycle. By month 4 your A‑tier triples.</h3>
+              <h3>Same target, sharper every month. By month 4 your A‑tier triples.</h3>
             </div>
             <div class="stat">
               <div class="stat-num">3.1×</div>
-              <div class="stat-label">A‑tier lift, M1 → M4</div>
+              <div class="stat-label">A‑tier growth, month 1 → 4</div>
             </div>
           </div>
 
@@ -1771,22 +1853,22 @@
             <div class="month m1">
               <span class="m-label">Month 1</span>
               <span class="m-stat">14 A‑tier</span>
-              <span class="m-sub">Broad ICP, fuzzy signal</span>
+              <span class="m-sub">Wide net, rough fit</span>
             </div>
             <div class="month m2">
               <span class="m-label">Month 2</span>
               <span class="m-stat">22 A‑tier</span>
-              <span class="m-sub">First calibration lands</span>
+              <span class="m-sub">First tune‑up lands</span>
             </div>
             <div class="month m3">
               <span class="m-label">Month 3</span>
               <span class="m-stat">31 A‑tier</span>
-              <span class="m-sub">Second cycle of wins</span>
+              <span class="m-sub">More wins feed in</span>
             </div>
             <div class="month m4">
               <span class="m-label">Month 4</span>
               <span class="m-stat">43 A‑tier</span>
-              <span class="m-sub">Signal locked</span>
+              <span class="m-sub">Dialed in</span>
             </div>
           </div>
         </div>
@@ -1799,7 +1881,7 @@
         <div class="section-head">
           <div class="head-copy">
             <span class="eyebrow"><span class="pip">●</span> Who we work with</span>
-            <h2>Precision over category. Real ICP over list-vendor approximations.</h2>
+            <h2>We find companies that actually fit — not just whatever's in your industry.</h2>
           </div>
         </div>
 
@@ -1807,7 +1889,7 @@
           <div class="tile pe">
             <div class="tile-head">
               <span class="tile-cat">Private Equity</span>
-              <span class="tile-meta">Thesis‑fit</span>
+              <span class="tile-meta">Fits your thesis</span>
             </div>
             <h3>Skincare MedSpa platforms, not "healthcare clinics in our states."</h3>
             <div class="icp-compare">
@@ -1817,7 +1899,7 @@
                 <span class="row-desc">Healthcare clinics, target states.</span>
               </div>
               <div class="icp-row precise">
-                <span class="row-label">Scorecard ICP</span>
+                <span class="row-label">Scorecard fit</span>
                 <span class="row-count">142</span>
                 <span class="row-desc">Skincare MedSpa, $5M+ revenue, multi‑location‑ready.</span>
               </div>
@@ -1828,7 +1910,7 @@
           <div class="tile mfg">
             <div class="tile-head">
               <span class="tile-cat">Manufacturing</span>
-              <span class="tile-meta">Workflow precision</span>
+              <span class="tile-meta">By what they build</span>
             </div>
             <h3>Companies with mechanical engineers on semiconductor design teams.</h3>
             <div class="icp-compare">
@@ -1838,18 +1920,18 @@
                 <span class="row-desc">Manufacturing, NAICS 33, 50–500 employees.</span>
               </div>
               <div class="icp-row precise">
-                <span class="row-label">Scorecard ICP</span>
+                <span class="row-label">Scorecard fit</span>
                 <span class="row-count">380</span>
                 <span class="row-desc">Mechanical engineers in semiconductor design roles, on staff today.</span>
               </div>
             </div>
-            <div class="tile-foot"><span class="pulse"></span>Sourced by what people do, not by NAICS code</div>
+            <div class="tile-foot"><span class="pulse"></span>Found by what they actually build, not an industry code</div>
           </div>
 
           <div class="tile saas">
             <div class="tile-head">
               <span class="tile-cat">SaaS</span>
-              <span class="tile-meta">Trigger‑fit</span>
+              <span class="tile-meta">Right timing</span>
             </div>
             <h3>Usage‑based pricing, with a new Engineering Leader in the seat.</h3>
             <div class="icp-compare">
@@ -1859,18 +1941,18 @@
                 <span class="row-desc">B2B SaaS, $10M+ ARR.</span>
               </div>
               <div class="icp-row precise">
-                <span class="row-label">Scorecard ICP</span>
+                <span class="row-label">Scorecard fit</span>
                 <span class="row-count">96</span>
                 <span class="row-desc">Usage‑based pricing AND a new VP Engineering or CTO in the last 90 days.</span>
               </div>
             </div>
-            <div class="tile-foot"><span class="pulse"></span>Buyer plus budget signal, in the same name</div>
+            <div class="tile-foot"><span class="pulse"></span>The buyer and the timing, in one company</div>
           </div>
 
           <div class="tile fs">
             <div class="tile-head">
               <span class="tile-cat">Field Services</span>
-              <span class="tile-meta">Customer‑base fit</span>
+              <span class="tile-meta">By who they serve</span>
             </div>
             <h3>Delivery operators servicing government contracts.</h3>
             <div class="icp-compare">
@@ -1880,7 +1962,7 @@
                 <span class="row-desc">Logistics &amp; delivery, multi‑state.</span>
               </div>
               <div class="icp-row precise">
-                <span class="row-label">Scorecard ICP</span>
+                <span class="row-label">Scorecard fit</span>
                 <span class="row-count">218</span>
                 <span class="row-desc">Last‑mile delivery operators with active government contracts.</span>
               </div>
@@ -1917,13 +1999,64 @@
             <div class="answer">No, we feed them. We deliver prospects ranked by fit; your team does the outreach. Most customers see their SDRs get more efficient because they're working a sharper top‑of‑funnel instead of grinding through a noisy list.</div>
           </details>
           <details class="q">
-            <summary><span class="qnum">05</span><span class="qtitle">What if we already have an ICP defined?</span><span class="qicon">+</span></summary>
-            <div class="answer">Good. That's our hypothesis to test. Often the ICP on paper diverges from what your team actually closes. We either confirm it fast or find the segments hiding inside it. Either outcome is useful.</div>
+            <summary><span class="qnum">05</span><span class="qtitle">What if we already know who we sell to?</span><span class="qicon">+</span></summary>
+            <div class="answer">Good. We treat it as a starting point and put it to the test. The customer you describe on paper often isn't quite the one your team actually closes. We either confirm it fast or find the pockets hiding inside it. Either way, you learn something.</div>
           </details>
           <details class="q">
             <summary><span class="qnum">06</span><span class="qtitle">Where does our data live?</span><span class="qicon">+</span></summary>
             <div class="answer">Our system lives in our infrastructure. We don't take a copy of your CRM, and won‑deal exports stay scoped to the firmographic fields we need.</div>
           </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- old way vs scorecard — build / buy / staff -->
+    <section class="compare-wrap" id="compare">
+      <div class="compare">
+        <div class="section-head">
+          <div class="head-copy">
+            <span class="eyebrow"><span class="pip">●</span> What it takes</span>
+            <h2>Three ways to do this yourself. Or let us run it.</h2>
+          </div>
+          <div class="head-meta">The old way → Scorecard</div>
+        </div>
+
+        <div class="compare-rows">
+          <article class="cmp-row">
+            <span class="cmp-num gold">01</span>
+            <div class="cmp-body">
+              <h3>Buy the tools</h3>
+              <p>ZoomInfo, Apollo, Clay. They search the data the way it's labeled, so anything filed under the wrong category slips past — and you're still the one deciding who's worth a call.</p>
+            </div>
+            <span class="cmp-cost">~$50K a year</span>
+          </article>
+
+          <article class="cmp-row">
+            <span class="cmp-num blue">02</span>
+            <div class="cmp-body">
+              <h3>Build it yourself</h3>
+              <p>Hire engineers to pull the data and write the software that reads each business and scores the fit. Then keep it running.</p>
+            </div>
+            <span class="cmp-cost">Months of engineering</span>
+          </article>
+
+          <article class="cmp-row">
+            <span class="cmp-num purple">03</span>
+            <div class="cmp-body">
+              <h3>Hire a team to do it</h3>
+              <p>Put people on it full‑time, digging up accounts and grading every one by hand, week after week.</p>
+            </div>
+            <span class="cmp-cost">Several salaries</span>
+          </article>
+
+          <article class="cmp-row scorecard">
+            <span class="cmp-num check">✓</span>
+            <div class="cmp-body">
+              <h3>Scorecard</h3>
+              <p>All three, done for you. Ranked accounts land on your reps' desks every month.</p>
+            </div>
+            <span class="cmp-cost">A 30‑minute call</span>
+          </article>
         </div>
       </div>
     </section>
@@ -1934,7 +2067,7 @@
         <img class="cta-logo" src="design-system/assets/scorecard-logo-mark-dark.svg" alt="Scorecard" />
         <div class="copy">
           <span class="eyebrow"><span class="pip">●</span> Ready when you are</span>
-          <h2>See your ICP in 30 minutes.</h2>
+          <h2>See your best‑fit customers in 30 minutes.</h2>
           <p>Book a working session. No deck, no demo loop. We review how you sell and walk through sample names on your data.</p>
         </div>
         <div class="actions">
@@ -1990,7 +2123,7 @@
             <div class="field" data-field="icp">
               <label for="icp">What kind of customers do you sell to?</label>
               <textarea id="icp" name="icp" rows="3" placeholder="B2B SaaS, $10–30M ARR, 80–250 employees. We sell into RevOps and Sales leaders. Best fits run usage‑based pricing and have a recently‑hired VP Engineering or VP Sales." required></textarea>
-              <span class="err-msg">A sentence or two about your ICP.</span>
+              <span class="err-msg">A sentence or two about your customers.</span>
             </div>
             <div class="form-foot">
               <span class="note">We'll prefill the calendar with your details.</span>
@@ -2258,14 +2391,18 @@
         config: {
           layout: "month_view",
           useSlotsViewOnSmallScreen: "true",
+          theme: "light", // force light until the site ships a dark mode
           name: values.name,
           email: values.email,
-          notes: `Company: ${values.company}\n\nICP / sales motion:\n${values.icp}`,
+          notes: `Company: ${values.company}\n\nCustomers / how they sell:\n${values.icp}`,
         },
         calLink: CAL_LINK,
       });
       if (!calMounted) {
         Cal.ns[CAL_NAMESPACE]("ui", {
+          // Force light theme so the calendar matches the light booking modal.
+          // TODO: remove once the site ships a dark mode.
+          theme: "light",
           cssVarsPerTheme: {
             light: { "cal-brand": "#03153A" },
             dark:  { "cal-brand": "#03153A" }

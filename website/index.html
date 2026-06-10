@@ -2320,11 +2320,12 @@
     const modal = document.getElementById('book-modal');
     let lastFocus = null;
 
-    function openModal() {
+    function openModal(source) {
       lastFocus = document.activeElement;
       modal.classList.add('is-open');
       modal.setAttribute('aria-hidden', 'false');
       document.body.classList.add('scroll-locked');
+      if (window.posthog) posthog.capture('book_call_started', { cta: source || 'unknown' });
       // Reset to form state on open
       modal.classList.remove('show-schedule');
       setTimeout(() => {
@@ -2341,7 +2342,7 @@
     document.querySelectorAll('[data-open-book]').forEach(el => {
       el.addEventListener('click', (e) => {
         e.preventDefault();
-        openModal();
+        openModal(el.textContent.replace(/[→↑]/g, '').trim());
       });
     });
     document.querySelectorAll('[data-close-book]').forEach(el => {
@@ -2355,7 +2356,7 @@
     });
     // Deep-link: /#book auto-opens the modal
     if (location.hash === '#book') {
-      window.addEventListener('load', () => setTimeout(openModal, 50));
+      window.addEventListener('load', () => setTimeout(() => openModal('deeplink'), 50));
     }
 
     // Deep-link any FAQ <details> by id (e.g. nav "Pricing" -> #pricing)
@@ -2388,6 +2389,7 @@
     }
 
     let calMounted = false;
+    let lastValues = null;
     function loadCalScript() {
       if (window.Cal) return;
       (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(cal, ar); return;} p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
@@ -2420,6 +2422,12 @@
           hideEventTypeDetails: false,
           layout: "month_view",
         });
+        Cal.ns[CAL_NAMESPACE]("on", {
+          action: "bookingSuccessful",
+          callback: () => {
+            if (window.posthog) posthog.capture('book_call_booked', { company: lastValues && lastValues.company });
+          }
+        });
         calMounted = true;
       }
     }
@@ -2438,6 +2446,11 @@
         icp: form.icp.value.trim(),
       };
       if (!validate(values)) return;
+      lastValues = values;
+      if (window.posthog) {
+        posthog.identify(values.email, { name: values.name, company: values.company });
+        posthog.capture('book_call_details_submitted', { company: values.company });
+      }
       thanksName.textContent = values.name.split(/\s+/)[0];
       recap.innerHTML = `
         <span class="chip">${values.email}</span>

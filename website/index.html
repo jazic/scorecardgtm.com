@@ -2293,28 +2293,17 @@
         </div>
       `).join('');
     })();
-    // Live ticker for the hero card's "cleared / total" counter.
+    // Static "cleared / total" counter for the hero card (no animation —
+    // a perpetual ticker bloated session-replay recordings).
     // Null-safe: silently skips if the live card isn't on the page.
-    (function tickCounters() {
-      let scored = 8472;
+    (function setCounters() {
+      const scored = 8472;
       const clearedNum = document.getElementById('cleared-num');
       const clearedTotal = document.getElementById('cleared-total');
       if (!clearedNum || !clearedTotal) return;
-      const refresh = () => {
-        clearedNum.textContent = Math.floor(scored * 0.015).toLocaleString();
-        clearedTotal.textContent = scored.toLocaleString();
-      };
-      refresh();
-      setInterval(() => { scored += 1; refresh(); }, 600);
+      clearedNum.textContent = Math.floor(scored * 0.015).toLocaleString();
+      clearedTotal.textContent = scored.toLocaleString();
     })();
-
-    let activeIdx = 0;
-    setInterval(() => {
-      activeIdx = (activeIdx + 1) % prospects.length;
-      document.querySelectorAll('.prospect').forEach((el, i) => {
-        el.classList.toggle('active', i === activeIdx);
-      });
-    }, 2200);
 
     // ------- Modal: open / close -------
     const modal = document.getElementById('book-modal');

@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Homepage — Copy × Strategy Analysis</title>
+<style>
+  :root{
+    --navy:#03153A; --green:#A8D862; --blue:#649BE4; --purple:#B493EA; --gold:#FCAF0F;
+    --bg:#F7F8FA; --card:#FFFFFF; --ink:#0F1B33; --muted:#5A667C; --faint:#8A94A6;
+    --line:#E4E8EF; --hair:#EDF0F5; --copy-bg:#FFFFFF; --meta-bg:#FBFCFE;
+    --shadow:0 1px 2px rgba(16,27,51,.04), 0 8px 24px rgba(16,27,51,.06);
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#0A1226; --card:#0F1B33; --ink:#EEF2F8; --muted:#9AA6BC; --faint:#6B7791;
+      --line:#20304F; --hair:#182642; --copy-bg:#0F1B33; --meta-bg:#0C1730;
+      --shadow:0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.35);
+    }
+  }
+  :root[data-theme="light"]{
+    --bg:#F7F8FA; --card:#FFFFFF; --ink:#0F1B33; --muted:#5A667C; --faint:#8A94A6;
+    --line:#E4E8EF; --hair:#EDF0F5; --copy-bg:#FFFFFF; --meta-bg:#FBFCFE;
+    --shadow:0 1px 2px rgba(16,27,51,.04), 0 8px 24px rgba(16,27,51,.06);
+  }
+  :root[data-theme="dark"]{
+    --bg:#0A1226; --card:#0F1B33; --ink:#EEF2F8; --muted:#9AA6BC; --faint:#6B7791;
+    --line:#20304F; --hair:#182642; --copy-bg:#0F1B33; --meta-bg:#0C1730;
+    --shadow:0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.35);
+  }
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Inter","Segoe UI",sans-serif;
+    line-height:1.5; -webkit-font-smoothing:antialiased;
+  }
+  a{ color:var(--blue); }
+
+  header.top{
+    position:sticky; top:0; z-index:20; background:var(--navy); color:#fff;
+    border-bottom:1px solid rgba(255,255,255,.08);
+  }
+  .top-in{
+    max-width:1280px; margin:0 auto; padding:14px 28px;
+    display:flex; align-items:center; gap:16px; flex-wrap:wrap;
+  }
+  .brand{ display:flex; align-items:baseline; gap:9px; }
+  .dot{ width:9px; height:9px; border-radius:2px; background:var(--green); display:inline-block; transform:translateY(-1px); }
+  .brand b{ font-size:16px; font-weight:700; letter-spacing:-.02em; }
+  .brand span{ font-size:13px; color:rgba(255,255,255,.6); }
+  .top-actions{ margin-left:auto; display:flex; align-items:center; gap:10px; }
+  .btn{
+    font:inherit; font-size:12.5px; font-weight:600; cursor:pointer;
+    background:rgba(255,255,255,.1); color:#fff; border:1px solid rgba(255,255,255,.18);
+    padding:7px 12px; border-radius:8px;
+  }
+  .btn:hover{ background:rgba(255,255,255,.16); }
+
+  .wrap{ max-width:1280px; margin:0 auto; padding:26px 28px 120px; }
+
+  .lede{
+    background:var(--card); border:1px solid var(--line); border-radius:14px;
+    padding:20px 22px; margin-bottom:26px; box-shadow:var(--shadow);
+  }
+  .lede h1{ margin:0 0 6px; font-size:20px; letter-spacing:-.02em; }
+  .lede p{ margin:6px 0 0; font-size:13.5px; color:var(--muted); max-width:80ch; }
+  .lede .how{ margin-top:12px; font-size:12.5px; color:var(--faint); }
+  .lede code{ background:var(--hair); padding:1px 6px; border-radius:5px; font-size:12px; }
+
+  .toc{ display:flex; flex-wrap:wrap; gap:7px; margin-top:14px; }
+  .toc a{
+    font-size:12px; font-weight:600; text-decoration:none; color:var(--muted);
+    background:var(--hair); border:1px solid var(--line); padding:5px 10px; border-radius:999px;
+  }
+  .toc a:hover{ color:var(--ink); border-color:var(--faint); }
+
+  .colhead{
+    display:grid; grid-template-columns:1fr 1fr; gap:22px; margin:8px 2px 4px;
+    position:sticky; top:57px; z-index:10;
+  }
+  .colhead > div{
+    font-size:11px; font-weight:700; letter-spacing:.09em; text-transform:uppercase; color:var(--faint);
+    background:var(--bg); padding:10px 4px 8px;
+  }
+
+  .section{ margin-bottom:22px; scroll-margin-top:120px; }
+  .sec-title{
+    display:flex; align-items:center; gap:12px; margin:0 2px 10px;
+  }
+  .sec-num{
+    flex-shrink:0; width:30px; height:30px; border-radius:9px; display:grid; place-items:center;
+    background:var(--navy); color:#fff; font-size:13px; font-weight:700; font-variant-numeric:tabular-nums;
+  }
+  .sec-title h2{ margin:0; font-size:17px; letter-spacing:-.015em; }
+  .sec-title .kind{
+    margin-left:auto; font-size:11px; font-weight:600; color:var(--muted);
+    background:var(--hair); border:1px solid var(--line); padding:4px 9px; border-radius:999px;
+  }
+
+  .row{ display:grid; grid-template-columns:1fr 1fr; gap:22px; align-items:stretch; }
+  .card{
+    background:var(--card); border:1px solid var(--line); border-radius:14px;
+    box-shadow:var(--shadow); overflow:hidden; display:flex; flex-direction:column;
+  }
+  .copy-card{ background:var(--copy-bg); }
+  .meta-card{ background:var(--meta-bg); }
+
+  .card-hd{
+    display:flex; align-items:center; gap:10px; padding:11px 16px;
+    border-bottom:1px solid var(--hair); min-height:46px;
+  }
+  .card-hd .lbl{ font-size:11px; font-weight:700; letter-spacing:.07em; text-transform:uppercase; color:var(--faint); }
+  .picker{ margin-left:auto; display:flex; align-items:center; gap:8px; }
+  .picker label{ font-size:11px; color:var(--faint); }
+  .picker select{
+    font:inherit; font-size:12.5px; font-weight:600; color:var(--ink);
+    background:var(--card); border:1px solid var(--line); border-radius:8px; padding:5px 9px; cursor:pointer;
+  }
+  .var-badge{
+    font-size:10px; font-weight:700; letter-spacing:.05em; text-transform:uppercase;
+    padding:3px 8px; border-radius:999px; background:rgba(100,155,228,.14); color:var(--blue);
+  }
+  .var-badge.orig{ background:rgba(168,216,98,.18); color:#5c7d20; }
+  @media (prefers-color-scheme: dark){ .var-badge.orig{ color:var(--green); } }
+  :root[data-theme="dark"] .var-badge.orig{ color:var(--green); }
+
+  .card-bd{ padding:16px 18px; font-size:13.5px; }
+  .meta-card .card-bd{ font-size:13px; }
+
+  /* copy blocks */
+  .cp .ey{ font-size:10.5px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--purple); margin:0 0 6px; }
+  .cp h3{ margin:2px 0 4px; font-size:17px; letter-spacing:-.015em; line-height:1.2; }
+  .cp h4{ margin:14px 0 3px; font-size:13.5px; }
+  .cp p{ margin:4px 0; color:var(--ink); }
+  .cp .sub{ color:var(--muted); }
+  .cp .cta{
+    display:inline-block; margin:8px 8px 2px 0; font-size:12px; font-weight:600;
+    padding:6px 11px; border-radius:7px; background:var(--navy); color:#fff;
+  }
+  .cp .cta.ghost{ background:transparent; color:var(--blue); border:1px solid var(--line); }
+  .cp .note{ margin-top:10px; font-size:11.5px; color:var(--faint); font-style:italic; }
+  .cp ul{ margin:5px 0; padding-left:18px; }
+  .cp li{ margin:2px 0; }
+  .cp .mono{ font-variant-numeric:tabular-nums; }
+  .cp .divlbl{ font-size:10px; font-weight:700; letter-spacing:.07em; text-transform:uppercase; color:var(--faint); margin:14px 0 4px; }
+  .cp table{ width:100%; border-collapse:collapse; margin:6px 0; font-size:12.5px; }
+  .cp td{ padding:6px 8px; border-top:1px solid var(--hair); vertical-align:top; }
+  .cp td:last-child{ text-align:right; white-space:nowrap; color:var(--muted); font-weight:600; }
+  .cp .win td{ background:rgba(168,216,98,.1); }
+
+  /* meta blocks */
+  .meta-card .m{ margin-bottom:15px; }
+  .meta-card .m:last-child{ margin-bottom:0; }
+  .meta-card .m > .h{
+    font-size:10.5px; font-weight:700; letter-spacing:.07em; text-transform:uppercase;
+    color:var(--faint); margin-bottom:5px; display:flex; align-items:center; gap:7px;
+  }
+  .meta-card .m .h::before{ content:""; width:6px; height:6px; border-radius:2px; background:var(--blue); }
+  .meta-card .m.who .h::before{ background:var(--purple); }
+  .meta-card .m.points .h::before{ background:var(--gold); }
+  .meta-card .m.sowhat .h::before{ background:var(--green); }
+  .meta-card p{ margin:0; color:var(--ink); }
+  .meta-card ul{ margin:0; padding-left:17px; }
+  .meta-card li{ margin:3px 0; color:var(--ink); }
+  .meta-card .sowhat p{
+    font-weight:600; padding:10px 12px; border-radius:9px;
+    background:rgba(168,216,98,.12); border-left:3px solid var(--green);
+  }
+
+  @media (max-width:860px){
+    .row, .colhead{ grid-template-columns:1fr; }
+    .colhead{ display:none; }
+    .card-hd .lbl{ display:inline; }
+    .meta-card{ border-style:dashed; }
+  }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="top-in">
+    <span class="brand"><span class="dot"></span><b>Scorecard</b> <span>Homepage · Copy × Strategy</span></span>
+    <div class="top-actions">
+      <button class="btn" id="expandAll">Expand meta</button>
+      <button class="btn" id="themeBtn">Theme</button>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="lede">
+    <h1>Homepage — Copy × Strategy Analysis</h1>
+    <p><strong>Left:</strong> the actual copy for each section, with a picker to switch between the original and any iterations. <strong>Right:</strong> the strategy behind the section — what it is, who it's for, the points it has to land, and the "so what" a buyer should walk away with.</p>
+    <p class="how">Add or edit iterations in the <code>SECTIONS</code> data block near the bottom of this file — each section's <code>variants</code> array feeds its picker. Copy is verbatim from the Claude Design <code>Home.dc.html</code>; strategy notes are a working first pass to react to.</p>
+    <nav class="toc" id="toc"></nav>
+  </div>
+
+  <div class="colhead">
+    <div>Copy</div>
+    <div>Section intent · audience · so what</div>
+  </div>
+
+  <div id="sections"></div>
+</div>
+
+<script>
+/* =========================================================================
+   DATA MODEL
+   Each section: { id, num, title, kind, variants:[{label, isOriginal, html}], meta:{...} }
+   - variants[].html renders in the left "Copy" card. First entry shows by default.
+   - meta drives the right card: whatItIs, whoFor (html), points[], soWhat.
+   Add an iteration: push another {label:'v2 — angle', html:`...`} into variants.
+   ========================================================================= */
+const SECTIONS = [
+  {
+    id:"header", num:"—", title:"Header / Nav", kind:"Global nav",
+    variants:[{label:"Original", isOriginal:true, html:`
+      <p class="ey">Wordmark</p><p>Scorecard</p>
+      <p class="divlbl">Nav</p>
+      <p>Industries · Tools · Pricing</p>
+      <a class="cta">See your market scored</a>
+      <p class="divlbl">Industries mega-menu — Find buyers to sell to</p>
+      <ul>
+        <li>Manufacturing and distribution</li><li>SaaS and technology</li>
+        <li>Healthcare and medical</li><li>Trades and field services</li>
+        <li>Professional and financial services</li><li>Logistics and transportation</li>
+        <li>Staffing and recruiting</li>
+      </ul>
+      <p class="divlbl">Find companies to acquire</p>
+      <ul><li>Private equity and ETA</li></ul>
+      <p class="sub">Search funds, holdcos and independent sponsors scoring a market to find the company worth buying.</p>
+      <a class="cta ghost">See all industries →</a>
+    `}],
+    meta:{
+      whatItIs:"Persistent wayfinding. Splits the whole story into two motions right away — <em>sell to</em> vs <em>acquire</em> — and keeps one hard conversion (\"See your market scored\") in reach on every scroll.",
+      whoFor:"Everyone, but the Industries menu is the self-select: an outbound sales leader picks their vertical; a PE/search-fund buyer finds the acquire door.",
+      points:["Product is organized by industry, not features","There are two distinct jobs it does (sell / acquire)","One primary action, repeated: get your market scored"],
+      soWhat:"\"There's a version of this built for my industry and my job.\""
+    }
+  },
+  {
+    id:"hero", num:"1", title:"Hero", kind:"Above the fold",
+    variants:[
+      {label:"Original — outcome (live)", isOriginal:true, html:`
+        <p class="ey">Live scoring · April 2026</p>
+        <h3>We feed your outbound team the accounts most likely to buy.</h3>
+        <p class="sub">ScoreCard finds and scores every company in your market — not just the easy-to-find slice — then hands your reps a ranked call list, with the reason behind each account. The research big teams pay a department for, run for you.</p>
+        <a class="cta">Book a 30-min intro</a><a class="cta ghost">See a real score →</a>
+        <p class="note">Built for Manufacturing · Distribution · Private Equity · Field Services</p>
+        <p class="divlbl">Hero card — Your ranked call list</p>
+        <p class="sub mono">[8,481→] sourced · 127 A-tier · Calibrated from 112 won deals · model v3 · Reason shown on every account</p>
+      `},
+      {label:"v — contrarian", html:`
+        <p class="ey">Live scoring · April 2026</p>
+        <h3>Stop calling the reachable. Start calling the best.</h3>
+        <p class="sub">Self-serve tools hand you whoever is easy to find and vaguely fits. ScoreCard scores your whole market, ranks it against the deals you already win, and hands your reps the accounts most likely to buy — run for you.</p>
+        <a class="cta">Book a 30-min intro</a><a class="cta ghost">See a real score →</a>
+      `},
+      {label:"v — institutional", html:`
+        <p class="ey">Live scoring · April 2026</p>
+        <h3>Your whole market, ranked by who's most likely to buy.</h3>
+        <p class="sub">ScoreCard names your whole addressable market — not just the easy-to-find slice — then ranks every account against the deals you already close, with the reason behind each one. Run for you.</p>
+        <a class="cta">Book a 30-min intro</a><a class="cta ghost">See a real score →</a>
+      `},
+      {label:"v2 — copywriting pass", html:`
+        <p class="ey">Live scoring · updated monthly</p>
+        <h3>We hand your reps the accounts most likely to buy.</h3>
+        <p class="sub">Scorecard scores every company in your market — not just the easy-to-find slice — and hands your reps a ranked call list, each account with the reason it's there. The prospecting a big team pays a department for, run for you.</p>
+        <a class="cta">Book a 30-min intro</a><a class="cta ghost">See a real score →</a>
+        <p class="note">Built for Manufacturing · Distribution · Private Equity · Field Services</p>
+      `}
+    ],
+    meta:{
+      whatItIs:"The one-sentence promise plus live proof. The card on the right shows the actual deliverable — a ranked call list with scores — so the value is visible before any explanation.",
+      whoFor:"A VP Sales / revenue leader at an SMB in manufacturing, distribution, field services (and PE for acquisition). Someone whose reps waste the week finding people to call.",
+      points:["We score the <em>whole</em> market, not the easy slice","Ranked against deals you already win (calibrated, not generic)","Every account carries its reason","It's managed — \"run for you,\" not another tool to operate"],
+      soWhat:"\"They'll hand my reps a list of who to call — and I don't have to build or run anything.\""
+    }
+  },
+  {
+    id:"good", num:"2", title:"What good looks like", kind:"Problem framing",
+    variants:[{label:"Original", isOriginal:true, html:`
+      <p class="ey">What good looks like</p>
+      <h3>Your sellers should be selling.</h3>
+      <p>Before ScoreCard, a rep's week disappears into finding someone worth calling. After, most of it goes to the call itself.</p>
+      <p class="note">Chart: Prospecting · Research · Admin &amp; CRM · Selling conversations — BEFORE vs AFTER</p>
+    `},
+      {label:"v2 — copywriting pass", html:`
+      <p class="ey">What good looks like</p>
+      <h3>Your sellers should be selling.</h3>
+      <p>Before Scorecard, a rep's week disappears into finding someone worth calling. After, most of it goes to the call.</p>
+      <p class="note">Chart: Prospecting · Research · Admin &amp; CRM · Selling conversations — BEFORE vs AFTER</p>
+    `}],
+    meta:{
+      whatItIs:"The emotional problem statement, made concrete with a before/after picture of where a rep's week actually goes.",
+      whoFor:"The same sales leader — framed around a pain they feel weekly: expensive reps doing low-value list-building.",
+      points:["Reps' time is the real cost","Prospecting/research eats the week today","The fix shifts hours back to selling"],
+      soWhat:"\"My most expensive people spend their time on the wrong thing — and it's fixable.\""
+    }
+  },
+  {
+    id:"how", num:"3", title:"How it works — the loop", kind:"Mechanism",
+    variants:[{label:"Original", isOriginal:true, html:`
+      <p class="ey">How it works</p>
+      <h3>One loop that pays you back — sharper every month.</h3>
+      <p class="divlbl">01 · you + us — Learn your ICP</p>
+      <p>Your ideal customer, learned from your wins. <span class="sub">Clustered from the deals you've already closed. (3 shapes in 112 won deals.)</span></p>
+      <p class="divlbl">02 · we run it — Find &amp; rank</p>
+      <p>Every business on the internet — ranked against your ICP. <span class="sub">8,481 found &amp; scored.</span></p>
+      <p class="divlbl">03 · delivered — Get the list</p>
+      <p>A fresh ranked list, in your reps' hands. <span class="sub">Every Monday · Salesforce · Slack · CSV.</span></p>
+      <p class="divlbl">04 · you — Call &amp; close</p>
+      <p>Your reps call, sell, and win. <span class="sub">They open with accounts that already fit — so the day goes to conversations that can close.</span></p>
+      <p class="note">Every win teaches the model — and the loop starts again, sharper.</p>
+    `},
+      {label:"v2 — copywriting pass", html:`
+      <p class="ey">How it works</p>
+      <h3>One loop that pays you back — sharper every month.</h3>
+      <p class="divlbl">01 · you + us — Learn your ICP</p>
+      <p>Your ideal customer, learned from your wins. <span class="sub">Clustered from the deals you've already closed — three shapes in 112 won deals.</span></p>
+      <p class="divlbl">02 · we run it — Find &amp; rank</p>
+      <p>Every business in your market, ranked against your ICP. <span class="sub">8,481 found and scored.</span></p>
+      <p class="divlbl">03 · delivered — Get the list</p>
+      <p>A fresh ranked list, in your reps' hands. <span class="sub">Every Monday — in Salesforce, Slack, or CSV.</span></p>
+      <p class="divlbl">04 · you — Call &amp; close</p>
+      <p>Your reps call, sell, and win. <span class="sub">They open with accounts that already fit — so the day goes to conversations that can close.</span></p>
+      <p class="note">Every win teaches the model — and the loop starts again, sharper.</p>
+    `},
+      {label:"v3 — value-first", html:`
+      <p class="ey">How it works</p>
+      <h3>More revenue from the reps you already have.</h3>
+      <p class="sub">Not a look-alike list — a ranked, account-by-account match to your ideal customer, in your own terms. So your reps spend the day talking to the right people.</p>
+      <p class="divlbl">01 · A model of your best customers</p>
+      <p>What your won deals actually have in common — the real patterns, in your language, not a generic template.</p>
+      <p class="divlbl">02 · Everyone who matches, ranked</p>
+      <p>We score every company in your market against that model, so the accounts most likely to buy rise to the top.</p>
+      <p class="divlbl">03 · A ready-to-call list, where your reps work</p>
+      <p>Delivered every week into Salesforce, Slack, or CSV. Nothing new to learn.</p>
+      <p class="divlbl">04 · Reps talk to the right people</p>
+      <p>More conversations that convert, faster deals, less time wasted — and pipeline that compounds as the model sharpens on every win.</p>
+      <p class="note">The longer you run it — and the more your team tells us — the sharper it gets.</p>
+    `}],
+    meta:{
+      whatItIs:"Reframed to customer value, not the mechanism: what your reps get (a precise, ICP-matched call list) and the revenue it drives. Who does each step is de-emphasized on purpose.",
+      whoFor:"The revenue leader picturing their reps' week — what changes when the list is built for their ICP, in their terms.",
+      points:["A precise, ICP-matched list — not look-alikes","Reps spend the day on the right accounts","More revenue, faster conversions, less waste","Compounds — sharper the longer you run it"],
+      soWhat:"\"My reps close the right accounts all day — and it keeps getting better.\""
+    }
+  },
+  {
+    id:"real-score", num:"4", title:"See a real score", kind:"Proof / how the score works",
+    variants:[{label:"Original", isOriginal:true, html:`
+      <p class="ey">How the score works</p>
+      <h3>We search the whole internet for fit. AI sorts it by your ideal customer.</h3>
+      <h4>We scan the whole internet for businesses and buying signals.</h4>
+      <p class="sub">Not a purchased list — every company that could plausibly fit, and the signals that hint they're ready to move.</p>
+      <h4>AI sorts it by your ideal customer.</h4>
+      <p class="sub">A real fit is often filed under the wrong label. AI reads what a business actually does and weighs every one of your criteria at once — catching the accounts the data has wrong.</p>
+      <p><strong>The payoff isn't more names. It's the accounts that actually fit — including the ones hiding behind bad data.</strong></p>
+      <p class="divlbl">Score justification panel (demo data)</p>
+      <p class="sub mono">Hartwell Industrial Supply — A · 94/100 · "Strong fit — prioritize outreach." · Fit 96 / Intent 78. Expandable fit + intent criteria (Line of business, Company size, Ownership, Owner tenure; Succession signals, Ops &amp; finance hiring), each with signals, confidence, and reasoning.</p>
+      <p class="note">Every criterion here is one you named — the score reads back in your language, not a generic grade.</p>
+    `},
+      {label:"v2 — copywriting pass", html:`
+      <p class="ey">How the score works</p>
+      <h3>We search the whole internet for fit — then rank it against your ideal customer.</h3>
+      <h4>We scan the whole internet for businesses and buying signals.</h4>
+      <p class="sub">Not a purchased list — every company that could plausibly fit, plus the signals that hint they're ready to move.</p>
+      <h4>AI ranks it against your ideal customer.</h4>
+      <p class="sub">A real fit is often filed under the wrong label. AI reads what a business actually does and weighs every one of your criteria at once — catching the accounts the data has wrong.</p>
+      <p><strong>The payoff isn't more names. It's the accounts that actually fit — including the ones hiding behind bad data.</strong></p>
+      <p class="divlbl">Score justification panel (demo data)</p>
+      <p class="sub mono">Hartwell Industrial Supply — A · 94/100 · "Strong fit — prioritize outreach." · Fit 96 / Intent 78. Expandable fit + intent criteria, each with signals, confidence, and reasoning.</p>
+      <p class="note">Every criterion here is one you named — the score reads back in your language, not a generic grade.</p>
+    `},
+      {label:"v3 — value-first (Keyplay-informed)", html:`
+      <p class="ey">How the score works</p>
+      <h3>The score tells your reps who to call — and why.</h3>
+      <p class="sub">Not a mystery number. A fit score your team can read, argue with, and trust — built from the criteria you already use to spot a winner.</p>
+      <h4>Right about the accounts everyone else gets wrong.</h4>
+      <p class="sub">The best fits are often filed under the wrong industry code, and the ones that look perfect on paper fall apart on the call. We read what a business actually does — so the right accounts rise, and the false positives drop.</p>
+      <h4>Scored in your language, not a generic grade.</h4>
+      <p class="sub">Every criterion is one you named. An A means what your team means by it.</p>
+      <p><strong>The payoff isn't more names. It's the right names — each with the reason attached.</strong></p>
+      <p class="divlbl">Score justification panel (demo data)</p>
+      <p class="sub mono">Hartwell Industrial Supply — A · 94/100 · "Strong fit — prioritize outreach." · Fit 96 / Intent 78. Expandable criteria, each with the signals and reasoning behind the score.</p>
+    `}],
+    meta:{
+      whatItIs:"The trust engine, reframed: less about illustrating how an ICP becomes signals, more about what a rep gets — a score that says who to call and why, and is right about the accounts generic data gets wrong.",
+      whoFor:"The skeptic burned by \"AI scoring\" and generic intent data — and the rep who has to act on the number.",
+      points:["Every score comes with its reason","Right about accounts others get wrong (great-on-paper ≠ great-fit)","Scored in the customer's own language","A score reps can argue with and trust"],
+      soWhat:"\"I can see <em>why</em> an account scored — so my reps would actually trust the list.\""
+    }
+  },
+  {
+    id:"why", num:"5", title:"Why ScoreCard (build vs buy)", kind:"Positioning",
+    variants:[{label:"Original", isOriginal:true, html:`
+      <p class="ey">Why ScoreCard</p>
+      <h3>Big teams build this from parts. We run the whole thing for you.</h3>
+      <p>To do this in-house, a team buys data from several vendors, buys or builds the tools, and hires people to run it all. We do the whole thing for you — about thirty minutes of your time a month.</p>
+      <table>
+        <tr><td><strong>Buy lists from several vendors</strong><br><span class="sub">More contracts to manage, and the data is still mislabeled in places — so good accounts slip through.</span></td><td>~$50k a year</td></tr>
+        <tr><td><strong>Buy or build the tools</strong><br><span class="sub">Scoring, data enrichment, and the AI to read the companies the data gets wrong.</span></td><td>Tools + setup</td></tr>
+        <tr><td><strong>Hire the people</strong><br><span class="sub">A sales-ops team to research and score every account, week after week.</span></td><td>Several hires</td></tr>
+        <tr class="win"><td><strong>ScoreCard</strong><br><span class="sub">The data, the tools, and the people — all run for you.</span></td><td>About 30 min a month</td></tr>
+      </table>
+      <p><strong>The self-serve tools get you to good enough. We get you to the best — the accounts that fit, including the ones hiding behind bad data.</strong></p>
+    `},
+      {label:"v2 — copywriting pass", html:`
+      <p class="ey">Why Scorecard</p>
+      <h3>Big teams build this from parts. We run the whole thing for you.</h3>
+      <p>To do this in-house, you buy data from several vendors, buy or build the tools, and hire people to run it all. We do the whole thing for you — about thirty minutes of your time a month.</p>
+      <table>
+        <tr><td><strong>Buy lists from several vendors</strong><br><span class="sub">More contracts to manage — and the data is still mislabeled in places, so good accounts slip through.</span></td><td>~$50k a year</td></tr>
+        <tr><td><strong>Buy or build the tools</strong><br><span class="sub">Scoring, data enrichment, and the AI to read the companies the data gets wrong.</span></td><td>Tools + setup</td></tr>
+        <tr><td><strong>Hire the people</strong><br><span class="sub">A sales-ops team to research and score every account, week after week.</span></td><td>Several hires</td></tr>
+        <tr class="win"><td><strong>Scorecard</strong><br><span class="sub">The data, the tools, and the people — all run for you.</span></td><td>About 30 min a month</td></tr>
+      </table>
+      <p><strong>The self-serve tools get you to good enough. We get you to the best — the accounts that fit, including the ones hiding behind bad data.</strong></p>
+    `},
+      {label:"v3 — expertise-led", html:`
+      <p class="ey">Why Scorecard</p>
+      <h3>Anyone can buy the tools. Knowing what makes an A is the hard part.</h3>
+      <p class="sub">We're former sales leaders — we've carried quota and built the GTM engines you're trying to feed. We tune your scoring model the way your best rep reads an account, then run the whole thing for you.</p>
+      <p class="divlbl">A tool, or DIY → Scorecard</p>
+      <p><span class="sub">A generic scoring engine, same for everyone</span> &nbsp;→&nbsp; <strong>A model tuned to how you win</strong></p>
+      <p><span class="sub">Sorts by industry code and headcount</span> &nbsp;→&nbsp; <strong>Weighs what a code can't see</strong></p>
+      <p><span class="sub">You interpret the score</span> &nbsp;→&nbsp; <strong>We rank it and tell you why</strong></p>
+      <p><span class="sub">Static the day you buy it</span> &nbsp;→&nbsp; <strong>Learns from every deal you close</strong></p>
+      <p><span class="sub">Several vendor contracts + your team's time</span> &nbsp;→&nbsp; <strong>One partner, priced to what it produces</strong></p>
+      <p><strong>The self-serve tools get you to good enough. Operators who've built GTM engines get you to the best — the accounts that fit, including the ones hiding behind bad data.</strong></p>
+      <p class="note">No vendor stack to pay for, nothing to configure or maintain — the whole thing runs off about thirty minutes of your time a month.</p>
+    `}],
+    meta:{
+      whatItIs:"The real \"why us\": expert operators and a scoring model tuned to how you win. Because it replaces a vendor stack + your team's time, it also lands cheaper — and it's priced to the pipeline produced, not a subscription. Scoring quality leads; cost follows from it.",
+      whoFor:"The leader choosing between a self-serve tool, DIY, and Scorecard — who needs to see the score is only as good as the people behind it.",
+      points:["The scoring is the product — and it's genuinely better","Former sales leaders who've built GTM engines","A model tuned to your wins beats a generic engine","Fewer vendors, less upkeep — priced to value, not a subscription"],
+      soWhat:"\"I'm getting operators who make the scoring better than I could — and it costs less than the stack I'd juggle.\""
+    }
+  },
+  {
+    id:"acquire", num:"6", title:"Secondary door — Acquire", kind:"Segment expansion",
+    variants:[{label:"Original", isOriginal:true, html:`
+      <p class="ey">Not just for selling</p>
+      <h3>Scoring a market to buy into it?</h3>
+      <p>For search funds, holdcos and PE, ScoreCard turns a fragmented, offline market into a ranked, defensible target list — the same engine, pointed at acquisition.</p>
+      <a class="cta ghost">See the acquire motion →</a>
+    `},
+      {label:"v2 — copywriting pass", html:`
+      <p class="ey">Not just for selling</p>
+      <h3>Scoring a market to buy into it?</h3>
+      <p>For search funds, holdcos, and PE, Scorecard turns a fragmented, offline market into a ranked, defensible target list — the same engine, pointed at acquisition.</p>
+      <a class="cta ghost">See the acquire motion →</a>
+    `}],
+    meta:{
+      whatItIs:"A doorway for a second, higher-value ICP without cluttering the main sell-side story.",
+      whoFor:"Search funds, holdcos, independent sponsors, PE — buyers scoring a market to acquire, not to sell into.",
+      points:["Same engine, different target (acquisition)","Turns fragmented/offline markets legible","Output is a defensible target list"],
+      soWhat:"\"This isn't only for salespeople — it works for finding a company to buy.\""
+    }
+  },
+  {
+    id:"testimonial", num:"7", title:"Testimonial", kind:"Social proof",
+    variants:[{label:"Original", isOriginal:true, html:`
+      <p class="ey">From a customer</p>
+      <h3>"We stopped buying lists and cancelled two tools. Every week my reps open with accounts that already fit — building the list isn't their job anymore."</h3>
+      <p class="sub">Dana Reyes · VP Sales, Northgate Industrial</p>
+    `},
+      {label:"v2 — copywriting pass", html:`
+      <p class="ey">From a customer</p>
+      <h3>"We stopped buying lists and cancelled two tools. Every week my reps open with accounts that already fit — building the list isn't their job anymore."</h3>
+      <p class="sub">Dana Reyes · VP Sales, Northgate Industrial</p>
+      <p class="note">⚠ Illustrative placeholder — replace with a real, approved quote before launch. Don't sharpen a fabricated quote.</p>
+    `}],
+    meta:{
+      whatItIs:"Peer proof from the exact buyer persona, quantifying displacement (lists + two tools cancelled).",
+      whoFor:"The sales leader who wants to hear it from someone in their seat, in their industry.",
+      points:["Replaces lists <em>and</em> tools (net cost down)","Reps stop list-building","Said by a VP Sales in industrial"],
+      soWhat:"\"Someone like me switched, cut spend, and freed their reps.\""
+    }
+  },
+  {
+    id:"dogfood", num:"8", title:"Dogfood proof", kind:"Founder credibility",
+    variants:[{label:"Original", isOriginal:true, html:`
+      <p class="ey">How we know it works</p>
+      <h3>"I needed customers — so I became customer number one. I sold them the same system I used to find them."</h3>
+      <p class="sub">We found our own first customers by scoring them. On the first call, we can show a prospect the read our system already had of their business — the cold call is the demo.</p>
+      <a class="cta">Read the story</a>
+      <p class="note">The proof no competitor can copy.</p>
+    `},
+      {label:"v2 — copywriting pass", html:`
+      <p class="ey">How we know it works</p>
+      <h3>"I needed customers — so I became customer number one. I sold them the same system I used to find them."</h3>
+      <p class="sub">We found our own first customers by scoring them. On the first call, we show a prospect the read our system already had of their business — the cold call is the demo.</p>
+      <a class="cta">Read the story</a>
+      <p class="note">The proof no competitor can copy.</p>
+    `}],
+    meta:{
+      whatItIs:"The differentiated origin story: the company found its own customers with its own product — proof of the mechanism that no competitor can replicate.",
+      whoFor:"The buyer who's heard every vendor claim; and the prospect who literally got scored before the call.",
+      points:["We use it on ourselves (dogfood)","\"The cold call is the demo\"","A moat competitors can't copy"],
+      soWhat:"\"They bet their own pipeline on this — that's the strongest proof there is.\""
+    }
+  },
+  {
+    id:"cta", num:"9", title:"Closing CTA", kind:"Conversion",
+    variants:[{label:"Original", isOriginal:true, html:`
+      <h3>See your whole market, scored.</h3>
+      <p>Book a 30-minute intro and we'll score a sample of your market — then walk you through every reason behind it.</p>
+      <a class="cta">Book a 30-min intro</a><a class="cta ghost">See how it works →</a>
+    `},
+      {label:"v2 — copywriting pass", html:`
+      <h3>See your whole market, scored.</h3>
+      <p>Book a 30-minute intro and we'll score a slice of your market live — then walk you through the reason behind every ranking.</p>
+      <a class="cta">Book a 30-min intro</a><a class="cta ghost">See how it works →</a>
+    `}],
+    meta:{
+      whatItIs:"Final ask, framed as a low-risk, high-value offer: a real sample scoring of their market with reasons walked through.",
+      whoFor:"Anyone convinced enough to trade 30 minutes for a concrete read on their own market.",
+      points:["Specific, bounded ask (30 min)","They get real output (a scored sample)","Reasons walked through — echoes the transparency promise"],
+      soWhat:"\"Low commitment, and I get something real — worth the half hour.\""
+    }
+  },
+  {
+    id:"footer", num:"—", title:"Footer", kind:"Global footer",
+    variants:[{label:"Original", isOriginal:true, html:`
+      <p class="ey">Wordmark</p><p>Scorecard</p>
+      <p class="sub">Find the few accounts worth uncommon effort — and start the right conversation.</p>
+      <a class="cta">See your market scored</a>
+      <p class="divlbl">Product</p><p class="sub">How it works · Tools · Pricing · Market sizer · Glossary</p>
+      <p class="divlbl">Industries</p><p class="sub">Manufacturing and distribution · Private equity and ETA · See all industries →</p>
+      <p class="divlbl">Company</p><p class="sub">About · Careers · Story · Contact · Resources</p>
+      <p class="divlbl">Legal</p><p class="sub">Security · Privacy · Terms</p>
+      <p class="note">© 2026 ScoreCard GTM, LLC · LinkedIn · X · justin@scorecardgtm.com</p>
+    `}],
+    meta:{
+      whatItIs:"Reassurance + navigation. The tagline restates the philosophy (\"a few accounts worth uncommon effort\") and repeats the primary CTA.",
+      whoFor:"Late-stage browsers hunting for pricing, story, security, or a way to make contact.",
+      points:["Restated brand philosophy","Repeated primary conversion","Trust links present (Security/Privacy/Terms)"],
+      soWhat:"\"This is a real company I can dig into and contact.\""
+    }
+  }
+];
+
+/* =========================================================================
+   RENDER
+   ========================================================================= */
+const secWrap = document.getElementById('sections');
+const toc = document.getElementById('toc');
+
+SECTIONS.forEach((s, i) => {
+  // TOC
+  const a = document.createElement('a');
+  a.href = '#' + s.id; a.textContent = (s.num === '—' ? '' : s.num + '. ') + s.title;
+  toc.appendChild(a);
+
+  const sec = document.createElement('section');
+  sec.className = 'section'; sec.id = s.id;
+
+  const multi = s.variants.length > 1;
+  const defIdx = s.variants.length - 1;            // default to the latest iteration
+  const opts = s.variants.map((v, vi) => `<option value="${vi}"${vi===defIdx?' selected':''}>${v.label}</option>`).join('');
+  const startVar = s.variants[defIdx];
+  const badge = `<span class="var-badge ${startVar.isOriginal ? 'orig' : ''}" data-badge>${startVar.isOriginal ? 'Original' : 'Iteration'}</span>`;
+
+  sec.innerHTML = `
+    <div class="sec-title">
+      <span class="sec-num">${s.num}</span>
+      <h2>${s.title}</h2>
+      <span class="kind">${s.kind}</span>
+    </div>
+    <div class="row">
+      <div class="card copy-card">
+        <div class="card-hd">
+          <span class="lbl">Copy</span>
+          ${badge}
+          <div class="picker">
+            ${multi ? `<label>Version</label><select data-picker>${opts}</select>`
+                    : `<span style="font-size:11px;color:var(--faint);">1 version</span>`}
+          </div>
+        </div>
+        <div class="card-bd cp" data-copy>${startVar.html}</div>
+      </div>
+      <div class="card meta-card" data-meta>
+        <div class="card-hd"><span class="lbl">Section intent</span></div>
+        <div class="card-bd">
+          <div class="m"><div class="h">What this section is</div><p>${s.meta.whatItIs}</p></div>
+          <div class="m who"><div class="h">Who it's for</div><p>${s.meta.whoFor}</p></div>
+          <div class="m points"><div class="h">Points we need to cover</div><ul>${s.meta.points.map(p=>`<li>${p}</li>`).join('')}</ul></div>
+          <div class="m sowhat"><div class="h">So what (the takeaway)</div><p>${s.meta.soWhat}</p></div>
+        </div>
+      </div>
+    </div>`;
+  secWrap.appendChild(sec);
+
+  // picker behavior
+  if (multi) {
+    const sel = sec.querySelector('[data-picker]');
+    const body = sec.querySelector('[data-copy]');
+    const bdg = sec.querySelector('[data-badge]');
+    sel.addEventListener('change', () => {
+      const v = s.variants[+sel.value];
+      body.innerHTML = v.html;
+      bdg.textContent = v.isOriginal ? 'Original' : 'Iteration';
+      bdg.classList.toggle('orig', !!v.isOriginal);
+    });
+  }
+});
+
+/* theme toggle */
+const root = document.documentElement;
+document.getElementById('themeBtn').addEventListener('click', () => {
+  const cur = root.getAttribute('data-theme');
+  const next = cur === 'dark' ? 'light' : (cur === 'light' ? 'dark'
+              : (matchMedia('(prefers-color-scheme: dark)').matches ? 'light' : 'dark'));
+  root.setAttribute('data-theme', next);
+});
+
+/* expand meta on mobile stacking is automatic; button jumps to give a quick scan */
+let expanded = false;
+document.getElementById('expandAll').addEventListener('click', (e) => {
+  expanded = !expanded;
+  document.querySelectorAll('.meta-card').forEach(m => m.style.display = expanded && innerWidth <= 860 ? 'flex' : '');
+  e.target.textContent = expanded ? 'Collapse meta' : 'Expand meta';
+});
+</script>
+</body>
+</html>

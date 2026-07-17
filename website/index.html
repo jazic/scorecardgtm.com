@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Scorecard — Sell like a company ten times your size.</title>
-  <meta name="description" content="AI sources and pre-qualifies high-fit prospects that look like your best customers — so your reps spend more time closing deals and less time building lists. Your pipeline gets sharper every month." />
+  <title>Scorecard — More revenue. Fewer surprises.</title>
+  <meta name="description" content="Scorecard turns your revenue goal into a plan your team can run — a board-ready full-funnel model, weekly intelligence, sourcing and scoring, and the operators to run it with you." />
+  <link rel="icon" type="image/png" sizes="32x32" href="design-system/assets/favicon-32.png" />
   <!-- PostHog — product analytics + session replay -->
   <script>
     !function(t,e){var o,n,p,r;e.__SV||(window.posthog && window.posthog.__loaded)||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="Xi tn init mn Qr yn xn pn capture calculateEventProperties Tn register register_once register_for_session unregister unregister_for_session Pn getFeatureFlag getFeatureFlagPayload getFeatureFlagResult isFeatureEnabled reloadFeatureFlags updateFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey displaySurvey cancelPendingSurvey canRenderSurvey canRenderSurveyAsync On identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset setIdentity clearIdentity get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException addExceptionStep captureLog startExceptionAutocapture stopExceptionAutocapture loadToolbar get_property getSessionProperty Mn Cn createPersonProfile setInternalOrTestUser Rn vn An opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing get_explicit_consent_status is_capturing clear_opt_in_out_capturing Sn debug Kr En getPageViewId captureTraceFeedback captureTraceMetric hn".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
@@ -17,302 +18,354 @@
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="design-system/tokens.css" />
   <style>
-    /* Tokens: defined in design-system/tokens.css (linked above). */
-
-    * { box-sizing: border-box; }
-    html, body { margin: 0; padding: 0; }
+    /* Local alias layer: the v3 design names, bound to the canonical tokens in
+       design-system/tokens.css. Keeps the ported design CSS verbatim while
+       tokens.css stays the single source of truth. */
+    :root {
+      --paper: var(--bg-1);
+      --paper-2: var(--bg-2);
+      --ink: var(--sc-ink);
+      --muted: var(--fg-3);
+      --body: var(--fg-2);
+      --line: var(--border);
+      --hair: var(--hairline);
+      --white: #FFFFFF;
+      --blue: var(--sc-blue);
+      --blue-deep: var(--sc-blue-deep);
+      --purple: var(--sc-purple);
+      --green: var(--sc-green);
+      --gold: var(--sc-gold);
+      --coral: var(--sc-coral);
+      --sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --mono: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --ease: cubic-bezier(.22, 1, .36, 1);
+      --ui: cubic-bezier(.2, .8, .2, 1);
+      --shadow: var(--shadow-card);
+    }
+    html, body { margin: 0; padding: 0; background: var(--paper); }
     html { scroll-behavior: smooth; }
-    body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: var(--bg-1);
-      color: var(--fg-1);
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
     body.scroll-locked { overflow: hidden; }
-    a { color: inherit; }
-    button { font-family: inherit; }
-
-    .page {
-      min-height: 100vh;
-      position: relative;
-      overflow-x: hidden;
+    .hp3 * { box-sizing: border-box; }
+    .hp3 {
+      margin: 0; color: var(--ink); background: var(--paper);
+      font-family: var(--sans); -webkit-font-smoothing: antialiased; overflow-x: clip;
     }
-
-    /* Hero-only background mosaic */
-    .bg {
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: min(820px, 100vh);
-      z-index: 0;
-      pointer-events: none;
+    .hp3 a { color: var(--blue-deep); text-decoration: none; }
+    .hp3 a:hover { color: var(--blue-deep); }
+    .hp3 button, .hp3 input, .hp3 textarea { font: inherit; }
+    .shell { width: min(1220px, calc(100% - 64px)); margin: 0 auto; }
+    .narrow { width: min(756px, calc(100% - 48px)); margin-inline: auto; }
+    .serif { font-family: var(--sans); font-weight: 700; letter-spacing: -.035em; text-wrap: balance; }
+    .mono { font-family: var(--mono); text-transform: uppercase; letter-spacing: .07em; font-variant-numeric: tabular-nums; }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 10px;
+      color: var(--muted); font-family: var(--mono);
+      font-size: 12px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
     }
-    .bg svg { width: 100%; height: 100%; display: block; }
+    .spark { width: 12px; height: 12px; position: relative; flex: 0 0 auto; color: var(--purple); }
+    .spark::before, .spark::after { content: ""; position: absolute; background: currentColor; inset: 0 4px; border-radius: 2px; }
+    .spark::after { transform: rotate(90deg); }
+
+    .button {
+      display: inline-flex; align-items: center; justify-content: center; gap: 9px;
+      min-height: 50px; padding: 0 23px; border: 1px solid transparent; border-radius: 8px;
+      cursor: pointer; font-weight: 600; font-size: 15px;
+      transition: transform .18s var(--ui), box-shadow .18s var(--ui), background .18s ease, opacity .18s ease;
+    }
+    .button:active { transform: scale(.98); }
+    .button:focus-visible { outline: 2px solid var(--blue); outline-offset: 4px; }
+    .button-primary { color: var(--white); background: var(--ink); }
+    .button-primary:hover { opacity: .92; }
+    .button-white { background: var(--white); color: var(--ink); box-shadow: var(--shadow); }
+    .button-white:hover { opacity: .95; }
+
+    .brand-word { font-family: var(--sans); font-weight: 700; letter-spacing: -.02em; }
 
     /* ---------- Header ---------- */
-    .header-wrap {
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      background: rgba(250,251,252,0.78);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      border-bottom: 1px solid var(--hairline);
-    }
-    .header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 18px 48px;
-      max-width: 1280px;
-      margin: 0 auto;
-      width: 100%;
-    }
-    .logo { height: 36px; width: auto; display: block; }
-    .nav { display: flex; gap: 32px; font-size: 14px; font-weight: 500; }
-    .nav a, .header a { text-decoration: none; color: var(--fg-1); }
-    .nav a { transition: color 120ms ease; }
-    .nav a:hover { color: var(--fg-2); }
-    .header-cta { display: flex; gap: 12px; align-items: center; }
-    .signin { color: var(--fg-3) !important; font-size: 14px; font-weight: 500; }
-
-    /* ---------- Buttons ---------- */
-    .btn-primary {
-      background: var(--fg-1);
-      color: #FFF;
-      border: none;
-      border-radius: 8px;
-      padding: 11px 18px;
-      font-size: 14px;
-      font-weight: 500;
-      cursor: pointer;
-      transition: transform 120ms ease, opacity 120ms ease;
-    }
-    .btn-primary:hover  { opacity: 0.92; }
-    .btn-primary:active { transform: scale(0.98); }
-    .btn-primary.lg { font-size: 15px; padding: 14px 22px; }
-    .btn-primary[disabled] { opacity: 0.55; cursor: not-allowed; }
-
-    .ghost-link {
-      text-decoration: none;
-      color: var(--fg-2);
-      font-size: 14px;
-      font-weight: 500;
-      cursor: pointer;
-      border-bottom: 1px solid var(--underline);
-      padding-bottom: 2px;
-      background: transparent;
-      border-top: 0; border-left: 0; border-right: 0;
-      padding-left: 0; padding-right: 0;
-    }
-    .ghost-link .arrow { margin-left: 6px; color: var(--sc-purple); }
+    .site-header-wrap { position: fixed; top: 0; left: 0; right: 0; z-index: 50; }
+    .site-header { transition: background 300ms ease, border-color 300ms ease, box-shadow 300ms ease; }
+    .header-inner { max-width: 1280px; margin: 0 auto; padding: 0 48px; height: 78px; display: flex; align-items: center; justify-content: space-between; }
+    .brand-link { display: flex; align-items: flex-end; gap: 10px; text-decoration: none; }
+    .brand-marks { position: relative; display: inline-flex; height: 30px; }
+    .brand-marks img { height: 30px; width: auto; display: block; transition: opacity 300ms ease; }
+    .brand-marks img.light { position: absolute; left: 0; top: 0; }
+    .site-nav { display: flex; align-items: center; gap: 2px; font-size: 14px; font-weight: 500; }
+    .nav-link { padding: 9px 14px; border-radius: 8px; text-decoration: none; transition: background 150ms ease, color 200ms ease; }
+    .nav-link:hover { background: rgba(148,163,184,0.18); }
+    .nav-svc { position: relative; height: 78px; display: flex; align-items: center; }
+    .nav-svc > .nav-link { display: inline-flex; align-items: center; gap: 6px; cursor: pointer; }
+    .chev { display: inline-block; font-size: 9px; line-height: 1; transition: transform 220ms ease; }
+    .svc-menu { position: absolute; top: 78px; left: 50%; transform: translateX(-50%); padding-top: 10px; display: none; }
+    .svc-menu.open { display: block; }
+    .svc-menu-inner { width: 300px; background: rgba(255,255,255,0.94); backdrop-filter: saturate(150%) blur(16px); -webkit-backdrop-filter: saturate(150%) blur(16px); border: 1px solid rgba(100,116,139,.18); border-radius: 14px; box-shadow: 0 24px 60px -20px rgba(3,21,58,.35); padding: 10px; cursor: default; }
+    .sc-menu-link { display: block; padding: 11px 12px; border-radius: 9px; text-decoration: none; font-size: 14px; font-weight: 600; color: var(--ink) !important; transition: background 120ms ease, color 120ms ease; }
+    .sc-menu-link:hover { background: rgba(100,116,139,.08); }
+    .hdr-cta { display: inline-flex; align-items: center; margin-left: 12px; padding: 11px 18px; border-radius: 9px; text-decoration: none; font-weight: 600; font-size: 14px; border: 0; cursor: pointer; transition: background 300ms ease, color 300ms ease, opacity 120ms ease, transform 120ms ease; }
+    .hdr-cta:hover { opacity: .92; }
+    .hdr-cta:active { transform: scale(.98); }
 
     /* ---------- Hero ---------- */
-    .hero {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 56px;
-      padding: 72px 48px 72px;
-      max-width: 1280px;
-      margin: 0 auto;
-      width: 100%;
-      align-items: center;
-      position: relative;
-      z-index: 2;
-    }
-    .hero > * { min-width: 0; }
-    .copy h1 {
-      font-size: 56px;
-      font-weight: 700;
-      letter-spacing: -0.03em;
-      line-height: 1.04;
-      margin: 0 0 18px;
-      color: var(--fg-1);
-      text-wrap: balance;
-      max-width: 560px;
-    }
-    .copy p.wedge {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 12.5px;
-      font-weight: 500;
-      letter-spacing: 0.01em;
-      color: var(--fg-2);
-      margin: 0 0 18px;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 6px 12px;
-      background: rgba(180,147,234,0.08);
-      border: 1px solid rgba(180,147,234,0.20);
-      border-radius: 999px;
-    }
-    .copy p.wedge .pip { color: var(--sc-purple); font-size: 12px; line-height: 1; }
-    .copy p.lede {
-      font-size: 17px;
-      line-height: 1.55;
-      color: var(--fg-2);
-      max-width: 540px;
-      margin: 0;
-      text-wrap: pretty;
-    }
-    .cta-row {
-      display: flex;
-      gap: 22px;
-      margin-top: 36px;
-      align-items: center;
-      flex-wrap: wrap;
-    }
-    .trust-stack {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      align-items: flex-start;
-      margin-top: 44px;
-    }
-    .trust {
-      display: inline-flex;
-      align-items: center;
-      gap: 14px;
-      font-size: 12px;
-      font-weight: 500;
-      color: var(--fg-3);
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      margin-top: 44px;
-    }
-    .trust-stack { width: 100%; min-width: 0; }
-    .trust-stack .trust {
-      margin-top: 0;
-      display: flex;
-      flex-wrap: wrap;
-      align-items: baseline;
-      max-width: 100%;
-    }
-    .trust-stack .trust strong { font-weight: 600; color: var(--fg-1); }
-    .trust .dot { width: 6px; height: 6px; border-radius: 3px; background: var(--sc-purple); }
-    .trust strong { color: var(--fg-1); font-weight: 600; letter-spacing: 0.05em; }
+    .hero { position: relative; margin-top: 0; padding-top: 136px; text-align: center; background: var(--ink); }
+    .hero-mosaic { position: absolute; inset: 0 0 auto 0; height: 1080px; z-index: 0; pointer-events: none; }
+    .hero-copy { position: relative; z-index: 2; text-shadow: 0 1px 16px rgba(3,21,58,.55); }
+    .hero .eyebrow { color: rgba(255,255,255,.92); }
+    .hero .eyebrow, .hero h1, .hero .lede, .hero .hero-cta { animation: hero-in .85s var(--ease) both; }
+    .hero h1 { margin: 22px auto 18px; max-width: 860px; font-size: clamp(50px, 5.2vw, 74px); line-height: .98; color: #fff; animation-delay: .06s; }
+    .hero h1 em { color: var(--blue); font-weight: 700; font-style: normal; position: relative; white-space: nowrap; }
+    .hero h1 em.t-mosaic::after { content: ""; position: absolute; left: .02em; right: .02em; bottom: -.02em; height: .07em; border-radius: 99px; background: linear-gradient(90deg, #FCAF0F, #A8D862, #649BE4, #B493EA); }
+    .hero .lede { max-width: 640px; margin: 0 auto; color: rgba(255,255,255,.9); font-size: 18px; line-height: 1.6; animation-delay: .14s; text-wrap: pretty; }
+    .hero-cta { display: flex; flex-direction: column; align-items: center; gap: 13px; margin-top: 28px; animation-delay: .22s; }
+    .hero-cta .button-primary { background: var(--gold); color: var(--ink); text-shadow: none; box-shadow: 0 14px 34px -12px rgba(0,5,18,.55); }
+    .hero-cta .button-primary:hover { opacity: .92; }
+    @keyframes hero-in { from { opacity: 0; transform: translateY(18px); } }
 
-    /* ---------- Live card ---------- */
-    .card-wrap { position: relative; }
-    .card {
-      background: var(--bg-2);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      box-shadow: var(--shadow-card);
-      position: relative;
-      z-index: 1;
-    }
-    .card-head {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 16px 22px;
-      border-bottom: 1px solid var(--hairline);
-    }
-    .live { display: flex; align-items: center; gap: 10px; }
-    .live .pulse {
-      width: 8px; height: 8px; border-radius: 4px; background: var(--sc-green);
-      box-shadow: 0 0 0 4px var(--pulse-glow);
-      animation: pulse 1.6s ease-in-out infinite;
-    }
-    .live-label { font-size: 13px; font-weight: 600; }
-    .live-month { font-size: 12px; color: var(--fg-3); }
-    .rubric { padding: 18px 22px 10px; }
-    .rubric-row { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
-    .rubric-title { font-size: 16px; font-weight: 600; }
-    .cleared { font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 600; color: var(--fg-1); }
-    .cleared .pip { color: var(--sc-green); }
-    .cleared .total { color: var(--fg-4); font-weight: 500; }
-    .dist { margin-top: 14px; position: relative; height: 60px; }
-    .dist svg { display: block; width: 100%; height: 60px; }
-    .prospects { padding: 6px 10px 10px; }
-    .prospect {
-      display: grid;
-      grid-template-columns: 1fr auto auto;
-      align-items: center;
-      gap: 14px;
-      padding: 11px 12px;
-      border-radius: 8px;
-      transition: background 240ms ease;
-    }
-    .prospect.active { background: var(--bg-active); }
-    .prospect .name { font-size: 13.5px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
-    .prospect .meta { font-size: 11.5px; color: var(--fg-3); margin-top: 2px; }
-    .prospect .info { min-width: 0; overflow: hidden; }
-    .prospect .meta { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .prospect .score {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 18px; font-weight: 700;
-      color: var(--fg-1); min-width: 30px; text-align: right; letter-spacing: -0.02em;
-    }
-    .tier { width: 22px; height: 22px; border-radius: 6px; font-size: 11px; font-weight: 700; display: grid; place-items: center; color: var(--fg-1); }
-    .tier.A { background: var(--sc-green); }
-    .tier.B { background: var(--sc-blue); }
-    .tier.C { background: var(--sc-purple); }
-    .tier.D { background: var(--sc-gold); }
-    .card-foot {
-      border-top: 1px solid var(--hairline);
-      padding: 12px 22px;
-      font-size: 12px;
-      color: var(--fg-3);
-      text-align: center;
-    }
-    .card-foot strong { color: var(--fg-1); font-weight: 600; }
+    .system-scroll { position: relative; z-index: 2; height: 230vh; margin-top: 18px; }
+    .system-stage { position: sticky; top: 0; height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 22px; width: min(900px, calc(100% - 64px)); margin: 0 auto; }
+    .system-h { opacity: 0; transform: translateY(16px); transition: opacity .7s var(--ease) .1s, transform .7s var(--ease) .1s; margin: 0; color: #fff; font-size: clamp(30px, 3vw, 42px); line-height: 1.06; font-weight: 700; letter-spacing: -.03em; text-align: center; max-width: 756px; text-wrap: balance; }
+    .system-sub { opacity: 0; transform: translateY(12px); transition: opacity .7s var(--ease) .22s, transform .7s var(--ease) .22s; margin: 0; color: rgba(255,255,255,.65); font-size: 15px; line-height: 1.5; text-align: center; max-width: 560px; text-wrap: pretty; }
+    .system-stage.pinned .system-h, .system-stage.pinned .system-sub { opacity: 1; transform: none; }
+    .system-card.scrub .sys-draw, .system-card.scrub .sys-fin, .system-card.scrub .sys-pop, .system-card.scrub .sys-ring { animation-play-state: paused; animation-delay: calc(var(--t, 0s) - var(--p, 0s)); }
+    .system-card { position: relative; width: 100%; max-width: 820px; margin: 0 auto; background: rgba(255,255,255,.92); backdrop-filter: blur(8px) saturate(140%); -webkit-backdrop-filter: blur(8px) saturate(140%); border: 1px solid rgba(255,255,255,.55); border-radius: 14px; box-shadow: var(--shadow); overflow: hidden; }
+    .system-card text { font-family: var(--sans); }
+    .sys-lbl { font-size: 11px; font-weight: 600; letter-spacing: .07em; fill: var(--muted); }
+    .sys-sm { font-size: 11px; font-weight: 500; fill: #94A3B8; font-variant-numeric: tabular-nums; }
+    .sys-draw { stroke-dasharray: 100; stroke-dashoffset: 100; }
+    .play .sys-draw { animation: sys-draw var(--d,1.5s) ease-out var(--t,0s) forwards; }
+    @keyframes sys-draw { to { stroke-dashoffset: 0; } }
+    .sys-fin { opacity: 0; }
+    .play .sys-fin { animation: sys-fin .5s ease var(--t,0s) forwards; }
+    @keyframes sys-fin { to { opacity: 1; } }
+    .sys-pop { opacity: 0; transform-box: fill-box; transform-origin: center; transform: scale(.4); }
+    .play .sys-pop { animation: sys-pop .5s cubic-bezier(.2,1.5,.4,1) var(--t,0s) forwards; }
+    @keyframes sys-pop { to { opacity: 1; transform: scale(1); } }
+    .sys-ring { opacity: 0; transform-box: fill-box; transform-origin: center; }
+    .play .sys-ring { animation: sys-ring 1.1s ease-out var(--t) forwards; }
+    @keyframes sys-ring { 0% { opacity: .9; transform: scale(.4); } 100% { opacity: 0; transform: scale(2.2); } }
 
-    /* ---------- Section primitives ---------- */
-    .section-head { max-width: 720px; margin: 0 0 56px; }
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 12px;
-      font-weight: 500;
-      color: var(--fg-3);
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      margin-bottom: 18px;
-    }
-    .eyebrow .pip { color: var(--sc-purple); font-size: 14px; line-height: 1; }
-    .section h2 {
-      font-size: 38px;
-      font-weight: 700;
-      letter-spacing: -0.025em;
-      line-height: 1.1;
-      margin: 0 0 18px;
-      color: var(--fg-1);
-      text-wrap: balance;
-    }
-    .section h2 + p {
-      font-size: 17px;
-      line-height: 1.55;
-      color: var(--fg-2);
-      margin: 0;
-      text-wrap: pretty;
-    }
+    /* ---------- Sections ---------- */
+    .section { padding: 88px 0; position: relative; }
+    #problem { padding: 96px 0; }
+    .section-heading { text-align: center; margin-bottom: 64px; }
+    .section-heading h2 { font-size: clamp(40px, 4.2vw, 48px); line-height: 1.1; margin: 18px auto 14px; max-width: 756px; }
+    .section-heading p { color: var(--muted); max-width: 600px; margin: 0 auto; font-size: 16px; line-height: 1.55; text-wrap: pretty; }
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .8s var(--ease), transform .8s var(--ease); }
+    .reveal.in { opacity: 1; transform: translateY(0); }
 
-    /* ---------- Footer ---------- */
-    .footer-wrap {
-      border-top: 1px solid var(--hairline);
-      background: var(--bg-2);
+    .comparison { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; width: min(800px, calc(100% - 64px)); margin: 0 auto; align-items: stretch; }
+    .compare-card { padding: 46px 38px 50px; background: var(--white); border: 1px solid var(--line); border-radius: 14px; }
+    .compare-card.good {
+      color: white; border-color: transparent;
+      background:
+        radial-gradient(circle at 82% 10%, rgba(100,155,228,.5), transparent 40%),
+        radial-gradient(circle at 8% 92%, rgba(180,147,234,.34), transparent 38%),
+        linear-gradient(150deg, #143a73, #03153A 70%);
     }
-    .footer {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 28px 48px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 24px;
-      font-size: 12px;
-      color: var(--fg-4);
-      letter-spacing: 0.04em;
-    }
-    .footer .footer-nav { display: flex; gap: 24px; }
-    .footer a { text-decoration: none; color: var(--fg-3); }
-    .footer a:hover { color: var(--fg-1); }
+    .compare-title { display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 19px; font-weight: 700; letter-spacing: -.02em; margin: 4px 0 30px; text-align: center; }
+    .compare-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 21px; }
+    .compare-list li { display: grid; grid-template-columns: 22px 1fr; gap: 12px; font-size: 14.5px; line-height: 1.5; align-items: start; }
+    .status { width: 21px; height: 21px; margin-top: 1px; display: grid; place-items: center; border-radius: 50%; color: white; background: var(--coral); font-size: 12px; font-weight: 800; }
+    .good .status { background: rgba(255,255,255,.18); font-size: 11px; }
 
-    /* ---------- Modal ---------- */
+    .feature-stack { display: grid; gap: 64px; width: min(800px, calc(100% - 64px)); margin: 0 auto; }
+    .feature-card { padding: 48px 40px; text-align: center; background: var(--white); border-radius: 12px; overflow: visible; }
+    .feature-meta { display: inline-flex; align-items: center; gap: 8px; color: var(--blue-deep); font-family: var(--mono); text-transform: uppercase; font-size: 12px; font-weight: 600; letter-spacing: .04em; }
+    .feature-icon { width: 16px; height: 16px; display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto; }
+    .feature-icon svg { width: 16px; height: 16px; display: block; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+    .services-eyebrow { color: var(--blue-deep); }
+    .services-eyebrow .spark { color: var(--blue-deep); }
+    .feature-card h3 { margin: 16px auto 10px; font-size: 28px; font-weight: 700; letter-spacing: -.025em; }
+    .feature-card > p { color: var(--muted); max-width: 560px; font-size: 16px; line-height: 1.6; margin: 0 auto; }
+    .visual { height: 280px; max-width: 680px; margin: 36px auto 0; border-radius: 12px; position: relative; overflow: hidden; }
+    .feature-card .visual > * { scale: .85; transform-origin: center center; }
+    .feature-card .ssq > * { scale: .78; }
+
+    /* 01 — Growth Planning Intensive */
+    .gpi-stage { height: 425px; position: relative; overflow: hidden; }
+    .gcard { position: absolute; left: 50%; top: calc(50% - 40px); width: 370px; background: #FFFFFF; border: 1px solid var(--line); border-radius: 14px; box-shadow: 0 24px 48px -20px rgba(3,21,58,.28); padding: 8px 0 4px; transition: transform .85s cubic-bezier(.3,1.3,.45,1), opacity .5s ease; will-change: transform; }
+    .gcard svg { display: block; width: 100%; height: auto; }
+    .gpi-done .gcard { cursor: pointer; }
+    .ghint { position: absolute; left: 0; right: 0; bottom: 14px; text-align: center; font-size: 12.5px; font-weight: 500; color: #94A3B8; opacity: 0; transition: opacity .5s ease .4s; pointer-events: none; }
+    .gpi-done .ghint { opacity: 1; }
+    .g-lbl { font-size: 11px; font-weight: 600; letter-spacing: .07em; fill: var(--muted); }
+    .g-sm { font-size: 10.5px; font-weight: 500; letter-spacing: .05em; fill: #94A3B8; }
+    .g-chip { font-size: 12.5px; font-weight: 600; fill: var(--ink); font-variant-numeric: tabular-nums; }
+    .gknob { transition: transform .55s cubic-bezier(.3,1.3,.45,1); }
+    .gchk { opacity: 0; transform: scale(.4); transform-box: fill-box; transform-origin: center; transition: transform .35s cubic-bezier(.2,1.5,.4,1), opacity .25s ease; }
+    .gchk.on { opacity: 1; transform: scale(1); }
+    .gpill { opacity: 0; transform: scale(.6); transform-box: fill-box; transform-origin: center; transition: transform .4s cubic-bezier(.2,1.5,.4,1), opacity .3s ease; }
+    .gpill.on { opacity: 1; transform: scale(1); }
+
+    /* 02 — Weekly Growth Intelligence */
+    .wgi { position: relative; overflow: hidden; }
+    .wgi-sheet { position: absolute; left: 50%; top: 64px; width: 640px; height: 430px; margin-left: -320px; background: #fff; border: 1px solid var(--hair); border-radius: 18px; box-shadow: 0 10px 30px rgba(3,21,58,.06); }
+    .wgi-sheet.s1 { transform: rotate(-2.6deg) translateX(-14px); }
+    .wgi-sheet.s2 { transform: rotate(1.4deg) translateX(12px); }
+    .wgi-report { position: absolute; left: 50%; top: 40px; width: 660px; margin-left: -330px; transform: rotate(-1.1deg); background: #fff; border: 1px solid var(--line); border-radius: 18px; padding: 24px 30px 26px; z-index: 3; box-shadow: 0 22px 55px rgba(3,21,58,.11), 0 4px 12px rgba(3,21,58,.05); }
+    .wgi-rhead { display: flex; align-items: center; }
+    .wgi-ct { display: flex; align-items: center; gap: 9px; font-size: 14px; font-weight: 700; letter-spacing: .11em; color: var(--muted); }
+    .wgi-ct .sq { width: 10px; height: 10px; border-radius: 3px; background: var(--green); }
+    .wgi-when { margin-left: auto; font-size: 11px; font-weight: 700; letter-spacing: .08em; color: #94A3B8; background: #F1F4F9; border-radius: 999px; padding: 7px 12px; font-variant-numeric: tabular-nums; }
+    .wgi-bar { height: 9px; border-radius: 5px; background: #E2E6EC; }
+    .wgi-kpis { display: flex; gap: 14px; margin-top: 18px; }
+    .wgi-kpi { flex: 1; border: 1.5px solid var(--hair); border-radius: 12px; padding: 12px 14px; background: #fff; position: relative; }
+    .wgi-kpi .wgi-bar { margin-bottom: 10px; }
+    .wgi-vbar { height: 14px; border-radius: 6px; background: #CBD5E1; }
+    .wgi-ok { position: absolute; top: 10px; right: 11px; width: 19px; height: 19px; border-radius: 6px; background: var(--green); color: #fff; font-size: 11px; font-weight: 800; line-height: 19px; text-align: center; }
+    .wgi-kpi.flag { background: rgba(252,175,15,.1); border-color: rgba(252,175,15,.5); flex: 1.35; opacity: 0; transform: scale(.55); transform-origin: center; }
+    .wgi-kpi.flag .lbl { font-size: 10px; font-weight: 700; letter-spacing: .09em; color: #B7660A; margin-bottom: 8px; }
+    .wgi-kpi.flag .val { font-size: 17px; font-weight: 800; color: var(--ink); white-space: nowrap; font-variant-numeric: tabular-nums; }
+    .play .wgi-kpi.flag { animation: sys-pop .5s cubic-bezier(.2,1.5,.4,1) var(--t) forwards, wgi-flagpulse .7s ease calc(var(--t) + .8s) 1; }
+    @keyframes wgi-flagpulse { 50% { box-shadow: 0 0 0 7px rgba(252,175,15,.18); } }
+    .wgi-hr { height: 1px; background: var(--hair); margin-top: 18px; }
+    .wgi-chain { display: flex; align-items: center; gap: 9px; margin-top: 18px; }
+    .wgi-chip { font-size: 12px; font-weight: 800; white-space: nowrap; border-radius: 999px; padding: 8px 12px; font-variant-numeric: tabular-nums; }
+    .wgi-chip.a1 { background: rgba(252,175,15,.12); border: 1.5px solid rgba(252,175,15,.55); color: var(--ink); }
+    .wgi-chip.a2 { background: rgba(252,175,15,.07); border: 1.5px solid rgba(252,175,15,.35); color: var(--ink); }
+    .wgi-chip.root { background: #fff; border: 1.5px solid #C7D0E0; color: var(--ink); opacity: 0; transform: scale(.55); transform-origin: center; }
+    .play .wgi-chip.root { animation: sys-pop .5s cubic-bezier(.2,1.5,.4,1) var(--t) forwards, wgi-rootpulse .7s ease calc(var(--t) + .6s) 1; }
+    @keyframes wgi-rootpulse { 50% { box-shadow: 0 0 0 6px rgba(3,21,58,.08); border-color: var(--ink); } }
+    .wgi-why { display: flex; align-items: center; gap: 4px; font-size: 9.5px; font-weight: 800; letter-spacing: .1em; color: #94A3B8; }
+    .wgi-why .ln { width: 14px; height: 1.5px; background: #CBD5E1; }
+    .wgi-prose { margin-top: 18px; }
+    .wgi-prose .wgi-bar { margin-top: 11px; }
+    .wgi-hl { margin-top: 13px; font-size: 15.5px; font-weight: 700; line-height: 1.5; color: var(--ink); opacity: 0; }
+    .play .wgi-hl { animation: sys-fin .4s ease calc(var(--th) - .25s) forwards; }
+    .wgi-hl span { background-image: linear-gradient(rgba(252,175,15,.3), rgba(252,175,15,.3)); background-repeat: no-repeat; background-size: 0% 100%; border-radius: 6px; padding: 2px 6px; margin-left: -6px; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+    .play .wgi-hl span { animation: wgi-sweep 1.1s cubic-bezier(.4,0,.3,1) var(--t,0s) forwards; }
+    @keyframes wgi-sweep { to { background-size: 100% 100%; } }
+    .wgi-mvzone { display: flex; align-items: center; gap: 13px; margin-top: 18px; }
+    .wgi-tf { font-size: 10px; font-weight: 800; letter-spacing: .1em; color: #3d6a1a; background: rgba(168,216,98,.16); border: 1.5px solid var(--green); border-radius: 999px; padding: 8px 12px; flex: 0 0 auto; }
+    .wgi-mv { display: flex; align-items: center; gap: 11px; }
+    .wgi-ar { width: 28px; height: 28px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 800; background: #EEF1F7; color: #B7C0D2; flex: 0 0 auto; }
+    .play .wgi-ar.on { animation: wgi-aron .4s ease var(--t) forwards; }
+    @keyframes wgi-aron { to { background: var(--purple); color: #fff; } }
+    .wgi-mtext { font-size: 14.5px; font-weight: 700; line-height: 1.3; color: var(--ink); }
+
+    /* 03 — Sourcing + scoring */
+    .ssq { position: relative; overflow: hidden; }
+    .acct { position: absolute; width: 176px; background: #fff; border: 1px solid var(--hair); border-radius: 14px; padding: 14px 16px; box-shadow: 0 12px 30px rgba(3,21,58,.08), 0 2px 8px rgba(3,21,58,.05); transform-origin: top left; transition: transform 1.4s cubic-bezier(.5,0,.22,1), opacity .9s ease var(--te, 0s); }
+    .acct .ahead { display: flex; align-items: center; gap: 10px; }
+    .acct .logo { width: 32px; height: 32px; border-radius: 9px; background: #EEF1F7; color: #94A3B8; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800; flex: 0 0 auto; }
+    .acct .hslot { position: relative; flex: 1; height: 30px; }
+    .acct .hslot .b1 { position: absolute; top: 3px; width: 82%; }
+    .acct .hslot .b2 { position: absolute; top: 18px; width: 55%; }
+    .acct .aname { position: absolute; top: 0; left: 0; font-size: 13.5px; font-weight: 800; color: var(--ink); white-space: nowrap; opacity: 0; }
+    .acct .ahr { height: 1px; background: var(--hair); margin-top: 12px; }
+    .acct .arow { margin-top: 11px; }
+    .acct .afoot { display: flex; align-items: center; gap: 8px; margin-top: 12px; height: 32px; }
+    .acct .score { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800; color: #fff; flex: 0 0 auto; opacity: 0; transform: scale(.4); transform-origin: center; font-variant-numeric: tabular-nums; }
+    .score.s-a { background: #74a832; } .score.s-b { background: var(--blue); } .score.s-d { background: #C3CCDB; color: #475569; }
+    .play .acct .score { animation: sys-pop .45s cubic-bezier(.2,1.5,.4,1) var(--ts) forwards; }
+    .tier { font-size: 9.5px; font-weight: 800; letter-spacing: .08em; border-radius: 999px; padding: 6px 9px; opacity: 0; transform: scale(.55); transform-origin: center; white-space: nowrap; }
+    .play .tier { animation: sys-pop .45s cubic-bezier(.2,1.5,.4,1) var(--tp, 99s) forwards; }
+    .tier.t-a { background: rgba(168,216,98,.16); color: #3d6a1a; border: 1.5px solid var(--green); }
+    .tier.t-b { background: rgba(100,155,228,.14); color: #2f66b8; border: 1.5px solid var(--blue); }
+    .tier.t-c { background: #F1F4F9; color: #8494AD; border: 1.5px solid #D5DCE8; }
+    .tier.t-d { background: #F4F6FA; color: #A9B4C6; border: 1.5px solid #E0E5EE; }
+    .callfirst { position: absolute; top: -13px; left: 12px; font-size: 9.5px; font-weight: 800; letter-spacing: .07em; color: var(--ink); background: var(--purple); border-radius: 999px; padding: 7px 11px; opacity: 0; transform: scale(.4); transform-origin: center; white-space: nowrap; box-shadow: 0 4px 10px rgba(180,147,234,.5); }
+    .play .callfirst { animation: sys-pop .5s cubic-bezier(.2,1.5,.4,1) 6.15s forwards; }
+    .play .acct.qc1 .b1 { animation: ss-fout .3s ease 5.75s forwards; }
+    .play .acct.qc1 .aname { animation: sys-fin .4s ease 5.9s forwards; }
+    @keyframes ss-fout { to { opacity: 0; } }
+
+    /* 04 — Fractional outbound */
+    .obx { position: relative; overflow: hidden; }
+    .obx-k { position: absolute; background: #fff; border: 1px solid var(--hair); border-radius: 16px; box-shadow: 0 14px 36px rgba(3,21,58,.09), 0 3px 9px rgba(3,21,58,.05); }
+    .obx-mini { width: 180px; padding: 13px 15px; opacity: 0; }
+    .play .obx-mini { animation: obx-fin8 .5s ease var(--t) forwards; }
+    @keyframes obx-fin8 { to { opacity: .8; } }
+    .obx-mt { display: flex; align-items: center; gap: 8px; font-size: 11px; font-weight: 700; letter-spacing: .1em; color: var(--muted); }
+    .obx-mt .sq { width: 9px; height: 9px; border-radius: 3px; }
+    .obx-tag { font-size: 8.5px; font-weight: 800; letter-spacing: .06em; color: #2f66b8; background: rgba(100,155,228,.14); border-radius: 5px; padding: 4px 5px; }
+    .obx-bub { border-radius: 10px; background: #EEF1F7; height: 20px; margin-top: 10px; width: 70%; }
+    .obx-bub.me { margin-left: auto; background: rgba(180,147,234,.18); width: 55%; border-bottom-right-radius: 3px; }
+    .obx-wv { display: flex; align-items: flex-end; gap: 4px; height: 26px; margin-top: 10px; }
+    .obx-wv i { display: block; width: 5px; border-radius: 3px; background: #CBD5E1; }
+    .obx-mrow { display: flex; align-items: center; gap: 6px; margin-top: 12px; font-size: 9px; font-weight: 800; letter-spacing: .07em; color: var(--muted); }
+    .obx-mrow .dt { width: 8px; height: 8px; border-radius: 3px; }
+    .cal-card { position: absolute; left: 216px; right: 16px; top: 44px; background: #fff; border: 1px solid var(--line); border-radius: 18px; padding: 20px 22px; box-shadow: 0 22px 55px rgba(3,21,58,.11), 0 4px 12px rgba(3,21,58,.05); }
+    .cal-head { display: flex; align-items: center; gap: 10px; }
+    .cal-ava { width: 28px; height: 28px; border-radius: 50%; background: rgba(180,147,234,.18); color: #6b3fb8; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 800; flex: 0 0 auto; }
+    .cal-t { font-size: 10.5px; font-weight: 700; letter-spacing: .1em; color: var(--muted); }
+    .cal-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0 10px; margin-top: 16px; }
+    .cal-day { font-size: 9.5px; font-weight: 800; letter-spacing: .08em; color: #94A3B8; text-align: center; padding-bottom: 8px; border-bottom: 1px solid var(--hair); }
+    .cal-col { display: flex; flex-direction: column; gap: 8px; min-height: 205px; padding-top: 10px; }
+    .cal-blk { border-radius: 9px; padding: 8px 9px; border: 1px solid; }
+    .cal-blk .tp { display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 800; color: var(--ink); font-variant-numeric: tabular-nums; }
+    .cal-blk .tp i { width: 8px; height: 8px; border-radius: 3px; display: block; }
+    .cal-blk .nm { font-size: 8.5px; font-weight: 800; letter-spacing: .05em; color: var(--muted); margin-top: 4px; }
+    .cal-blk .wgi-bar { height: 6px; margin-top: 6px; }
+    .cal-blk.ch-e { background: rgba(100,155,228,.1); border-color: rgba(100,155,228,.35); }
+    .cal-blk.ch-e .tp i { background: var(--blue); }
+    .cal-blk.ch-d { background: rgba(180,147,234,.12); border-color: rgba(180,147,234,.4); }
+    .cal-blk.ch-d .tp i { background: var(--purple); }
+    .cal-blk.ch-c { background: rgba(252,175,15,.1); border-color: rgba(252,175,15,.4); }
+    .cal-blk.ch-c .tp i { background: var(--gold); }
+    .cal-foot { display: flex; align-items: center; gap: 8px; margin-top: 6px; padding-top: 12px; border-top: 1px solid var(--hair); font-size: 10.5px; font-weight: 700; letter-spacing: .07em; color: var(--muted); font-variant-numeric: tabular-nums; }
+    .cal-foot .gd { width: 8px; height: 8px; border-radius: 50%; background: var(--green); }
+
+    /* The artwork supplies its own cards and shadows; keep the stage frameless
+       and allow those shadows to extend beyond the animation viewport. */
+    .feature-card .visual { overflow: visible; }
+
+    /* ---------- Process / delivery / pricing ---------- */
+    .process { background: var(--ink); color: white; overflow: hidden; }
+    .process::before { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 75% 10%, rgba(100,155,228,.5), transparent 34%), radial-gradient(circle at 12% 94%, rgba(180,147,234,.32), transparent 30%); }
+    .process .section-heading { position: relative; z-index: 2; }
+    .process .section-heading p { color: rgba(255,255,255,.72); }
+    .steps { position: relative; z-index: 2; display: grid; grid-template-columns: repeat(3, 1fr); width: min(800px, calc(100% - 64px)); margin: 0 auto; }
+    .step { min-height: 300px; padding: 34px 30px; border-top: 1px solid rgba(255,255,255,.22); border-bottom: 1px solid rgba(255,255,255,.22); border-right: 1px solid rgba(255,255,255,.18); }
+    .step:first-child { border-left: 1px solid rgba(255,255,255,.18); }
+    .step-num { font-family: var(--sans); font-weight: 700; font-size: 44px; letter-spacing: -.03em; color: var(--green); font-variant-numeric: tabular-nums; }
+    .step h3 { font-size: 20px; font-weight: 700; letter-spacing: -.02em; margin: 28px 0 12px; }
+    .step p { color: rgba(255,255,255,.68); line-height: 1.6; font-size: 14px; }
+
+    .security-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; width: min(800px, calc(100% - 64px)); margin: 0 auto; }
+    .security-card { min-height: 200px; padding: 30px; background: var(--white); border: 1px solid var(--line); border-radius: 14px; }
+    .security-icon { width: 52px; height: 52px; border-radius: 12px; background: rgba(100,155,228,.12); display: grid; place-items: center; color: var(--blue-deep); font-size: 24px; }
+    .security-card h3 { margin: 28px 0 10px; font-size: 20px; font-weight: 700; letter-spacing: -.02em; }
+    .security-card p { color: var(--muted); margin: 0; font-size: 14px; line-height: 1.6; }
+
+    .crm-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+    .crm-chip { font-size: 12px; font-weight: 600; color: var(--body); border: 1px solid var(--line); border-radius: 999px; padding: 7px 12px; background: var(--paper); }
+    .price-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; width: min(800px, calc(100% - 64px)); margin: 0 auto; }
+    .price-card { padding: 38px 34px; background: var(--white); border: 1px solid var(--line); border-radius: 14px; display: flex; flex-direction: column; }
+    .price-card.custom { color: white; border-color: transparent; background: radial-gradient(circle at 82% 10%, rgba(100,155,228,.5), transparent 40%), radial-gradient(circle at 8% 92%, rgba(180,147,234,.34), transparent 38%), linear-gradient(150deg, #143a73, #03153A 70%); }
+    .price-kicker { font-family: var(--mono); text-transform: uppercase; font-size: 11px; font-weight: 700; letter-spacing: .08em; color: var(--muted); }
+    .price-card.custom .price-kicker { color: rgba(255,255,255,.65); }
+    .price-card h3 { margin: 14px 0 6px; font-size: 26px; font-weight: 700; letter-spacing: -.02em; }
+    .price-for { font-size: 14px; color: var(--muted); margin: 0 0 22px; line-height: 1.5; }
+    .price-card.custom .price-for { color: rgba(255,255,255,.7); }
+    .price-list { list-style: none; margin: 0 0 30px; padding: 22px 0 0; border-top: 1px solid var(--hair); display: grid; gap: 13px; }
+    .price-card.custom .price-list { border-top-color: rgba(255,255,255,.2); }
+    .price-list li { display: grid; grid-template-columns: 20px 1fr; gap: 10px; font-size: 14.5px; line-height: 1.45; }
+    .price-list .pk { color: #74a832; font-weight: 800; }
+    .price-card.custom .price-list .pk { color: var(--green); }
+    .price-cta { margin-top: auto; display: flex; flex-direction: column; gap: 12px; align-items: flex-start; }
+    .price-note { font-size: 12.5px; color: var(--muted); }
+    .price-card.custom .price-note { color: rgba(255,255,255,.65); }
+    .price-addon { display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; width: min(800px, calc(100% - 64px)); margin: 24px auto 0; padding: 24px 28px; background: var(--white); border: 1px solid var(--line); border-radius: 14px; }
+    .addon-chip { display: inline-block; font-family: var(--mono); text-transform: uppercase; font-size: 10px; font-weight: 700; letter-spacing: .08em; color: #6b3fb8; background: rgba(180,147,234,.15); border: 1px solid rgba(180,147,234,.5); border-radius: 999px; padding: 7px 11px; }
+
+    .final-cta { width: min(960px, calc(100% - 48px)); margin: 0 auto 24px; border-radius: 20px; color: white; padding: 88px 40px 40px; text-align: center; position: relative; overflow: hidden; background: #03153A; }
+    .final-cta::before { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(120deg, rgba(3,21,58,.62), rgba(10,37,80,.36) 48%, rgba(20,58,115,.18)), radial-gradient(circle at 16% 18%, rgba(180,147,234,.24), transparent 30%), radial-gradient(circle at 88% 30%, rgba(168,216,98,.16), transparent 30%); }
+    .final-cta > * { position: relative; z-index: 2; }
+    .final-cta > .footer-mosaic { position: absolute; inset: 0; z-index: 0; opacity: .72; }
+    .final-cta h2 { max-width: 756px; margin: 16px auto 20px; font-family: var(--sans); font-weight: 700; font-size: clamp(44px, 4.6vw, 60px); line-height: 1.02; letter-spacing: -.035em; text-wrap: balance; }
+    .final-cta p { color: rgba(255,255,255,.74); font-size: 16px; }
+    .final-actions { display: flex; justify-content: center; align-items: center; gap: 12px; margin-top: 30px; }
+    .footer { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: end; margin-top: 72px; padding-top: 28px; border-top: 1px solid rgba(255,255,255,.22); text-align: left; }
+    .footer-brand { display: inline-flex; align-items: center; gap: 11px; }
+    .footer-brand img { height: 30px; width: auto; }
+    .footer-brand .brand-word { color: white; font-size: 22px; }
+    .footer-meta { font-family: var(--mono); text-transform: uppercase; font-size: 9px; color: rgba(255,255,255,.6); letter-spacing: .07em; }
+    .footer-links { display: flex; gap: 24px; font-size: 12px; }
+    .footer-links a { color: rgba(255,255,255,.82) !important; }
+
+    /* ---------- Booking modal (two-step lead form -> Cal.com) ---------- */
     .modal {
       position: fixed;
       inset: 0;
@@ -359,7 +412,6 @@
     }
     .modal-close:hover { background: var(--fg-1); color: #FFF; border-color: var(--fg-1); }
     .modal-body { padding: 32px 32px 28px; }
-
     .modal-eyebrow {
       font-family: 'JetBrains Mono', monospace;
       font-size: 11px;
@@ -383,8 +435,6 @@
       margin: 0 0 22px;
       max-width: 520px;
     }
-
-    /* ---------- Form ---------- */
     .field-row {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -431,7 +481,6 @@
       display: none;
     }
     .field.error .err-msg { display: block; }
-
     .form-foot {
       display: flex;
       align-items: center;
@@ -461,18 +510,15 @@
     .submit-btn:hover  { opacity: 0.92; }
     .submit-btn:active { transform: scale(0.98); }
     .submit-btn .arrow { margin-left: 6px; }
-
-    /* Modal state machine */
     .modal-state-form { display: block; }
     .modal-state-schedule { display: none; }
     .modal.show-schedule .modal-state-form { display: none; }
     .modal.show-schedule .modal-state-schedule { display: block; }
-
     .recap {
       display: flex; flex-wrap: wrap; gap: 6px 8px;
       margin-bottom: 18px;
     }
-    .chip {
+    .recap .chip {
       font-family: 'JetBrains Mono', monospace;
       font-size: 11px;
       font-weight: 500;
@@ -486,7 +532,7 @@
       display: inline-block;
       margin-top: 14px;
       font-size: 13px;
-      color: var(--fg-2);
+      color: var(--fg-2) !important;
       text-decoration: none;
       border-bottom: 1px solid var(--underline);
       cursor: pointer;
@@ -498,49 +544,59 @@
       margin: 0 -8px;
     }
     #cal-inline { width: 100%; }
-
-    /* ---------- Animations ---------- */
-    @keyframes pulse {
-      0%,100% { box-shadow: 0 0 0 4px var(--pulse-glow); }
-      50%     { box-shadow: 0 0 0 7px rgba(168,216,98,0.10); }
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to   { opacity: 1; }
-    }
-    @keyframes popIn {
-      from { opacity: 0; transform: translateY(8px) scale(0.985); }
-      to   { opacity: 1; transform: translateY(0) scale(1); }
-    }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes popIn { from { opacity: 0; transform: translateY(8px) scale(0.98); } to { opacity: 1; transform: none; } }
 
     /* ---------- Responsive ---------- */
-    @media (max-width: 1024px) {
-
-
-
-
-
-
-
+    @media (max-width: 880px) {
+      .shell { width: min(100% - 40px, 760px); }
+      .header-inner { padding: 0 24px; }
+      .hero { padding-top: 122px; }
+      .system-scroll { height: 260vh; }
+      .comparison { grid-template-columns: 1fr; width: calc(100% - 40px); }
+      .feature-stack { width: calc(100% - 40px); }
+      .feature-card { padding: 38px; }
+      .steps { width: calc(100% - 40px); }
     }
-    @media (max-width: 560px) {
-
-    }
-    @media (max-width: 960px) {
-      .header { padding: 16px 24px; }
-      .nav { display: none; }
-      .hero {
-        grid-template-columns: 1fr;
-        gap: 40px;
-        padding: 48px 24px 56px;
-      }
-      .copy h1 { font-size: 44px; }
-      .copy p.lede { font-size: 16px; }
-      .section h2 { font-size: 30px; }
-
-
-
-      .footer { flex-direction: column; align-items: flex-start; gap: 12px; padding: 24px; }
+    @media (max-width: 700px) {
+      .shell, .narrow { width: calc(100% - 36px); }
+      .header-inner { padding: 0 18px; }
+      .site-nav .nav-link, .nav-svc { display: none; }
+      .hero { padding-top: 112px; }
+      .hero-mosaic { height: 640px; }
+      .hero h1 { font-size: clamp(42px, 13vw, 60px); line-height: .96; margin-top: 22px; }
+      .hero .lede { font-size: 16px; }
+      .system-scroll { height: 240vh; }
+      .system-stage { width: calc(100% - 36px); }
+      .section { padding: 96px 0; }
+      .section-heading { margin-bottom: 44px; }
+      .section-heading h2 { font-size: 42px; }
+      .comparison { width: calc(100% - 36px); gap: 14px; }
+      .compare-card { padding: 32px 24px; }
+      .compare-list { gap: 18px; }
+      .feature-stack { width: calc(100% - 36px); gap: 24px; }
+      .feature-card { min-height: 0; padding: 26px 20px; }
+      .feature-card h3 { font-size: 27px; }
+      .visual { height: 360px; margin-top: 30px; }
+      .gcard { width: 320px; }
+      .visual.gpi-stage { height: 430px; }
+      .wgi-report { width: 94%; margin-left: -47%; padding: 16px; }
+      .wgi-chain { flex-wrap: wrap; }
+      .acct { width: 150px; padding: 10px 12px; }
+      .steps { grid-template-columns: 1fr; width: calc(100% - 36px); }
+      .step { min-height: 0; border-left: 1px solid rgba(255,255,255,.18); border-bottom: 0; }
+      .step:last-child { border-bottom: 1px solid rgba(255,255,255,.22); }
+      .security-grid { grid-template-columns: 1fr; width: calc(100% - 36px); }
+      .security-card { min-height: 0; }
+      .price-grid { grid-template-columns: 1fr; width: calc(100% - 36px); }
+      .price-card { padding: 28px 22px; }
+      .price-addon { width: calc(100% - 36px); padding: 22px; }
+      .final-cta { width: calc(100% - 20px); padding: 84px 20px 30px; border-radius: 16px; }
+      .final-cta h2 { font-size: 44px; }
+      .final-actions { flex-direction: column; }
+      .final-actions .button { width: 100%; max-width: 320px; }
+      .footer { grid-template-columns: 1fr; margin-top: 72px; }
+      .footer-links { flex-wrap: wrap; gap: 16px; }
       .field-row { grid-template-columns: 1fr; gap: 0; }
       .field-row .field { margin-bottom: 12px; }
       .form-foot { flex-direction: column; align-items: stretch; gap: 12px; }
@@ -548,1560 +604,547 @@
       .modal { padding: 16px; }
       .modal-body { padding: 28px 22px 22px; }
     }
-    @media (max-width: 520px) {
-      .header-cta .signin { display: none; }
-      .copy h1 { font-size: 36px; }
-      .cta-row { flex-direction: column; align-items: flex-start; gap: 16px; }
-
-    }
-
-    /* ============================================================
-       Editorial body sections
-       ============================================================ */
-
-    /* ---------- editorial problems ---------- */
-    .why-wrap {
-      border-top: 1px solid var(--hairline);
-      background: var(--bg-2);
-      position: relative;
-      z-index: 1;
-    }
-    .why {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 120px 48px 96px;
-      display: flex;
-      flex-direction: column;
-      gap: 80px;
-    }
-    .section-head {
-      display: flex;
-      flex-direction: row;
-      align-items: flex-end;
-      justify-content: space-between;
-      gap: 56px;
-      padding-bottom: 36px;
-      border-bottom: 1px solid var(--border);
-    }
-    .section-head .head-copy {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      max-width: 760px;
-    }
-    .section-head h2 {
-      font-size: 64px;
-      font-weight: 700;
-      letter-spacing: -0.035em;
-      line-height: 0.98;
-      margin: 0;
-      color: var(--fg-1);
-      text-wrap: balance;
-    }
-    .section-head .head-meta {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--fg-4);
-      padding-bottom: 12px;
-      flex-shrink: 0;
-    }
-    .section-head .head-lede {
-      font-size: 19px;
-      line-height: 1.55;
-      color: var(--fg-2);
-      max-width: 600px;
-      margin-top: 4px;
-    }
-
-    .problem {
-      display: grid;
-      grid-template-columns: 220px 1fr 280px;
-      gap: 48px;
-      align-items: start;
-      padding-bottom: 72px;
-      border-bottom: 1px solid var(--hairline);
-    }
-    .problem:last-child { border-bottom: none; padding-bottom: 0; }
-    .problem .numeral {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-    .problem .numeral .num {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 160px;
-      font-weight: 700;
-      line-height: 0.85;
-      letter-spacing: -0.04em;
-    }
-    .problem .numeral .num.gold   { color: var(--sc-gold); }
-    .problem .numeral .num.blue   { color: var(--sc-blue); }
-    .problem .numeral .num.purple { color: var(--sc-purple); }
-    .problem .numeral .label {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--fg-4);
-    }
-    .problem .body {
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
-      max-width: 520px;
-      padding-top: 14px;
-    }
-    .problem .body h3 {
-      font-size: 32px;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      line-height: 1.15;
-      margin: 0;
-      color: var(--fg-1);
-      text-wrap: balance;
-    }
-    .problem .body p {
-      font-size: 17px;
-      line-height: 1.6;
-      color: var(--fg-2);
-      margin: 0;
-    }
-    .problem .evidence {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-    .problem .evidence .ev-label {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--fg-4);
-      margin-bottom: 8px;
-    }
-
-    /* problem 01 — list breakdown */
-    .ev-list-row {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      gap: 8px;
-      padding: 6px 10px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
-      color: var(--fg-4);
-    }
-    .ev-list-row.is-signal {
-      color: var(--fg-1);
-      background: rgba(252,175,15,0.10);
-      border-left: 2px solid var(--sc-gold);
-    }
-    .ev-list-row .pct { margin-left: auto; }
-    .ev-list-row.is-signal .pct { font-weight: 700; }
-    .ev-list-row.dim { color: var(--fg-5); }
-
-    /* problem 02 — tool stack grid + total */
-    .ev-toolstack {
-      width: 100%;
-      max-width: 320px;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-    .ev-toolstack .ev-tool-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 8px;
-    }
-    .ev-tool {
-      background: var(--bg-2);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 12px 14px;
-      display: flex;
-      flex-direction: column;
-      gap: 3px;
-    }
-    .ev-tool .tool-cat {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 9.5px;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-    .ev-tool .tool-name {
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--fg-1);
-      letter-spacing: -0.01em;
-    }
-    .ev-tool .tool-cost {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
-      color: var(--fg-4);
-      margin-top: 2px;
-    }
-    .ev-tool.t1 .tool-cat { color: var(--sc-blue); }
-    .ev-tool.t2 .tool-cat { color: var(--sc-purple); }
-    .ev-tool.t3 .tool-cat { color: #C77E00; }
-    .ev-tool.t4 .tool-cat { color: #7AAE3D; }
-    .ev-tool-total {
-      display: flex;
-      align-items: baseline;
-      justify-content: space-between;
-      padding: 12px 14px;
-      border-top: 1px dashed var(--border);
-      margin-top: 4px;
-    }
-    .ev-tool-total .total-label {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 10.5px;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--fg-3);
-    }
-    .ev-tool-total .total-num {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 18px;
-      font-weight: 700;
-      color: var(--fg-1);
-      letter-spacing: -0.02em;
-    }
-    .ev-tool-total .total-note {
-      flex-basis: 100%;
-      font-size: 11.5px;
-      color: var(--fg-3);
-      margin-top: 6px;
-      line-height: 1.4;
-    }
-
-    /* problem 03 — compounding line chart */
-    .ev-compound {
-      width: 100%;
-      max-width: 320px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-    .ev-compound svg { width: 100%; height: auto; display: block; }
-    .ev-compound-legend {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
-      color: var(--fg-3);
-    }
-    .ev-compound-legend .lg-row {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .ev-compound-legend .lg-swatch {
-      width: 18px; height: 2px; border-radius: 1px;
-    }
-    .ev-compound-legend .lg-row.fast .lg-swatch { background: var(--sc-green); }
-    .ev-compound-legend .lg-row.slow .lg-swatch { background: var(--fg-4); }
-    .ev-compound-legend .lg-num {
-      font-weight: 700;
-      color: var(--fg-1);
-      letter-spacing: -0.01em;
-    }
-
-    /* ---------- pull-quote band ---------- */
-    .quote-wrap {
-      background: var(--fg-1);
-      position: relative;
-      overflow: hidden;
-      z-index: 1;
-    }
-    .quote {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 140px 48px;
-      display: flex;
-      flex-direction: column;
-      gap: 36px;
-      position: relative;
-      z-index: 2;
-    }
-    .quote .quote-head {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
-    .quote .quote-head .pulse {
-      width: 8px; height: 8px; border-radius: 50%;
-      background: var(--sc-green);
-      box-shadow: 0 0 0 4px rgba(168,216,98,0.22);
-    }
-    .quote .quote-head .label {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--sc-green);
-    }
-    .quote .quote-body {
-      display: flex;
-      flex-direction: row;
-      gap: 24px;
-      align-items: flex-start;
-    }
-    .quote .quote-body .glyph {
-      font-family: Inter, sans-serif;
-      font-size: 240px;
-      font-weight: 700;
-      line-height: 0.7;
-      letter-spacing: -0.05em;
-      color: var(--sc-green);
-      flex-shrink: 0;
-      margin-top: -20px;
-    }
-    .quote .quote-body .text {
-      font-size: 80px;
-      font-weight: 700;
-      letter-spacing: -0.035em;
-      line-height: 1.0;
-      color: #FFFFFF;
-      text-wrap: balance;
-    }
-    .quote .quote-body .text em {
-      font-style: normal;
-      color: var(--sc-green);
-    }
-    .quote .quote-sub {
-      font-size: 19px;
-      line-height: 1.55;
-      color: rgba(255,255,255,0.72);
-      max-width: 880px;
-      padding-left: 96px;
-    }
-    .quote-dots {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      opacity: 0.5;
-      z-index: 1;
-    }
-    .quote-dots span {
-      position: absolute;
-      border-radius: 50%;
-    }
-
-    /* ---------- compounding loop ---------- */
-    .loop-wrap {
-      border-top: 1px solid var(--hairline);
-      background: var(--bg-2);
-      position: relative;
-      z-index: 1;
-    }
-    .loop {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 120px 48px;
-      display: flex;
-      flex-direction: column;
-      gap: 80px;
-    }
-    /* workflow strip (4 weeks, compact) */
-    .flow {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 0;
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      overflow: hidden;
-      background: var(--bg-1);
-    }
-    .flow .step {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      padding: 24px 22px;
-      position: relative;
-      background: var(--bg-2);
-      border-right: 1px solid var(--hairline);
-    }
-    .flow .step:last-child { border-right: none; }
-    .flow .step .week-tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 10.5px;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--fg-3);
-    }
-    .flow .step .week-tag .tick {
-      width: 8px; height: 8px; border-radius: 50%;
-    }
-    .flow .step.s1 .week-tag .tick { background: var(--sc-gold); }
-    .flow .step.s2 .week-tag .tick { background: var(--sc-green); }
-    .flow .step.s3 .week-tag .tick { background: var(--sc-blue); }
-    .flow .step.s4 .week-tag .tick { background: var(--sc-purple); }
-    .flow .step .step-name {
-      font-size: 22px;
-      font-weight: 700;
-      letter-spacing: -0.015em;
-      color: var(--fg-1);
-    }
-    .flow .step .step-desc {
-      font-size: 13.5px;
-      line-height: 1.55;
-      color: var(--fg-2);
-      margin-top: 2px;
-    }
-    .flow .step .step-arrow {
-      position: absolute;
-      right: -10px;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 20px;
-      height: 20px;
-      background: var(--bg-2);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 12px;
-      color: var(--fg-3);
-      z-index: 2;
-    }
-
-    /* compounding curves chart (the LITERAL compounding visual) */
-    .compound {
-      display: flex;
-      flex-direction: column;
-      gap: 24px;
-      padding: 48px 56px;
-      background: linear-gradient(180deg, var(--bg-2) 0%, var(--bg-1) 100%);
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      position: relative;
-      overflow: hidden;
-    }
-    .compound .compound-head {
-      display: flex;
-      flex-direction: row;
-      align-items: flex-end;
-      justify-content: space-between;
-      gap: 32px;
-    }
-    .compound .compound-head .left {
-      display: flex; flex-direction: column; gap: 8px; max-width: 600px;
-    }
-    .compound .compound-head .tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--sc-green);
-    }
-    .compound .compound-head .tag::before {
-      content: '';
-      width: 8px; height: 8px; border-radius: 50%;
-      background: var(--sc-green);
-      box-shadow: 0 0 0 3px rgba(168,216,98,0.22);
-    }
-    .compound .compound-head h3 {
-      font-size: 28px;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      line-height: 1.15;
-      color: var(--fg-1);
-      margin: 0;
-      text-wrap: balance;
-    }
-    .compound .compound-head .stat {
-      font-family: 'JetBrains Mono', monospace;
-      text-align: right;
-      flex-shrink: 0;
-    }
-    .compound .compound-head .stat .stat-num {
-      font-size: 36px;
-      font-weight: 700;
-      color: var(--fg-1);
-      letter-spacing: -0.025em;
-      line-height: 1;
-    }
-    .compound .compound-head .stat .stat-label {
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--fg-3);
-      margin-top: 6px;
-    }
-    .compound .compound-chart {
-      position: relative;
-      height: 220px;
-      width: 100%;
-    }
-    .compound .compound-chart svg { display: block; width: 100%; height: 100%; }
-    .compound .compound-axis {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 16px;
-      padding-top: 8px;
-      border-top: 1px dashed var(--hairline);
-      font-family: 'JetBrains Mono', monospace;
-    }
-    .compound .compound-axis .month {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-      padding: 12px 0 0;
-    }
-    .compound .compound-axis .month .m-label {
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--fg-4);
-    }
-    .compound .compound-axis .month .m-stat {
-      font-size: 14px;
-      font-weight: 700;
-      color: var(--fg-1);
-      letter-spacing: -0.01em;
-    }
-    .compound .compound-axis .month .m-sub {
-      font-size: 10.5px;
-      color: var(--fg-3);
-    }
-    .compound .compound-axis .month.m1 .m-label { color: #94A3B8; }
-    .compound .compound-axis .month.m2 .m-label { color: #C77E00; }
-    .compound .compound-axis .month.m3 .m-label { color: #7AAE3D; }
-    .compound .compound-axis .month.m4 .m-label { color: #2E6FBF; }
-    .compound .compound-axis .month.m4 .m-stat::after {
-      content: '';
-      display: inline-block;
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: var(--sc-green);
-      margin-left: 6px;
-      vertical-align: middle;
-      box-shadow: 0 0 0 3px rgba(168,216,98,0.22);
-    }
-    .loop-bridge {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      gap: 14px;
-      align-self: center;
-      padding: 10px 18px;
-      background: var(--bg-2);
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--fg-1);
-      box-shadow: 0 8px 20px -10px rgba(3,21,58,0.12);
-    }
-    .loop-bridge .arrow-loop {
-      width: 18px; height: 18px;
-      display: flex; align-items: center; justify-content: center;
-      color: var(--sc-green);
-    }
-
-    /* ---------- customers data tiles ---------- */
-    .customers-wrap {
-      border-top: 1px solid var(--hairline);
-      background: var(--bg-1);
-      position: relative;
-      z-index: 1;
-    }
-    .customers {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 120px 48px;
-      display: flex;
-      flex-direction: column;
-      gap: 56px;
-    }
-    .industry-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-    }
-    .tile {
-      background: var(--bg-2);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 28px;
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
-    }
-    .tile .tile-head {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .tile .tile-cat {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 10.5px;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-    }
-    .tile.pe .tile-cat   { color: var(--sc-gold); }
-    .tile.mfg .tile-cat  { color: #7AAE3D; }
-    .tile.saas .tile-cat { color: var(--sc-blue); }
-    .tile.fs .tile-cat   { color: var(--sc-purple); }
-    .tile .tile-meta {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 10px;
-      color: var(--fg-4);
-    }
-    .tile h3 {
-      font-size: 19px;
-      font-weight: 700;
-      letter-spacing: -0.015em;
-      line-height: 1.25;
-      color: var(--fg-1);
-      margin: 0;
-    }
-    .tile .tile-foot {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding-top: 14px;
-      border-top: 1px solid var(--hairline);
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
-      color: var(--fg-2);
-    }
-    .tile .tile-foot .pulse {
-      width: 6px; height: 6px; border-radius: 50%;
-      background: var(--sc-green);
-    }
-    .tile .tile-foot .pulse.live {
-      box-shadow: 0 0 0 3px rgba(168,216,98,0.22);
-    }
-
-    /* ICP precision comparison (generic list vs Scorecard ICP) */
-    .icp-compare {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      flex: 1;
-    }
-    .icp-row {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      align-items: baseline;
-      gap: 8px 12px;
-      padding: 12px 14px;
-      border-radius: 10px;
-    }
-    .icp-row.generic {
-      background: rgba(100,116,139,0.06);
-      border: 1px solid var(--hairline);
-    }
-    .icp-row.precise {
-      background: rgba(168,216,98,0.09);
-      border: 1px solid rgba(168,216,98,0.32);
-    }
-    .icp-row .row-label {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--fg-3);
-    }
-    .icp-row.precise .row-label { color: #5A8B2A; }
-    .icp-row .row-count {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 14px;
-      font-weight: 700;
-      color: var(--fg-3);
-      letter-spacing: -0.01em;
-    }
-    .icp-row.precise .row-count { color: var(--fg-1); }
-    .icp-row .row-desc {
-      grid-column: 1 / -1;
-      font-size: 13px;
-      line-height: 1.4;
-      color: var(--fg-2);
-      margin-top: 2px;
-    }
-    .icp-row.precise .row-desc { color: var(--fg-1); font-weight: 500; }
-
-    /* ---------- bare FAQ ---------- */
-    .faq-wrap {
-      border-top: 1px solid var(--hairline);
-      background: var(--bg-2);
-      position: relative;
-      z-index: 1;
-    }
-    .faq {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 120px 48px;
-      display: grid;
-      grid-template-columns: 380px 1fr;
-      gap: 80px;
-      align-items: start;
-    }
-    .faq .head h2 {
-      font-size: 56px;
-      font-weight: 700;
-      letter-spacing: -0.035em;
-      line-height: 0.98;
-      margin: 0;
-      color: var(--fg-1);
-    }
-    .faq .head .sub {
-      font-size: 15px;
-      line-height: 1.6;
-      color: var(--fg-2);
-      margin-top: 18px;
-    }
-    .faq .list {
-      display: flex;
-      flex-direction: column;
-    }
-    details.q {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      padding: 28px 0;
-      border-top: 1px solid var(--border);
-    }
-    details.q:last-of-type { border-bottom: 1px solid var(--border); }
-    details.q summary {
-      list-style: none;
-      cursor: pointer;
-      display: grid;
-      grid-template-columns: 36px 1fr auto;
-      gap: 32px;
-      align-items: center;
-    }
-    details.q summary::-webkit-details-marker { display: none; }
-    details.q summary .qnum {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--fg-4);
-    }
-    details.q[open] summary .qnum { color: var(--sc-purple); }
-    details.q summary .qtitle {
-      font-size: 22px;
-      font-weight: 600;
-      letter-spacing: -0.015em;
-      color: var(--fg-1);
-    }
-    details.q[open] summary .qtitle { font-weight: 700; }
-    details.q summary .qicon {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 22px;
-      color: var(--fg-4);
-      transition: transform 200ms ease;
-    }
-    details.q[open] summary .qicon { transform: rotate(45deg); color: var(--sc-purple); }
-    details.q .answer {
-      font-size: 15px;
-      line-height: 1.65;
-      color: var(--fg-2);
-      max-width: 620px;
-      padding-left: 68px;
-    }
-    details.q .answer strong { color: var(--fg-1); font-weight: 600; }
-
-    /* ---------- old way vs scorecard ---------- */
-    .compare-wrap {
-      border-top: 1px solid var(--hairline);
-      background: var(--bg-1);
-      position: relative;
-      z-index: 1;
-    }
-    .compare {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 120px 48px 96px;
-      display: flex;
-      flex-direction: column;
-      gap: 56px;
-    }
-    .compare-rows { display: flex; flex-direction: column; }
-    .cmp-row {
-      display: grid;
-      grid-template-columns: 72px 1fr 200px;
-      gap: 40px;
-      align-items: center;
-      padding: 30px 0;
-      border-bottom: 1px solid var(--hairline);
-    }
-    .cmp-num {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 26px;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      line-height: 1;
-    }
-    .cmp-num.gold   { color: var(--sc-gold); }
-    .cmp-num.blue   { color: var(--sc-blue); }
-    .cmp-num.purple { color: var(--sc-purple); }
-    .cmp-body { display: flex; flex-direction: column; gap: 8px; max-width: 640px; }
-    .cmp-body h3 {
-      font-size: 24px;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      line-height: 1.15;
-      margin: 0;
-      color: var(--fg-1);
-    }
-    .cmp-body p {
-      font-size: 16px;
-      line-height: 1.6;
-      color: var(--fg-2);
-      margin: 0;
-    }
-    .cmp-cost {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 13px;
-      font-weight: 600;
-      letter-spacing: 0.02em;
-      color: var(--fg-3);
-      justify-self: end;
-      text-align: right;
-    }
-    .cmp-row.scorecard {
-      background: var(--bg-2);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 30px 32px;
-      margin-top: 16px;
-      box-shadow: var(--shadow-card);
-    }
-    .cmp-row.scorecard .cmp-cost { color: #5A8B2A; }
-    .cmp-num.check {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 40px;
-      height: 40px;
-      background: rgba(168,216,98,0.16);
-      border-radius: 10px;
-      color: #5A8B2A;
-      font-size: 22px;
-    }
-
-    /* ---------- dark CTA band ---------- */
-    .cta-wrap {
-      background: var(--fg-1);
-      position: relative;
-      overflow: hidden;
-      z-index: 1;
-    }
-    .cta {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 120px 48px 96px;
-      display: flex;
-      flex-direction: row;
-      gap: 56px;
-      align-items: flex-end;
-      position: relative;
-      z-index: 2;
-    }
-    .cta .cta-logo {
-      position: absolute;
-      right: 60px;
-      top: 56px;
-      width: auto;
-      height: 88px;
-      opacity: 0.92;
-      z-index: 1;
-      filter: drop-shadow(0 0 36px rgba(168,216,98,0.18));
-    }
-    .cta .copy {
-      display: flex;
-      flex-direction: column;
-      gap: 22px;
-      flex: 1.2;
-      position: relative;
-    }
-    .cta .copy .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 12px;
-      font-weight: 500;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.62);
-    }
-    .cta .copy .eyebrow .pip { color: var(--sc-green); font-size: 14px; line-height: 1; }
-    .cta .copy h2 {
-      font-size: 80px;
-      font-weight: 700;
-      letter-spacing: -0.035em;
-      line-height: 0.98;
-      color: #FFFFFF;
-      max-width: 720px;
-      margin: 0;
-      text-wrap: balance;
-    }
-    .cta .copy p {
-      font-size: 18px;
-      line-height: 1.55;
-      color: rgba(255,255,255,0.72);
-      max-width: 540px;
-      margin: 8px 0 0;
-    }
-    .cta .actions {
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
-      align-items: flex-end;
-      position: relative;
-      padding-bottom: 8px;
-    }
-    .cta .btn-green {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 16px 24px;
-      background: var(--sc-green);
-      border-radius: 8px;
-      font-size: 16px;
-      font-weight: 600;
-      color: var(--fg-1);
-      border: none;
-      cursor: pointer;
-      box-shadow: 0 16px 36px -12px rgba(168,216,98,0.5);
-      font-family: inherit;
-      transition: transform 120ms ease, box-shadow 120ms ease;
-    }
-    .cta .btn-green:hover { transform: translateY(-1px); box-shadow: 0 20px 44px -14px rgba(168,216,98,0.6); }
-    .cta .btn-green:active { transform: scale(0.98); }
-    .cta .btn-green .arrow { font-family: 'JetBrains Mono', monospace; font-weight: 700; }
-    .cta .ghost-link-dark {
-      font-size: 14px;
-      font-weight: 500;
-      color: rgba(255,255,255,0.72);
-      text-decoration: none;
-      border-bottom: 1px solid rgba(255,255,255,0.25);
-      padding-bottom: 2px;
-    }
-    .cta .ghost-link-dark .arrow { color: var(--sc-green); margin-left: 6px; }
-
-    /* ---------- responsive ---------- */
-    @media (max-width: 1024px) {
-      .section-head { flex-direction: column; align-items: flex-start; gap: 24px; }
-      .section-head h2 { font-size: 44px; }
-      .problem { grid-template-columns: 1fr; gap: 24px; padding-bottom: 56px; }
-      .problem .numeral .num { font-size: 120px; }
-      .problem .body { padding-top: 0; }
-      .problem .body h3 { font-size: 26px; }
-      .flow { grid-template-columns: 1fr 1fr; }
-      .flow .step { border-right: 1px solid var(--hairline); border-bottom: 1px solid var(--hairline); }
-      .flow .step:nth-child(2n) { border-right: none; }
-      .flow .step:nth-last-child(-n+2) { border-bottom: none; }
-      .flow .step .step-arrow { display: none; }
-      .compound { padding: 32px 24px; }
-      .compound .compound-head { flex-direction: column; align-items: flex-start; }
-      .compound .compound-head .stat { text-align: left; }
-      .compound .compound-axis { grid-template-columns: 1fr 1fr; }
-      .quote .quote-body .text { font-size: 56px; }
-      .quote .quote-body .glyph { font-size: 160px; }
-      .quote .quote-sub { padding-left: 0; }
-      .industry-grid { grid-template-columns: 1fr; }
-      .faq { grid-template-columns: 1fr; gap: 32px; }
-      .faq .head h2 { font-size: 40px; }
-      details.q summary .qtitle { font-size: 18px; }
-      .cmp-row { grid-template-columns: 56px 1fr; gap: 12px 24px; }
-      .cmp-cost { grid-column: 2; justify-self: start; text-align: left; }
-      .cta { flex-direction: column; align-items: flex-start; gap: 32px; padding: 80px 24px; }
-      .cta .copy h2 { font-size: 56px; }
-      .cta .actions { align-items: flex-start; }
-      .cta .cta-logo { right: 24px; top: 28px; height: 64px; opacity: 0.85; }
-    }
-    @media (max-width: 640px) {
-      .why { padding: 72px 24px; }
-      .quote { padding: 96px 24px; }
-      .quote .quote-body { flex-direction: column; gap: 0; }
-      .quote .quote-body .glyph { font-size: 120px; margin-top: 0; }
-      .quote .quote-body .text { font-size: 38px; }
-      .quote .quote-sub { font-size: 16px; }
-      .loop, .customers, .faq, .compare { padding: 72px 24px; }
-      .cmp-row.scorecard { padding: 24px; }
-      .cta .copy h2 { font-size: 40px; }
-      .cta .cta-logo { display: none; }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .hp3 *, .hp3 *::before, .hp3 *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+      .reveal { opacity: 1; transform: none; }
+      .system-h, .system-sub { opacity: 1; transform: none; }
     }
   </style>
 </head>
 <body>
-  <div class="page">
-    <div class="bg" id="bg"></div>
-
-    <div class="header-wrap">
-      <header class="header">
-        <a href="#top" aria-label="Scorecard home">
-          <img class="logo" src="design-system/assets/scorecard-logo.svg" alt="Scorecard" />
-        </a>
-        <nav class="nav">
-          <a href="#how">How it works</a>
-          <a href="#customers">Customers</a>
-          <a href="#pricing">Pricing</a>
-          <a href="#faq">FAQ</a>
-        </nav>
-        <div class="header-cta">
-          <a href="https://app.scorecardgtm.com" class="signin">Client signin</a>
-          <button class="btn-primary" type="button" data-open-book>Book intro call</button>
-        </div>
-      </header>
-    </div>
-
-    <main id="top">
-      <section class="hero">
-        <div class="copy">
-          <h1>Sell like a company ten times your size.</h1>
-          <p class="wedge"><span class="pip" aria-hidden="true">●</span> Managed prospecting. More paying customers, every month.</p>
-          <p class="lede">We hand your reps the accounts worth pitching — <strong>sourced, scored, and ranked</strong> from the patterns in the customers you already won, each with the likely buyer named. Big teams pay a department to do this. We do it for you.</p>
-          <div class="cta-row">
-            <button class="btn-primary lg" type="button" data-open-book>Book a 30‑min intro</button>
-            <a href="#how" class="ghost-link">See how it works<span class="arrow">→</span></a>
-          </div>
-          <div class="trust-stack">
-            <div class="trust">
-              <span class="dot" aria-hidden="true"></span>
-              <span>Trusted across</span>
-              <strong>Private&nbsp;Equity&nbsp;·&nbsp;Manufacturing&nbsp;·&nbsp;SaaS&nbsp;·&nbsp;Field&nbsp;Services</strong>
-            </div>
-          </div>
-        </div>
-
-        <div class="card-wrap">
-                <div class="card" role="figure" aria-label="Live scoring preview">
-            <div class="card-head">
-              
-             
-            </div>
-            <div class="rubric">
-              <div class="rubric-row">
-                <span class="rubric-title">Mid‑market field services</span>
-                <span class="cleared">
-                  <span class="pip">●</span>&nbsp;<span id="cleared-num">127</span>
-                  <span class="total">&nbsp;cleared&nbsp;/ <span id="cleared-total">8,472</span></span>
-                </span>
-              </div>
-              <div class="dist">
-                <svg viewBox="0 0 400 60" preserveAspectRatio="none" aria-hidden="true">
-                  <defs>
-                    <linearGradient id="distNoise" x1="0%" y1="0%" x2="0%" y2="100%">
-                      <stop offset="0%" stop-color="#94A3B8" stop-opacity="0.55" />
-                      <stop offset="100%" stop-color="#94A3B8" stop-opacity="0.18" />
-                    </linearGradient>
-                    <linearGradient id="distSignal" x1="0%" y1="0%" x2="0%" y2="100%">
-                      <stop offset="0%" stop-color="#A8D862" stop-opacity="1" />
-                      <stop offset="100%" stop-color="#649BE4" stop-opacity="0.85" />
-                    </linearGradient>
-                  </defs>
-                  <g id="dist-bars"></g>
-                </svg>
-              </div>
-            </div>
-            <div class="prospects" id="prospects"></div>
-            <div class="card-foot">
-              Built from <strong>112 of your won deals</strong>
-            </div>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <!-- editorial problems with 01/02/03 numerals + evidence visualizations -->
-    <section class="why-wrap" id="why">
-      <div class="why">
-        <div class="section-head">
-          <div class="head-copy">
-            <span class="eyebrow"><span class="pip">●</span> Why Scorecard</span>
-            <h2>Most outbound fails before the first call.</h2>
-          </div>
-        </div>
-
-        <article class="problem">
-          <div class="numeral">
-            <span class="num gold">01</span>
-            <span class="label">List quality</span>
-          </div>
-          <div class="body">
-            <h3>Lists don't match who you actually sell to.</h3>
-            <p>Vendors sell against their categories — industry codes, headcount bands — not the companies you actually sell to. A genuine fit gets filed under the wrong category, so a normal search walks right past it. And the filters that exist don't combine: a four‑of‑five fit drops out while a weaker account scrapes through — and your reps can't tell before they dial.</p>
-          </div>
-          <div class="evidence">
-            <span class="ev-label">A typical 50k vendor list</span>
-            <div class="ev-list-row is-signal"><span>Worth a call</span><span class="pct">~3%</span></div>
-            <div class="ev-list-row"><span>Wrong size</span><span class="pct">22%</span></div>
-            <div class="ev-list-row"><span>Wrong vertical</span><span class="pct">31%</span></div>
-            <div class="ev-list-row"><span>Out of business</span><span class="pct">8%</span></div>
-            <div class="ev-list-row dim"><span>Already a customer</span><span class="pct">4%</span></div>
-            <div class="ev-list-row dim"><span>Indeterminate</span><span class="pct">32%</span></div>
-          </div>
-        </article>
-
-        <article class="problem">
-          <div class="numeral">
-            <span class="num blue">02</span>
-            <span class="label">Tool sprawl</span>
-          </div>
-          <div class="body">
-            <h3>Tools fight each other for the same job.</h3>
-            <p>Most teams run a pile of overlapping tools — one to find companies, one to fill in the details, one to send the emails, one to grade them. Each promises clarity. Together they bury it. When something stops working, nobody can tell which tool is to blame.</p>
-          </div>
-          <div class="ev-toolstack" aria-hidden="true">
-            <div class="ev-tool-grid">
-              <div class="ev-tool t1"><span class="tool-cat">Data</span><span class="tool-name">ZoomInfo</span><span class="tool-cost">$32k / yr</span></div>
-              <div class="ev-tool t2"><span class="tool-cat">Enrich</span><span class="tool-name">Clay</span><span class="tool-cost">$18k / yr</span></div>
-              <div class="ev-tool t3"><span class="tool-cat">Sequence</span><span class="tool-name">Outreach</span><span class="tool-cost">$24k / yr</span></div>
-              <div class="ev-tool t4"><span class="tool-cat">Score</span><span class="tool-name">MadKudu</span><span class="tool-cost">$22k / yr</span></div>
-            </div>
-            <div class="ev-tool-total">
-              <span class="total-label">Stack total</span>
-              <span class="total-num">$96k / yr</span>
-              <span class="total-note">Four tools, four bills, one job none of them finish.</span>
-            </div>
-          </div>
-        </article>
-
-        <article class="problem">
-          <div class="numeral">
-            <span class="num purple">03</span>
-            <span class="label">Strategy cadence</span>
-          </div>
-          <div class="body">
-            <h3>Strategy gets revisited once a quarter, if that.</h3>
-            <p>Pulling your win rates, checking them against who you thought you were selling to, redoing the lists. Days of work. By the time it's done, the quarter is over and the market has moved.</p>
-          </div>
-          <div class="evidence">
-            <span class="ev-label">5% lift, applied · per year</span>
-            <div class="ev-compound" aria-hidden="true">
-              <svg viewBox="0 0 320 96" preserveAspectRatio="none">
-                <line x1="0" y1="92" x2="320" y2="92" stroke="#CBD5E1" stroke-width="1" stroke-dasharray="2 4"/>
-                <path d="M 14 92 L 88 92 L 88 86.75 L 162 86.75 L 162 81.24 L 236 81.24 L 236 75.45 L 310 75.45 L 310 69.37"
-                      fill="none" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"/>
-                <circle cx="310" cy="69.37" r="3" fill="#94A3B8"/>
-                <path d="M 14 92 L 38.67 86.75 L 63.33 81.24 L 88 75.45 L 112.67 69.37 L 137.33 63 L 162 56.3 L 186.67 49.26 L 211.33 41.86 L 236 34.11 L 260.67 25.97 L 285.33 17.42 L 310 8.43"
-                      fill="none" stroke="#A8D862" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                <circle cx="310" cy="8.43" r="4" fill="#A8D862"/>
-                <circle cx="310" cy="8.43" r="8" fill="#A8D862" fill-opacity="0.22"/>
-              </svg>
-              <div class="ev-compound-legend">
-                <div class="lg-row slow"><span class="lg-swatch"></span><span>1× / quarter</span><span class="lg-num">+22% / yr</span></div>
-                <div class="lg-row fast"><span class="lg-swatch"></span><span>3× / quarter</span><span class="lg-num">+80% / yr</span></div>
-              </div>
-            </div>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <!-- pull-quote band — typographic showpiece -->
-    <section class="quote-wrap">
-      <div class="quote-dots" aria-hidden="true">
-        <span style="left:8%;top:18%;width:4px;height:4px;background:rgba(252,175,15,0.6);"></span>
-        <span style="left:14%;top:62%;width:3px;height:3px;background:rgba(168,216,98,0.5);"></span>
-        <span style="left:22%;top:30%;width:5px;height:5px;background:rgba(180,147,234,0.6);"></span>
-        <span style="left:28%;top:78%;width:3px;height:3px;background:rgba(100,155,228,0.5);"></span>
-        <span style="left:38%;top:14%;width:4px;height:4px;background:rgba(168,216,98,0.55);"></span>
-        <span style="left:44%;top:88%;width:3px;height:3px;background:rgba(252,175,15,0.5);"></span>
-        <span style="left:56%;top:22%;width:5px;height:5px;background:rgba(168,216,98,0.7);"></span>
-        <span style="left:62%;top:70%;width:3px;height:3px;background:rgba(180,147,234,0.55);"></span>
-        <span style="left:72%;top:32%;width:4px;height:4px;background:rgba(100,155,228,0.6);"></span>
-        <span style="left:78%;top:80%;width:3px;height:3px;background:rgba(168,216,98,0.5);"></span>
-        <span style="left:86%;top:16%;width:5px;height:5px;background:rgba(252,175,15,0.55);"></span>
-        <span style="left:92%;top:58%;width:3px;height:3px;background:rgba(180,147,234,0.5);"></span>
-      </div>
-      <div class="quote">
-        <div class="quote-head">
-          <span class="pulse" aria-hidden="true"></span>
-          <span class="label">The fix</span>
-        </div>
-        <div class="quote-body">
-          <span class="glyph" aria-hidden="true">"</span>
-          <h2 class="text">A pipeline built from the customers <em>you already win.</em></h2>
-        </div>
-        <p class="quote-sub">Your reps get a ranked list every month. Every deal you win sharpens it. Every dead end drops off. Nobody has to learn a new tool — they just notice the names keep getting better.</p>
-      </div>
-    </section>
-
-    <!-- how it works — single compounding loop diagram -->
-    <section class="loop-wrap" id="how">
-      <div class="loop">
-        <div class="section-head">
-          <div class="head-copy">
-            <span class="eyebrow"><span class="pip">●</span> How it works</span>
-            <h2>Find them. Rank them. Get sharper every month.</h2>
-            <p class="head-lede">Built around how you actually sell, not some average customer. We find the companies the big lists miss, rank them against the deals you've already won, and get sharper every month — starting from your best customers if you know them, or finding the pattern if you don't.</p>
-          </div>
-          <div class="head-meta">First cycle → 4 weeks</div>
-        </div>
-
-        <!-- Top: 4-week workflow strip -->
-        <div class="flow">
-          <div class="step s1">
-            <span class="week-tag"><span class="tick"></span>Week 1</span>
-            <span class="step-name">Learn who you sell to</span>
-            <p class="step-desc">We start with the customers you've already won and find what your best ones have in common.</p>
-            <span class="step-arrow" aria-hidden="true">→</span>
-          </div>
-          <div class="step s2">
-            <span class="week-tag"><span class="tick"></span>Week 2</span>
-            <span class="step-name">Find the names</span>
-            <p class="step-desc">We search the whole web for companies that match — including the ones the big lists never show you.</p>
-            <span class="step-arrow" aria-hidden="true">→</span>
-          </div>
-          <div class="step s3">
-            <span class="week-tag"><span class="tick"></span>Week 3</span>
-            <span class="step-name">Rank against your wins</span>
-            <p class="step-desc">Your team walks the top names line by line. We tune the order until it matches your gut.</p>
-            <span class="step-arrow" aria-hidden="true">→</span>
-          </div>
-          <div class="step s4">
-            <span class="week-tag"><span class="tick"></span>Week 4</span>
-            <span class="step-name">Deliver &amp; refine</span>
-            <p class="step-desc">A ranked list — 30–50 names, about a week of outreach per rep — lands in your CRM, Slack, or inbox. Each month it sharpens on what actually closed.</p>
-          </div>
-        </div>
-
-        <!-- Bridge: visualizes the loop back -->
-        <div class="loop-bridge">
-          <span class="arrow-loop" aria-hidden="true">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><polyline points="23 20 23 14 17 14"/><path d="M20.49 9A9 9 0 005.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 013.51 15"/></svg>
+<div class="hp3">
+  <div class="site-header-wrap">
+    <header class="site-header" id="site-header">
+      <div class="header-inner">
+        <a href="#top" aria-label="Scorecard home" class="brand-link">
+          <span class="brand-marks">
+            <img id="logo-dark" src="design-system/assets/scorecard-mark-ondark.svg" alt="" />
+            <img id="logo-light" class="light" src="design-system/assets/scorecard-mark.svg" alt="" aria-hidden="true" />
           </span>
-          <span>Then it loops — and the curve sharpens</span>
-        </div>
-
-        <!-- Bottom: literal compounding visualization -->
-        <div class="compound">
-          <div class="compound-head">
-            <div class="left">
-              <span class="tag">Score distribution, by month</span>
-              <h3>Same target, sharper every month. By month 4 your A‑tier triples.</h3>
-            </div>
-            <div class="stat">
-              <div class="stat-num">3.1×</div>
-              <div class="stat-label">A‑tier growth, month 1 → 4</div>
-            </div>
-          </div>
-
-          <div class="compound-chart">
-            <svg viewBox="0 0 1080 220" preserveAspectRatio="none" aria-hidden="true">
-              <defs>
-                <linearGradient id="cmpM1" x1="0" x2="0" y1="0" y2="1">
-                  <stop offset="0" stop-color="#94A3B8" stop-opacity="0.32"/>
-                  <stop offset="1" stop-color="#94A3B8" stop-opacity="0"/>
-                </linearGradient>
-                <linearGradient id="cmpM2" x1="0" x2="0" y1="0" y2="1">
-                  <stop offset="0" stop-color="#FCAF0F" stop-opacity="0.45"/>
-                  <stop offset="1" stop-color="#FCAF0F" stop-opacity="0"/>
-                </linearGradient>
-                <linearGradient id="cmpM3" x1="0" x2="0" y1="0" y2="1">
-                  <stop offset="0" stop-color="#A8D862" stop-opacity="0.55"/>
-                  <stop offset="1" stop-color="#A8D862" stop-opacity="0"/>
-                </linearGradient>
-                <linearGradient id="cmpM4" x1="0" x2="0" y1="0" y2="1">
-                  <stop offset="0" stop-color="#A8D862" stop-opacity="0.85"/>
-                  <stop offset="0.6" stop-color="#649BE4" stop-opacity="0.55"/>
-                  <stop offset="1" stop-color="#649BE4" stop-opacity="0"/>
-                </linearGradient>
-                <linearGradient id="cmpM4Stroke" x1="0" x2="1" y1="0" y2="0">
-                  <stop offset="0" stop-color="#A8D862"/>
-                  <stop offset="1" stop-color="#649BE4"/>
-                </linearGradient>
-              </defs>
-
-              <!-- Baseline axis -->
-              <line x1="0" y1="200" x2="1080" y2="200" stroke="#CBD5E1" stroke-width="1" stroke-dasharray="2 4"/>
-
-              <!-- Month 1: broad, low, fuzzy gray curve - peak around x=320 -->
-              <path d="M 20 200 C 120 196 200 180 320 152 C 460 120 580 132 720 168 C 820 192 940 198 1060 200 Z"
-                    fill="url(#cmpM1)" stroke="#94A3B8" stroke-width="1.3" stroke-opacity="0.6"/>
-
-              <!-- Month 2: narrower, taller, gold tinted - peak around x=460 -->
-              <path d="M 80 200 C 200 194 320 158 460 96 C 560 52 660 76 780 142 C 880 184 980 198 1040 200 Z"
-                    fill="url(#cmpM2)" stroke="#FCAF0F" stroke-width="1.4" stroke-opacity="0.75"/>
-
-              <!-- Month 3: narrower still, green - peak around x=620 -->
-              <path d="M 220 200 C 360 192 460 144 620 60 C 720 16 820 36 920 110 C 990 162 1040 192 1060 200 Z"
-                    fill="url(#cmpM3)" stroke="#A8D862" stroke-width="1.5" stroke-opacity="0.85"/>
-
-              <!-- Month 4: sharp peak, signal locked - green-blue gradient, peak around x=820 -->
-              <path d="M 460 200 C 600 196 700 168 820 30 C 880 6 940 12 980 60 C 1020 110 1050 174 1060 200 Z"
-                    fill="url(#cmpM4)" stroke="url(#cmpM4Stroke)" stroke-width="2"/>
-
-              <!-- Peak marker on M4 -->
-              <circle cx="820" cy="30" r="5" fill="#A8D862"/>
-              <circle cx="820" cy="30" r="9" fill="#A8D862" fill-opacity="0.22"/>
-            </svg>
-          </div>
-
-          <div class="compound-axis">
-            <div class="month m1">
-              <span class="m-label">Month 1</span>
-              <span class="m-stat">14 A‑tier</span>
-              <span class="m-sub">Wide net, rough fit</span>
-            </div>
-            <div class="month m2">
-              <span class="m-label">Month 2</span>
-              <span class="m-stat">22 A‑tier</span>
-              <span class="m-sub">First tune‑up lands</span>
-            </div>
-            <div class="month m3">
-              <span class="m-label">Month 3</span>
-              <span class="m-stat">31 A‑tier</span>
-              <span class="m-sub">More wins feed in</span>
-            </div>
-            <div class="month m4">
-              <span class="m-label">Month 4</span>
-              <span class="m-stat">43 A‑tier</span>
-              <span class="m-sub">Dialed in</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- customers — punchy data tiles -->
-    <section class="customers-wrap" id="customers">
-      <div class="customers">
-        <div class="section-head">
-          <div class="head-copy">
-            <span class="eyebrow"><span class="pip">●</span> Who we work with</span>
-            <h2>We find companies that actually fit — not just whatever's in your industry.</h2>
-          </div>
-        </div>
-
-        <div class="industry-grid">
-          <div class="tile pe">
-            <div class="tile-head">
-              <span class="tile-cat">Private Equity</span>
-              <span class="tile-meta">Fits your thesis</span>
-            </div>
-            <h3>Skincare MedSpa platforms, not "healthcare clinics in our states."</h3>
-            <div class="icp-compare">
-              <div class="icp-row generic">
-                <span class="row-label">Generic list</span>
-                <span class="row-count">8,400</span>
-                <span class="row-desc">Healthcare clinics, target states.</span>
-              </div>
-              <div class="icp-row precise">
-                <span class="row-label">Scorecard fit</span>
-                <span class="row-count">142</span>
-                <span class="row-desc">Skincare MedSpa, $5M+ revenue, multi‑location‑ready.</span>
+          <span class="brand-word" id="brand-word" style="font-size:17px; line-height:1; transform:translateY(-1px); transition:color 300ms ease;">Scorecard</span>
+        </a>
+        <nav class="site-nav">
+          <a class="nav-link" href="#problem">Why Scorecard</a>
+          <div class="nav-svc" id="nav-svc">
+            <a class="nav-link" href="#features">
+              Services
+              <span class="chev" id="chev">▼</span>
+            </a>
+            <div class="svc-menu" id="svc-menu">
+              <div class="svc-menu-inner">
+                <a class="sc-menu-link" href="#features">Growth Planning Intensive</a>
+                <a class="sc-menu-link" href="#features">Weekly Growth Intelligence</a>
+                <a class="sc-menu-link" href="#features">Prospect sourcing + scoring</a>
+                <a class="sc-menu-link" href="#features">Fractional outbound</a>
               </div>
             </div>
-            <div class="tile-foot"><span class="pulse"></span>The thesis brokers can't show you</div>
           </div>
-
-          <div class="tile mfg">
-            <div class="tile-head">
-              <span class="tile-cat">Manufacturing</span>
-              <span class="tile-meta">By what they build</span>
-            </div>
-            <h3>Companies with mechanical engineers on semiconductor design teams.</h3>
-            <div class="icp-compare">
-              <div class="icp-row generic">
-                <span class="row-label">Generic list</span>
-                <span class="row-count">12,000+</span>
-                <span class="row-desc">Manufacturing, NAICS 33, 50–500 employees.</span>
-              </div>
-              <div class="icp-row precise">
-                <span class="row-label">Scorecard fit</span>
-                <span class="row-count">380</span>
-                <span class="row-desc">Mechanical engineers in semiconductor design roles, on staff today.</span>
-              </div>
-            </div>
-            <div class="tile-foot"><span class="pulse"></span>Found by what they actually build, not an industry code</div>
-          </div>
-
-          <div class="tile saas">
-            <div class="tile-head">
-              <span class="tile-cat">SaaS</span>
-              <span class="tile-meta">Right timing</span>
-            </div>
-            <h3>Usage‑based pricing, with a new Engineering Leader in the seat.</h3>
-            <div class="icp-compare">
-              <div class="icp-row generic">
-                <span class="row-label">Generic list</span>
-                <span class="row-count">14,000</span>
-                <span class="row-desc">B2B SaaS, $10M+ ARR.</span>
-              </div>
-              <div class="icp-row precise">
-                <span class="row-label">Scorecard fit</span>
-                <span class="row-count">96</span>
-                <span class="row-desc">Usage‑based pricing AND a new VP Engineering or CTO in the last 90 days.</span>
-              </div>
-            </div>
-            <div class="tile-foot"><span class="pulse"></span>The buyer and the timing, in one company</div>
-          </div>
-
-          <div class="tile fs">
-            <div class="tile-head">
-              <span class="tile-cat">Field Services</span>
-              <span class="tile-meta">By who they serve</span>
-            </div>
-            <h3>Delivery operators servicing government contracts.</h3>
-            <div class="icp-compare">
-              <div class="icp-row generic">
-                <span class="row-label">Generic list</span>
-                <span class="row-count">6,200</span>
-                <span class="row-desc">Logistics &amp; delivery, multi‑state.</span>
-              </div>
-              <div class="icp-row precise">
-                <span class="row-label">Scorecard fit</span>
-                <span class="row-count">218</span>
-                <span class="row-desc">Last‑mile delivery operators with active government contracts.</span>
-              </div>
-            </div>
-            <div class="tile-foot"><span class="pulse"></span>Defined by who they serve, not by industry code</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- bare FAQ — sit on surface, no cards -->
-    <section class="faq-wrap" id="faq">
-      <div class="faq">
-        <div class="head">
-          <span class="eyebrow"><span class="pip">●</span> Questions</span>
-          <h2>What people ask before the intro.</h2>
-          <p class="sub">If yours isn't here, ask on the call. We'd rather show the work than pitch it.</p>
-        </div>
-        <div class="list">
-          <details class="q" id="pricing">
-            <summary><span class="qnum">01</span><span class="qtitle">What's the pricing?</span><span class="qicon">+</span></summary>
-            <div class="answer">Flat monthly retainer, scoped to your batch volume and what we're building for you. <strong>No per‑lead pricing, no platform fees.</strong> We quote on the intro call once we understand what you're trying to do.</div>
-          </details>
-          <details class="q">
-            <summary><span class="qnum">02</span><span class="qtitle">What do you need from us to start?</span><span class="qicon">+</span></summary>
-            <div class="answer">A list of your last <strong>30–150 won deals</strong> (company name and close date is enough), and a 60‑minute kickoff. We build a first‑cut ranking, send a small batch, and you tell us where it's right and where it's wrong. You don't need to plug us into your CRM to start.</div>
-          </details>
-          <details class="q">
-            <summary><span class="qnum">03</span><span class="qtitle">How long until we see ranked prospects?</span><span class="qicon">+</span></summary>
-            <div class="answer">First batch in <strong>week 1–2</strong>. Working session in week 3. Monthly delivery starts in <strong>week 4</strong>. You'll have a ranked pipeline on your data inside a single sprint.</div>
-          </details>
-          <details class="q">
-            <summary><span class="qnum">04</span><span class="qtitle">Do you replace our SDRs?</span><span class="qicon">+</span></summary>
-            <div class="answer">No, we feed them. We deliver prospects ranked by fit; your team does the outreach. Most customers see their SDRs get more efficient because they're working a sharper top‑of‑funnel instead of grinding through a noisy list.</div>
-          </details>
-          <details class="q">
-            <summary><span class="qnum">05</span><span class="qtitle">What if we already know who we sell to?</span><span class="qicon">+</span></summary>
-            <div class="answer">Good. We treat it as a starting point and put it to the test. The customer you describe on paper often isn't quite the one your team actually closes. We either confirm it fast or find the pockets hiding inside it. Either way, you learn something.</div>
-          </details>
-          <details class="q">
-            <summary><span class="qnum">06</span><span class="qtitle">Where does our data live?</span><span class="qicon">+</span></summary>
-            <div class="answer">Our system lives in our infrastructure. We don't take a copy of your CRM, and won‑deal exports stay scoped to the firmographic fields we need.</div>
-          </details>
-        </div>
-      </div>
-    </section>
-
-    <!-- old way vs scorecard — build / buy / staff -->
-    <section class="compare-wrap" id="compare">
-      <div class="compare">
-        <div class="section-head">
-          <div class="head-copy">
-            <span class="eyebrow"><span class="pip">●</span> What it takes</span>
-            <h2>Three ways to do this yourself. Or let us run it.</h2>
-          </div>
-          <div class="head-meta">The old way → Scorecard</div>
-        </div>
-
-        <div class="compare-rows">
-          <article class="cmp-row">
-            <span class="cmp-num gold">01</span>
-            <div class="cmp-body">
-              <h3>Buy the tools</h3>
-              <p>ZoomInfo, Apollo, Clay. They search the data the way it's labeled, so anything filed under the wrong category slips past — and you're still the one deciding who's worth a call.</p>
-            </div>
-            <span class="cmp-cost">~$50K a year</span>
-          </article>
-
-          <article class="cmp-row">
-            <span class="cmp-num blue">02</span>
-            <div class="cmp-body">
-              <h3>Build it yourself</h3>
-              <p>Hire engineers to pull the data and write the software that reads each business and scores the fit. Then keep it running.</p>
-            </div>
-            <span class="cmp-cost">Months of engineering</span>
-          </article>
-
-          <article class="cmp-row">
-            <span class="cmp-num purple">03</span>
-            <div class="cmp-body">
-              <h3>Hire a team to do it</h3>
-              <p>Put people on it full‑time, digging up accounts and grading every one by hand, week after week.</p>
-            </div>
-            <span class="cmp-cost">Several salaries</span>
-          </article>
-
-          <article class="cmp-row scorecard">
-            <span class="cmp-num check">✓</span>
-            <div class="cmp-body">
-              <h3>Scorecard</h3>
-              <p>All three, done for you. Ranked accounts land on your reps' desks every month.</p>
-            </div>
-            <span class="cmp-cost">A 30‑minute call</span>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- dark CTA -->
-    <section class="cta-wrap">
-      <div class="cta">
-        <img class="cta-logo" src="design-system/assets/scorecard-logo-mark-dark.svg" alt="Scorecard" />
-        <div class="copy">
-          <span class="eyebrow"><span class="pip">●</span> Ready when you are</span>
-          <h2>See your best‑fit customers in 30 minutes.</h2>
-          <p>Book a working session. No deck, no demo loop. We review how you sell and walk through sample names on your data.</p>
-        </div>
-        <div class="actions">
-          <button class="btn-green" type="button" data-open-book>Book a 30‑min intro<span class="arrow">→</span></button>
-          <a href="#how" class="ghost-link-dark">Re‑read how it works<span class="arrow">↑</span></a>
-        </div>
-      </div>
-    </section>
-
-    <footer class="footer-wrap">
-      <div class="footer">
-        <span>&copy; 2026 Scorecard GTM, LLC</span>
-        <nav class="footer-nav">
-          <a href="#how">How it works</a>
-          <a href="#customers">Customers</a>
-          <a href="#pricing">Pricing</a>
-          <a href="#faq">FAQ</a>
-          <a href="#" data-open-book>Book intro</a>
+          <a class="nav-link" href="#pricing">Pricing</a>
+          <a class="nav-link" href="https://app.scorecardgtm.com">Client login</a>
+          <a class="hdr-cta" id="hdr-cta" href="#see-your-market">Define your growth plan</a>
         </nav>
       </div>
-    </footer>
+    </header>
   </div>
 
-  <!-- ---------- Modal ---------- -->
+  <main id="top">
+    <section class="hero">
+      <div class="hero-mosaic" aria-hidden="true"><div id="hero-mosaic-wrap"></div></div>
+      <div class="hero-copy shell">
+        <div class="eyebrow"><span class="spark"></span> For CEOs, revenue leaders, and boards</div>
+        <h1 class="serif">We turn your revenue goals into a <em class="t-mosaic">plan</em> your team can run.</h1>
+        <p class="lede">And give them the tools to deliver predictable revenue — reporting, sourcing, scoring, and execution, operated with you.</p>
+        <div class="hero-cta">
+          <button class="button button-primary" type="button" data-open-book>Define your growth plan <span aria-hidden="true">→</span></button>
+        </div>
+      </div>
+
+      <div class="system-scroll" id="system-scroll">
+        <div class="system-stage" id="system-stage">
+        <h2 class="system-h serif">We turn reactive sales into predictable revenue factories.</h2>
+        <div class="system-card play scrub" id="hero-stage" aria-label="Unpredictable revenue becomes a steepening line as five Scorecard services light up">
+          <svg viewBox="0 70 900 365" style="display:block; width:100%; height:auto;" aria-hidden="true">
+            <defs>
+              <filter id="sys-chipshadow" x="-30%" y="-60%" width="160%" height="220%">
+                <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#03153A" flood-opacity="0.10"></feDropShadow>
+              </filter>
+            </defs>
+            <line x1="60" y1="395" x2="820" y2="395" stroke="rgba(100,116,139,.35)"></line>
+            <text x="60" y="418" class="sys-sm">Q1</text><text x="200" y="418" class="sys-sm">Q2</text>
+            <text x="393" y="418" class="sys-sm">Q3</text><text x="545" y="418" class="sys-sm">Q4</text>
+            <text x="690" y="418" class="sys-sm">Q5</text>
+            <g class="sys-fin" style="--t:1.6s;">
+              <line x1="60" y1="130" x2="820" y2="130" stroke="rgba(100,116,139,.3)" stroke-dasharray="4 5"></line>
+              <text x="60" y="120" class="sys-lbl" style="fill:#94A3B8;">BEFORE SCORECARD</text>
+            </g>
+            <g class="sys-fin" style="--t:2.45s;">
+              <rect x="400" y="130" width="420" height="265" fill="#A8D862" fill-opacity=".06"></rect>
+              <text x="416" y="120" class="sys-lbl" style="fill:#3d6a1a;">WITH SCORECARD</text>
+            </g>
+            <path class="sys-fin" style="--t:1.4s;" d="M60,335 C75,355 95,360 110,345 S140,310 155,318 S185,355 200,348 S230,308 245,315 S275,352 290,346 S320,310 335,316 S370,340 400,330 L400,395 L60,395 Z" fill="rgba(148,163,184,.10)" stroke="none"></path>
+            <path class="sys-draw" pathLength="100" style="--t:.2s; --d:1.5s;" d="M60,335 C75,355 95,360 110,345 S140,310 155,318 S185,355 200,348 S230,308 245,315 S275,352 290,346 S320,310 335,316 S370,340 400,330" fill="none" stroke="#94A3B8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+            <line class="sys-draw" pathLength="100" style="--t:1.9s; --d:.45s;" x1="400" y1="392" x2="400" y2="133" stroke="#FCAF0F" stroke-width="1.5"></line>
+            <g class="sys-pop" style="--t:2.3s;" filter="url(#sys-chipshadow)">
+              <circle cx="400" cy="210" r="22" fill="#FFFFFF" stroke="rgba(100,116,139,.18)"></circle>
+              <image href="design-system/assets/scorecard-sq.svg" x="387" y="197" width="26" height="26" preserveAspectRatio="xMidYMid meet"></image>
+            </g>
+            <text class="sys-fin" style="--t:2.45s; font-size:11px; font-weight:700; letter-spacing:.08em;" x="432" y="214" fill="#B7660A">SYSTEM START</text>
+            <circle class="sys-pop" cx="400" cy="330" r="5.5" fill="#FCAF0F" stroke="#FFFFFF" stroke-width="1.5" style="--t:2.35s;"></circle>
+            <path class="sys-fin" style="--t:6.6s;" d="M400,330 C419,327 437,323 455,318 C475,312 495,305 515,296 C535,286 555,275 575,262 C595,248 615,233 635,216 C655,198 675,179 695,158 C709,143 723,124 735,106" fill="none" stroke="#A8D862" stroke-opacity=".16" stroke-width="10" stroke-linecap="round"></path>
+            <path class="sys-draw" pathLength="100" style="--t:2.9s; --d:.65s;" d="M400,330 C419,327 437,323 455,318" fill="none" stroke="#A8D862" stroke-width="2.5" stroke-linecap="round"></path>
+            <path class="sys-draw" pathLength="100" style="--t:3.6s; --d:.65s;" d="M455,318 C475,312 495,305 515,296" fill="none" stroke="#A8D862" stroke-width="2.5" stroke-linecap="round"></path>
+            <path class="sys-draw" pathLength="100" style="--t:4.3s; --d:.65s;" d="M515,296 C535,286 555,275 575,262" fill="none" stroke="#A8D862" stroke-width="2.5" stroke-linecap="round"></path>
+            <path class="sys-draw" pathLength="100" style="--t:5.0s; --d:.65s;" d="M575,262 C595,248 615,233 635,216" fill="none" stroke="#A8D862" stroke-width="2.5" stroke-linecap="round"></path>
+            <path class="sys-draw" pathLength="100" style="--t:5.7s; --d:.65s;" d="M635,216 C655,198 675,179 695,158" fill="none" stroke="#A8D862" stroke-width="2.5" stroke-linecap="round"></path>
+            <path class="sys-draw" pathLength="100" style="--t:6.4s; --d:.55s;" d="M695,158 C709,143 723,124 735,106" fill="none" stroke="#A8D862" stroke-width="2.5" stroke-linecap="round"></path>
+            <circle class="sys-ring" cx="455" cy="318" r="9" fill="none" stroke="#A8D862" stroke-width="1.5" style="--t:3.45s;"></circle>
+            <circle class="sys-ring" cx="515" cy="296" r="9" fill="none" stroke="#A8D862" stroke-width="1.5" style="--t:4.15s;"></circle>
+            <circle class="sys-ring" cx="575" cy="262" r="9" fill="none" stroke="#A8D862" stroke-width="1.5" style="--t:4.85s;"></circle>
+            <circle class="sys-ring" cx="635" cy="216" r="9" fill="none" stroke="#A8D862" stroke-width="1.5" style="--t:5.55s;"></circle>
+            <circle class="sys-ring" cx="695" cy="158" r="9" fill="none" stroke="#A8D862" stroke-width="1.5" style="--t:6.25s;"></circle>
+            <circle class="sys-pop" cx="455" cy="318" r="4.5" fill="#A8D862" stroke="#FFFFFF" stroke-width="1.5" style="--t:3.45s;"></circle>
+            <circle class="sys-pop" cx="515" cy="296" r="4.5" fill="#A8D862" stroke="#FFFFFF" stroke-width="1.5" style="--t:4.15s;"></circle>
+            <circle class="sys-pop" cx="575" cy="262" r="4.5" fill="#A8D862" stroke="#FFFFFF" stroke-width="1.5" style="--t:4.85s;"></circle>
+            <circle class="sys-pop" cx="635" cy="216" r="4.5" fill="#A8D862" stroke="#FFFFFF" stroke-width="1.5" style="--t:5.55s;"></circle>
+            <circle class="sys-pop" cx="695" cy="158" r="4.5" fill="#A8D862" stroke="#FFFFFF" stroke-width="1.5" style="--t:6.25s;"></circle>
+            <circle class="sys-pop" cx="735" cy="106" r="5.5" fill="#A8D862" stroke="#FFFFFF" stroke-width="1.5" style="--t:6.85s;"></circle>
+            <g class="sys-chip sys-fin" style="--t:3.55s;">
+              <line x1="461" y1="323" x2="487" y2="346" stroke="rgba(100,116,139,.4)" stroke-dasharray="2 4"></line>
+              <rect x="487" y="331" width="150" height="30" rx="8" fill="#FFFFFF" stroke="rgba(100,116,139,.18)" filter="url(#sys-chipshadow)"></rect>
+              <g transform="translate(500,339)" fill="none" stroke="#4a7c1e" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M0,1 H14 L8.5,7.5 V13 H5.5 V7.5 Z"></path></g>
+              <text x="521" y="350" style="font-size:12px; font-weight:600;" fill="#03153A">Full-funnel model</text>
+            </g>
+            <g class="sys-chip sys-fin" style="--t:4.25s;">
+              <line x1="521" y1="300" x2="547" y2="308" stroke="rgba(100,116,139,.4)" stroke-dasharray="2 4"></line>
+              <rect x="547" y="293" width="168" height="30" rx="8" fill="#FFFFFF" stroke="rgba(100,116,139,.18)" filter="url(#sys-chipshadow)"></rect>
+              <g transform="translate(560,301)" fill="none" stroke="#4a7c1e" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M2,13 V8 M7,13 V3 M12,13 V10"></path></g>
+              <text x="581" y="312" style="font-size:12px; font-weight:600;" fill="#03153A">CRM instrumentation</text>
+            </g>
+            <g class="sys-chip sys-fin" style="--t:4.95s;">
+              <line x1="581" y1="265" x2="607" y2="270" stroke="rgba(100,116,139,.4)" stroke-dasharray="2 4"></line>
+              <rect x="607" y="255" width="160" height="30" rx="8" fill="#FFFFFF" stroke="rgba(100,116,139,.18)" filter="url(#sys-chipshadow)"></rect>
+              <g transform="translate(620,263)" fill="none" stroke="#4a7c1e" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M1,11 L5,7 L8,9 L13,3 M9.5,3 H13 V6.5"></path></g>
+              <text x="641" y="274" style="font-size:12px; font-weight:600;" fill="#03153A">Weekly intelligence</text>
+            </g>
+            <g class="sys-chip sys-fin" style="--t:5.65s;">
+              <line x1="641" y1="219" x2="667" y2="228" stroke="rgba(100,116,139,.4)" stroke-dasharray="2 4"></line>
+              <rect x="667" y="213" width="158" height="30" rx="8" fill="#FFFFFF" stroke="rgba(100,116,139,.18)" filter="url(#sys-chipshadow)"></rect>
+              <g transform="translate(680,221)" fill="none" stroke="#4a7c1e" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="7" r="5.2"></circle><circle cx="7" cy="7" r="1.4" fill="#4a7c1e" stroke="none"></circle></g>
+              <text x="701" y="232" style="font-size:12px; font-weight:600;" fill="#03153A">Sourcing + scoring</text>
+            </g>
+            <g class="sys-chip sys-fin" style="--t:6.3s;">
+              <line x1="701" y1="161" x2="727" y2="170" stroke="rgba(100,116,139,.4)" stroke-dasharray="2 4"></line>
+              <rect x="727" y="155" width="168" height="30" rx="8" fill="#FFFFFF" stroke="rgba(100,116,139,.18)" filter="url(#sys-chipshadow)"></rect>
+              <g transform="translate(740,163)" fill="none" stroke="#4a7c1e" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M13,1 L1,6.2 L6,8 L7.8,13 Z M6,8 L13,1"></path></g>
+              <text x="761" y="174" style="font-size:12px; font-weight:600;" fill="#03153A">Outbound execution</text>
+            </g>
+          </svg>
+        </div>
+        <p class="system-sub">The full-funnel model finds your levers. The system pulls them — measured every week, compounding every quarter.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="problem" aria-labelledby="problem-title">
+      <div class="section-heading narrow reveal">
+        <div class="eyebrow"><span class="spark"></span> The management problem</div>
+        <h2 class="serif" id="problem-title">A revenue target is not a plan your team can run.</h2>
+      </div>
+      <div class="comparison reveal">
+        <article class="compare-card">
+          <h3 class="compare-title">A target without a plan</h3>
+          <ul class="compare-list">
+            <li><span class="status">×</span><span>A board number with no explicit assumptions behind it.</span></li>
+            <li><span class="status">×</span><span>Market, funnel, capacity, and investment modeled in separate spreadsheets.</span></li>
+            <li><span class="status">×</span><span>Reporting that describes the past but cannot direct the next move.</span></li>
+            <li><span class="status">×</span><span>No way to tell whether the goal is achievable, or what has to change.</span></li>
+            <li><span class="status">×</span><span>More software and headcount added before the constraint is understood.</span></li>
+          </ul>
+        </article>
+        <article class="compare-card good">
+          <h3 class="compare-title"><span style="color:rgba(255,255,255,.72); font-weight:500;">With</span> <img src="design-system/assets/scorecard-mark-ondark.svg" alt="" style="height:20px; width:auto;"> Scorecard</h3>
+          <ul class="compare-list">
+            <li><span class="status">✓</span><span>A board-ready full-funnel model behind the revenue target.</span></li>
+            <li><span class="status">✓</span><span>Explicit requirements for market, conversion, capacity, and investment.</span></li>
+            <li><span class="status">✓</span><span>Weekly intelligence that explains what changed and what to do next.</span></li>
+            <li><span class="status">✓</span><span>Scoring and priorities connected to the plan inside your CRM.</span></li>
+            <li><span class="status">✓</span><span>Managed services chosen because the plan requires them.</span></li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="features" aria-labelledby="features-title">
+      <div class="section-heading narrow reveal">
+        <div class="eyebrow services-eyebrow"><span class="spark"></span> Services</div>
+        <h2 class="serif" id="features-title">First, we define the plan. Then, we help run it.</h2>
+        <p>One starting engagement creates the model. Standardized managed services operate the recurring work the plan calls for.</p>
+      </div>
+      <div class="feature-stack">
+        <article class="feature-card reveal">
+          <div class="feature-meta"><span class="feature-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M3 2.5h7l3 3v8H3z"></path><path d="M10 2.5v3h3M5.5 8h5M5.5 10.5h3.5"></path></svg></span><span>Growth planning</span></div>
+          <h3>Growth Planning Intensive</h3>
+          <p>A focused strategy engagement that turns the revenue target into a board-ready operating plan: market opportunity, unit economics, required funnel, capacity, investment, forecast scenarios, and a prioritized action plan.</p>
+          <div class="visual gpi-stage" id="gpi-stage">
+            <div class="gcard" id="gcard1">
+              <svg viewBox="0 0 260 218" aria-hidden="true">
+                <rect x="14" y="12" width="6" height="6" rx="1.5" fill="#FCAF0F"></rect>
+                <text x="28" y="20" class="g-lbl">FUNNEL MODEL</text>
+                <g class="sys-fin" style="--t:.4s;">
+                  <text x="16" y="46" class="g-sm">THE GOAL</text>
+                  <text x="244" y="48" text-anchor="end" style="font-size:15px; font-weight:700; font-variant-numeric:tabular-nums;" fill="#03153A">$10M</text>
+                  <line x1="16" y1="58" x2="244" y2="58" stroke="rgba(100,116,139,.18)"></line>
+                </g>
+                <g class="sys-fin" style="--t:.7s;"><text x="16" y="80" class="g-sm">AD SPEND / MO</text><text x="244" y="80" text-anchor="end" class="g-chip">$55K</text></g>
+                <g class="sys-fin" style="--t:1.1s;"><text x="16" y="102" class="g-sm">WIN RATE</text><text x="244" y="102" text-anchor="end" class="g-chip">18%</text></g>
+                <g class="sys-fin" style="--t:1.5s;"><text x="16" y="124" class="g-sm">AVG DEAL SIZE</text><text x="244" y="124" text-anchor="end" class="g-chip">$34K</text></g>
+                <g class="sys-fin" style="--t:1.9s;"><text x="16" y="146" class="g-sm">SELLERS</text><text x="244" y="146" text-anchor="end" class="g-chip">6</text></g>
+                <g class="sys-fin" style="--t:2.2s;">
+                  <line x1="16" y1="160" x2="244" y2="160" stroke="rgba(100,116,139,.18)"></line>
+                  <text x="16" y="184" class="g-sm">WHAT THE MATH SAYS</text>
+                  <text id="gmath" x="244" y="186" text-anchor="end" style="font-size:17px; font-weight:700; letter-spacing:-.02em; font-variant-numeric:tabular-nums;" fill="#03153A">$10.0M</text>
+                </g>
+                <g class="sys-pop" style="--t:3.4s;">
+                  <rect x="152" y="192" width="92" height="18" rx="9" fill="rgba(196,85,47,.12)" stroke="#c47a5c"></rect>
+                  <text x="198" y="204" text-anchor="middle" style="font-size:8.5px; font-weight:700; letter-spacing:.05em;" fill="#a34d28">$2.8M SHORT</text>
+                </g>
+              </svg>
+            </div>
+            <div class="gcard" id="gcard2">
+              <svg viewBox="0 0 270 210" aria-hidden="true">
+                <rect x="14" y="12" width="6" height="6" rx="1.5" fill="#A8D862"></rect>
+                <text x="28" y="20" class="g-lbl">SCENARIOS</text>
+                <g class="sys-fin" style="--t:.4s;">
+                  <text x="254" y="28" text-anchor="end" class="g-sm">FORECAST</text>
+                  <text id="gforecast" x="254" y="50" text-anchor="end" style="font-size:20px; font-weight:700; letter-spacing:-.02em; font-variant-numeric:tabular-nums;" fill="#03153A">$7.2M</text>
+                  <text x="254" y="66" text-anchor="end" class="g-sm">TARGET $10M</text>
+                </g>
+                <g class="sys-fin" style="--t:.5s;">
+                  <text x="16" y="82" class="g-sm">AD SPEND</text>
+                  <line x1="16" y1="94" x2="150" y2="94" stroke="rgba(100,116,139,.25)" stroke-width="4" stroke-linecap="round"></line>
+                  <circle class="gknob" id="gknob-a" cx="50" cy="94" r="8" fill="#FFFFFF" stroke="#B493EA" stroke-width="2.5"></circle>
+                  <rect x="10" y="80" width="148" height="26" fill="transparent" style="cursor: pointer;" data-gslide="a"></rect>
+                </g>
+                <g class="sys-fin" style="--t:.8s;">
+                  <text x="16" y="118" class="g-sm">WIN RATE</text>
+                  <line x1="16" y1="130" x2="150" y2="130" stroke="rgba(100,116,139,.25)" stroke-width="4" stroke-linecap="round"></line>
+                  <circle class="gknob" id="gknob-b" cx="70" cy="130" r="8" fill="#FFFFFF" stroke="#B493EA" stroke-width="2.5"></circle>
+                  <rect x="10" y="116" width="148" height="26" fill="transparent" style="cursor: pointer;" data-gslide="b"></rect>
+                </g>
+                <g class="sys-fin" style="--t:1.1s;">
+                  <text x="16" y="154" class="g-sm">SELLERS</text>
+                  <line x1="16" y1="166" x2="150" y2="166" stroke="rgba(100,116,139,.25)" stroke-width="4" stroke-linecap="round"></line>
+                  <circle class="gknob" id="gknob-c" cx="40" cy="166" r="8" fill="#FFFFFF" stroke="#B493EA" stroke-width="2.5"></circle>
+                  <rect x="10" y="152" width="148" height="26" fill="transparent" style="cursor: pointer;" data-gslide="c"></rect>
+                </g>
+                <g class="gpill" id="gpill">
+                  <rect x="16" y="184" width="82" height="18" rx="9" fill="rgba(168,216,98,.18)" stroke="#A8D862"></rect>
+                  <text x="57" y="196" text-anchor="middle" style="font-size:8.5px; font-weight:700; letter-spacing:.05em;" fill="#3d6a1a">ON TARGET ✓</text>
+                </g>
+              </svg>
+            </div>
+            <div class="gcard" id="gcard3">
+              <svg viewBox="0 0 250 148" aria-hidden="true">
+                <rect x="14" y="12" width="6" height="6" rx="1.5" fill="#649BE4"></rect>
+                <text x="28" y="20" class="g-lbl">THE PLAN</text>
+                <g class="sys-fin" style="--t:.5s;">
+                  <rect x="16" y="40" width="16" height="16" rx="4" fill="#FFFFFF" stroke="rgba(100,116,139,.35)" stroke-width="1.3"></rect>
+                  <text x="44" y="52" class="g-chip">Spend $15K more on ads / mo</text>
+                  <g class="gchk" id="gchk1">
+                    <rect x="16" y="40" width="16" height="16" rx="4" fill="#A8D862"></rect>
+                    <path d="M20,48 L23.5,51.5 L29,44.5" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                  </g>
+                  <rect x="12" y="36" width="226" height="26" fill="transparent" style="cursor: pointer;" data-gtog="0"></rect>
+                </g>
+                <g class="sys-fin" style="--t:.8s;">
+                  <rect x="16" y="76" width="16" height="16" rx="4" fill="#FFFFFF" stroke="rgba(100,116,139,.35)" stroke-width="1.3"></rect>
+                  <text x="44" y="88" class="g-chip">Coach win rate: 18% → 22%</text>
+                  <g class="gchk" id="gchk2">
+                    <rect x="16" y="76" width="16" height="16" rx="4" fill="#A8D862"></rect>
+                    <path d="M20,84 L23.5,87.5 L29,80.5" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                  </g>
+                  <rect x="12" y="72" width="226" height="26" fill="transparent" style="cursor: pointer;" data-gtog="1"></rect>
+                </g>
+                <g class="sys-fin" style="--t:1.1s;">
+                  <rect x="16" y="112" width="16" height="16" rx="4" fill="#FFFFFF" stroke="rgba(100,116,139,.35)" stroke-width="1.3"></rect>
+                  <text x="44" y="124" class="g-chip">Hire 2 sellers by June</text>
+                  <g class="gchk" id="gchk3">
+                    <rect x="16" y="112" width="16" height="16" rx="4" fill="#A8D862"></rect>
+                    <path d="M20,120 L23.5,123.5 L29,116.5" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                  </g>
+                  <rect x="12" y="108" width="226" height="26" fill="transparent" style="cursor: pointer;" data-gtog="2"></rect>
+                </g>
+              </svg>
+            </div>
+            <div class="ghint">Click a card — try the sliders and checkboxes</div>
+          </div>
+        </article>
+
+        <article class="feature-card reveal">
+          <div class="feature-meta"><span class="feature-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M2.5 12.5h11"></path><path d="m3.5 10 3-3 2.2 2.2 3.8-4.2"></path><path d="M10 5h2.5v2.5"></path></svg></span><span>Weekly growth intelligence</span></div>
+          <h3>See what changed. Know what to do next.</h3>
+          <p>We instrument your CRM, then deliver a weekly report aligned to the plan — a point of view on what happened and the moves to make next.</p>
+          <div class="visual wgi" id="wgi-stage" aria-hidden="true" style="height:480px;">
+            <div class="wgi-sheet s1 sys-fin" style="--t:.25s;"></div>
+            <div class="wgi-sheet s2 sys-fin" style="--t:.35s;"></div>
+            <div class="wgi-report sys-fin" style="--t:.2s;">
+              <div class="wgi-rhead sys-fin" style="--t:.5s;">
+                <div class="wgi-ct"><span class="sq"></span>THE WEEKLY</div>
+                <div class="wgi-when">WK 07 · MON 7:00 AM</div>
+              </div>
+              <div class="wgi-kpis">
+                <div class="wgi-kpi sys-pop" style="--t:1.0s;">
+                  <div class="wgi-bar" style="width:58%;"></div>
+                  <div class="wgi-vbar" style="width:62%;"></div>
+                  <div class="wgi-ok sys-pop" style="--t:1.35s;">✓</div>
+                </div>
+                <div class="wgi-kpi sys-pop" style="--t:1.25s;">
+                  <div class="wgi-bar" style="width:46%;"></div>
+                  <div class="wgi-vbar" style="width:55%;"></div>
+                  <div class="wgi-ok sys-pop" style="--t:1.6s;">✓</div>
+                </div>
+                <div class="wgi-kpi flag" style="--t:1.6s;">
+                  <div class="lbl">PIPELINE FORECAST</div>
+                  <div class="val">↓ 20% vs plan</div>
+                </div>
+              </div>
+              <div class="wgi-hr sys-fin" style="--t:2.7s;"></div>
+              <div class="wgi-chain sys-fin" style="--t:2.9s;">
+                <div class="wgi-chip a1 sys-pop" style="--t:3.1s;">PIPELINE ↓ 20%</div>
+                <div class="wgi-why sys-fin" style="--t:3.6s;"><span>WHY</span><span class="ln"></span></div>
+                <div class="wgi-chip a2 sys-pop" style="--t:3.9s;">DEMOS ↓ 18%</div>
+                <div class="wgi-why sys-fin" style="--t:4.4s;"><span>WHY</span><span class="ln"></span></div>
+                <div class="wgi-chip root" style="--t:4.7s;">NO FOLLOW-UP AFTER CALL 1</div>
+              </div>
+              <div class="wgi-hr sys-fin" style="--t:5.3s;"></div>
+              <div class="wgi-prose">
+                <div class="wgi-bar sys-fin" style="--t:5.5s; width:86%;"></div>
+                <div class="wgi-bar sys-fin" style="--t:5.7s; width:64%;"></div>
+                <div class="wgi-hl" style="--th:6.1s;"><span style="--t:6.1s;">Demand is fine. We're losing demos because follow-up stops after the first call.</span></div>
+                <div class="wgi-bar sys-fin" style="--t:7.3s; width:72%;"></div>
+              </div>
+              <div class="wgi-mvzone">
+                <div class="wgi-tf sys-pop" style="--t:7.7s;">DO THIS WEEK</div>
+                <div class="wgi-mv sys-pop" style="--t:8.0s;">
+                  <div class="wgi-ar on" style="--t:8.3s;">→</div>
+                  <div class="wgi-mtext">Call back all 14 stalled accounts before buying new leads</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="feature-card reveal">
+          <div class="feature-meta"><span class="feature-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="5.5"></circle><circle cx="8" cy="8" r="2.5"></circle><path d="M8 1v2M8 13v2M1 8h2M13 8h2"></path></svg></span><span>Prospect sourcing + scoring</span></div>
+          <h3>Stop calling everyone. Call the likely buyers.</h3>
+          <p>We source the right accounts and score every one against your model. Your team starts each week at the top of the list.</p>
+          <div class="visual ssq" id="ssq-stage" aria-hidden="true" style="height:400px;">
+            <div class="acct" data-ss="0" style="left:4px; top:48px; --te:0.30s;">
+              <div class="ahead"><div class="logo">DK</div><div class="hslot"><div class="wgi-bar b1"></div><div class="wgi-bar b2"></div></div></div>
+              <div class="ahr"></div>
+              <div class="wgi-bar arow" style="width:72%;"></div>
+              <div class="afoot"><div class="score s-d" style="--ts:2.9s;">33</div></div>
+            </div>
+            <div class="acct" data-ss="1" style="left:174px; top:48px; --te:0.41s;">
+              <div class="ahead"><div class="logo">NV</div><div class="hslot"><div class="wgi-bar b1"></div><div class="wgi-bar b2"></div></div></div>
+              <div class="ahr"></div>
+              <div class="wgi-bar arow" style="width:70%;"></div>
+              <div class="afoot"><div class="score s-a" style="--ts:2.0s;">88</div><div class="tier t-a" style="--tp:5.5s;">TIER A</div></div>
+            </div>
+            <div class="acct" data-ss="2" style="left:344px; top:48px; --te:0.52s;">
+              <div class="ahead"><div class="logo">QT</div><div class="hslot"><div class="wgi-bar b1"></div><div class="wgi-bar b2"></div></div></div>
+              <div class="ahr"></div>
+              <div class="wgi-bar arow" style="width:68%;"></div>
+              <div class="afoot"><div class="score s-d" style="--ts:2.45s;">38</div><div class="tier t-d" style="--tp:5.9s;">TIER D</div></div>
+            </div>
+            <div class="acct" data-ss="3" style="left:514px; top:48px; --te:0.63s;">
+              <div class="ahead"><div class="logo">LM</div><div class="hslot"><div class="wgi-bar b1"></div><div class="wgi-bar b2"></div></div></div>
+              <div class="ahr"></div>
+              <div class="wgi-bar arow" style="width:66%;"></div>
+              <div class="afoot"><div class="score s-b" style="--ts:2.3s;">51</div><div class="tier t-c" style="--tp:5.8s;">TIER C</div></div>
+            </div>
+            <div class="acct" data-ss="4" style="left:4px; top:234px; --te:0.74s;">
+              <div class="ahead"><div class="logo">OR</div><div class="hslot"><div class="wgi-bar b1"></div><div class="wgi-bar b2"></div></div></div>
+              <div class="ahr"></div>
+              <div class="wgi-bar arow" style="width:70%;"></div>
+              <div class="afoot"><div class="score s-b" style="--ts:2.15s;">74</div><div class="tier t-b" style="--tp:5.65s;">TIER B</div></div>
+            </div>
+            <div class="acct" data-ss="5" style="left:174px; top:234px; --te:0.85s;">
+              <div class="ahead"><div class="logo">PW</div><div class="hslot"><div class="wgi-bar b1"></div><div class="wgi-bar b2"></div></div></div>
+              <div class="ahr"></div>
+              <div class="wgi-bar arow" style="width:72%;"></div>
+              <div class="afoot"><div class="score s-d" style="--ts:3.2s;">21</div></div>
+            </div>
+            <div class="acct qc1" data-ss="6" style="left:344px; top:234px; --te:0.96s;">
+              <div class="ahead"><div class="logo" style="background:rgba(180,147,234,.18); color:#6b3fb8;">AC</div><div class="hslot"><div class="wgi-bar b1"></div><div class="wgi-bar b2"></div><div class="aname">Acme Industries</div></div></div>
+              <div class="ahr"></div>
+              <div class="wgi-bar arow" style="width:76%;"></div>
+              <div class="afoot"><div class="score s-a" style="--ts:1.85s;">92</div><div class="tier t-a" style="--tp:5.4s;">TIER A</div><div class="callfirst">CALL FIRST</div></div>
+            </div>
+            <div class="acct" data-ss="7" style="left:514px; top:234px; --te:1.07s;">
+              <div class="ahead"><div class="logo">RS</div><div class="hslot"><div class="wgi-bar b1"></div><div class="wgi-bar b2"></div></div></div>
+              <div class="ahr"></div>
+              <div class="wgi-bar arow" style="width:68%;"></div>
+              <div class="afoot"><div class="score s-d" style="--ts:3.35s;">14</div></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="feature-card reveal">
+          <div class="feature-meta"><span class="feature-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M2.5 9.5v-3l8-3v9z"></path><path d="M10.5 6a3.5 3.5 0 0 1 0 4M4.5 10l1 3"></path></svg></span><span>Fractional outbound</span></div>
+          <h3>We book qualified meetings. Your closers close.</h3>
+          <p>A dedicated rep on fractional time runs the email, DM, and cold-call campaigns on your top-scored accounts — and fills your closers' calendars with qualified meetings, for months, not weeks. You keep your time for the relationships that matter most.</p>
+          <div class="visual obx" id="obx-stage" aria-hidden="true" style="height:400px;">
+            <div class="obx-k obx-mini" style="left:12px; top:56px; transform:rotate(-2.4deg); --t:.3s;">
+              <div class="obx-mt"><span class="sq" style="background:var(--blue);"></span>EMAIL CAMPAIGN</div>
+              <div style="display:flex; align-items:center; gap:8px; margin-top:12px;"><span class="obx-tag">SUBJECT</span><div class="wgi-bar" style="width:52%;"></div></div>
+              <div class="wgi-bar" style="width:78%; margin-top:10px;"></div>
+              <div class="obx-mrow sys-fin" style="--t:4.7s;"><span class="dt" style="background:var(--blue);"></span>3 MEETINGS</div>
+            </div>
+            <div class="obx-k obx-mini" style="left:20px; top:180px; transform:rotate(1.6deg); --t:.5s;">
+              <div class="obx-mt"><span class="sq" style="background:var(--purple);"></span>LINKEDIN DMS</div>
+              <div class="obx-bub"></div>
+              <div class="obx-bub me"></div>
+              <div class="obx-mrow sys-fin" style="--t:4.9s;"><span class="dt" style="background:var(--purple);"></span>2 MEETINGS</div>
+            </div>
+            <div class="obx-k obx-mini" style="left:12px; top:304px; transform:rotate(-1.4deg); --t:.7s;">
+              <div class="obx-mt"><span class="sq" style="background:var(--gold);"></span>COLD CALLS</div>
+              <div class="obx-wv"><i style="height:10px;"></i><i style="height:20px;"></i><i style="height:14px;"></i><i style="height:24px;"></i><i style="height:12px;"></i><i style="height:22px;"></i><i style="height:16px;"></i><i style="height:26px;"></i><i style="height:11px;"></i><i style="height:18px;"></i></div>
+              <div class="obx-mrow sys-fin" style="--t:5.1s;"><span class="dt" style="background:var(--gold);"></span>2 MEETINGS</div>
+            </div>
+            <div class="obx-k cal-card sys-fin" style="--t:1.0s;">
+              <div class="cal-head">
+                <div class="cal-ava">SJ</div>
+                <div class="cal-t">BOOKED BY SAM · YOUR FRACTIONAL REP</div>
+                <div class="wgi-when" style="margin-left:auto;">WK 07</div>
+              </div>
+              <div class="cal-grid">
+                <div class="cal-day">MON</div><div class="cal-day">TUE</div><div class="cal-day">WED</div><div class="cal-day">THU</div><div class="cal-day">FRI</div>
+                <div class="cal-col">
+                  <div class="cal-blk ch-e sys-pop" style="--t:1.4s;"><div class="tp"><i></i>88</div><div class="wgi-bar" style="width:80%;"></div></div>
+                </div>
+                <div class="cal-col">
+                  <div class="cal-blk ch-d sys-pop" style="--t:1.9s;"><div class="tp"><i></i>92</div><div class="nm">ACME IND.</div></div>
+                  <div class="cal-blk ch-c sys-pop" style="--t:2.4s;"><div class="tp"><i></i>74</div><div class="wgi-bar" style="width:70%;"></div></div>
+                </div>
+                <div class="cal-col">
+                  <div class="cal-blk ch-e sys-pop" style="--t:2.8s;"><div class="tp"><i></i>81</div><div class="wgi-bar" style="width:76%;"></div></div>
+                </div>
+                <div class="cal-col">
+                  <div class="cal-blk ch-d sys-pop" style="--t:3.2s;"><div class="tp"><i></i>86</div><div class="wgi-bar" style="width:72%;"></div></div>
+                  <div class="cal-blk ch-e sys-pop" style="--t:3.6s;"><div class="tp"><i></i>79</div><div class="wgi-bar" style="width:64%;"></div></div>
+                </div>
+                <div class="cal-col">
+                  <div class="cal-blk ch-c sys-pop" style="--t:4.0s;"><div class="tp"><i></i>90</div><div class="wgi-bar" style="width:78%;"></div></div>
+                </div>
+              </div>
+              <div class="cal-foot sys-fin" style="--t:4.5s;"><span class="gd"></span>7 QUALIFIED MEETINGS · BOOKED FOR YOUR CLOSERS</div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section process" id="process" aria-labelledby="process-title">
+      <div class="section-heading narrow reveal">
+        <div class="eyebrow" style="color:rgba(255,255,255,.72)"><span class="spark"></span> How the system works</div>
+        <h2 class="serif" id="process-title">Plan. Operate. Learn and adjust.</h2>
+        <p>Scorecard turns the target into working logic, operates the recurring services, and reads performance back against the plan.</p>
+      </div>
+      <div class="steps reveal">
+        <article class="step"><div class="step-num">01</div><h3>Build the plan</h3><p>Model the market, economics, funnel, capacity, investment, and scenarios behind the revenue target.</p></article>
+        <article class="step"><div class="step-num">02</div><h3>Run the required work</h3><p>Connect the plan to reporting, sourcing, scoring, CRM instrumentation, and optional execution.</p></article>
+        <article class="step"><div class="step-num">03</div><h3>Learn and adjust</h3><p>Read actual performance against the plan each week, then sequence the next management move.</p></article>
+      </div>
+    </section>
+
+    <section class="section" id="delivery" aria-labelledby="delivery-title">
+      <div class="section-heading narrow reveal">
+        <div class="eyebrow"><span class="spark"></span> Standardized by design</div>
+        <h2 class="serif" id="delivery-title">Software does the repeat work. An operator owns the result.</h2>
+        <p>Scorecard adds the planning, reporting, scoring, and workflow layer around the systems your team already uses.</p>
+      </div>
+      <div class="security-grid">
+        <article class="security-card reveal"><div class="security-icon">◇</div><h3>Board-ready strategy</h3><p>A full-funnel model, explicit assumptions, forecast scenarios, priorities, and a sequenced action plan.</p></article>
+        <article class="security-card reveal"><div class="security-icon">▣</div><h3>Proprietary software</h3><p>The repeatable analysis, scoring, workflows, and reporting run on Scorecard's operating stack.</p></article>
+        <article class="security-card reveal"><div class="security-icon">◎</div><h3>Accountable operator</h3><p>A senior operator configures the service, checks output, explains changes, and keeps it improving.</p></article>
+        <article class="security-card reveal"><div class="security-icon">↗</div><h3>Built around your CRM</h3><p>Your CRM remains the source of truth. Scorecard connects the plan and priorities around it — whichever you run.</p>
+        <div class="crm-row"><span class="crm-chip">Salesforce</span><span class="crm-chip">HubSpot</span><span class="crm-chip">Pipedrive</span><span class="crm-chip">Dynamics 365</span><span class="crm-chip">Zoho</span></div></article>
+      </div>
+    </section>
+
+    <section class="section" id="pricing" aria-labelledby="pricing-title">
+      <div class="section-heading narrow reveal">
+        <div class="eyebrow"><span class="spark"></span> Pricing</div>
+        <h2 class="serif" id="pricing-title">Two ways to deploy.</h2>
+        <p>No menu pricing. Tell us the target and the team — we'll walk you through both and find the right plan for you.</p>
+      </div>
+      <div class="price-grid reveal">
+        <article class="price-card">
+          <div class="price-kicker">Standard deployment</div>
+          <h3>One sales motion</h3>
+          <p class="price-for">The full system, deployed on a single sales motion.</p>
+          <ul class="price-list">
+            <li><span class="pk">✓</span><span>Growth Planning Intensive</span></li>
+            <li><span class="pk">✓</span><span>Weekly Growth Intelligence</span></li>
+            <li><span class="pk">✓</span><span>Sourcing + scoring</span></li>
+            <li><span class="pk">✓</span><span>CRM instrumentation</span></li>
+          </ul>
+          <div class="price-cta">
+            <button class="button button-primary" type="button" data-open-book>Contact us</button>
+            <div class="price-note">We'll talk you through it and find the right plan.</div>
+          </div>
+        </article>
+        <article class="price-card custom">
+          <div class="price-kicker">Custom deployment</div>
+          <h3>Multiple motions or teams</h3>
+          <p class="price-for">For portfolios, multiple ICPs, or more than one revenue team.</p>
+          <ul class="price-list">
+            <li><span class="pk">✓</span><span>Everything in Standard</span></li>
+            <li><span class="pk">✓</span><span>A full-funnel model per motion</span></li>
+            <li><span class="pk">✓</span><span>Multiple ICPs and territories</span></li>
+            <li><span class="pk">✓</span><span>Dedicated senior operator</span></li>
+          </ul>
+          <div class="price-cta">
+            <button class="button button-white" type="button" data-open-book>Contact us</button>
+            <div class="price-note">We'll scope it together on one call.</div>
+          </div>
+        </article>
+      </div>
+      <div class="price-addon reveal">
+        <div style="max-width: 620px;">
+          <span class="addon-chip">Add-on · either plan</span>
+          <div style="font-size: 18px; font-weight: 700; letter-spacing: -.015em; margin-top: 12px;">Fractional outbound</div>
+          <div style="font-size: 14px; color: var(--muted); margin-top: 6px; line-height: 1.55;">A dedicated rep works your top-scored accounts and books qualified meetings for your closers.</div>
+        </div>
+        <a href="#features" style="color: var(--body); font-size: 14px; font-weight: 500; border-bottom: 1px solid rgba(71,85,105,.25); padding-bottom: 3px;">See how it works <span style="color: var(--purple);">→</span></a>
+      </div>
+    </section>
+
+    <section class="final-cta" id="see-your-market" aria-labelledby="final-title">
+      <div class="footer-mosaic" aria-hidden="true"><div id="footer-mosaic-wrap"></div></div>
+      <div class="eyebrow" style="color:rgba(255,255,255,.7)"><span class="spark"></span> Start with the Growth Planning Intensive</div>
+      <h2 id="final-title">Bring us the number. We'll build the plan behind it.</h2>
+      <p>Leave with a board-ready revenue model and a clear sequence of what to fund, fix, and launch.</p>
+      <div class="final-actions">
+        <button class="button button-white" type="button" data-open-book>Define your growth plan</button>
+        <a href="#features" class="button" style="color:white;border-color:rgba(255,255,255,.38)">Explore services</a>
+      </div>
+      <footer class="footer">
+        <div>
+          <div class="footer-brand"><img src="design-system/assets/scorecard-mark-ondark.svg" alt=""><span class="brand-word">Scorecard</span></div>
+          <div class="footer-meta" style="margin-top:12px">Growth planning · Managed growth services</div>
+        </div>
+        <div>
+          <div class="footer-links"><a href="#problem">Why Scorecard</a><a href="#features">Services</a><a href="#pricing">Pricing</a><a href="https://app.scorecardgtm.com">Client portal</a><a href="#top">Back to top ↑</a></div>
+          <div class="footer-meta" style="margin-top:16px;text-align:right">© 2026 Scorecard</div>
+        </div>
+      </footer>
+    </section>
+  </main>
+
+  <!-- ---------- Booking modal ---------- -->
   <div class="modal" id="book-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-hidden="true">
     <div class="modal-backdrop" data-close-book></div>
     <div class="modal-dialog">
@@ -2110,7 +1153,7 @@
         <!-- Form state -->
         <div class="modal-state-form">
           <div class="modal-eyebrow"><span class="pip">●</span>&nbsp;Step 1 of 2</div>
-          <h2 class="modal-title" id="modal-title">Book a 30‑min intro</h2>
+          <h2 class="modal-title" id="modal-title">Define your growth plan</h2>
           <p class="modal-sub">Tell us a little about how you sell. Next step: pick a time. We don't run decks. <strong>We show the work on your data.</strong></p>
           <form id="lead-form" novalidate>
             <div class="field-row">
@@ -2156,156 +1199,508 @@
       </div>
     </div>
   </div>
+</div>
 
-  <script>
-    // ------- Score grid background -------
-    (function renderBg() {
-      const W = 1600, H = 900;
-      const COLS = 80, ROWS = 44;
-      const CW = W / COLS, CH = H / ROWS;
-      const rng = (a, b, salt = 0) => {
-        const s = ((a * 73856093) ^ (b * 19349663) ^ (salt * 83492791)) >>> 0;
-        return (s % 100000) / 100000;
-      };
-      const rightBumpY = (x) => {
-        const mu = 1440, sd = 280, peakY = 100, baseY = 820;
-        const t = Math.exp(-Math.pow((x - mu) / sd, 2));
-        return baseY - (baseY - peakY) * t;
-      };
-      const cells = [];
-      for (let r = 0; r < ROWS; r++) {
-        for (let c = 0; c < COLS; c++) {
-          if (rng(c, r, 1) < 0.06) continue;
-          const x = c * CW, y = r * CH, cx = x + CW / 2, cy = y + CH / 2;
-          const yR = rightBumpY(cx);
-          const insideRight = cy > yR && cx > 840 && cx < 2040;
-          const leftMu = 780, leftSd = 200, leftPeak = 380;
-          const midMu = 1100, midSd = 240, midPeak = 200;
-          const yL = 820 - (820 - leftPeak) * Math.exp(-Math.pow((cx - leftMu) / leftSd, 2));
-          const yM = 820 - (820 - midPeak) * Math.exp(-Math.pow((cx - midMu) / midSd, 2));
-          const insideLeft = cy > yL && cx > 200 && cx < 1360;
-          const insideMid = cy > yM && cx > 500 && cx < 1700;
-          let color = '#CBD5E1';
-          let opacity = 0.18 + rng(c, r, 2) * 0.12;
-          if (insideRight) {
-            const t = (cy - 100) / (820 - 100);
-            if (t < 0.30) color = '#A8D862';
-            else if (t < 0.55) color = '#649BE4';
-            else if (t < 0.80) color = '#B493EA';
-            else color = '#94A3B8';
-            opacity = 0.55 + rng(c, r, 3) * 0.35;
-          } else if (insideMid) {
-            color = '#A8D862';
-            opacity = 0.32 + rng(c, r, 4) * 0.18;
-          } else if (insideLeft) {
-            color = '#FCAF0F';
-            opacity = 0.32 + rng(c, r, 5) * 0.18;
-          }
-          cells.push({ x, y, w: CW - 1.5, h: CH - 1.5, color, opacity });
+<script>
+  // ===================== Hero mosaic =====================
+  // Ported from the design project's HeroMosaic.jsx — the drawing code is
+  // unchanged; only the React wrapper became a plain init function.
+  const HM_TONES = {
+    'near-dark': { bg: '#03153A', rgb: '3,21,58',     field: '#4A72AE', dark: true },
+    'deep-dark': { bg: '#050D22', rgb: '5,13,34',     field: '#3F63A0', dark: true },
+    'light':     { bg: '#FAFBFC', rgb: '250,251,252', field: '#A8C0E0', dark: false },
+  };
+  function hmHex(h) { return [parseInt(h.slice(1, 3), 16), parseInt(h.slice(3, 5), 16), parseInt(h.slice(5, 7), 16)]; }
+  function hmShade(hex, k, bg) {
+    const c = hmHex(hex);
+    let R, G, B;
+    if (k <= 1) { const t = Math.max(0, k); R = bg[0] + (c[0] - bg[0]) * t; G = bg[1] + (c[1] - bg[1]) * t; B = bg[2] + (c[2] - bg[2]) * t; }
+    else { const t = Math.min(1, k - 1) * 0.55; R = c[0] + (255 - c[0]) * t; G = c[1] + (255 - c[1]) * t; B = c[2] + (255 - c[2]) * t; }
+    return 'rgb(' + Math.round(R) + ',' + Math.round(G) + ',' + Math.round(B) + ')';
+  }
+  function hmFamRamp(name) {
+    if (name === 'orange') return ['#B7660A', '#FFC65A'];
+    if (name === 'purple') return ['#5E45A0', '#CFB6F6'];
+    if (name === 'blue')   return ['#3F6FBE', '#BFDCF9'];
+    if (name === 'green')  return ['#5E9626', '#CAF285'];
+    return ['#34507E', '#9DB6D6'];
+  }
+  function hmLerpHex(a, b, t) {
+    const A = hmHex(a), B = hmHex(b);
+    return 'rgb(' + Math.round(A[0] + (B[0] - A[0]) * t) + ',' + Math.round(A[1] + (B[1] - A[1]) * t) + ',' + Math.round(A[2] + (B[2] - A[2]) * t) + ')';
+  }
+  function hmDarkCut(col, amt) {
+    const m = col.match(/\d+/g); const r = +m[0], g = +m[1], b = +m[2];
+    return 'rgb(' + Math.round(r + (3 - r) * amt) + ',' + Math.round(g + (21 - g) * amt) + ',' + Math.round(b + (58 - b) * amt) + ')';
+  }
+  function hmLighten(c, amt) {
+    let r, g, b;
+    if (c[0] === '#') { r = parseInt(c.slice(1, 3), 16); g = parseInt(c.slice(3, 5), 16); b = parseInt(c.slice(5, 7), 16); }
+    else { const m = c.match(/\d+/g); r = +m[0]; g = +m[1]; b = +m[2]; }
+    return 'rgb(' + Math.round(r + (255 - r) * amt) + ',' + Math.round(g + (255 - g) * amt) + ',' + Math.round(b + (255 - b) * amt) + ')';
+  }
+  function hmCfg(props) {
+    return {
+      tone: props.tone || 'deep-dark',
+      bgCols: 88, bgGap: 1.3, graphCols: 88, graphGap: 1.3,
+      blur: 0.7, signal: 1.08, noise: 0.12,
+      height: 1.0, effSlope: 1.0, spread: 1.0, dfLevel: 0.34,
+      posC: 820, posB: 1060, posA: 1300,
+      zoom: 1.06, focusX: 0.4, focusY: 0.6,
+      animOn: props.animated !== false, animStyle: 'zap',
+      animStart: (props.animStart != null ? +props.animStart : 0.72),
+      gapMs: (props.gapMs != null ? +props.gapMs : 16),
+      overlay: props.overlay !== false,
+    };
+  }
+  function hmBuildScene(W, H, p, st) {
+    const sig = [W, H, p.tone, p.graphCols, p.graphGap, p.signal, p.height, p.effSlope, p.spread, p.dfLevel, p.posA, p.posB, p.posC, p.zoom, p.focusX, p.focusY, p.noise, p.bgCols, p.bgGap].join('|');
+    if (st.scene && st.scene.sig === sig) return st.scene;
+
+    const VW = 1600, VH = 900;
+    const z = p.zoom || 1;
+    const scale = Math.max(W / VW, H / VH) * z;
+    const fx = (p.focusX != null ? p.focusX : 0.5) * VW;
+    const fy = (p.focusY != null ? p.focusY : 0.5) * VH;
+    let ox = W / 2 - fx * scale, oy = H / 2 - fy * scale;
+    const rng = (a, b, s) => { const v = ((a * 73856093) ^ (b * 19349663) ^ ((s + 1013) * 83492791)) >>> 0; return (v % 100000) / 100000; };
+    const tone = HM_TONES[p.tone] || HM_TONES['deep-dark'];
+    const bg = hmHex(tone.bg);
+    const field = tone.field;
+
+    const PADX = VW * 0.6, PADY = VH * 0.5;
+    const FX0 = -PADX, FX1 = VW + PADX, FY0 = -PADY, FY1 = VH + PADY;
+    { const minOx = W - FX1 * scale, maxOx = -FX0 * scale;
+      ox = (minOx <= maxOx) ? Math.min(maxOx, Math.max(minOx, W / 2 - fx * scale)) : (W - (FX0 + FX1) * scale) / 2;
+      const minOy = H - FY1 * scale, maxOy = -FY0 * scale;
+      oy = (minOy <= maxOy) ? Math.min(maxOy, Math.max(minOy, H / 2 - fy * scale)) : (H - (FY0 + FY1) * scale) / 2; }
+
+    const baseY = VH;
+    const h = p.height, sl = p.effSlope, sp = p.spread;
+    const topf = 0.82 * h;
+    const fA = topf, fB = topf * (1 - 0.26 * sl), fC = topf * (1 - 0.50 * sl);
+    const segs = [
+      { pos: 460,    sigma: 360 * sp, frac: Math.max(0.05, p.dfLevel * h), fam: 'orange', df: true },
+      { pos: p.posC, sigma: 205 * sp, frac: fC, fam: 'purple' },
+      { pos: p.posB, sigma: 205 * sp, frac: fB, fam: 'blue' },
+      { pos: p.posA, sigma: 215 * sp, frac: fA, fam: 'green' },
+    ];
+    for (let i = 0; i < segs.length; i++) segs[i].peakY = VH * (1 - segs[i].frac);
+
+    const s = VW / Math.round(p.bgCols);
+    const c0 = Math.floor(FX0 / s), c1 = Math.ceil(FX1 / s);
+    const r0 = Math.floor(FY0 / s), r1 = Math.ceil(FY1 / s);
+    const bgCells = [];
+    for (let r = r0; r < r1; r++) for (let c = c0; c < c1; c++) {
+      let k = 0.62 + rng(c, r, 2) * 0.40 + p.noise * 0.6; k = Math.max(0.46, k);
+      bgCells.push({ x: c * s, y: r * s, w: Math.max(0.5, s - p.bgGap), hh: Math.max(0.5, s - p.bgGap), col: hmShade(field, k, bg), op: 1 });
+    }
+
+    const gC = Math.round(p.graphCols), gR = Math.max(20, Math.round(p.graphCols * VH / VW));
+    const gCW = VW / gC, gCH = VH / gR;
+    const cells = [];
+    const cols = {};
+    for (let r = 0; r < gR; r++) for (let c = 0; c < gC; c++) {
+      const x = c * gCW, y = r * gCH, cx = x + gCW / 2, cy = y + gCH / 2;
+      let best = null, bestY = Infinity;
+      for (let i = 0; i < segs.length; i++) {
+        const sg = segs[i];
+        const cyCurve = baseY - (baseY - sg.peakY) * Math.exp(-Math.pow((cx - sg.pos) / sg.sigma, 2));
+        if (cy > cyCurve && cyCurve < bestY) { bestY = cyCurve; best = sg; }
+      }
+      if (!best) continue;
+      const topness = Math.max(0, Math.min(1, 1 - (cy - best.peakY) / (baseY - best.peakY)));
+      const ramp = hmFamRamp(best.fam);
+      let gt = topness * 0.82 + rng(c, r, 3) * 0.16 + (p.signal - 1) * 0.5;
+      gt = Math.max(0, Math.min(1, gt)) * (best.df ? 0.9 : 1);
+      const colr = hmLerpHex(ramp[0], ramp[1], gt);
+      const cell = { x: x + (rng(c, r, 61) - 0.5) * 0.9, y: y + (rng(c, r, 71) - 0.5) * 0.9, cx: cx, cyMid: y + Math.max(0.5, gCH - p.graphGap) / 2, w: Math.max(0.5, gCW - p.graphGap), hh: Math.max(0.5, gCH - p.graphGap), col: colr, oCol: hmDarkCut(colr, 0.42), order: 0, op: 1, _col: c };
+      (cols[c] || (cols[c] = [])).push(cell);
+      cells.push(cell);
+    }
+    let maxDepth = 1;
+    for (const cc in cols) maxDepth = Math.max(maxDepth, cols[cc].length);
+    const MAXLEAD = 2.6;
+    const span = maxDepth + MAXLEAD;
+    for (const cc in cols) {
+      const stack = cols[cc];
+      stack.sort((a, b) => b.y - a.y);
+      const lead = rng(+cc, 7, 9) * MAXLEAD;
+      for (let d = 0; d < stack.length; d++) {
+        stack[d].order = Math.min(1, (d + lead) / span);
+      }
+    }
+    cells.sort((a, b) => a.order - b.order);
+
+    st.scene = { sig, scale, ox, oy, bg, tone, bgCells, cells, gCH, _bg: null, _bgDpr: 0 };
+    return st.scene;
+  }
+  function hmDrawScene(ctx, W, H, p, time, dpr, st) {
+    const sc = hmBuildScene(W, H, p, st);
+    if (!sc._bg || sc._bgDpr !== dpr) {
+      const off = document.createElement('canvas');
+      off.width = Math.round(W * dpr); off.height = Math.round(H * dpr);
+      const oc = off.getContext('2d');
+      oc.setTransform(dpr, 0, 0, dpr, 0, 0);
+      oc.fillStyle = sc.tone.bg; oc.fillRect(0, 0, W, H);
+      oc.save(); oc.translate(sc.ox, sc.oy); oc.scale(sc.scale, sc.scale);
+      for (let i = 0; i < sc.bgCells.length; i++) { const b = sc.bgCells[i]; oc.globalAlpha = b.op != null ? b.op : 1; oc.fillStyle = b.col; oc.fillRect(b.x, b.y, b.w, b.hh); }
+      oc.globalAlpha = 1; oc.restore();
+      sc._bg = off; sc._bgDpr = dpr;
+    }
+    ctx.clearRect(0, 0, W, H);
+    ctx.drawImage(sc._bg, 0, 0, W, H);
+
+    ctx.save();
+    ctx.translate(sc.ox, sc.oy); ctx.scale(sc.scale, sc.scale);
+    ctx.lineWidth = 0.9;
+
+    const anim = (time != null && p.animOn);
+    const start = (p.animStart != null ? p.animStart : 0.3);
+    const style = p.animStyle || 'zap';
+    const N = sc.cells.length;
+    const startCount = Math.round(start * N);
+    const gap = Math.max(0.004, (p.gapMs != null ? p.gapMs : 90) / 1000);
+    const appearDur = style === 'zap' ? Math.min(0.34, Math.max(0.12, gap * 0.9)) : 0.6;
+    const revealed = anim ? (startCount + time / gap) : N;
+    const f = N > 0 ? Math.min(1, revealed / N) : 1;
+    const ease = (u) => 1 - Math.pow(1 - u, 3);
+
+    for (let i = 0; i < sc.cells.length; i++) {
+      const cl = sc.cells[i];
+      let pr = 1;
+      if (anim) {
+        if (i < startCount) pr = 1;
+        else {
+          const appearAt = (i - startCount) * gap;
+          if (time < appearAt) break;
+          pr = Math.min(1, Math.max(0, (time - appearAt) / appearDur));
         }
       }
-      const svgNS = 'http://www.w3.org/2000/svg';
-      const svg = document.createElementNS(svgNS, 'svg');
-      svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
-      svg.setAttribute('preserveAspectRatio', 'xMidYMid slice');
-      const defs = document.createElementNS(svgNS, 'defs');
-      defs.innerHTML = `
-        <linearGradient id="gridLeftFade" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%" stop-color="#FAFBFC" stop-opacity="1" />
-          <stop offset="30%" stop-color="#FAFBFC" stop-opacity="0" />
-        </linearGradient>
-        <linearGradient id="gridBottomFade" x1="0%" y1="0%" x2="0%" y2="100%">
-          <stop offset="55%" stop-color="#FAFBFC" stop-opacity="0" />
-          <stop offset="100%" stop-color="#FAFBFC" stop-opacity="0.85" />
-        </linearGradient>
-        <filter id="gridSoft" x="-2%" y="-2%" width="104%" height="104%">
-          <feGaussianBlur stdDeviation="0.6" />
-        </filter>
-      `;
-      svg.appendChild(defs);
-      const g = document.createElementNS(svgNS, 'g');
-      g.setAttribute('filter', 'url(#gridSoft)');
-      g.setAttribute('opacity', '0.7');
-      g.innerHTML = cells.map(cell =>
-        `<rect x="${cell.x}" y="${cell.y}" width="${cell.w}" height="${cell.h}" fill="${cell.color}" fill-opacity="${cell.opacity}" rx="1"/>`
-      ).join('');
-      svg.appendChild(g);
-      const fadeL = document.createElementNS(svgNS, 'rect');
-      fadeL.setAttribute('x', '0'); fadeL.setAttribute('y', '0');
-      fadeL.setAttribute('width', String(W)); fadeL.setAttribute('height', String(H));
-      fadeL.setAttribute('fill', 'url(#gridLeftFade)');
-      fadeL.setAttribute('pointer-events', 'none');
-      svg.appendChild(fadeL);
-      const fadeB = document.createElementNS(svgNS, 'rect');
-      fadeB.setAttribute('x', '0'); fadeB.setAttribute('y', '0');
-      fadeB.setAttribute('width', String(W)); fadeB.setAttribute('height', String(H));
-      fadeB.setAttribute('fill', 'url(#gridBottomFade)');
-      fadeB.setAttribute('pointer-events', 'none');
-      svg.appendChild(fadeB);
-      document.getElementById('bg').appendChild(svg);
-    })();
-
-    // ------- Distribution bars -------
-    (function renderDistribution() {
-      const bins = 80;
-      const arr = [];
-      const bumps = [
-        { mu: 0.12, sd: 0.06, amp: 0.32 },
-        { mu: 0.32, sd: 0.08, amp: 0.55 },
-        { mu: 0.68, sd: 0.13, amp: 1.00 },
-      ];
-      for (let i = 0; i < bins; i++) {
-        const x = i / (bins - 1);
-        let y = 0;
-        bumps.forEach(b => { y += b.amp * Math.exp(-Math.pow((x - b.mu) / b.sd, 2)); });
-        arr.push(Math.min(1, y));
+      let a = 1, scaleC = 1, col = cl.col;
+      if (pr < 1) {
+        const e = ease(pr);
+        a = Math.min(1, pr / 0.18);
+        const settle = e;
+        scaleC = 1 + (1 - settle) * 0.22;
+        col = hmLighten(cl.col, (1 - settle) * 0.45);
       }
-      const host = document.getElementById('dist-bars');
-      const W = 400, w = W / bins;
-      let html = '';
-      for (let i = 0; i < bins; i++) {
-        const u = i / (bins - 1);
-        const isSignal = u >= 0.50;
-        const h = arr[i] * 54;
-        const x = (i / bins) * W;
-        html += `<rect x="${(x + 0.4).toFixed(2)}" y="${(60 - h).toFixed(2)}" width="${(w - 0.8).toFixed(2)}" height="${h.toFixed(2)}" fill="url(#${isSignal ? 'distSignal' : 'distNoise'})"/>`;
+      ctx.globalAlpha = a * (cl.op != null ? cl.op : 1);
+      ctx.fillStyle = col;
+      let x = cl.x, y = cl.y, w = cl.w, hh = cl.hh;
+      if (scaleC !== 1) { const w2 = w * scaleC, h2 = hh * scaleC; x = cl.cx - w2 / 2; y = cl.cyMid - h2 / 2; w = w2; hh = h2; }
+      ctx.fillRect(x, y, w, hh);
+      ctx.strokeStyle = cl.oCol || 'rgba(3,21,58,0.4)';
+      ctx.strokeRect(x, y, w, hh);
+    }
+    ctx.globalAlpha = 1;
+    ctx.restore();
+
+    const rgb = sc.tone.rgb;
+    if (p.overlay) {
+      let g = ctx.createLinearGradient(0, 0, W, 0);
+      g.addColorStop(0, 'rgba(' + rgb + ',1)'); g.addColorStop(0.34, 'rgba(' + rgb + ',0)');
+      ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+      g = ctx.createLinearGradient(0, 0, 0, H);
+      g.addColorStop(0.44, 'rgba(' + rgb + ',0)'); g.addColorStop(1, 'rgba(' + rgb + ',1)');
+      ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+      g = ctx.createLinearGradient(0, 0, 0, H);
+      g.addColorStop(0, 'rgba(' + rgb + ',0.6)'); g.addColorStop(0.24, 'rgba(' + rgb + ',0)');
+      ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+    }
+    return f;
+  }
+  function initHeroMosaic(wrap, opts) {
+    if (!wrap) return;
+    const p = hmCfg(opts || {});
+    wrap.style.position = 'relative';
+    wrap.style.width = '100%';
+    wrap.style.height = '100%';
+    wrap.style.overflow = 'hidden';
+    if (p.blur > 0) wrap.style.filter = 'blur(' + p.blur + 'px)';
+    const cv = document.createElement('canvas');
+    cv.style.cssText = 'position:absolute; inset:0; width:100%; height:100%; display:block;';
+    wrap.appendChild(cv);
+
+    const st = { scene: null, animStart: null, doneAt: null, raf: null, f: null, t: 0 };
+    const paint = (now) => {
+      const W = wrap.clientWidth, H = wrap.clientHeight;
+      if (W < 2 || H < 2) return;
+      const dpr = Math.min(2, window.devicePixelRatio || 1);
+      if (cv.width !== Math.round(W * dpr) || cv.height !== Math.round(H * dpr)) {
+        cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+        cv.style.width = W + 'px'; cv.style.height = H + 'px';
       }
-      host.innerHTML = html;
-    })();
+      const ctx = cv.getContext('2d');
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      if (st.animStart == null) st.animStart = now;
+      st.t = (now - st.animStart) / 1000;
+      st.f = hmDrawScene(ctx, W, H, p, st.t, dpr, st);
+    };
+    paint(performance.now());
+    if (p.animOn) {
+      const loop = (now) => {
+        paint(now);
+        if (st.f != null && st.f >= 1) {
+          if (st.doneAt == null) st.doneAt = st.t;
+          if (st.t > st.doneAt + 1.2) { st.raf = null; return; }   // settled — idle to save CPU
+        } else st.doneAt = null;
+        st.raf = requestAnimationFrame(loop);
+      };
+      st.raf = requestAnimationFrame(loop);
+    }
+    const repaint = () => { st.scene = null; paint(performance.now()); };
+    window.addEventListener('resize', repaint);
+    if (typeof ResizeObserver !== 'undefined') new ResizeObserver(repaint).observe(wrap);
+  }
 
-    // ------- Prospect list + live ticker -------
-    const prospects = [
-      { name: 'Hartwell Industrial Supply',  meta: '$48M ARR · 220 emp · OH', score: 94, tier: 'A' },
-      { name: 'Meridian Plumbing Co.',        meta: '$12M ARR · 64 emp · TX',  score: 88, tier: 'A' },
-      { name: 'Northpoint Capital Partners',  meta: '$210M AUM · PE · NY',     score: 76, tier: 'B' },
-      { name: 'Ferris & Lane Tax Advisors',   meta: '$6M ARR · 38 emp · IL',   score: 64, tier: 'C' },
-      { name: 'Kestrel HVAC Services',        meta: '$3M ARR · 22 emp · AZ',   score: 41, tier: 'D' },
-    ];
-    (function renderProspects() {
-      document.getElementById('prospects').innerHTML = prospects.map((p, i) => `
-        <div class="prospect${i === 0 ? ' active' : ''}" data-idx="${i}">
-          <div class="info">
-            <div class="name">${p.name}</div>
-            <div class="meta">${p.meta}</div>
-          </div>
-          <div class="score">${p.score}</div>
-          <div class="tier ${p.tier}">${p.tier}</div>
-        </div>
-      `).join('');
-    })();
-    // Static "cleared / total" counter for the hero card (no animation —
-    // a perpetual ticker bloated session-replay recordings).
-    // Null-safe: silently skips if the live card isn't on the page.
-    (function setCounters() {
-      const scored = 8472;
-      const clearedNum = document.getElementById('cleared-num');
-      const clearedTotal = document.getElementById('cleared-total');
-      if (!clearedNum || !clearedTotal) return;
-      clearedNum.textContent = Math.floor(scored * 0.015).toLocaleString();
-      clearedTotal.textContent = scored.toLocaleString();
-    })();
+  // ===================== Page logic =====================
+  // Ported from the design project's DCLogic component. Design-panel props are
+  // fixed at their defaults here (mosaic on, "mosaic underline", lively motion),
+  // so only real interaction state is tracked.
+  (function () {
+    const REDUCED = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
 
-    // ------- Modal: open / close -------
+    const state = {
+      menuOpen: false, scrolled: false,
+      gStep: -1, gFocus: null, gDone: false,
+      gKnob: { a: 0, b: 0, c: 0 }, gChk: [false, false, false],
+      sysPinned: false,
+    };
+    const el = (id) => document.getElementById(id);
+    function setState(patch) { Object.assign(state, patch); render(); }
+
+    // ---- Header ----
+    const HDR_DARK = {
+      bg: 'linear-gradient(180deg, rgba(3,21,58,0.78) 0%, rgba(3,21,58,0.34) 58%, rgba(3,21,58,0) 100%)',
+      blur: 'none', border: 'none', shadow: 'none',
+      word: '#FFFFFF', nav: 'rgba(255,255,255,0.92)', chev: 'rgba(255,255,255,0.7)',
+      ctaBg: '#FCAF0F', ctaColor: '#03153A',
+    };
+    const HDR_LIGHT = {
+      bg: 'rgba(250,251,252,0.78)', blur: 'saturate(150%) blur(14px)',
+      border: '1px solid rgba(100,116,139,0.18)', shadow: '0 8px 24px -20px rgba(3,21,58,0.30)',
+      word: '#03153A', nav: '#475569', chev: '#64748B',
+      ctaBg: '#03153A', ctaColor: '#FFFFFF',
+    };
+
+    // ---- GPI card choreography ----
+    const POS = {
+      hidden: { t: 'translate(-50%, -42%) scale(.92)', z: 0, o: 0 },
+      center: { t: 'translate(-50%, -50%)', z: 3, o: 1 },
+      backL:  { t: 'translate(calc(-50% - 185px), calc(-50% - 30px)) rotate(-8deg) scale(.88)', z: 1, o: 1 },
+      backR:  { t: 'translate(calc(-50% + 185px), calc(-50% - 26px)) rotate(7deg) scale(.88)', z: 2, o: 1 },
+    };
+    // sea-to-queue: 8 cards, 5 sort into a ranked fan, 3 sink
+    const SSQ = [null, [24, 118, 1.22, -2, 1, 6], [190, 140, 1.08, 1.6, 1, 5], [340, 156, 1, -1.2, .9, 4], [470, 170, .94, 1.8, .6, 3], [530, 182, .88, -1.6, .42, 2]];
+    const SS_BASES = [[4, 48], [174, 48], [344, 48], [514, 48], [4, 234], [174, 234], [344, 234], [514, 234]];
+    const SS_QMAP = [0, 2, 5, 4, 3, 0, 1, 0];
+    let ssPhase = 0;
+
+    function render() {
+      // Header
+      const h = state.scrolled ? HDR_LIGHT : HDR_DARK;
+      const hdr = el('site-header');
+      hdr.style.background = h.bg;
+      hdr.style.backdropFilter = h.blur;
+      hdr.style.webkitBackdropFilter = h.blur;
+      hdr.style.borderBottom = h.border;
+      hdr.style.boxShadow = h.shadow;
+      el('brand-word').style.color = h.word;
+      el('logo-dark').style.opacity = state.scrolled ? 0 : 1;
+      el('logo-light').style.opacity = state.scrolled ? 1 : 0;
+      document.querySelectorAll('.site-nav > .nav-link, .nav-svc > .nav-link').forEach(a => { a.style.color = h.nav; });
+      const chev = el('chev');
+      chev.style.color = h.chev;
+      chev.style.transform = state.menuOpen ? 'rotate(180deg)' : 'rotate(0deg)';
+      el('svc-menu').classList.toggle('open', state.menuOpen);
+      const cta = el('hdr-cta');
+      cta.style.background = h.ctaBg;
+      cta.style.color = h.ctaColor;
+
+      // Pinned hero headline
+      el('system-stage').classList.toggle('pinned', state.sysPinned);
+
+      // GPI cards
+      const gs = state.gStep, gf = state.gFocus;
+      let pos;
+      if (gf != null) {
+        const others = [0, 1, 2].filter(i => i !== gf);
+        pos = []; pos[gf] = POS.center; pos[others[0]] = POS.backL; pos[others[1]] = POS.backR;
+      } else {
+        pos = [
+          gs >= 1 ? POS.backL : (gs >= 0 ? POS.center : POS.hidden),
+          gs >= 2 ? POS.backR : (gs >= 1 ? POS.center : POS.hidden),
+          gs >= 2 ? POS.center : POS.hidden,
+        ];
+      }
+      [1, 2, 3].forEach((n, i) => {
+        const c = el('gcard' + n);
+        c.classList.toggle('play', gs >= i);
+        c.style.transform = pos[i].t;
+        c.style.zIndex = pos[i].z;
+        c.style.opacity = pos[i].o;
+      });
+      el('gpi-stage').classList.toggle('gpi-done', state.gDone);
+
+      // Scenario knobs -> forecast
+      const kb = state.gKnob;
+      el('gknob-a').style.transform = 'translateX(' + kb.a + 'px)';
+      el('gknob-b').style.transform = 'translateX(' + kb.b + 'px)';
+      el('gknob-c').style.transform = 'translateX(' + kb.c + 'px)';
+      const nsum = ((50 + kb.a - 16) + (70 + kb.b - 16) + (40 + kb.c - 16)) / 134;
+      const fv = Math.max(4, Math.min(12.5, 7.2 + (nsum - 0.8358) * 3.127));
+      const fc = el('gforecast');
+      fc.textContent = '$' + fv.toFixed(1) + 'M';
+      fc.setAttribute('fill', fv >= 9.95 ? '#3d6a1a' : '#03153A');
+      el('gpill').classList.toggle('on', fv >= 9.95);
+
+      // Plan checkboxes
+      [1, 2, 3].forEach(n => el('gchk' + n).classList.toggle('on', state.gChk[n - 1]));
+
+      // Sourcing + scoring cards
+      SS_BASES.forEach((b, i) => {
+        const node = document.querySelector('.acct[data-ss="' + i + '"]');
+        if (!node) return;
+        let t = 'none', o = ssPhase >= 1 ? 1 : 0, z = 1;
+        if (ssPhase >= 2) {
+          const q = SS_QMAP[i];
+          if (q) {
+            const p = SSQ[q];
+            t = 'translate(' + (p[0] - b[0]) + 'px,' + (p[1] - b[1]) + 'px) scale(' + p[2] + ') rotate(' + p[3] + 'deg)';
+            o = p[4]; z = p[5];
+          } else { t = 'translateY(46px) scale(.94)'; o = .1; }
+        }
+        node.style.transform = t; node.style.opacity = o; node.style.zIndex = z;
+      });
+    }
+
+    // ---- GPI timeline ----
+    let gT = [], gR = [];
+    const atG = (ms, fn) => gT.push(setTimeout(fn, REDUCED ? 0 : ms));
+    function countG(node, from, to, ms, fmt) {
+      if (!node) return;
+      let t0 = null;
+      const step = ts => {
+        if (!t0) t0 = ts;
+        const p = Math.min(1, (ts - t0) / Math.max(REDUCED ? 0 : ms, 1));
+        const e = 1 - Math.pow(1 - p, 3);
+        node.textContent = fmt(from + (to - from) * e);
+        if (p < 1) gR.push(requestAnimationFrame(step));
+      };
+      gR.push(requestAnimationFrame(step));
+    }
+    function playGpi() {
+      gT.forEach(clearTimeout); gR.forEach(cancelAnimationFrame); gT = []; gR = [];
+      setState({ gStep: -1, gFocus: null, gDone: false, gKnob: { a: 0, b: 0, c: 0 }, gChk: [false, false, false] });
+      const m = el('gmath');
+      if (m) { m.textContent = '$10.0M'; m.setAttribute('fill', '#03153A'); }
+      atG(80, () => setState({ gStep: 0 }));
+      atG(4400, () => setState({ gStep: 1 }));
+      atG(9400, () => setState({ gStep: 2 }));
+      atG(13000, () => setState({ gDone: true }));
+      const f = v => '$' + v.toFixed(1) + 'M';
+      atG(2300, () => countG(m, 10.0, 7.2, 900, f));
+      atG(3200, () => { if (m) m.setAttribute('fill', '#a34d28'); });
+      atG(6000, () => setKnob('a', 40));
+      atG(6600, () => setKnob('b', 40));
+      atG(7200, () => setKnob('c', 40));
+      atG(11100, () => setChk(0, true));
+      atG(11700, () => setChk(1, true));
+      atG(12300, () => setChk(2, true));
+    }
+    function setKnob(k, v) { state.gKnob[k] = v; render(); }
+    function setChk(i, v) { state.gChk[i] = v; render(); }
+
+    // ---- GPI interaction ----
+    [1, 2, 3].forEach((n, i) => {
+      el('gcard' + n).addEventListener('click', () => { if (state.gDone) setState({ gFocus: i }); });
+    });
+    const SLIDE_BASE = { a: 50, b: 70, c: 40 };
+    document.querySelectorAll('[data-gslide]').forEach(hit => {
+      hit.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (state.gStep < 1) return;
+        const svg = e.currentTarget.ownerSVGElement;
+        if (!svg || !svg.getScreenCTM) return;
+        const pt = new DOMPoint(e.clientX, e.clientY).matrixTransform(svg.getScreenCTM().inverse());
+        const x = Math.max(16, Math.min(150, pt.x));
+        setKnob(e.currentTarget.dataset.gslide, x - SLIDE_BASE[e.currentTarget.dataset.gslide]);
+      });
+    });
+    document.querySelectorAll('[data-gtog]').forEach(hit => {
+      hit.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (state.gStep < 2) return;
+        const i = +e.currentTarget.dataset.gtog;
+        setChk(i, !state.gChk[i]);
+      });
+    });
+
+    // ---- Services menu ----
+    const svc = el('nav-svc');
+    svc.addEventListener('mouseenter', () => setState({ menuOpen: true }));
+    svc.addEventListener('mouseleave', () => setState({ menuOpen: false }));
+
+    // ---- Scroll: header tone ----
+    const onHdr = () => {
+      // Header stays dark for the whole ink hero (incl. the pinned graph), goes light after
+      const hero = document.querySelector('.hp3 .hero');
+      const s = hero ? hero.getBoundingClientRect().bottom < 90 : (window.scrollY || 0) > 12;
+      if (s !== state.scrolled) setState({ scrolled: s });
+    };
+
+    // ---- Scroll: scrubbed hero timeline ----
+    const onScrub = () => {
+      const sc = el('system-scroll');
+      const card = el('hero-stage');
+      if (!sc || !card) return;
+      const r = sc.getBoundingClientRect();
+      const travel = sc.offsetHeight - window.innerHeight;
+      const p = Math.min(1, Math.max(0, -r.top / Math.max(travel, 1)));
+      card.style.setProperty('--p', (p * 7.4).toFixed(3) + 's');
+      const pin = p > 0.02;
+      if (pin !== state.sysPinned) setState({ sysPinned: pin });
+    };
+
+    // ---- Scroll: reveals ----
+    const onReveal = () => {
+      const vh = window.innerHeight;
+      document.querySelectorAll('.hp3 .reveal:not(.in)').forEach(node => {
+        const r = node.getBoundingClientRect();
+        if (r.top < vh * 0.92 && r.bottom > 0) node.classList.add('in');
+      });
+    };
+
+    // ---- Scroll: play the service visuals once in view ----
+    let gPlayed = false, wPlayed = false, sPlayed = false, oPlayed = false;
+    const inView = (node) => { if (!node) return false; const r = node.getBoundingClientRect(); return r.top < window.innerHeight * 0.8 && r.bottom > 0; };
+    const gCheck = () => {
+      if (!gPlayed && inView(el('gpi-stage'))) { gPlayed = true; playGpi(); }
+      if (!wPlayed && inView(el('wgi-stage'))) { wPlayed = true; el('wgi-stage').classList.add('play'); }
+      if (!sPlayed && inView(el('ssq-stage'))) {
+        sPlayed = true;
+        ssPhase = 1; el('ssq-stage').classList.add('play'); render();
+        setTimeout(() => { ssPhase = 2; render(); }, REDUCED ? 0 : 3900);
+      }
+      if (!oPlayed && inView(el('obx-stage'))) { oPlayed = true; el('obx-stage').classList.add('play'); }
+    };
+
+    const onScroll = () => { onHdr(); onScrub(); onReveal(); gCheck(); };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+
+    if (REDUCED) document.querySelectorAll('.hp3 .reveal').forEach(n => n.classList.add('in'));
+    initHeroMosaic(el('hero-mosaic-wrap'), { tone: 'near-dark', animated: !REDUCED });
+    initHeroMosaic(el('footer-mosaic-wrap'), { tone: 'deep-dark', animated: !REDUCED, gapMs: 18 });
+    render();
+    onScroll();
+    // Layout settles after fonts/images land — re-check a few times rather than polling forever.
+    [400, 1200, 2200].forEach(ms => setTimeout(onScroll, ms));
+  })();
+
+  // ===================== Booking modal =====================
+  (function () {
     const modal = document.getElementById('book-modal');
     let lastFocus = null;
 
@@ -2347,16 +1742,6 @@
     if (location.hash === '#book') {
       window.addEventListener('load', () => setTimeout(() => openModal('deeplink'), 50));
     }
-
-    // Deep-link any FAQ <details> by id (e.g. nav "Pricing" -> #pricing)
-    function openFaqFromHash() {
-      const id = (location.hash || '').slice(1);
-      if (!id) return;
-      const target = document.getElementById(id);
-      if (target && target.tagName === 'DETAILS') target.open = true;
-    }
-    window.addEventListener('hashchange', openFaqFromHash);
-    window.addEventListener('load', openFaqFromHash);
 
     // ------- Lead form -> Cal.com -------
     const CAL_LINK = "scorecardgtm/30min";
@@ -2459,6 +1844,7 @@
       modal.classList.remove('show-schedule');
       setTimeout(() => document.getElementById('name').focus(), 50);
     });
-  </script>
+  })();
+</script>
 </body>
 </html>

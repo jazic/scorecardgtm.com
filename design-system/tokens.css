@@ -20,8 +20,10 @@
   --sc-gold:        #FCAF0F;
   --sc-green:       #A8D862;
   --sc-blue:        #649BE4;
+  --sc-blue-deep:   #1a4fb8;       /* links, deep-blue gradient stop */
   --sc-purple:      #B493EA;
   --sc-ink:         #03153A;
+  --sc-coral:       #c47a5c;       /* negative / "without a plan" state */
 
   /* -- Semantic surfaces ------------------------------------------------- */
   --bg-1:           #FAFBFC;       /* page background */
@@ -45,7 +47,7 @@
 
   /* -- Elevation / shadow ------------------------------------------------ */
   --shadow-soft:    0 4px 12px -6px rgba(3,21,58,0.06);
-  --shadow-card:    0 30px 80px -30px rgba(3,21,58,0.18), 0 4px 12px -6px rgba(3,21,58,0.06);
+  --shadow-card:    0 30px 80px -30px rgba(3,21,58,0.20), 0 4px 12px -6px rgba(3,21,58,0.06);
   --shadow-modal:   0 40px 120px -20px rgba(3,21,58,0.45), 0 8px 24px -8px rgba(3,21,58,0.18);
 }
 

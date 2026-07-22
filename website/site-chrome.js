@@ -53,16 +53,16 @@
                 <div class="nav-svc" id="nav-svc">
                   <a class="nav-link${active === 'what' ? ' active' : ''}" href="${href(home, '#features', 'index.html#features')}" data-nav-section="services"${active === 'what' ? ' aria-current="page"' : ''}>What we do <span class="chev" id="chev">▼</span></a>
                   <div class="svc-menu" id="svc-menu"><div class="svc-menu-inner">
-                    <a class="sc-menu-link" href="what-we-do-coming-soon.html">Growth plan</a>
-                    <a class="sc-menu-link" href="what-we-do-coming-soon.html">Account sourcing + scoring</a>
-                    <a class="sc-menu-link" href="what-we-do-coming-soon.html">Fractional outbound</a>
+                    <a class="sc-menu-link" href="growth-strategy.html">Growth plan</a>
+                    <a class="sc-menu-link" href="account-scoring.html">Account sourcing + scoring</a>
+                    <a class="sc-menu-link" href="fractional-outbound.html">Fractional outbound</a>
                   </div></div>
                 </div>
                 <div class="nav-svc solutions-menu">
                   <a class="nav-link${active === 'solutions' ? ' active' : ''}" href="solutions-coming-soon.html"${active === 'solutions' ? ' aria-current="page"' : ''}>Solutions <span class="chev">▼</span></a>
                   <div class="svc-menu"><div class="svc-menu-inner">
                     <div class="solution-menu-group"><span class="solution-menu-label">By objective</span><a class="sc-menu-link" href="solutions-coming-soon.html">Sell to companies</a><a class="sc-menu-link" href="solutions-coming-soon.html">Invest in companies</a><a class="sc-menu-link" href="solutions-coming-soon.html">Acquire companies</a><a class="sc-menu-link" href="solutions-coming-soon.html">Buy from companies</a><a class="sc-menu-link" href="solutions-coming-soon.html">Hire from companies</a></div>
-                    <div class="solution-menu-group"><span class="solution-menu-label">By role</span><a class="sc-menu-link" href="solutions-coming-soon.html">CEOs and founders</a><a class="sc-menu-link" href="solutions-coming-soon.html">Revenue leaders</a><a class="sc-menu-link" href="private-equity.html">Private equity</a><a class="sc-menu-link solution-menu-new" href="eta-search.html"><span>ETA search</span><span class="solution-new-badge">New</span></a></div>
+                    <div class="solution-menu-group"><span class="solution-menu-label">By role</span><a class="sc-menu-link" href="ceos-founders.html">CEOs and founders</a><a class="sc-menu-link" href="sales-leaders.html">Revenue leaders</a><a class="sc-menu-link" href="private-equity.html">Private equity</a><a class="sc-menu-link solution-menu-new" href="eta-search.html"><span>ETA search</span><span class="solution-new-badge">New</span></a></div>
                     <div class="solution-menu-group"><span class="solution-menu-label">By industry</span>${industryMenuLinks}</div>
                     <a class="solution-menu-all" href="solutions-coming-soon.html">Explore all solutions →</a>
                   </div></div>
@@ -76,8 +76,23 @@
               </button>
             </div>
             <nav class="mobile-nav-panel" id="mobile-nav-panel" aria-label="Mobile navigation" aria-hidden="true">
-              <a href="${href(home, '#features', 'index.html#features')}"${active === 'what' ? ' aria-current="page"' : ''}>What we do</a>
-              <a href="solutions-coming-soon.html"${active === 'solutions' ? ' aria-current="page"' : ''}>Solutions</a>
+              <div class="mobile-nav-section">
+                <a class="mobile-nav-parent" href="${href(home, '#features', 'index.html#features')}"${active === 'what' ? ' aria-current="page"' : ''}>What we do <span aria-hidden="true">→</span></a>
+                <div class="mobile-nav-sublinks" aria-label="What we do pages">
+                  <a href="growth-strategy.html">Growth plan</a>
+                  <a href="account-scoring.html">Account sourcing + scoring</a>
+                  <a href="fractional-outbound.html">Fractional outbound</a>
+                </div>
+              </div>
+              <div class="mobile-nav-section">
+                <a class="mobile-nav-parent" href="solutions-coming-soon.html"${active === 'solutions' ? ' aria-current="page"' : ''}>Solutions <span aria-hidden="true">→</span></a>
+                <div class="mobile-nav-sublinks" aria-label="Solution pages">
+                  <a href="ceos-founders.html">CEOs and founders</a>
+                  <a href="sales-leaders.html">Revenue leaders</a>
+                  <a href="private-equity.html">Private equity</a>
+                  <a href="eta-search.html">ETA search <span class="solution-new-badge">New</span></a>
+                </div>
+              </div>
               <a href="${href(home, '#pricing', 'index.html#pricing')}">Pricing</a>
               <a href="https://app.scorecardgtm.com">Client login</a>
               <a class="mobile-nav-cta" href="${ctaHref}">${ctaLabel}</a>

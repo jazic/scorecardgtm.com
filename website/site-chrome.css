@@ -487,6 +487,8 @@ body.mobile-nav-open {
     right: 0;
     display: grid;
     gap: 4px;
+    max-height: calc(100vh - 92px);
+    overflow-y: auto;
     padding: 10px;
     border: 1px solid rgba(100,116,139,.18);
     border-radius: 16px;
@@ -520,6 +522,46 @@ body.mobile-nav-open {
 
   .mobile-nav-panel a:not(.mobile-nav-cta):hover {
     background: rgba(100,155,228,.1);
+  }
+
+  .mobile-nav-section {
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(100,116,139,.14);
+  }
+
+  .mobile-nav-section + .mobile-nav-section {
+    padding-top: 4px;
+  }
+
+  .mobile-nav-panel .mobile-nav-parent {
+    justify-content: space-between;
+  }
+
+  .mobile-nav-parent > span {
+    color: var(--blue-deep, #174c91);
+    font-size: 17px;
+  }
+
+  .mobile-nav-sublinks {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 3px;
+    padding: 0 6px 2px;
+  }
+
+  .mobile-nav-panel .mobile-nav-sublinks a {
+    min-height: 40px;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 6px 8px;
+    color: #526176 !important;
+    font-size: 12.5px;
+    font-weight: 600;
+    line-height: 1.25;
+  }
+
+  .mobile-nav-sublinks .solution-new-badge {
+    flex: 0 0 auto;
   }
 
   .mobile-nav-panel .mobile-nav-cta {
@@ -560,4 +602,5 @@ body.mobile-nav-open {
   .header-inner { padding-left: 10px; }
   .site-header .brand-word { font-size: 16px; }
   .hdr-cta { padding-inline: 11px; font-size: 12px; }
+  .mobile-nav-sublinks { grid-template-columns: 1fr; }
 }

@@ -155,6 +155,7 @@
       const home = isHome(this);
 
       this.innerHTML = `
+        ${home ? '' : '<div class="standalone-footer">'}
         <footer class="footer">
           <div>
             <a class="footer-brand" href="${href(home, '#top', 'index.html')}"><img src="design-system/assets/scorecard-mark-ondark.svg" alt="" /><span class="brand-word">Scorecard</span></a>
@@ -164,7 +165,8 @@
             <nav class="footer-links" aria-label="Footer navigation"><a href="${href(home, '#features', 'index.html#features')}">What we do</a><a href="solutions-coming-soon.html">Solutions</a><a href="${href(home, '#pricing', 'index.html#pricing')}">Pricing</a><a href="https://app.scorecardgtm.com">Client login</a><a href="#top">Back to top ↑</a></nav>
             <div class="footer-meta footer-copyright">© 2026 Scorecard</div>
           </div>
-        </footer>`;
+        </footer>
+        ${home ? '' : '</div>'}`;
     }
   }
 

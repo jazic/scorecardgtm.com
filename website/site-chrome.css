@@ -333,6 +333,16 @@ body.mobile-nav-open {
   text-align: left;
 }
 
+.standalone-footer {
+  margin-top: 0;
+  padding: 1px 32px 48px;
+  background: #03153a;
+}
+
+.standalone-footer .footer {
+  margin-top: 0;
+}
+
 .footer-brand {
   min-height: 44px;
   display: inline-flex;
@@ -525,6 +535,14 @@ body.mobile-nav-open {
   .footer {
     grid-template-columns: 1fr;
     margin-top: 72px;
+  }
+
+  .standalone-footer {
+    padding: 1px 20px 36px;
+  }
+
+  .standalone-footer .footer {
+    margin-top: 0;
   }
 
   .footer-links {

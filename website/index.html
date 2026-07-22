@@ -90,20 +90,17 @@
     .hero-fold { position: relative; z-index: 3; min-height: 100vh; min-height: 100svh; padding: 136px 0 18px; display: flex; flex-direction: column; gap: 42px; }
     .hero-copy { position: relative; z-index: 2; isolation: isolate; text-shadow: 0 1px 12px rgba(3,21,58,.42); }
     .hero-copy::before { content: ""; position: absolute; z-index: -1; inset: -58px -72px -48px; pointer-events: none; background: radial-gradient(ellipse at center, rgba(3,21,58,.48) 0%, rgba(3,21,58,.28) 44%, rgba(3,21,58,0) 76%); filter: blur(10px); }
-    .hero h1, .hero .hero-kicker, .hero .hero-description, .hero .hero-operator-note, .hero .hero-cta, .hero .hero-qualifier { animation: hero-in .85s var(--ease) both; }
-    .hero-kicker { width: fit-content; margin: 0 auto 24px; padding: 7px 11px; border: 1px solid rgba(255,255,255,.2); border-radius: 999px; color: rgba(255,255,255,.76); background: rgba(3,21,58,.52); font-size: 10.5px; font-weight: 750; letter-spacing: .09em; line-height: 1.25; text-transform: uppercase; animation-delay: .02s; }
+    .hero h1, .hero .hero-description, .hero .hero-cta { animation: hero-in .85s var(--ease) both; }
     .hero h1 { margin: 0 auto 30px; max-width: 1000px; font-size: clamp(52px, 5.25vw, 78px); line-height: .98; color: #fff; animation-delay: .06s; }
     .hero-line { display: block; white-space: nowrap; }
     .hero h1 em { color: var(--green); font-weight: 700; font-style: normal; position: relative; white-space: nowrap; text-shadow: 0 0 28px rgba(168,216,98,.22); }
     .hero-description { width: min(760px, calc(100% - 40px)); margin: 0 auto; color: rgba(255,255,255,.84); font-size: clamp(18px, 1.65vw, 22px); font-weight: 500; line-height: 1.5; letter-spacing: -.018em; text-wrap: pretty; animation-delay: .14s; }
-    .hero-operator-note { margin: 13px auto 0; color: #fff; font-size: 14px; font-weight: 700; line-height: 1.45; animation-delay: .18s; }
     .hero-cta { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 13px; margin-top: 24px; animation-delay: .22s; }
     .hero-cta .button { width: auto; min-width: 242px; white-space: nowrap; }
     .hero-cta .button-primary { background: var(--green); color: var(--ink); text-shadow: none; box-shadow: 0 14px 34px -12px rgba(0,5,18,.55); }
     .hero-cta .button-primary:hover { opacity: .92; }
     .hero-cta .button-secondary { color: var(--ink); border-color: rgba(255,255,255,.9); background: rgba(255,255,255,.94); text-shadow: none; box-shadow: 0 14px 34px -14px rgba(0,5,18,.58); }
     .hero-cta .button-secondary:hover { color: var(--ink); background: #fff; transform: translateY(-1px); }
-    .hero-qualifier { margin: 16px auto 0; color: rgba(255,255,255,.58); font-size: 12px; font-weight: 600; line-height: 1.45; animation-delay: .28s; }
     @keyframes hero-in { from { opacity: 0; transform: translateY(18px); } }
 
     /* ---------- Hero confidence panel: experience + CRM compatibility ---------- */
@@ -210,14 +207,16 @@
     #delivery { background: #fff; }
     .division-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; width: min(980px, calc(100% - 64px)); margin: 0 auto; }
     .division-card { padding: 38px; border: 1px solid var(--line); border-radius: 16px; background: var(--paper-2); }
-    .division-card.software { color: #fff; border-color: transparent; background: linear-gradient(150deg, #143a73, #03153A 72%); }
+    .division-card.software { color: #fff; border-color: rgba(100,155,228,.34); background: linear-gradient(150deg, #174A8F, #03153A 72%); box-shadow: 0 28px 60px -42px rgba(3,21,58,.9); }
     .division-label { color: var(--blue-deep); font-size: 10px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
-    .division-card.software .division-label { color: var(--green); }
+    .division-card.software .division-label { color: #B9EA75; }
     .division-card h3 { margin: 16px 0 24px; font-size: 27px; line-height: 1.1; letter-spacing: -.035em; }
+    .division-card.software h3 { color: #fff; }
     .division-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 16px; }
     .division-list li { display: grid; grid-template-columns: 18px 1fr; gap: 10px; color: var(--body); font-size: 14px; line-height: 1.5; }
     .division-list li::before { content: "✓"; width: 18px; height: 18px; display: grid; place-items: center; border-radius: 50%; color: #315c17; background: rgba(168,216,98,.24); font-size: 10px; font-weight: 900; }
-    .division-card.software .division-list li { color: rgba(255,255,255,.74); }
+    .division-card.software .division-list li { color: rgba(255,255,255,.9); }
+    .division-card.software .division-list li::before { color: #17360A; background: #B9EA75; }
     .client-role { width: min(980px, calc(100% - 64px)); margin: 18px auto 0; padding: 20px 24px; border: 1px solid rgba(100,155,228,.25); border-radius: 14px; color: var(--body); background: rgba(100,155,228,.07); font-size: 14px; line-height: 1.55; text-align: center; }
     .client-role strong { color: var(--ink); }
     .case-study { padding: 96px 0; color: #fff; background: #050505; }
@@ -484,8 +483,6 @@
     .plan-features { list-style: none; margin: 24px 0 0; padding: 22px 0 0; display: grid; gap: 13px; border-top: 1px solid var(--hair); }
     .plan-features li { display: grid; grid-template-columns: 17px 1fr; gap: 8px; color: var(--body); font-size: 12px; line-height: 1.4; }
     .plan-features .check { width: 16px; height: 16px; display: grid; place-items: center; border-radius: 50%; color: #315c17; background: rgba(168,216,98,.24); font-size: 9px; font-weight: 900; }
-    .pricing-note { max-width: 760px; margin: 28px auto 0; padding: 18px 22px; border: 1px solid rgba(100,155,228,.22); border-radius: 14px; color: var(--body); background: rgba(100,155,228,.07); font-size: 13px; line-height: 1.55; text-align: center; text-wrap: pretty; }
-    .pricing-note strong { color: var(--ink); }
     .final-cta { width: 100%; margin: 0; border-radius: 0; color: white; padding: 96px 40px 40px; text-align: center; position: relative; overflow: hidden; background: #03153A; }
     .final-cta::before { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(120deg, rgba(3,21,58,.62), rgba(10,37,80,.36) 48%, rgba(20,58,115,.18)), radial-gradient(circle at 16% 18%, rgba(180,147,234,.24), transparent 30%), radial-gradient(circle at 88% 30%, rgba(168,216,98,.16), transparent 30%); }
     .final-cta > * { position: relative; z-index: 2; }
@@ -704,9 +701,7 @@
       .hero-fold { padding: 112px 0 18px; gap: 40px; }
       .hero h1 { font-size: clamp(38px, 11.2vw, 50px); line-height: .96; margin-top: 22px; }
       .hero h1 em { white-space: normal; }
-      .hero-kicker { max-width: 320px; margin-bottom: 20px; font-size: 9px; }
       .hero-description { width: calc(100% - 20px); font-size: 17px; line-height: 1.52; }
-      .hero-operator-note { width: calc(100% - 20px); font-size: 13px; }
       .hero-cta .button { width: 100%; max-width: 320px; min-width: 0; }
       .system-scroll { height: 170svh; }
       .system-stage { width: calc(100% - 36px); }
@@ -720,7 +715,6 @@
       .feature-card { min-height: 0; padding: 26px 20px; }
       .feature-card h3 { font-size: 27px; }
       .feature-card > .visual { display: none; }
-      .feature-card > .card-link { min-height: 44px; display: inline-flex; align-items: center; }
       .mobile-visual-summary {
         display: grid; gap: 10px; margin-top: 28px; padding: 15px;
         border: 1px solid rgba(100,116,139,.18); border-radius: 14px;
@@ -846,15 +840,12 @@
       <div class="hero-mosaic" aria-hidden="true"><div id="hero-mosaic-wrap"></div></div>
       <div class="hero-fold">
         <div class="hero-copy shell">
-          <div class="hero-kicker">The managed growth planning and outbound partner for B2B companies</div>
           <h1 class="serif"><span class="hero-line">Turn your revenue target into</span> <span class="hero-line">the right accounts and</span> <span class="hero-line"><em class="t-mosaic">qualified pipeline.</em></span></h1>
           <p class="hero-description">Scorecard diagnoses what is holding growth back, builds the plan and account system to fix it, and runs focused outbound when execution is the gap.</p>
-          <p class="hero-operator-note">Our experts operate the system. Your sales team closes the deals.</p>
         <div class="hero-cta">
           <button class="button button-primary" type="button" data-open-book>Build your growth plan <span aria-hidden="true">→</span></button>
           <a class="button button-secondary" href="#features">See how Scorecard works <span aria-hidden="true">→</span></a>
         </div>
-          <p class="hero-qualifier">For CEOs and revenue leaders at established B2B companies.</p>
         </div>
 
         <!-- A compact confidence panel: one slow experience marquee, one static CRM row. -->
@@ -960,7 +951,7 @@
               <line x1="635" y1="216" x2="640" y2="211" stroke="rgba(100,116,139,.4)" stroke-dasharray="2 4"></line>
               <rect x="640" y="196" width="170" height="30" rx="15" fill="#0A214A" stroke="rgba(100,155,228,.42)" filter="url(#sys-chipshadow)"></rect>
               <g transform="translate(653,204)"><g class="sys-chip-check"><rect x="1" y="1" width="12" height="12" rx="3" fill="#A8D862"></rect><path d="M4.2 7.1 6.2 9 10 4.9" fill="none" stroke="#03153A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></g></g>
-              <text x="674" y="215" style="font-size:12px; font-weight:600;" fill="#FFFFFF">Weekly report</text>
+              <text x="674" y="215" style="font-size:12px; font-weight:600;" fill="#FFFFFF">Reporting</text>
             </g>
             <g class="sys-chip" data-hero-target data-t="5.9" data-check-t="6.04">
               <line x1="676" y1="161" x2="680" y2="166" stroke="rgba(100,116,139,.4)" stroke-dasharray="2 4"></line>
@@ -1073,7 +1064,8 @@
           <div class="feature-meta"><span class="feature-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M3 2.5h7l3 3v8H3z"></path><path d="M10 2.5v3h3M5.5 8h5M5.5 10.5h3.5"></path></svg></span><span>Diagnose · Growth plan</span></div>
           <h3>Find what is really behind the revenue target.</h3>
           <p>We model market, economics, funnel, capacity, and investment together. You see what must be true, what is most likely to break, and where to act first.</p>
-          <a class="card-link" href="#pricing">Explore the growth plan →</a>
+          <!-- Detail link hidden until the growth plan destination is ready. -->
+          <!-- <a class="card-link" href="growth-strategy.html">Explore the growth plan →</a> -->
           <div class="mobile-visual-summary" aria-label="Growth plan outputs">
             <div class="mobile-summary-row"><span>Market and economics</span><strong>Modeled</strong></div>
             <div class="mobile-summary-row"><span>Funnel and capacity</span><strong>Forecast</strong></div>
@@ -1207,7 +1199,8 @@
           <div class="feature-meta"><span class="feature-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="5.5"></circle><circle cx="8" cy="8" r="2.5"></circle><path d="M8 1v2M8 13v2M1 8h2M13 8h2"></path></svg></span><span>Prioritize · Account system</span></div>
           <h3>Turn what we learn into account priorities.</h3>
           <p>We define the market, build an explainable scorecard, and give your team a ranked queue connected to the plan. Every priority has a reason.</p>
-          <a class="card-link" href="#pricing">Explore the account system →</a>
+          <!-- Detail link hidden until the account system destination is ready. -->
+          <!-- <a class="card-link" href="account-scoring.html">Explore the account system →</a> -->
           <div class="mobile-visual-summary" aria-label="Account sourcing and scoring output">
             <div class="mobile-summary-flow">Target market <b>→</b> Ranked account queue</div>
             <div class="mobile-summary-row"><span>Best-fit account</span><strong>92 · Tier A</strong></div>
@@ -1269,7 +1262,8 @@
           <div class="feature-meta"><span class="feature-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M2.5 9.5v-3l8-3v9z"></path><path d="M10.5 6a3.5 3.5 0 0 1 0 4M4.5 10l1 3"></path></svg></span><span>Execute · Managed outbound</span></div>
           <h3>Add focused execution when capacity is the gap.</h3>
           <p>Our team runs email, LinkedIn, and cold calls against the accounts that matter most. Qualified conversations and campaign evidence feed the next decision.</p>
-          <a class="card-link" href="#pricing">Explore managed outbound →</a>
+          <!-- Detail link hidden until the managed outbound destination is ready. -->
+          <!-- <a class="card-link" href="fractional-outbound.html">Explore managed outbound →</a> -->
           <div class="mobile-visual-summary" aria-label="Managed outbound workflow">
             <div class="mobile-summary-flow">Priority account <b>→</b> Qualified meeting</div>
             <div class="mobile-summary-row"><span>List and messaging</span><strong>Managed</strong></div>
@@ -1414,8 +1408,8 @@
             <span class="plan-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="5.5"></circle><circle cx="8" cy="8" r="2.5"></circle><path d="M8 1v2M8 13v2M1 8h2M13 8h2"></path></svg></span>
             <h3>Account System</h3>
             <div class="plan-model">
-              <div class="plan-quantity"><strong>Weekly</strong><span>account priorities</span></div>
-              <div class="plan-quantity-caption">Operating cadence</div>
+              <div class="plan-quantity"><strong>Daily / weekly</strong><span>new accounts</span></div>
+              <div class="plan-quantity-caption">Sourcing and scoring cadence</div>
               <div class="plan-commercial"><strong>Recurring managed system</strong><span>Scoped to market coverage, account volume, and refresh cadence.</span></div>
             </div>
             <p class="plan-for">Source the right accounts, score every one against the model, and prioritize likely buyers.</p>
@@ -1425,6 +1419,7 @@
               <li><span class="check">✓</span><span>Explainable account scoring</span></li>
               <li><span class="check">✓</span><span>Tier A–D ranked queue</span></li>
               <li><span class="check">✓</span><span>CRM-ready delivery</span></li>
+              <li><span class="check">✓</span><span>Weekly feedback and learning loop</span></li>
             </ul>
           </article>
           <article class="plan-column" style="--plan-accent:#D78668;">
@@ -1446,7 +1441,6 @@
             </ul>
           </article>
         </div>
-        <p class="pricing-note"><strong>Start with the smallest useful scope.</strong> After a working session, we recommend what to solve first and what not to buy yet.</p>
       </div>
     </section>
 

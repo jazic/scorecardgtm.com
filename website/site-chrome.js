@@ -20,10 +20,6 @@
     }
   ];
 
-  const industryMenuLinks = solutionIndustries
-    .map(({ label }) => `<a class="sc-menu-link" href="solutions-coming-soon.html">${label}</a>`)
-    .join('');
-
   class ScorecardSiteHeader extends HTMLElement {
     connectedCallback() {
       if (this.dataset.ready) return;
@@ -50,23 +46,8 @@
                 <span class="brand-word" id="brand-word">Scorecard</span>
               </a>
               <nav class="site-nav" aria-label="Primary navigation">
-                <div class="nav-svc" id="nav-svc">
-                  <a class="nav-link${active === 'what' ? ' active' : ''}" href="${href(home, '#features', 'index.html#features')}" data-nav-section="services"${active === 'what' ? ' aria-current="page"' : ''}>What we do <span class="chev" id="chev">▼</span></a>
-                  <div class="svc-menu" id="svc-menu"><div class="svc-menu-inner">
-                    <a class="sc-menu-link" href="growth-strategy.html">Growth plan</a>
-                    <a class="sc-menu-link" href="account-scoring.html">Account sourcing + scoring</a>
-                    <a class="sc-menu-link" href="fractional-outbound.html">Fractional outbound</a>
-                  </div></div>
-                </div>
-                <div class="nav-svc solutions-menu">
-                  <a class="nav-link${active === 'solutions' ? ' active' : ''}" href="solutions-coming-soon.html"${active === 'solutions' ? ' aria-current="page"' : ''}>Solutions <span class="chev">▼</span></a>
-                  <div class="svc-menu"><div class="svc-menu-inner">
-                    <div class="solution-menu-group"><span class="solution-menu-label">By objective</span><a class="sc-menu-link" href="solutions-coming-soon.html">Sell to companies</a><a class="sc-menu-link" href="solutions-coming-soon.html">Invest in companies</a><a class="sc-menu-link" href="solutions-coming-soon.html">Acquire companies</a><a class="sc-menu-link" href="solutions-coming-soon.html">Buy from companies</a><a class="sc-menu-link" href="solutions-coming-soon.html">Hire from companies</a></div>
-                    <div class="solution-menu-group"><span class="solution-menu-label">By role</span><a class="sc-menu-link" href="ceos-founders.html">CEOs and founders</a><a class="sc-menu-link" href="sales-leaders.html">Revenue leaders</a><a class="sc-menu-link" href="private-equity.html">Private equity</a><a class="sc-menu-link solution-menu-new" href="eta-search.html"><span>ETA search</span><span class="solution-new-badge">New</span></a></div>
-                    <div class="solution-menu-group"><span class="solution-menu-label">By industry</span>${industryMenuLinks}</div>
-                    <a class="solution-menu-all" href="solutions-coming-soon.html">Explore all solutions →</a>
-                  </div></div>
-                </div>
+                <a class="nav-link${active === 'what' ? ' active' : ''}" href="${href(home, '#features', 'index.html#features')}" data-nav-section="services"${active === 'what' ? ' aria-current="page"' : ''}>How it works</a>
+                <a class="nav-link" href="${href(home, '#who-we-help', 'index.html#who-we-help')}">Who we help</a>
                 <a class="nav-link" href="${href(home, '#pricing', 'index.html#pricing')}" data-nav-section="pricing">Pricing</a>
                 <a class="nav-link" href="https://app.scorecardgtm.com">Client login</a>
                 <a class="hdr-cta" id="hdr-cta" href="${ctaHref}"><span class="hdr-cta-full">${ctaLabel}</span><span class="hdr-cta-short">${ctaShortLabel}</span></a>
@@ -76,23 +57,8 @@
               </button>
             </div>
             <nav class="mobile-nav-panel" id="mobile-nav-panel" aria-label="Mobile navigation" aria-hidden="true">
-              <div class="mobile-nav-section">
-                <a class="mobile-nav-parent" href="${href(home, '#features', 'index.html#features')}"${active === 'what' ? ' aria-current="page"' : ''}>What we do <span aria-hidden="true">→</span></a>
-                <div class="mobile-nav-sublinks" aria-label="What we do pages">
-                  <a href="growth-strategy.html">Growth plan</a>
-                  <a href="account-scoring.html">Account sourcing + scoring</a>
-                  <a href="fractional-outbound.html">Fractional outbound</a>
-                </div>
-              </div>
-              <div class="mobile-nav-section">
-                <a class="mobile-nav-parent" href="solutions-coming-soon.html"${active === 'solutions' ? ' aria-current="page"' : ''}>Solutions <span aria-hidden="true">→</span></a>
-                <div class="mobile-nav-sublinks" aria-label="Solution pages">
-                  <a href="ceos-founders.html">CEOs and founders</a>
-                  <a href="sales-leaders.html">Revenue leaders</a>
-                  <a href="private-equity.html">Private equity</a>
-                  <a href="eta-search.html">ETA search <span class="solution-new-badge">New</span></a>
-                </div>
-              </div>
+              <a href="${href(home, '#features', 'index.html#features')}"${active === 'what' ? ' aria-current="page"' : ''}>How it works</a>
+              <a href="${href(home, '#who-we-help', 'index.html#who-we-help')}">Who we help</a>
               <a href="${href(home, '#pricing', 'index.html#pricing')}">Pricing</a>
               <a href="https://app.scorecardgtm.com">Client login</a>
               <a class="mobile-nav-cta" href="${ctaHref}">${ctaLabel}</a>
@@ -177,7 +143,7 @@
             <div class="footer-meta footer-tagline">Make revenue more predictable.</div>
           </div>
           <div>
-            <nav class="footer-links" aria-label="Footer navigation"><a href="${href(home, '#features', 'index.html#features')}">What we do</a><a href="solutions-coming-soon.html">Solutions</a><a href="${href(home, '#pricing', 'index.html#pricing')}">Pricing</a><a href="https://app.scorecardgtm.com">Client login</a><a href="#top">Back to top ↑</a></nav>
+            <nav class="footer-links" aria-label="Footer navigation"><a href="${href(home, '#features', 'index.html#features')}">How it works</a><a href="${href(home, '#who-we-help', 'index.html#who-we-help')}">Who we help</a><a href="${href(home, '#pricing', 'index.html#pricing')}">Pricing</a><a href="https://app.scorecardgtm.com">Client login</a><a href="#top">Back to top ↑</a></nav>
             <div class="footer-meta footer-copyright">© 2026 Scorecard</div>
           </div>
         </footer>

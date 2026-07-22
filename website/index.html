@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Scorecard — Make revenue more predictable.</title>
-  <meta name="description" content="Scorecard helps revenue teams build the growth plan, find and prioritize the right accounts, and put the plan into action with software and expert support." />
+  <title>Scorecard: Turn revenue targets into qualified pipeline.</title>
+  <meta name="description" content="Scorecard finds what is holding B2B growth back, builds the plan and account system to fix it, and runs focused outbound when extra execution is needed." />
   <link rel="icon" type="image/png" sizes="32x32" href="design-system/assets/favicon-32.png" />
-  <!-- PostHog — product analytics + session replay -->
+  <!-- PostHog: product analytics + session replay -->
   <script>
     !function(t,e){var o,n,p,r;e.__SV||(window.posthog && window.posthog.__loaded)||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="Xi tn init mn Qr yn xn pn capture calculateEventProperties Tn register register_once register_for_session unregister unregister_for_session Pn getFeatureFlag getFeatureFlagPayload getFeatureFlagResult isFeatureEnabled reloadFeatureFlags updateFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey displaySurvey cancelPendingSurvey canRenderSurvey canRenderSurveyAsync On identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset setIdentity clearIdentity get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException addExceptionStep captureLog startExceptionAutocapture stopExceptionAutocapture loadToolbar get_property getSessionProperty Mn Cn createPersonProfile setInternalOrTestUser Rn vn An opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing get_explicit_consent_status is_capturing clear_opt_in_out_capturing Sn debug Kr En getPageViewId captureTraceFeedback captureTraceMetric hn".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
     posthog.init('phc_BsMQ4wmsDxP5ooamuEMVWUSaPakZ3QzkaLTSyVSd62fy', {
@@ -90,25 +90,20 @@
     .hero-fold { position: relative; z-index: 3; min-height: 100vh; min-height: 100svh; padding: 136px 0 18px; display: flex; flex-direction: column; gap: 42px; }
     .hero-copy { position: relative; z-index: 2; isolation: isolate; text-shadow: 0 1px 12px rgba(3,21,58,.42); }
     .hero-copy::before { content: ""; position: absolute; z-index: -1; inset: -58px -72px -48px; pointer-events: none; background: radial-gradient(ellipse at center, rgba(3,21,58,.48) 0%, rgba(3,21,58,.28) 44%, rgba(3,21,58,0) 76%); filter: blur(10px); }
-    .hero h1, .hero .hero-services, .hero .hero-cta { animation: hero-in .85s var(--ease) both; }
+    .hero h1, .hero .hero-kicker, .hero .hero-description, .hero .hero-operator-note, .hero .hero-cta, .hero .hero-qualifier { animation: hero-in .85s var(--ease) both; }
+    .hero-kicker { width: fit-content; margin: 0 auto 24px; padding: 7px 11px; border: 1px solid rgba(255,255,255,.2); border-radius: 999px; color: rgba(255,255,255,.76); background: rgba(3,21,58,.52); font-size: 10.5px; font-weight: 750; letter-spacing: .09em; line-height: 1.25; text-transform: uppercase; animation-delay: .02s; }
     .hero h1 { margin: 0 auto 30px; max-width: 1000px; font-size: clamp(52px, 5.25vw, 78px); line-height: .98; color: #fff; animation-delay: .06s; }
     .hero-line { display: block; white-space: nowrap; }
     .hero h1 em { color: var(--green); font-weight: 700; font-style: normal; position: relative; white-space: nowrap; text-shadow: 0 0 28px rgba(168,216,98,.22); }
-    .hero-services { position: relative; z-index: 4; width: min(850px, calc(100% - 40px)); margin: 0 auto; display: grid; gap: 8px; color: rgba(255,255,255,.88); font-family: var(--sans); font-size: clamp(18px, 1.55vw, 22px); font-weight: 500; line-height: 1.42; letter-spacing: -.018em; animation-delay: .14s; text-wrap: pretty; }
-    .hero-service-line { display: flex; align-items: center; justify-content: center; gap: 7px; }
-    .hero-service-copy { text-align: center; }
-    .hero-service-line .hero-service-pill { margin: 0; }
-    .hero-service-ending { display: inline-flex; align-items: center; gap: 2px; white-space: nowrap; }
-    .hero-service-punctuation { color: rgba(255,255,255,.82); }
-    .hero-service-pill { position: relative; z-index: 5; display: inline-flex; align-items: center; justify-content: center; gap: 7px; height: 30px; margin: 0 2px; padding: 0 11px; vertical-align: middle; border: 1px solid rgba(255,255,255,.25); border-radius: 999px; color: #fff; background: rgba(3,21,58,.68); box-shadow: inset 0 1px rgba(255,255,255,.08), 0 8px 20px -14px rgba(0,5,18,.82); backdrop-filter: blur(10px) saturate(120%); -webkit-backdrop-filter: blur(10px) saturate(120%); font-size: 12.5px; font-weight: 700; letter-spacing: -.01em; line-height: 1; white-space: nowrap; text-shadow: none; transform-origin: center; will-change: transform, opacity; }
-    .hero-service-pill > span { display: block; line-height: 1; transform: translateY(-.25px); }
-    .hero-service-pill svg { width: 15px; height: 15px; display: block; align-self: center; flex: 0 0 auto; fill: none; stroke: var(--pill-accent,#4a7c1e); stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+    .hero-description { width: min(760px, calc(100% - 40px)); margin: 0 auto; color: rgba(255,255,255,.84); font-size: clamp(18px, 1.65vw, 22px); font-weight: 500; line-height: 1.5; letter-spacing: -.018em; text-wrap: pretty; animation-delay: .14s; }
+    .hero-operator-note { margin: 13px auto 0; color: #fff; font-size: 14px; font-weight: 700; line-height: 1.45; animation-delay: .18s; }
     .hero-cta { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 13px; margin-top: 24px; animation-delay: .22s; }
     .hero-cta .button { width: auto; min-width: 242px; white-space: nowrap; }
     .hero-cta .button-primary { background: var(--green); color: var(--ink); text-shadow: none; box-shadow: 0 14px 34px -12px rgba(0,5,18,.55); }
     .hero-cta .button-primary:hover { opacity: .92; }
     .hero-cta .button-secondary { color: var(--ink); border-color: rgba(255,255,255,.9); background: rgba(255,255,255,.94); text-shadow: none; box-shadow: 0 14px 34px -14px rgba(0,5,18,.58); }
     .hero-cta .button-secondary:hover { color: var(--ink); background: #fff; transform: translateY(-1px); }
+    .hero-qualifier { margin: 16px auto 0; color: rgba(255,255,255,.58); font-size: 12px; font-weight: 600; line-height: 1.45; animation-delay: .28s; }
     @keyframes hero-in { from { opacity: 0; transform: translateY(18px); } }
 
     /* ---------- Hero confidence panel: experience + CRM compatibility ---------- */
@@ -145,7 +140,6 @@
     @media (min-width: 1280px) {
       .hero-fold { padding-top: 156px; }
       .hero h1 { max-width: 1040px; font-size: clamp(72px, 5.5vw, 84px); }
-      .hero-services { margin-top: 4px; }
       .hero-cta { margin-top: 28px; }
     }
     @media (min-width: 881px) and (max-width: 1279px) {
@@ -157,7 +151,6 @@
     }
 
     .system-scroll { position: relative; z-index: 2; height: 230vh; margin-top: 26px; }
-    .system-scroll::before { content: ""; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(circle at 8% 12%, rgba(100,155,228,.34), transparent 32%), radial-gradient(circle at 92% 88%, rgba(180,147,234,.23), transparent 30%); }
     .system-stage { position: sticky; z-index: 1; top: 0; height: 100vh; padding: 88px 0 24px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 22px; width: min(900px, calc(100% - 64px)); margin: 0 auto; }
     .system-h { opacity: 0; transform: translateY(16px); transition: opacity .7s var(--ease) .1s, transform .7s var(--ease) .1s; margin: 0; color: #fff; font-size: clamp(30px, 3vw, 42px); line-height: 1.06; font-weight: 700; letter-spacing: -.03em; text-align: center; max-width: 756px; text-wrap: balance; }
     .system-sub { opacity: 0; transform: translateY(12px); transition: opacity .7s var(--ease) .22s, transform .7s var(--ease) .22s; margin: 0; color: rgba(255,255,255,.65); font-size: 15px; line-height: 1.5; text-align: center; max-width: 560px; text-wrap: pretty; }
@@ -170,8 +163,6 @@
     .system-card text { font-family: var(--sans); }
     @media (max-width: 700px) {
       .system-h { font-size: 30px; }
-      .hero-service-pill { height: 28px; padding: 0 8px; gap: 5px; font-size: 11px; }
-      .hero-service-pill svg { width: 14px; height: 14px; }
     }
     .sys-lbl { font-size: 11px; font-weight: 600; letter-spacing: .07em; fill: var(--muted); }
     .sys-sm { font-size: 11px; font-weight: 500; fill: #94A3B8; font-variant-numeric: tabular-nums; }
@@ -189,6 +180,56 @@
     @keyframes sys-ring { 0% { opacity: .9; transform: scale(.4); } 100% { opacity: 0; transform: scale(2.2); } }
     .sys-chip { opacity: 0; transform-box: fill-box; transform-origin: center; will-change: opacity, transform; }
     .sys-chip-check { opacity: 0; transform-box: fill-box; transform-origin: center; will-change: opacity, transform; }
+
+    /* ---------- Who we help ---------- */
+    .who-help { position: relative; z-index: 4; width: 100%; margin: -120px 0 0; padding: 104px 0 88px; scroll-margin-top: 76px; color: var(--ink); background: #F4F6F9; text-align: left; }
+    .who-help::before { content: ""; position: absolute; top: 0; left: 50%; width: 124px; height: 4px; background: var(--green); transform: translateX(-50%); }
+    .who-help-inner { width: min(1220px, calc(100% - 64px)); margin: 0 auto; }
+    .who-help-heading { max-width: 920px; margin: 0 auto; text-align: center; }
+    .who-help-heading h2 { margin: 0; color: var(--ink); font-size: clamp(42px,4.2vw,58px); line-height: 1.01; letter-spacing: -.045em; }
+    .who-help-heading p { max-width: 660px; margin: 22px auto 0; color: var(--body); font-size: 17px; line-height: 1.62; letter-spacing: -.01em; text-wrap: pretty; }
+    .who-help-audiences { display: grid; grid-template-columns: minmax(0,1.55fr) minmax(330px,.72fr); gap: 28px; margin-top: 60px; align-items: stretch; }
+    .audience-group-label { margin: 0 0 18px; color: var(--muted); font-size: 11px; font-weight: 750; letter-spacing: .1em; line-height: 1; text-transform: uppercase; }
+    .operating-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); border-top: 1px solid rgba(100,116,139,.24); border-left: 1px solid rgba(100,116,139,.24); background: rgba(255,255,255,.52); }
+    .who-help-item { min-height: 204px; padding: 30px 32px 32px; text-align: left; border-right: 1px solid rgba(100,116,139,.24); border-bottom: 1px solid rgba(100,116,139,.24); }
+    .who-help-icon { width: 32px; height: 32px; display: block; color: var(--blue-deep); }
+    .who-help-icon svg { width: 100%; height: 100%; display: block; fill: none; stroke: currentColor; stroke-width: 1.45; stroke-linecap: round; stroke-linejoin: round; }
+    .who-help-item h4 { max-width: 300px; margin: 24px 0 9px; color: var(--ink); font-size: 20px; line-height: 1.22; letter-spacing: -.025em; }
+    .who-help-item p { max-width: 330px; margin: 0; color: var(--muted); font-size: 13.5px; line-height: 1.58; }
+    .investor-panel { min-height: 100%; padding: 32px; display: flex; flex-direction: column; overflow: hidden; position: relative; color: #fff; border-radius: 12px; background: var(--ink); box-shadow: 0 26px 60px -46px rgba(3,21,58,.85); }
+    .investor-panel .audience-group-label { color: var(--green); }
+    .investor-visual { height: 190px; margin: 4px -6px 26px; }
+    .investor-visual svg { width: 100%; height: 100%; display: block; overflow: visible; }
+    .investor-panel h3 { max-width: 320px; margin: auto 0 12px; color: #fff; font-size: 27px; line-height: 1.08; letter-spacing: -.035em; }
+    .investor-panel > p { max-width: 340px; margin: 0; color: rgba(255,255,255,.68); font-size: 14px; line-height: 1.62; }
+    .who-help-bridge { display: flex; align-items: center; gap: 18px; margin-top: 68px; color: var(--muted); font-size: 12px; font-weight: 750; letter-spacing: .08em; line-height: 1.3; text-align: center; text-transform: uppercase; }
+    .who-help-bridge::before, .who-help-bridge::after { content: ""; height: 1px; flex: 1; background: rgba(100,116,139,.2); }
+    .who-help-bridge span { flex: 0 0 auto; }
+
+    /* ---------- Experts, software, and proof ---------- */
+    #delivery { background: #fff; }
+    .division-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; width: min(980px, calc(100% - 64px)); margin: 0 auto; }
+    .division-card { padding: 38px; border: 1px solid var(--line); border-radius: 16px; background: var(--paper-2); }
+    .division-card.software { color: #fff; border-color: transparent; background: linear-gradient(150deg, #143a73, #03153A 72%); }
+    .division-label { color: var(--blue-deep); font-size: 10px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+    .division-card.software .division-label { color: var(--green); }
+    .division-card h3 { margin: 16px 0 24px; font-size: 27px; line-height: 1.1; letter-spacing: -.035em; }
+    .division-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 16px; }
+    .division-list li { display: grid; grid-template-columns: 18px 1fr; gap: 10px; color: var(--body); font-size: 14px; line-height: 1.5; }
+    .division-list li::before { content: "✓"; width: 18px; height: 18px; display: grid; place-items: center; border-radius: 50%; color: #315c17; background: rgba(168,216,98,.24); font-size: 10px; font-weight: 900; }
+    .division-card.software .division-list li { color: rgba(255,255,255,.74); }
+    .client-role { width: min(980px, calc(100% - 64px)); margin: 18px auto 0; padding: 20px 24px; border: 1px solid rgba(100,155,228,.25); border-radius: 14px; color: var(--body); background: rgba(100,155,228,.07); font-size: 14px; line-height: 1.55; text-align: center; }
+    .client-role strong { color: var(--ink); }
+    .case-study { padding: 96px 0; color: #fff; background: #050505; }
+    .case-study-inner { width: min(1120px, calc(100% - 64px)); margin: 0 auto; }
+    .case-study-kicker { color: rgba(255,255,255,.54); font-size: 10px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+    .case-study h2 { max-width: 980px; margin: 24px 0 56px; font-size: clamp(44px,5vw,68px); line-height: 1.02; letter-spacing: -.045em; }
+    .case-study-grid { display: grid; grid-template-columns: repeat(4,1fr); border-top: 1px solid rgba(255,255,255,.28); border-bottom: 1px solid rgba(255,255,255,.28); }
+    .case-study-part { min-height: 210px; padding: 28px 24px; border-right: 1px solid rgba(255,255,255,.22); }
+    .case-study-part:last-child { border-right: 0; }
+    .case-study-part span { color: rgba(255,255,255,.48); font-size: 9px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+    .case-study-part p { margin: 48px 0 0; color: rgba(255,255,255,.82); font-size: 16px; line-height: 1.5; }
+    .case-study-note { margin: 22px 0 0; color: rgba(255,255,255,.48); font-size: 12px; }
 
     /* ---------- Sections ---------- */
     .section { padding: 88px 0; position: relative; }
@@ -223,20 +264,17 @@
     .feature-icon svg { width: 16px; height: 16px; display: block; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
     .services-eyebrow { color: var(--blue-deep); }
     .services-eyebrow .spark { color: var(--blue-deep); }
-    #features { overflow: hidden; background-color: #F4F8FF; background-image: radial-gradient(circle at 12% 10%, rgba(100,155,228,.13), transparent 28%), radial-gradient(circle at 88% 88%, rgba(180,147,234,.12), transparent 30%), linear-gradient(rgba(100,155,228,.055) 1px, transparent 1px), linear-gradient(90deg, rgba(100,155,228,.055) 1px, transparent 1px); background-size: auto, auto, 28px 28px, 28px 28px; }
+    #features { overflow: hidden; scroll-margin-top: 76px; background-color: #F4F8FF; background-image: radial-gradient(circle at 12% 10%, rgba(100,155,228,.13), transparent 28%), radial-gradient(circle at 88% 88%, rgba(180,147,234,.12), transparent 30%), linear-gradient(rgba(100,155,228,.055) 1px, transparent 1px), linear-gradient(90deg, rgba(100,155,228,.055) 1px, transparent 1px); background-size: auto, auto, 28px 28px, 28px 28px; }
     .feature-card h3 { margin: 16px auto 10px; font-size: 28px; font-weight: 700; letter-spacing: -.025em; }
     .feature-card > p { color: var(--muted); max-width: 560px; font-size: 16px; line-height: 1.6; margin: 0 auto; }
     .feature-card > .card-link { display: inline-flex; margin-top: 18px; font-size: 14px; font-weight: 700; }
     .feature-card.optional-execution { padding-block: 42px; }
-    .feature-card.optional-execution .visual { display: none; }
     .feature-card.optional-execution > p { max-width: 640px; }
-    .feature-card.platform-output { width: min(800px, calc(100% - 64px)); margin: 34px auto 0; border: 1px solid rgba(100,155,228,.24); background: linear-gradient(145deg, rgba(100,155,228,.11), rgba(180,147,234,.08) 48%, #FFFFFF 82%); }
-    .platform-output-label { width: fit-content; display: flex; margin: 0 auto 10px; padding: 6px 9px; border-radius: 999px; color: var(--blue-deep); background: rgba(255,255,255,.76); border: 1px solid rgba(100,155,228,.2); font-size: 9px; font-weight: 800; letter-spacing: .09em; text-transform: uppercase; }
     .visual { height: 280px; max-width: 680px; margin: 36px auto 0; border-radius: 12px; position: relative; overflow: hidden; }
     .feature-card .visual > * { scale: .85; transform-origin: center center; }
     .feature-card .ssq > * { scale: .78; }
 
-    /* 01 — Growth plan */
+    /* 01: Growth plan */
     .gpi-stage { --g-spread: 210px; height: 425px; position: relative; overflow: hidden; }
     .gcard { position: absolute; left: 50%; top: calc(50% - 40px); width: 370px; background: #FFFFFF; border: 1px solid var(--line); border-radius: 14px; box-shadow: 0 24px 48px -20px rgba(3,21,58,.28); padding: 8px 0 4px; transition: transform .85s cubic-bezier(.3,1.3,.45,1), opacity .5s ease; will-change: transform; }
     .gcard svg { display: block; width: 100%; height: auto; }
@@ -257,7 +295,7 @@
     .gpill { opacity: 0; transform: scale(.6); transform-box: fill-box; transform-origin: center; transition: transform .4s cubic-bezier(.2,1.5,.4,1), opacity .3s ease; }
     .gpill.on { opacity: 1; transform: scale(1); }
 
-    /* 02 — CRM evidence and weekly intelligence */
+    /* 02: CRM evidence and weekly intelligence */
     .wgi { position: relative; overflow: hidden; }
     .feature-card .visual.wgi > * { scale: .92; }
     .wgi-client { position: absolute; left: 50%; top: 24px; width: 720px; height: 500px; margin-left: -360px; overflow: hidden; background: #fff; border: 1px solid var(--line); border-radius: 16px; box-shadow: 0 24px 60px rgba(3,21,58,.13), 0 4px 14px rgba(3,21,58,.06); }
@@ -341,7 +379,7 @@
     .wgi-recommend-label { display: block; margin-bottom: 6px; font-size: 7px; font-weight: 800; line-height: 1; letter-spacing: .11em; color: #527C2B; text-transform: uppercase; }
     .wgi-recommend strong { display: block; font-size: 13.5px; line-height: 1.3; color: var(--ink); }
 
-    /* 03 — Sourcing + scoring */
+    /* 03: Sourcing + scoring */
     .ssq { position: relative; overflow: hidden; }
     .acct { position: absolute; width: 176px; background: #fff; border: 1px solid var(--hair); border-radius: 14px; padding: 14px 16px; box-shadow: 0 12px 30px rgba(3,21,58,.08), 0 2px 8px rgba(3,21,58,.05); transform-origin: top left; transition: transform 1.4s cubic-bezier(.5,0,.22,1), opacity .9s ease var(--te, 0s); }
     .acct .ahead { display: flex; align-items: center; gap: 10px; }
@@ -368,7 +406,7 @@
     .play .acct.qc1 .aname { animation: sys-fin .4s ease 5.9s forwards; }
     @keyframes ss-fout { to { opacity: 0; } }
 
-    /* 04 — Fractional outbound */
+    /* 04: Managed outbound */
     .obx { position: relative; overflow: hidden; }
     .obx-k { position: absolute; background: #fff; border: 1px solid var(--hair); border-radius: 16px; box-shadow: 0 14px 36px rgba(3,21,58,.09), 0 3px 9px rgba(3,21,58,.05); }
     .obx-mini { width: 180px; padding: 13px 15px; opacity: .44; }
@@ -409,58 +447,19 @@
     .feature-card .visual { overflow: visible; }
     .mobile-visual-summary { display: none; }
 
-    /* ---------- Process / delivery / pricing ---------- */
-    .process { background: var(--ink); color: white; overflow: hidden; }
-    .process::before { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 75% 10%, rgba(100,155,228,.5), transparent 34%), radial-gradient(circle at 12% 94%, rgba(180,147,234,.32), transparent 30%); }
-    .process .section-heading { position: relative; z-index: 2; }
-    .process .section-heading p { color: rgba(255,255,255,.72); }
-    .process .section-heading .eyebrow { color: rgba(255,255,255,.82) !important; border-color: rgba(255,255,255,.18); background: rgba(255,255,255,.08); }
-    .process .section-heading .eyebrow .spark { color: var(--green); }
-    .steps { position: relative; z-index: 2; display: grid; grid-template-columns: repeat(3, 1fr); width: min(800px, calc(100% - 64px)); margin: 0 auto; }
-    .step { min-height: 300px; padding: 34px 30px; border-top: 1px solid rgba(255,255,255,.22); border-bottom: 1px solid rgba(255,255,255,.22); border-right: 1px solid rgba(255,255,255,.18); }
-    .step:first-child { border-left: 1px solid rgba(255,255,255,.18); }
-    .step-num { font-family: var(--sans); font-weight: 700; font-size: 44px; letter-spacing: -.03em; color: var(--green); font-variant-numeric: tabular-nums; }
-    .step h3 { font-size: 20px; font-weight: 700; letter-spacing: -.02em; margin: 28px 0 12px; }
-    .step p { color: rgba(255,255,255,.68); line-height: 1.6; font-size: 14px; }
-
-    .security-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; width: min(800px, calc(100% - 64px)); margin: 0 auto; }
-    .security-card { min-height: 200px; padding: 30px; background: var(--white); border: 1px solid var(--line); border-radius: 14px; }
-    .security-icon { width: 52px; height: 52px; border-radius: 12px; background: rgba(100,155,228,.12); display: grid; place-items: center; color: var(--blue-deep); font-size: 24px; }
-    .security-card h3 { margin: 28px 0 10px; font-size: 20px; font-weight: 700; letter-spacing: -.02em; }
-    .security-card p { color: var(--muted); margin: 0; font-size: 14px; line-height: 1.6; }
-
+    /* ---------- Delivery / pricing ---------- */
     .crm-confidence { width: min(800px, calc(100% - 64px)); margin: 24px auto 0; padding: 22px 26px; border: 1px solid var(--line); border-radius: 14px; background: rgba(255,255,255,.72); }
     .crm-confidence-label { margin-bottom: 18px; color: var(--muted); font-size: 11px; font-weight: 700; letter-spacing: .08em; text-align: center; text-transform: uppercase; }
     .crm-logos { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 18px 34px; }
     .crm-logo { display: inline-flex; align-items: center; gap: 7px; color: #475569; font-size: 15px; font-weight: 700; }
     .crm-logo svg { width: 24px; height: 24px; display: block; }
     .crm-logo.sf { color: #0D9DDA; } .crm-logo.hs { color: #FF5C35; } .crm-logo.pd { color: #222; } .crm-logo.ms { color: #5E5E5E; } .crm-logo.zoho { color: #246FDB; }
-    #audiences { overflow: hidden; color: white; background: var(--ink); }
-    #audiences::before { content: ""; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(circle at 8% 12%, rgba(100,155,228,.34), transparent 32%), radial-gradient(circle at 92% 88%, rgba(180,147,234,.23), transparent 30%); }
-    .audience-layout { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(280px,.78fr) minmax(520px,1.22fr); gap: 80px; width: min(1120px, calc(100% - 64px)); margin: 0 auto; align-items: start; }
-    .audience-intro { position: sticky; top: 120px; padding-top: 6px; }
-    .audience-intro .eyebrow { color: rgba(255,255,255,.74); }
-    .audience-intro .spark { color: var(--green); }
-    .audience-intro h2 { margin: 22px 0 18px; font-size: clamp(42px,4.2vw,56px); line-height: 1.02; letter-spacing: -.04em; }
-    .audience-intro p { max-width: 390px; margin: 0; color: rgba(255,255,255,.67); font-size: 15px; line-height: 1.65; }
-    .audience-list { border-top: 1px solid rgba(255,255,255,.2); }
-    .audience-card { --persona:#A8D862; display: grid; grid-template-columns: 112px minmax(0,1fr); gap: 28px; padding: 34px 4px; align-items: center; border-bottom: 1px solid rgba(255,255,255,.2); }
-    .audience-card:nth-child(2) { --persona:#649BE4; }
-    .audience-card:nth-child(3) { --persona:#B493EA; }
-    .audience-portrait { position: relative; width: 104px; aspect-ratio: 1; display: grid; place-items: center; overflow: hidden; border-radius: 50%; color: var(--ink); background: var(--persona); box-shadow: 0 18px 40px -24px rgba(0,0,0,.8); }
-    .audience-portrait::before { content: ""; position: absolute; width: 68px; height: 68px; top: -22px; right: -18px; border: 1px solid rgba(3,21,58,.18); border-radius: 50%; }
-    .audience-portrait::after { content: ""; position: absolute; width: 58px; height: 58px; bottom: -28px; left: -12px; border: 12px solid rgba(255,255,255,.24); border-radius: 50%; }
-    .audience-portrait svg { position: relative; z-index: 1; width: 48px; height: 48px; fill: none; stroke: currentColor; stroke-width: 1.45; stroke-linecap: round; stroke-linejoin: round; }
-    .audience-role { color: var(--persona); font-size: 10.5px; font-weight: 750; letter-spacing: .09em; text-transform: uppercase; }
-    .audience-card h3 { max-width: 480px; margin: 9px 0 9px; color: white; font-size: 25px; line-height: 1.1; letter-spacing: -.03em; }
-    .audience-card p { max-width: 520px; margin: 0 0 14px; color: rgba(255,255,255,.64); font-size: 13.5px; line-height: 1.6; }
-    .audience-card a { color: white; font-size: 13px; font-weight: 700; }
-    .audience-card a:hover { color: var(--persona); }
+    #pricing { scroll-margin-top: 76px; }
     .pricing-wrap { width: min(1220px, calc(100% - 64px)); margin: 0 auto; }
     .plan-table { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 16px; align-items: stretch; }
     .plan-column { position: relative; min-width: 0; padding: 30px 24px 28px; display: flex; flex-direction: column; border: 1px solid var(--line); border-radius: 18px; background: #fff; box-shadow: 0 24px 70px -48px rgba(3,21,58,.52); }
     .plan-column.featured { border-color: rgba(100,155,228,.55); box-shadow: 0 30px 74px -40px rgba(3,21,58,.55), inset 0 4px 0 var(--blue); }
-    .plan-badge { position: absolute; top: 20px; right: 20px; padding: 6px 9px; border-radius: 999px; color: #174c91; background: rgba(100,155,228,.14); font-size: 9px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+    .plan-stage { display: block; margin-bottom: 15px; color: var(--blue-deep); font-size: 9px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
     .plan-icon { width: 42px; height: 42px; display: grid; place-items: center; border-radius: 12px; color: var(--plan-accent, var(--blue-deep)); background: color-mix(in srgb, var(--plan-accent, var(--blue)) 13%, white); border: 1px solid color-mix(in srgb, var(--plan-accent, var(--blue)) 22%, white); }
     .plan-icon svg { width: 21px; height: 21px; display: block; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
     .plan-column h3 { min-height: 48px; margin: 18px 0 6px; color: var(--ink); font-size: 21px; line-height: 1.12; letter-spacing: -.025em; text-wrap: balance; }
@@ -681,7 +680,12 @@
       .pricing-wrap { width: calc(100% - 40px); }
       .plan-table { grid-template-columns: 1fr; max-width: 760px; margin-inline: auto; overflow: visible; gap: 14px; border: 0; background: transparent; box-shadow: none; }
       .plan-column { border: 1px solid var(--line); border-radius: 16px; }
-      .audience-layout { grid-template-columns: minmax(240px,.65fr) minmax(480px,1.35fr); gap: 48px; width: calc(100% - 40px); }
+      .who-help { padding-block: 90px 96px; }
+      .who-help-audiences { grid-template-columns: minmax(0,1.35fr) minmax(310px,.75fr); gap: 22px; }
+      .who-help-item { padding-inline: 26px; }
+      .case-study-grid { grid-template-columns: repeat(2,1fr); }
+      .case-study-part:nth-child(2) { border-right: 0; }
+      .case-study-part:nth-child(-n+2) { border-bottom: 1px solid rgba(255,255,255,.22); }
     }
     @media (max-width: 880px) {
       .shell { width: min(100% - 40px, 760px); }
@@ -690,18 +694,19 @@
       .comparison { grid-template-columns: 1fr; width: calc(100% - 40px); }
       .feature-stack { width: calc(100% - 40px); }
       .feature-card { padding: 38px; }
-      .feature-card.platform-output { width: calc(100% - 40px); }
-      .steps { width: calc(100% - 40px); }
-      .audience-layout { grid-template-columns: 1fr; gap: 44px; }
-      .audience-intro { position: static; max-width: 600px; }
+      .division-grid { width: calc(100% - 40px); }
+      .client-role { width: calc(100% - 40px); }
+      .who-help-audiences { grid-template-columns: 1fr; }
+      .investor-panel { min-height: 520px; }
     }
     @media (max-width: 700px) {
       .shell, .narrow { width: calc(100% - 36px); }
       .hero-fold { padding: 112px 0 18px; gap: 40px; }
-      .hero h1 { font-size: clamp(42px, 13vw, 60px); line-height: .96; margin-top: 22px; }
-      .hero-services { width: calc(100% - 28px); gap: 11px; font-size: 17px; line-height: 1.52; }
-      .hero-service-line { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 5px 7px; }
-      .hero-service-copy { text-align: center; }
+      .hero h1 { font-size: clamp(38px, 11.2vw, 50px); line-height: .96; margin-top: 22px; }
+      .hero h1 em { white-space: normal; }
+      .hero-kicker { max-width: 320px; margin-bottom: 20px; font-size: 9px; }
+      .hero-description { width: calc(100% - 20px); font-size: 17px; line-height: 1.52; }
+      .hero-operator-note { width: calc(100% - 20px); font-size: 13px; }
       .hero-cta .button { width: 100%; max-width: 320px; min-width: 0; }
       .system-scroll { height: 170svh; }
       .system-stage { width: calc(100% - 36px); }
@@ -712,7 +717,6 @@
       .compare-card { padding: 32px 24px; }
       .compare-list { gap: 18px; }
       .feature-stack { width: calc(100% - 36px); gap: 24px; }
-      .feature-card.platform-output { width: calc(100% - 36px); }
       .feature-card { min-height: 0; padding: 26px 20px; }
       .feature-card h3 { font-size: 27px; }
       .feature-card > .visual { display: none; }
@@ -776,18 +780,32 @@
       .wgi-recommend-label { font-size: 5.5px; }
       .wgi-recommend strong { font-size: 9.5px; }
       .acct { width: 150px; padding: 10px 12px; }
-      .steps { grid-template-columns: 1fr; width: calc(100% - 36px); }
-      .step { min-height: 0; border-left: 1px solid rgba(255,255,255,.18); border-bottom: 0; }
-      .step:last-child { border-bottom: 1px solid rgba(255,255,255,.22); }
-      .security-grid { grid-template-columns: 1fr; width: calc(100% - 36px); }
-      .security-card { min-height: 0; }
-      .audience-layout { width: calc(100% - 36px); }
-      .audience-card { grid-template-columns: 76px minmax(0,1fr); gap: 18px; padding: 28px 0; }
-      .audience-portrait { width: 72px; }
-      .audience-portrait svg { width: 34px; height: 34px; }
-      .audience-card h3 { font-size: 21px; }
-      .audience-card a { min-height: 44px; display: inline-flex; align-items: center; margin-top: 6px; }
       .crm-confidence { width: calc(100% - 36px); padding: 20px; }
+      .who-help { margin-top: -136px; padding: 76px 0 70px; }
+      .who-help::before { width: 84px; }
+      .who-help-inner { width: calc(100% - 36px); }
+      .who-help-heading h2 { font-size: 40px; }
+      .who-help-heading p { margin-top: 18px; font-size: 16px; }
+      .who-help-audiences { margin-top: 44px; gap: 32px; }
+      .operating-grid { grid-template-columns: 1fr; }
+      .who-help-item { min-height: 0; padding: 28px 26px 30px; }
+      .who-help-item h4 { margin-top: 20px; font-size: 20px; }
+      .who-help-item p { font-size: 14px; }
+      .investor-panel { min-height: 0; padding: 28px; }
+      .investor-visual { height: 170px; }
+      .investor-panel h3 { margin: 38px 0 12px; font-size: 26px; }
+      .who-help-bridge { gap: 12px; margin-top: 52px; font-size: 10px; letter-spacing: .065em; }
+      .division-grid { grid-template-columns: 1fr; width: calc(100% - 36px); }
+      .division-card { padding: 30px 24px; }
+      .client-role { width: calc(100% - 36px); }
+      .case-study { padding: 76px 0; }
+      .case-study-inner { width: calc(100% - 36px); }
+      .case-study h2 { margin-bottom: 42px; font-size: 42px; }
+      .case-study-grid { grid-template-columns: 1fr; }
+      .case-study-part { min-height: 0; padding: 25px 4px 28px; border-right: 0; border-bottom: 1px solid rgba(255,255,255,.22); }
+      .case-study-part:nth-child(-n+2) { border-bottom: 1px solid rgba(255,255,255,.22); }
+      .case-study-part:last-child { border-bottom: 0; }
+      .case-study-part p { margin-top: 24px; }
       .crm-logos { gap: 16px 22px; }
       .pricing-wrap { width: calc(100% - 36px); }
       .plan-table { grid-template-columns: 1fr; }
@@ -816,7 +834,6 @@
       .reveal { opacity: 1; transform: none; }
       .system-h, .system-sub { opacity: 1; transform: none; }
       .system-stage .system-card { opacity: 1; transform: none; }
-      .hero-service-pill { opacity: 1 !important; transform: none !important; }
     }
   </style>
 </head>
@@ -829,16 +846,15 @@
       <div class="hero-mosaic" aria-hidden="true"><div id="hero-mosaic-wrap"></div></div>
       <div class="hero-fold">
         <div class="hero-copy shell">
-          <h1 class="serif"><span class="hero-line">Know how you’ll <em class="t-mosaic">grow</em></span> <span class="hero-line">and which accounts will</span> <span class="hero-line">get you there.</span></h1>
-          <h2 class="hero-services">
-            <span class="hero-service-line"><span class="hero-service-copy">Turn your revenue target into a working</span><span class="hero-service-ending"><span class="hero-service-pill" data-hero-pill style="--pill-accent:#B7660A;"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 1.5h8l3 3v10H2z"></path><path d="M10 1.5v3h3M4.5 8h6M4.5 11h4"></path></svg><span>Growth plan</span></span><span class="hero-service-punctuation">,</span></span></span>
-            <span class="hero-service-line"><span class="hero-service-copy">prioritize the market with</span><span class="hero-service-ending"><span class="hero-service-pill" data-hero-pill style="--pill-accent:#6b3fb8;"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="5.5"></circle><circle cx="8" cy="8" r="2.5"></circle><path d="M8 1v2M8 13v2M1 8h2M13 8h2"></path></svg><span>Account sourcing and scoring</span></span><span class="hero-service-punctuation">,</span></span></span>
-            <span class="hero-service-line"><span class="hero-service-copy">extend your team with</span><span class="hero-service-ending"><span class="hero-service-pill" data-hero-pill style="--pill-accent:#a34d28;"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 9.5v-3l8-3v9z"></path><path d="M10.5 6a3.5 3.5 0 0 1 0 4M4.5 10l1 3"></path></svg><span>Fractional outbound</span></span><span class="hero-service-punctuation">.</span></span></span>
-          </h2>
+          <div class="hero-kicker">The managed growth planning and outbound partner for B2B companies</div>
+          <h1 class="serif"><span class="hero-line">Turn your revenue target into</span> <span class="hero-line">the right accounts and</span> <span class="hero-line"><em class="t-mosaic">qualified pipeline.</em></span></h1>
+          <p class="hero-description">Scorecard diagnoses what is holding growth back, builds the plan and account system to fix it, and runs focused outbound when execution is the gap.</p>
+          <p class="hero-operator-note">Our experts operate the system. Your sales team closes the deals.</p>
         <div class="hero-cta">
           <button class="button button-primary" type="button" data-open-book>Build your growth plan <span aria-hidden="true">→</span></button>
-          <a class="button button-secondary" href="#account-scoring">Explore account scoring <span aria-hidden="true">→</span></a>
+          <a class="button button-secondary" href="#features">See how Scorecard works <span aria-hidden="true">→</span></a>
         </div>
+          <p class="hero-qualifier">For CEOs and revenue leaders at established B2B companies.</p>
         </div>
 
         <!-- A compact confidence panel: one slow experience marquee, one static CRM row. -->
@@ -875,8 +891,8 @@
 
       <div class="system-scroll" id="system-scroll">
         <div class="system-stage" id="system-stage">
-        <h2 class="system-h serif">One connected system turns your growth plan into action.</h2>
-        <div class="system-card play scrub" id="hero-stage" aria-label="Growth plan, CRM evidence, account sourcing and scoring, weekly reporting, and fractional outbound connect in one growth system">
+        <h2 class="system-h serif">See what is in the way. Know what to do next.</h2>
+        <div class="system-card play scrub" id="hero-stage" aria-label="Growth plan, CRM evidence, account sourcing and scoring, weekly reporting, and managed outbound connect in one growth system">
           <svg viewBox="38 70 824 365" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
             <defs>
               <filter id="sys-chipshadow" x="-30%" y="-60%" width="160%" height="220%">
@@ -950,11 +966,71 @@
               <line x1="676" y1="161" x2="680" y2="166" stroke="rgba(100,116,139,.4)" stroke-dasharray="2 4"></line>
               <rect x="680" y="151" width="180" height="30" rx="15" fill="#0A214A" stroke="rgba(100,155,228,.42)" filter="url(#sys-chipshadow)"></rect>
               <g transform="translate(693,159)"><g class="sys-chip-check"><rect x="1" y="1" width="12" height="12" rx="3" fill="#A8D862"></rect><path d="M4.2 7.1 6.2 9 10 4.9" fill="none" stroke="#03153A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></g></g>
-              <text x="714" y="170" style="font-size:12px; font-weight:600;" fill="#FFFFFF">Fractional outbound</text>
+              <text x="714" y="170" style="font-size:12px; font-weight:600;" fill="#FFFFFF">Managed outbound</text>
             </g>
           </svg>
         </div>
-        <p class="system-sub">The plan sets direction. CRM evidence, account priorities, weekly reporting, and outbound keep it moving.</p>
+        <p class="system-sub">The plan, account priorities, weekly evidence, and execution stay connected, so every next move has a reason.</p>
+        </div>
+      </div>
+
+      <div class="who-help reveal" id="who-we-help" aria-labelledby="who-help-title">
+        <div class="who-help-inner">
+          <div class="who-help-heading">
+            <h2 class="serif" id="who-help-title">Where Scorecard works best.</h2>
+            <p>We adapt the growth system to the economics, buyers, signals, and realities of each market.</p>
+          </div>
+          <div class="who-help-audiences">
+            <section class="operating-audiences" aria-labelledby="operating-audiences-title">
+              <h3 class="audience-group-label" id="operating-audiences-title">Operating companies</h3>
+              <div class="operating-grid">
+                <article class="who-help-item">
+                  <span class="who-help-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 8h16v11H4z"></path><path d="M9 8V5h6v3M4 12h16M10 12v2h4v-2"></path></svg></span>
+                  <h4>B2B services and agencies</h4>
+                  <p>Replace referral dependence with a clear market and a consistent way to reach it.</p>
+                </article>
+                <article class="who-help-item">
+                  <span class="who-help-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"></rect><path d="M3 9h18M8 14h3M8 17h7"></path></svg></span>
+                  <h4>B2B SaaS and technology</h4>
+                  <p>Connect the revenue target to the segments, accounts, and buying signals worth sales time.</p>
+                </article>
+                <article class="who-help-item">
+                  <span class="who-help-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 20V9l6 3V8l6 4V5l6 4v11z"></path><path d="M7 16h2M12 16h2M17 16h2"></path></svg></span>
+                  <h4>Manufacturing and distribution</h4>
+                  <p>Prioritize across fragmented applications, channels, end markets, and territories.</p>
+                </article>
+                <article class="who-help-item">
+                  <span class="who-help-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 21s6-5.2 6-11a6 6 0 1 0-12 0c0 5.8 6 11 6 11z"></path><circle cx="12" cy="10" r="2"></circle></svg></span>
+                  <h4>Specialized and field services</h4>
+                  <p>Account for geography, credentials, capacity, and service fit before outreach begins.</p>
+                </article>
+              </div>
+            </section>
+            <article class="investor-panel">
+              <p class="audience-group-label">Investors</p>
+              <div class="investor-visual" aria-hidden="true">
+                <svg viewBox="0 0 340 190">
+                  <defs>
+                    <linearGradient id="investor-path" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#649BE4" stop-opacity=".25"></stop><stop offset="1" stop-color="#A8D862"></stop></linearGradient>
+                  </defs>
+                  <g fill="#649BE4" opacity=".55">
+                    <circle cx="24" cy="34" r="3"></circle><circle cx="62" cy="24" r="2.5"></circle><circle cx="98" cy="42" r="3"></circle><circle cx="42" cy="72" r="2.5"></circle><circle cx="84" cy="82" r="3"></circle><circle cx="124" cy="66" r="2.5"></circle><circle cx="28" cy="112" r="3"></circle><circle cx="70" cy="126" r="2.5"></circle><circle cx="118" cy="112" r="3"></circle><circle cx="46" cy="158" r="2.5"></circle><circle cx="102" cy="154" r="3"></circle>
+                  </g>
+                  <path d="M20 18C94 18 121 47 162 82C202 116 235 130 314 130" fill="none" stroke="url(#investor-path)" stroke-width="2"></path>
+                  <path d="M20 174C94 174 121 145 162 110C202 76 235 62 314 62" fill="none" stroke="url(#investor-path)" stroke-width="2"></path>
+                  <path d="M164 82V110" fill="none" stroke="#A8D862" stroke-width="2" stroke-dasharray="3 5"></path>
+                  <g fill="#A8D862" stroke="#03153A" stroke-width="3">
+                    <circle cx="248" cy="96" r="6"></circle><circle cx="278" cy="96" r="6"></circle><circle cx="308" cy="96" r="6"></circle>
+                  </g>
+                  <text x="20" y="188" fill="rgba(255,255,255,.45)" font-size="9" font-weight="700" letter-spacing="1.2">MARKET</text>
+                  <text x="247" y="188" fill="#A8D862" font-size="9" font-weight="700" letter-spacing="1.2">SHORTLIST</text>
+                </svg>
+              </div>
+              <h3>Private equity and search funds</h3>
+              <p>Map a market around an investment thesis, rank the few businesses worth pursuing, and conduct careful direct outreach.</p>
+            </article>
+          </div>
+          <div class="who-help-bridge"><span>Different markets. The same question: what is holding growth back?</span></div>
         </div>
       </div>
     </section>
@@ -968,21 +1044,19 @@
         <article class="compare-card">
           <h3 class="compare-title">You see the result, but not what caused it.</h3>
           <ul class="compare-list">
-            <li><span class="status">×</span><span>A revenue target handed down without the assumptions needed to test whether it is achievable.</span></li>
-            <li><span class="status">×</span><span>Market, funnel, capacity, and investment modeled in separate spreadsheets—or not at all.</span></li>
+            <li><span class="status">×</span><span>The target is detached from the market, conversion, capacity, and investment assumptions behind it.</span></li>
+            <li><span class="status">×</span><span>Plans live across spreadsheets and dashboards with no shared logic.</span></li>
             <li><span class="status">×</span><span>Reporting that describes the past but cannot direct the next move.</span></li>
-            <li><span class="status">×</span><span>No way to tell whether the goal is achievable, or what has to change.</span></li>
             <li><span class="status">×</span><span>More software and headcount added before the constraint is understood.</span></li>
           </ul>
         </article>
         <article class="compare-card good">
           <h3 class="compare-title"><span style="color:rgba(255,255,255,.72); font-weight:500;">With</span> <img src="design-system/assets/scorecard-mark-ondark.svg" alt="" style="height:20px; width:auto;"> Scorecard</h3>
           <ul class="compare-list">
-            <li><span class="status">✓</span><span>A board-ready full-funnel model behind the revenue target.</span></li>
-            <li><span class="status">✓</span><span>Explicit requirements for market, conversion, capacity, and investment.</span></li>
-            <li><span class="status">✓</span><span>Weekly intelligence that explains what changed and what to do next.</span></li>
-            <li><span class="status">✓</span><span>Scoring and priorities connected to the plan inside your CRM.</span></li>
-            <li><span class="status">✓</span><span>Your team runs the system, adds focused support, or asks us to help operate it.</span></li>
+            <li><span class="status">✓</span><span>One model shows what must be true to hit the number.</span></li>
+            <li><span class="status">✓</span><span>Market, conversion, capacity, and investment are tested together.</span></li>
+            <li><span class="status">✓</span><span>Weekly evidence reveals what changed and where to act next.</span></li>
+            <li><span class="status">✓</span><span>Account priorities and execution stay tied to the plan.</span></li>
           </ul>
         </article>
       </div>
@@ -990,16 +1064,16 @@
 
     <section class="section" id="features" aria-labelledby="features-title">
       <div class="section-heading narrow reveal">
-        <div class="eyebrow services-eyebrow"><span class="spark"></span> What we do</div>
-        <h2 class="serif" id="features-title">Three ways to put the growth system to work.</h2>
-        <p>Start with the growth plan, the account system, or focused execution. Scorecard connects all three to the same operating model.</p>
+        <div class="eyebrow services-eyebrow"><span class="spark"></span> How Scorecard works</div>
+        <h2 class="serif" id="features-title">We find what is holding growth back, then build the system to fix it.</h2>
+        <p>The engagement starts with diagnosis. From there, we focus only on the planning, account, and execution work your business needs.</p>
       </div>
       <div class="feature-stack">
         <article class="feature-card reveal" id="growth-strategy">
-          <div class="feature-meta"><span class="feature-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M3 2.5h7l3 3v8H3z"></path><path d="M10 2.5v3h3M5.5 8h5M5.5 10.5h3.5"></path></svg></span><span>Growth plan</span></div>
-          <h3>Build the plan behind the number.</h3>
-          <p>Turn the revenue target into a board-ready operating plan: market opportunity, unit economics, required funnel, capacity, investment, forecast scenarios, and a prioritized sequence of action.</p>
-          <a class="card-link" href="what-we-do-coming-soon.html">Explore the growth plan →</a>
+          <div class="feature-meta"><span class="feature-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M3 2.5h7l3 3v8H3z"></path><path d="M10 2.5v3h3M5.5 8h5M5.5 10.5h3.5"></path></svg></span><span>Diagnose · Growth plan</span></div>
+          <h3>Find what is really behind the revenue target.</h3>
+          <p>We model market, economics, funnel, capacity, and investment together. You see what must be true, what is most likely to break, and where to act first.</p>
+          <a class="card-link" href="#pricing">Explore the growth plan →</a>
           <div class="mobile-visual-summary" aria-label="Growth plan outputs">
             <div class="mobile-summary-row"><span>Market and economics</span><strong>Modeled</strong></div>
             <div class="mobile-summary-row"><span>Funnel and capacity</span><strong>Forecast</strong></div>
@@ -1129,84 +1203,11 @@
           </div>
         </article>
 
-        <article class="feature-card reveal platform-output" id="platform-evidence">
-          <div class="platform-output-label">Included platform layer</div>
-          <div class="feature-meta"><span class="feature-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><rect x="2.5" y="3.5" width="11" height="9" rx="1.5"></rect><path d="m3.5 5 4.5 3.5L12.5 5"></path></svg></span><span>CRM evidence + weekly read</span></div>
-          <h3>See what changed. Know what to do next.</h3>
-          <p>Scorecard reads actual performance against the plan, explains the constraint, and returns a clear recommendation in the operating cadence your team already uses.</p>
-          <a class="card-link" href="how-scorecard-works.html">See how Scorecard works →</a>
-          <div class="mobile-visual-summary" aria-label="Weekly operating flow">
-            <div class="mobile-summary-flow">CRM evidence <b>→</b> Weekly read <b>→</b> Next action</div>
-            <div class="mobile-summary-row"><span>Pipeline vs. plan</span><strong>Visible</strong></div>
-            <div class="mobile-summary-row"><span>Constraint this week</span><strong>Explained</strong></div>
-          </div>
-          <div class="visual wgi" id="wgi-stage" aria-hidden="true" style="height:540px;">
-            <div class="wgi-client">
-              <div class="wgi-clientbar">
-                <div class="wgi-windowdots"><i></i><i></i><i></i></div>
-              </div>
-              <div class="wgi-clientbody">
-                <aside class="wgi-inbox">
-                  <div class="wgi-inboxhead"><strong>Inbox</strong><span>4</span></div>
-                  <div class="wgi-email-row wgi-new">
-                    <div class="wgi-row-avatar"><img src="design-system/assets/scorecard-sq.svg" alt="" /></div>
-                    <div class="wgi-email-copy"><strong>Pipeline below plan</strong><span>Follow-up is the constraint.</span><small>Monday briefing · Week 07</small><time>7:00</time></div>
-                  </div>
-                  <div class="wgi-email-row wgi-placeholder">
-                    <div class="wgi-row-avatar"></div>
-                    <div class="wgi-email-copy"><span class="wgi-sk name"></span><span class="wgi-sk subject"></span><span class="wgi-sk preview"></span></div>
-                  </div>
-                  <div class="wgi-email-row wgi-placeholder">
-                    <div class="wgi-row-avatar"></div>
-                    <div class="wgi-email-copy"><span class="wgi-sk name"></span><span class="wgi-sk subject"></span><span class="wgi-sk preview"></span></div>
-                  </div>
-                  <div class="wgi-email-row wgi-placeholder">
-                    <div class="wgi-row-avatar"></div>
-                    <div class="wgi-email-copy"><span class="wgi-sk name"></span><span class="wgi-sk subject"></span><span class="wgi-sk preview"></span></div>
-                  </div>
-                </aside>
-                <section class="wgi-reader">
-                  <div class="wgi-empty"><span class="wgi-empty-icon"></span><strong>Select a message</strong><small>Your message will open here.</small></div>
-                  <article class="wgi-message">
-                    <div class="wgi-reader-actions"><span>←</span><span>⌑</span><span>↗</span><span>•••</span></div>
-                    <div class="wgi-mailhead">
-                      <div class="wgi-avatar"><img src="design-system/assets/scorecard-sq.svg" alt="" /></div>
-                      <div class="wgi-from">
-                        <strong>Scorecard Intelligence</strong>
-                        <span>weekly@scorecardgtm.com</span>
-                        <span>to Revenue Team</span>
-                      </div>
-                      <div class="wgi-when">MON · 7:00 AM</div>
-                    </div>
-                    <div class="wgi-subject">
-                      <span>Monday briefing · Week 07</span>
-                      <strong>Pipeline below plan; follow-up is the constraint.</strong>
-                    </div>
-                    <div class="wgi-letter">
-                      <p class="wgi-summary sys-fin" style="--t:2.15s;">Pipeline finished 20% below plan even though demand remains on target.</p>
-                      <p class="wgi-signal-line sys-fin" style="--t:2.65s;">
-                        <span class="wgi-signal"><strong>Pipeline:</strong><span class="wgi-value warn">↓ 20%</span></span>
-                        <span class="wgi-signal"><strong>Demand:</strong><span class="wgi-value good">On plan</span></span>
-                        <span class="wgi-signal"><strong>Proposals:</strong><span class="wgi-value info">↓ 18%</span></span>
-                      </p>
-                      <p class="wgi-diagnosis sys-fin" style="--t:3.2s;"><span>Our read</span><strong>Demand is there, but follow-up broke down: four accounts received no second call.</strong></p>
-                      <blockquote class="wgi-recommend sys-fin" style="--t:4.05s;">
-                        <span class="wgi-recommend-label">This week</span>
-                        <strong>Call the four stalled accounts before buying new leads.</strong>
-                      </blockquote>
-                    </div>
-                  </article>
-                </section>
-              </div>
-            </div>
-          </div>
-        </article>
-
         <article class="feature-card reveal" id="account-scoring">
-          <div class="feature-meta"><span class="feature-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="5.5"></circle><circle cx="8" cy="8" r="2.5"></circle><path d="M8 1v2M8 13v2M1 8h2M13 8h2"></path></svg></span><span>Prospect sourcing + scoring</span></div>
-          <h3>Stop calling everyone. Call the likely buyers.</h3>
-          <p>Define the market, source the right accounts, and score every one against your plan. Your team starts each week at the top of the list.</p>
-          <a class="card-link" href="what-we-do-coming-soon.html">Explore account sourcing + scoring →</a>
+          <div class="feature-meta"><span class="feature-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="5.5"></circle><circle cx="8" cy="8" r="2.5"></circle><path d="M8 1v2M8 13v2M1 8h2M13 8h2"></path></svg></span><span>Prioritize · Account system</span></div>
+          <h3>Turn what we learn into account priorities.</h3>
+          <p>We define the market, build an explainable scorecard, and give your team a ranked queue connected to the plan. Every priority has a reason.</p>
+          <a class="card-link" href="#pricing">Explore the account system →</a>
           <div class="mobile-visual-summary" aria-label="Account sourcing and scoring output">
             <div class="mobile-summary-flow">Target market <b>→</b> Ranked account queue</div>
             <div class="mobile-summary-row"><span>Best-fit account</span><strong>92 · Tier A</strong></div>
@@ -1265,11 +1266,11 @@
         </article>
 
         <article class="feature-card reveal optional-execution" id="fractional-outbound">
-          <div class="feature-meta"><span class="feature-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M2.5 9.5v-3l8-3v9z"></path><path d="M10.5 6a3.5 3.5 0 0 1 0 4M4.5 10l1 3"></path></svg></span><span>Fractional outbound · optional execution</span></div>
-          <h3>We book qualified meetings. Your sales team takes it from there.</h3>
-          <p>A dedicated rep on fractional time runs email, LinkedIn, and cold-call campaigns for your top-scored accounts — and puts qualified meetings directly on your sales team's calendars. You keep your time for the relationships that matter most.</p>
-          <a class="card-link" href="what-we-do-coming-soon.html">Explore fractional outbound →</a>
-          <div class="mobile-visual-summary" aria-label="Fractional outbound workflow">
+          <div class="feature-meta"><span class="feature-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M2.5 9.5v-3l8-3v9z"></path><path d="M10.5 6a3.5 3.5 0 0 1 0 4M4.5 10l1 3"></path></svg></span><span>Execute · Managed outbound</span></div>
+          <h3>Add focused execution when capacity is the gap.</h3>
+          <p>Our team runs email, LinkedIn, and cold calls against the accounts that matter most. Qualified conversations and campaign evidence feed the next decision.</p>
+          <a class="card-link" href="#pricing">Explore managed outbound →</a>
+          <div class="mobile-visual-summary" aria-label="Managed outbound workflow">
             <div class="mobile-summary-flow">Priority account <b>→</b> Qualified meeting</div>
             <div class="mobile-summary-row"><span>List and messaging</span><strong>Managed</strong></div>
             <div class="mobile-summary-row"><span>Campaign learning</span><strong>Weekly</strong></div>
@@ -1325,31 +1326,37 @@
       </div>
     </section>
 
-    <section class="section process" id="process" aria-labelledby="process-title">
-      <div class="section-heading narrow reveal">
-        <div class="eyebrow" style="color:rgba(255,255,255,.72)"><span class="spark"></span> How the system works</div>
-        <h2 class="serif" id="process-title">Plan. Accounts. Action. Learning.</h2>
-        <p>Scorecard connects the growth plan to the accounts and work most likely to move it—then uses real results to sharpen the next decision.</p>
-      </div>
-      <div class="steps reveal">
-        <article class="step"><div class="step-num">01</div><h3>Build the growth plan</h3><p>Model the market, economics, funnel, capacity, investment, and scenarios behind the revenue target.</p></article>
-        <article class="step"><div class="step-num">02</div><h3>Prioritize the right accounts</h3><p>Turn the plan into a market definition, an explainable scorecard, and a ranked account queue.</p></article>
-        <article class="step"><div class="step-num">03</div><h3>Act, measure, and improve</h3><p>Execute with your team or ours, read results against the plan, and sharpen the next decision.</p></article>
-      </div>
-    </section>
-
     <section class="section" id="delivery" aria-labelledby="delivery-title">
       <div class="section-heading narrow reveal">
-        <div class="eyebrow"><span class="spark"></span> One connected system</div>
-        <h2 class="serif" id="delivery-title">The plan stays connected to the work.</h2>
-        <p>Scorecard connects the growth plan, account intelligence, reporting, and workflows around the systems your team already uses.</p>
+        <div class="eyebrow"><span class="spark"></span> The operating model</div>
+        <h2 class="serif" id="delivery-title">Expert judgment, made repeatable.</h2>
+        <p>Scorecard is a consulting system, not a dashboard handoff. Our experts diagnose, decide, and adapt. The software preserves the logic and keeps every action connected to the plan.</p>
       </div>
-      <div class="security-grid">
-        <article class="security-card reveal"><div class="security-icon">◇</div><h3>Revenue operating plan</h3><p>A full-funnel model, explicit assumptions, forecast scenarios, priorities, and a sequenced action plan.</p></article>
-        <article class="security-card reveal"><div class="security-icon">▣</div><h3>Scorecard platform</h3><p>The model, scoring, reporting, integrations, plugins, and repeatable workflows live in one operating system.</p></article>
-        <article class="security-card reveal"><div class="security-icon">◎</div><h3>Expert support</h3><p>Use your own team, add a focused service, or ask Scorecard to help operate the complete system.</p></article>
-        <article class="security-card reveal"><div class="security-icon">↗</div><h3>Built around your CRM</h3><p>Your CRM remains the source of truth. Scorecard connects the plan and priorities around it — whichever you run.</p></article>
+      <div class="division-grid reveal">
+        <article class="division-card">
+          <span class="division-label">Expert judgment</span>
+          <h3>We find the problem behind the number.</h3>
+          <ul class="division-list">
+            <li>Learn how your business makes money and where growth breaks down.</li>
+            <li>Test market, funnel, capacity, and investment assumptions together.</li>
+            <li>Decide which accounts and actions deserve attention.</li>
+            <li>Review the evidence and change course when the facts change.</li>
+            <li>Run outbound when additional execution will solve the problem.</li>
+          </ul>
+        </article>
+        <article class="division-card software">
+          <span class="division-label">The Scorecard system</span>
+          <h3>The logic stays visible and usable.</h3>
+          <ul class="division-list">
+            <li>Keep assumptions, scenarios, and decisions in one model.</li>
+            <li>Source and score accounts against the strategy.</li>
+            <li>Show why each account received its priority.</li>
+            <li>Connect account priorities and outcomes to the CRM you already use.</li>
+            <li>Preserve what the team learns for the next decision.</li>
+          </ul>
+        </article>
       </div>
+      <p class="client-role reveal"><strong>You steer the decisions.</strong> Scorecard does the analysis, operates the system, and adds execution. Your team takes the right conversations and closes.</p>
       <div class="crm-confidence reveal" aria-label="CRM compatibility">
         <div class="crm-confidence-label">Works with the CRM you already run</div>
         <div class="crm-logos">
@@ -1362,41 +1369,32 @@
       </div>
     </section>
 
-    <section class="section" id="audiences" aria-labelledby="audiences-title">
-      <div class="audience-layout">
-        <div class="audience-intro reveal">
-          <div class="eyebrow"><span class="spark"></span> Who it is for</div>
-          <h2 class="serif" id="audiences-title">A different decision for every seat.</h2>
-          <p>The model stays shared. The question it answers changes with the person making the call.</p>
+    <section class="case-study" id="case-study" aria-labelledby="case-study-title">
+      <div class="case-study-inner reveal">
+        <div class="case-study-kicker">Confidential client work · Case study placeholder</div>
+        <h2 class="serif" id="case-study-title">How one B2B company found what was blocking its revenue target and rebuilt the motion around it.</h2>
+        <div class="case-study-grid">
+          <article class="case-study-part"><span>The business</span><p>[Anonymous company profile]</p></article>
+          <article class="case-study-part"><span>The constraint</span><p>[What management believed versus what Scorecard discovered]</p></article>
+          <article class="case-study-part"><span>What Scorecard built</span><p>[Growth plan, account system, and execution scope]</p></article>
+          <article class="case-study-part"><span>What changed</span><p>[Validated qualitative or quantitative result]</p></article>
         </div>
-        <div class="audience-list">
-          <article class="audience-card reveal">
-            <div class="audience-portrait" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M8 38h32M12 34V20h8v14M28 34V12h8v22M8 18l10-8 8 5 12-9"></path><circle cx="18" cy="10" r="2"></circle><circle cx="26" cy="15" r="2"></circle><circle cx="38" cy="6" r="2"></circle></svg></div>
-            <div><span class="audience-role">CEOs and founders</span><h3>Put a credible plan behind the revenue goal.</h3><p>Make the market, funnel, capacity, investment, and tradeoffs explicit before committing more money or headcount.</p><a href="ceos-founders.html">See the CEO view →</a></div>
-          </article>
-          <article class="audience-card reveal">
-            <div class="audience-portrait" aria-hidden="true"><svg viewBox="0 0 48 48"><circle cx="24" cy="23" r="15"></circle><circle cx="24" cy="23" r="8"></circle><circle cx="24" cy="23" r="2.5"></circle><path d="M35 12l5-5M35 7h5v5M8 40h13M27 40h13"></path></svg></div>
-            <div><span class="audience-role">Sales and revenue leaders</span><h3>Give the team the right accounts and priorities.</h3><p>Connect the growth plan to account selection, pipeline evidence, weekly constraints, and the next management move.</p><a href="sales-leaders.html">See the revenue leader view →</a></div>
-          </article>
-          <article class="audience-card reveal">
-            <div class="audience-portrait" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M7 39h34M10 36V17l9-5v24M19 36V9l10-4v31M29 36V19l9 4v13M14 22h2M14 27h2M23 14h2M23 20h2M23 26h2M33 27h2M33 32h2"></path></svg></div>
-            <div><span class="audience-role">Private equity and ETA</span><h3>Turn the thesis into a ranked target market.</h3><p>Find businesses that match the acquisition thesis, score the evidence, and focus outreach on the owners worth pursuing.</p><a href="eta-search.html">See the proprietary search view →</a></div>
-          </article>
-        </div>
+        <p class="case-study-note">Client identity withheld by agreement. Placeholder content for review. Not production proof.</p>
       </div>
     </section>
 
     <section class="section" id="pricing" aria-labelledby="pricing-title">
       <div class="section-heading narrow reveal">
-        <div class="eyebrow"><span class="spark"></span> Pricing</div>
-        <h2 class="serif" id="pricing-title">Start with the problem in front of you.</h2>
-        <p>Begin with the growth plan, the account system, or optional execution. We scope each engagement around the market, data, integrations, and operating support you need.</p>
+        <div class="eyebrow"><span class="spark"></span> Engagements</div>
+        <h2 class="serif" id="pricing-title">Start with the right problem.</h2>
+        <p>We recommend the smallest scope that solves the problem in front of you. Add the Account System or Managed Outbound only when the findings call for it.</p>
       </div>
       <div class="pricing-wrap reveal">
         <div class="plan-table" aria-label="Scorecard service options">
           <article class="plan-column" style="--plan-accent:#FCAF0F;">
+            <span class="plan-stage">Starting point</span>
             <span class="plan-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M3 2.5h7l3 3v8H3z"></path><path d="M10 2.5v3h3M5.5 8h5M5.5 10.5h3.5"></path></svg></span>
-            <h3>Growth plan</h3>
+            <h3>Growth Plan</h3>
             <div class="plan-model">
               <div class="plan-quantity"><strong>30–60</strong><span>days</span></div>
               <div class="plan-quantity-caption">Typical engagement window</div>
@@ -1412,16 +1410,16 @@
             </ul>
           </article>
           <article class="plan-column featured" style="--plan-accent:#B493EA;">
-            <span class="plan-badge">Most common</span>
+            <span class="plan-stage">Ongoing system</span>
             <span class="plan-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="5.5"></circle><circle cx="8" cy="8" r="2.5"></circle><path d="M8 1v2M8 13v2M1 8h2M13 8h2"></path></svg></span>
-            <h3>Prospect sourcing + scoring</h3>
+            <h3>Account System</h3>
             <div class="plan-model">
-              <div class="plan-quantity"><strong>1,000+</strong><span>businesses</span></div>
-              <div class="plan-quantity-caption">Minimum target market</div>
-              <div class="plan-commercial"><strong>Recurring platform + managed service</strong><span>Scoped to market coverage, account volume, and refresh cadence.</span></div>
+              <div class="plan-quantity"><strong>Weekly</strong><span>account priorities</span></div>
+              <div class="plan-quantity-caption">Operating cadence</div>
+              <div class="plan-commercial"><strong>Recurring managed system</strong><span>Scoped to market coverage, account volume, and refresh cadence.</span></div>
             </div>
             <p class="plan-for">Source the right accounts, score every one against the model, and prioritize likely buyers.</p>
-            <button class="button button-primary" type="button" data-open-book aria-label="Contact us about Prospect sourcing and scoring">Build your account system</button>
+            <button class="button button-primary" type="button" data-open-book aria-label="Contact Scorecard about an account system">Build your account system</button>
             <ul class="plan-features">
               <li><span class="check">✓</span><span>ICP-based account sourcing</span></li>
               <li><span class="check">✓</span><span>Explainable account scoring</span></li>
@@ -1430,15 +1428,16 @@
             </ul>
           </article>
           <article class="plan-column" style="--plan-accent:#D78668;">
+            <span class="plan-stage">Execution option</span>
             <span class="plan-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M2.5 9.5v-3l8-3v9z"></path><path d="M10.5 6a3.5 3.5 0 0 1 0 4M4.5 10l1 3"></path></svg></span>
-            <h3>Fractional outbound</h3>
+            <h3>Managed Outbound</h3>
             <div class="plan-model">
-              <div class="plan-quantity"><strong>500+</strong><span>touches / month</span></div>
-              <div class="plan-quantity-caption">Minimum managed cadence</div>
+              <div class="plan-quantity"><strong>3</strong><span>coordinated channels</span></div>
+              <div class="plan-quantity-caption">Email, LinkedIn, and calls</div>
               <div class="plan-commercial"><strong>Optional managed execution</strong><span>Scoped to capacity, channels, and campaign complexity.</span></div>
             </div>
             <p class="plan-for">Add optional email, LinkedIn, and cold-call execution against your highest-priority accounts.</p>
-            <button class="button button-primary" type="button" data-open-book aria-label="Contact us about Fractional outbound">Discuss managed execution</button>
+            <button class="button button-primary" type="button" data-open-book aria-label="Contact Scorecard about managed outbound">Discuss managed execution</button>
             <ul class="plan-features">
               <li><span class="check">✓</span><span>Email and LinkedIn campaigns</span></li>
               <li><span class="check">✓</span><span>Fractional cold calling</span></li>
@@ -1447,17 +1446,17 @@
             </ul>
           </article>
         </div>
-        <p class="pricing-note"><strong>Start with the smallest engagement that gets the system operating.</strong> After a short working session, we will recommend the right starting point and a scope tailored to your business.</p>
+        <p class="pricing-note"><strong>Start with the smallest useful scope.</strong> After a working session, we recommend what to solve first and what not to buy yet.</p>
       </div>
     </section>
 
     <section class="final-cta" id="see-your-market" aria-labelledby="final-title">
       <div class="footer-mosaic" aria-hidden="true"><div id="footer-mosaic-wrap"></div></div>
-      <h2 id="final-title">Bring us the number. We'll build the plan behind it.</h2>
-      <p>Start with the growth plan or the account system. We will help you connect both when the plan calls for it.</p>
+      <h2 id="final-title">Not sure what is holding growth back? Start there.</h2>
+      <p>Bring the goal, the evidence, and what your team believes. We will find what is in the way and show you what to do next.</p>
       <div class="final-actions">
         <button class="button button-white" type="button" data-open-book>Build your growth plan</button>
-        <a href="#account-scoring" class="button" style="color:white;border-color:rgba(255,255,255,.38)">Explore account scoring</a>
+        <a href="#features" class="button" style="color:white;border-color:rgba(255,255,255,.38)">See how Scorecard works</a>
       </div>
       <scorecard-site-footer home-page></scorecard-site-footer>
     </section>
@@ -1522,7 +1521,7 @@
 
 <script>
   // ===================== Hero mosaic =====================
-  // Ported from the design project's HeroMosaic.jsx — the drawing code is
+  // Ported from the design project's HeroMosaic.jsx. The drawing code is
   // unchanged; only the React wrapper became a plain init function.
   const HM_TONES = {
     'near-dark': { bg: '#03153A', rgb: '3,21,58',     field: '#4A72AE', dark: true },
@@ -1793,7 +1792,7 @@
         paint(now);
         if (st.f != null && st.f >= 1) {
           if (st.doneAt == null) st.doneAt = st.t;
-          if (st.t > st.doneAt + 1.2) { st.raf = null; return; }   // settled — idle to save CPU
+          if (st.t > st.doneAt + 1.2) { st.raf = null; return; }   // settled; idle to save CPU
         } else st.doneAt = null;
         st.raf = requestAnimationFrame(loop);
       };
@@ -1842,8 +1841,6 @@
       const card = el(id);
       if (featureStack && card) featureStack.appendChild(card);
     });
-    const platformEvidence = el('platform-evidence');
-    if (featureStack && platformEvidence) featureStack.after(platformEvidence);
     function setState(patch) { Object.assign(state, patch); render(); }
 
     // ---- GPI card choreography ----
@@ -1994,7 +1991,7 @@
 
     // ---- Scroll: header tone ----
     // Elevation and navigation behavior are owned by the shared chrome.
-    const darkSections = document.querySelectorAll('.hp3 .hero, .hp3 .process, .hp3 #audiences, .hp3 .final-cta');
+    const darkSections = document.querySelectorAll('.hp3 .hero, .hp3 .case-study, .hp3 .final-cta');
     const navZones = [
       { name: 'problem', start: el('problem'), end: el('features') },
       { name: 'services', start: el('features'), end: el('pricing') },
@@ -2023,56 +2020,6 @@
     };
 
     const SYSTEM_TIMELINE = 8.2;
-
-    // The three service pills leave the primary hero sentence and land in the graph.
-    const updateHeroPills = sc => {
-      const sentence = document.querySelector('.hero-services');
-      const graph = el('hero-stage');
-      if (!sentence || !graph || !sc) return;
-      const pills = sentence.querySelectorAll('[data-hero-pill]');
-      const targets = graph.querySelectorAll('.sys-chip[data-hero-target]');
-      const clamp = n => Math.max(0, Math.min(1, n));
-      const smooth = n => { n = clamp(n); return n * n * (3 - 2 * n); };
-      const out = n => 1 - Math.pow(1 - clamp(n), 3);
-      const pageY = window.scrollY;
-      const sentenceTop = sentence.getBoundingClientRect().top + pageY;
-      const systemTop = sc.getBoundingClientRect().top + pageY;
-      const travel = Math.max(sc.offsetHeight - window.innerHeight, 1);
-      const startY = Math.max(0, sentenceTop - window.innerHeight * .22);
-      pills.forEach((pill, i) => {
-        const targetChip = targets[i];
-        const target = targetChip && targetChip.querySelector(':scope > rect')?.getBoundingClientRect();
-        if (!targetChip || !target) return;
-        pill.style.transform = 'none';
-        const source = pill.getBoundingClientRect();
-        const dock = Number(targetChip.dataset.t || 0) / SYSTEM_TIMELINE;
-        const dockY = systemTop + travel * dock;
-        const journey = clamp((pageY - startY) / Math.max(dockY - startY, 1));
-        const enter = out(journey / .26);
-        const exit = smooth((journey - .52) / .48);
-        const mobile = window.innerWidth <= 700;
-        const laneX = mobile ? window.innerWidth * .5 : window.innerWidth * ([.27, .5, .73][i] || .5);
-        const laneY = mobile ? window.innerHeight * (.38 + i * .09) : window.innerHeight * .48;
-        const sourceX = source.left + source.width / 2;
-        const sourceY = source.top + source.height / 2;
-        const targetX = target.left + target.width / 2;
-        const targetY = target.top + target.height / 2;
-        const heldX = sourceX + (laneX - sourceX) * enter;
-        const heldY = sourceY + (laneY - sourceY) * enter;
-        const desiredX = heldX + (targetX - heldX) * exit;
-        const desiredY = heldY + (targetY - heldY) * exit;
-        const fade = smooth((journey - .9) / .1);
-        const dx = desiredX - sourceX;
-        const dy = desiredY - sourceY;
-        const targetScaleX = target.width / Math.max(source.width, 1);
-        const targetScaleY = target.height / Math.max(source.height, 1);
-        const scaleX = 1 + exit * (targetScaleX - 1);
-        const scaleY = 1 + exit * (targetScaleY - 1);
-        const opacity = 1 - fade;
-        pill.style.transform = `translate(${dx}px, ${dy}px) scale(${scaleX}, ${scaleY})`;
-        pill.style.opacity = String(opacity);
-      });
-    };
 
     // Keep pill state tied directly to the scroll playhead. Recomputing paused
     // SVG animation delays every frame can flash between animation fill states.
@@ -2104,7 +2051,6 @@
       const playhead = p * SYSTEM_TIMELINE;
       card.style.setProperty('--p', playhead.toFixed(3) + 's');
       updateSystemChips(playhead);
-      updateHeroPills(sc);
       const pin = p > 0.02;
       if (pin !== state.sysPinned) setState({ sysPinned: pin });
     };
@@ -2166,11 +2112,10 @@
     };
 
     // ---- Scroll: play the service visuals once in view ----
-    let gPlayed = false, wPlayed = false, sPlayed = false, oPlayed = false;
+    let gPlayed = false, sPlayed = false, oPlayed = false;
     const inView = (node) => { if (!node) return false; const r = node.getBoundingClientRect(); return r.top < window.innerHeight * 0.8 && r.bottom > 0; };
     const gCheck = () => {
       if (!gPlayed && inView(el('gpi-stage'))) { gPlayed = true; playGpi(); }
-      if (!wPlayed && inView(el('wgi-stage'))) { wPlayed = true; el('wgi-stage').classList.add('play'); }
       if (!sPlayed && inView(el('ssq-stage'))) {
         sPlayed = true;
         ssPhase = 1; el('ssq-stage').classList.add('play'); render();
@@ -2189,7 +2134,7 @@
     initHeroMosaic(el('footer-mosaic-wrap'), { tone: 'deep-dark', animated: !REDUCED, gapMs: 18 });
     render();
     onScroll();
-    // Layout settles after fonts/images land — re-check a few times rather than polling forever.
+    // Layout settles after fonts/images land. Re-check a few times rather than polling forever.
     [400, 1200, 2200].forEach(ms => setTimeout(onScroll, ms));
   })();
 

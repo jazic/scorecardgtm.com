@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Proprietary Search Account Scoring | Scorecard</title>
+  <meta name="description" content="Turn your acquisition thesis into an explainable score, rank the businesses that fit, and know where to invest your research, letters, calls, and follow-up." />
+  <link rel="icon" type="image/png" sizes="32x32" href="design-system/assets/favicon-32.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="design-system/tokens.css" />
+  <link rel="stylesheet" href="site-chrome.css" />
+  <script src="site-chrome.js"></script>
+  <style>
+    :root {
+      --paper: var(--bg-1);
+      --paper-2: var(--bg-2);
+      --ink: var(--sc-ink);
+      --muted: var(--fg-3);
+      --body: var(--fg-2);
+      --line: var(--border);
+      --hair: var(--hairline);
+      --white: #fff;
+      --blue: var(--sc-blue);
+      --blue-deep: var(--sc-blue-deep);
+      --purple: var(--sc-purple);
+      --green: var(--sc-green);
+      --gold: var(--sc-gold);
+      --coral: var(--sc-coral);
+      --sans: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --ease: cubic-bezier(.22, 1, .36, 1);
+      --shadow: var(--shadow-card);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; color: var(--ink); background: var(--paper); font-family: var(--sans); -webkit-font-smoothing: antialiased; overflow-x: clip; }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; }
+    .shell { width: min(1220px, calc(100% - 64px)); margin: 0 auto; }
+    .narrow { width: min(780px, calc(100% - 48px)); margin-inline: auto; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 10px; color: var(--muted); font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+    .spark { position: relative; width: 12px; height: 12px; flex: 0 0 auto; color: var(--purple); }
+    .spark::before, .spark::after { content: ""; position: absolute; inset: 0 4px; border-radius: 2px; background: currentColor; }
+    .spark::after { transform: rotate(90deg); }
+    .button { display: inline-flex; align-items: center; justify-content: center; gap: 9px; min-height: 50px; padding: 0 23px; border: 1px solid transparent; border-radius: 8px; cursor: pointer; font-size: 15px; font-weight: 650; transition: transform .18s ease, opacity .18s ease, background .18s ease; }
+    .button:active { transform: scale(.98); }
+    .button-primary { color: var(--white); background: var(--ink); }
+    .button-white { color: var(--ink); background: var(--white); box-shadow: var(--shadow); }
+
+    /* Hero */
+    .hero { position: relative; min-height: 830px; overflow: hidden; color: white; background: var(--ink); }
+    .hero::before { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 16% 24%, rgba(180,147,234,.26), transparent 30%), radial-gradient(circle at 83% 68%, rgba(168,216,98,.18), transparent 28%), linear-gradient(118deg, rgba(3,21,58,.3), rgba(10,37,80,.72)); }
+    .hero-grid { position: absolute; inset: 0; opacity: .28; background-image: linear-gradient(rgba(255,255,255,.08) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.08) 1px, transparent 1px); background-size: 76px 76px; mask-image: linear-gradient(to bottom, black, transparent 92%); }
+    .hero-inner { position: relative; z-index: 2; display: grid; grid-template-columns: 1.02fr .98fr; gap: 64px; align-items: center; min-height: 830px; padding: 148px 0 90px; }
+    .hero .eyebrow { color: rgba(255,255,255,.72); }
+    .hero .spark { color: var(--green); }
+    .hero h1 { max-width: 690px; margin: 24px 0 26px; font-size: clamp(58px, 6vw, 82px); line-height: .96; letter-spacing: -.055em; text-wrap: balance; }
+    .hero h1 em { color: var(--green); font-style: normal; }
+    .hero-lede { max-width: 650px; margin: 0; color: rgba(255,255,255,.82); font-size: clamp(18px, 1.5vw, 21px); font-weight: 500; line-height: 1.62; letter-spacing: -.018em; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+    .hero-actions .button-primary { color: var(--ink); background: var(--green); }
+    .hero-actions .button-secondary { color: white; border-color: rgba(255,255,255,.36); background: rgba(255,255,255,.08); }
+    .hero-note { margin-top: 16px; color: rgba(255,255,255,.58); font-size: 12px; }
+
+    /* Score panel */
+    .score-panel { overflow: hidden; border: 1px solid rgba(255,255,255,.2); border-radius: 18px; color: var(--ink); background: rgba(255,255,255,.97); box-shadow: 0 38px 90px -45px rgba(0,5,18,.85); transform: rotate(.35deg); }
+    .score-head { padding: 24px 26px; border-bottom: 1px solid var(--hair); }
+    .panel-kicker { color: var(--muted); font-size: 10px; font-weight: 800; letter-spacing: .09em; text-transform: uppercase; }
+    .company-row { display: flex; justify-content: space-between; gap: 20px; align-items: flex-start; margin-top: 12px; }
+    .company-row h2 { margin: 0 0 6px; font-size: 24px; letter-spacing: -.035em; }
+    .company-meta { color: var(--muted); font-size: 12px; }
+    .score-ring { display: grid; place-items: center; width: 62px; height: 62px; flex: 0 0 62px; border-radius: 50%; background: conic-gradient(var(--green) 0 86%, #e7ebef 86% 100%); }
+    .score-ring span { display: grid; place-items: center; width: 48px; height: 48px; border-radius: 50%; background: white; font-size: 20px; font-weight: 850; }
+    .owner-strip { display: grid; grid-template-columns: auto 1fr auto; gap: 13px; align-items: center; padding: 15px 26px; border-bottom: 1px solid var(--hair); background: #f8fafc; }
+    .owner-avatar { position: relative; display: grid; place-items: center; width: 42px; height: 42px; overflow: hidden; border: 2px solid white; border-radius: 50%; color: white; background: linear-gradient(145deg, #8da0b9 0 46%, #31496b 46% 100%); box-shadow: 0 0 0 1px var(--line); font-size: 11px; font-weight: 800; }
+    .owner-avatar::before { content: ""; position: absolute; top: 7px; width: 13px; height: 13px; border-radius: 50%; background: #e5bca2; }
+    .owner-avatar::after { content: ""; position: absolute; bottom: -7px; width: 32px; height: 27px; border-radius: 16px 16px 0 0; background: #29415f; }
+    .owner-avatar i { position: absolute; right: -1px; bottom: -1px; z-index: 2; display: grid; place-items: center; width: 14px; height: 14px; border: 2px solid white; border-radius: 4px; color: white; background: #0a66c2; font-size: 7px; font-style: normal; font-weight: 900; }
+    .owner-details strong { display: block; font-size: 12px; }
+    .owner-details span { display: block; margin-top: 3px; color: var(--muted); font-size: 9px; }
+    .owner-contact { display: grid; gap: 4px; color: var(--body); font-size: 9px; text-align: right; }
+    .owner-profile-found { color: var(--blue-deep); font-weight: 700; }
+    .score-summary { display: grid; grid-template-columns: repeat(3, 1fr); border-bottom: 1px solid var(--hair); }
+    .score-stat { padding: 18px 12px; text-align: center; }
+    .score-stat + .score-stat { border-left: 1px solid var(--hair); }
+    .score-stat strong { display: block; font-size: 14px; }
+    .score-stat small { display: block; margin-top: 4px; color: var(--muted); font-size: 10px; }
+    .criteria { margin: 0; padding: 8px 26px 18px; list-style: none; }
+    .criterion { display: grid; grid-template-columns: 22px 1fr auto; gap: 10px; align-items: start; padding: 13px 0; border-bottom: 1px solid #edf0f3; }
+    .criterion:last-child { border: 0; }
+    .criterion-mark { display: grid; place-items: center; width: 20px; height: 20px; border-radius: 50%; font-size: 10px; font-weight: 900; }
+    .pass { color: #315c17; background: rgba(168,216,98,.28); }
+    .unknown { color: #825c00; background: rgba(252,175,15,.18); }
+    .concern { color: #9b3b27; background: rgba(215,134,104,.2); }
+    .criterion strong { display: block; font-size: 12px; }
+    .criterion small { display: block; margin-top: 4px; color: var(--muted); font-size: 10px; line-height: 1.45; }
+    .points { color: var(--muted); font-size: 10px; font-weight: 700; }
+
+    /* Shared sections */
+    .section { padding: 112px 0; }
+    .section.alt { background: var(--paper-2); }
+    .section.dark { color: white; background: var(--ink); }
+    .section-heading { margin-bottom: 52px; }
+    .section-heading.center { text-align: center; }
+    .section-heading h2 { max-width: 850px; margin: 18px auto 0; font-size: clamp(42px, 4.8vw, 64px); line-height: 1; letter-spacing: -.045em; text-wrap: balance; }
+    .section-heading:not(.center) h2 { margin-left: 0; }
+    .section-heading p { max-width: 720px; margin: 22px auto 0; color: var(--body); font-size: 17px; line-height: 1.7; }
+    .section-heading:not(.center) p { margin-left: 0; }
+    .dark .section-heading p { color: rgba(255,255,255,.67); }
+    .dark .eyebrow { color: rgba(255,255,255,.67); }
+
+    .question-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .question-card { min-height: 240px; padding: 30px; border: 1px solid var(--line); border-radius: 16px; background: white; box-shadow: 0 24px 70px -52px rgba(3,21,58,.5); }
+    .question-num { color: var(--purple); font-size: 11px; font-weight: 850; letter-spacing: .08em; }
+    .question-card h3 { margin: 72px 0 0; font-size: 25px; line-height: 1.18; letter-spacing: -.035em; }
+
+    .steps { display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid var(--line); border-radius: 18px; background: white; box-shadow: var(--shadow); }
+    .step { padding: 32px; }
+    .step + .step { border-left: 1px solid var(--line); }
+    .step-num { color: var(--purple); font-size: 11px; font-weight: 850; letter-spacing: .08em; }
+    .step h3 { margin: 28px 0 10px; font-size: 24px; letter-spacing: -.03em; }
+    .step p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.65; }
+
+    /* Signal gallery */
+    .signal-gallery { margin-top: 24px; padding: 28px; border: 1px solid var(--line); border-radius: 18px; background: #edf2f7; }
+    .signal-gallery-head { display: flex; justify-content: space-between; gap: 32px; align-items: end; margin-bottom: 22px; }
+    .signal-gallery h3 { margin: 0; font-size: 21px; letter-spacing: -.025em; }
+    .signal-gallery-head p { max-width: 550px; margin: 0; color: var(--muted); font-size: 12px; line-height: 1.55; text-align: right; }
+    .signal-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; }
+    .signal-card { min-height: 220px; padding: 20px; border: 1px solid var(--line); border-radius: 12px; background: white; }
+    .signal-visual { display: grid; place-items: center; height: 70px; margin-bottom: 20px; }
+    .signal-card h4 { margin: 0 0 8px; font-size: 15px; letter-spacing: -.02em; }
+    .signal-card p { margin: 0; color: var(--muted); font-size: 11.5px; line-height: 1.55; }
+    .signal-card.custom-signal { color: white; border-color: rgba(255,255,255,.12); background: var(--ink); }
+    .signal-card.custom-signal p { color: rgba(255,255,255,.68); }
+    .custom-signal-icon { position: relative; display: grid; place-items: center; width: 56px; height: 56px; border: 1px solid rgba(255,255,255,.24); border-radius: 14px; background: rgba(168,216,98,.12); }
+    .custom-signal-icon::before, .custom-signal-icon::after { content: ""; position: absolute; width: 22px; height: 3px; border-radius: 2px; background: var(--green); }
+    .custom-signal-icon::after { transform: rotate(90deg); }
+    .browser-mini { width: 76px; height: 50px; border: 2px solid var(--ink); border-radius: 6px; background: white; box-shadow: 9px 8px 0 var(--green); }
+    .browser-mini::before { content: ""; display: block; height: 9px; border-bottom: 1px solid var(--line); background: #f1f3f6; }
+    .browser-off { position: relative; width: 76px; height: 50px; border: 2px dashed #9aa5b5; border-radius: 6px; }
+    .browser-off::after { content: "×"; position: absolute; inset: 0; display: grid; place-items: center; color: #7c8797; font-size: 28px; }
+    .locations { position: relative; width: 86px; height: 52px; }
+    .pin { position: absolute; display: grid; place-items: center; width: 27px; height: 27px; border-radius: 50% 50% 50% 0; color: white; background: var(--ink); font-size: 9px; font-style: normal; font-weight: 800; transform: rotate(-45deg); }
+    .pin span { transform: rotate(45deg); }
+    .pin:nth-child(1) { left: 3px; top: 20px; }.pin:nth-child(2) { left: 30px; top: 2px; background: #315c17; }.pin:nth-child(3) { right: 2px; top: 21px; }
+    .bars { display: flex; gap: 5px; align-items: end; height: 52px; }
+    .bars i { width: 13px; border-radius: 3px 3px 0 0; background: var(--green); }
+    .bars i:nth-child(1) { height: 24px; }.bars i:nth-child(2) { height: 36px; }.bars i:nth-child(3) { height: 32px; }.bars i:nth-child(4) { height: 46px; }
+    .team { display: flex; align-items: end; justify-content: center; gap: 4px; height: 52px; }
+    .person { position: relative; width: 23px; height: 30px; border-radius: 11px 11px 5px 5px; background: #a9b4c5; }
+    .person::before { content: ""; position: absolute; top: -11px; left: 6px; width: 11px; height: 11px; border-radius: 50%; background: inherit; }
+    .person.lead { height: 39px; background: var(--ink); }
+    .signal-footnote { margin: 18px 2px 0; color: var(--muted); font-size: 11px; line-height: 1.6; text-align: right; }
+    .signal-flow { display: grid; grid-template-columns: repeat(3, 1fr); margin-top: 18px; overflow: hidden; border: 1px solid var(--line); border-radius: 15px; background: white; }
+    .signal-flow-step { position: relative; min-height: 190px; padding: 25px; }
+    .signal-flow-step + .signal-flow-step { border-left: 1px solid var(--line); }
+    .signal-flow-step + .signal-flow-step::before { content: "→"; position: absolute; top: 50%; left: -12px; display: grid; place-items: center; width: 24px; height: 24px; border: 1px solid var(--line); border-radius: 50%; color: var(--purple); background: white; font-size: 11px; font-weight: 850; transform: translateY(-50%); }
+    .flow-label { color: var(--purple); font-size: 9px; font-weight: 850; letter-spacing: .08em; text-transform: uppercase; }
+    .signal-flow-step h4 { margin: 38px 0 9px; font-size: 19px; letter-spacing: -.025em; }
+    .signal-flow-step p { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.6; }
+
+    /* Tiers and market */
+    .tier-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+    .tier-card { width: 100%; padding: 25px; border: 1px solid rgba(255,255,255,.18); border-top: 3px solid var(--tier-color, var(--green)); border-radius: 15px; color: white; background: rgba(255,255,255,.07); font: inherit; text-align: left; cursor: pointer; transition: opacity 220ms ease, border-color 220ms ease, background 220ms ease, transform 220ms ease; }
+    .tier-grid.has-focus .tier-card:not(.is-active) { opacity: .62; }
+    .tier-card.is-active { border-color: var(--tier-color, var(--green)); background: color-mix(in srgb, var(--tier-color, var(--green)) 15%, transparent); transform: translateY(-2px); }
+    .tier-letter { display: grid; place-items: center; width: 38px; height: 38px; border-radius: 10px; color: var(--ink); background: var(--tier-color, var(--green)); font-weight: 850; }
+    .tier-title { display: block; margin: 25px 0 9px; font-size: 19px; font-weight: 700; }
+    .tier-copy { display: block; margin: 0; color: rgba(255,255,255,.78); font-size: 13px; font-weight: 400; line-height: 1.55; }
+    .market-view { display: grid; gap: 16px; margin-top: 28px; }
+    .distribution-panel, .prospect-panel { overflow: hidden; border: 1px solid rgba(255,255,255,.16); border-radius: 16px; background: white; color: var(--ink); }
+    .panel-head { display: flex; justify-content: space-between; gap: 18px; align-items: flex-start; padding: 21px 23px; border-bottom: 1px solid var(--line); }
+    .panel-head h3 { margin: 0 0 5px; font-size: 25px; letter-spacing: -.025em; }
+    .panel-head p { margin: 0; color: var(--muted); font-size: 12px; }
+    .distribution-body { display: grid; grid-template-columns: 1fr 215px; gap: 28px; padding: 24px; }
+    .grade-list { display: grid; gap: 10px; align-content: center; }
+    .grade-row { min-height: 44px; display: grid; grid-template-columns: 23px 1fr auto 30px; gap: 8px; align-items: center; width: 100%; padding: 7px 8px; border: 0; border-bottom: 1px solid var(--hair); border-radius: 8px; color: var(--ink); background: transparent; font-family: inherit; font-size: 10px; text-align: left; cursor: pointer; transition: opacity 220ms ease, background 220ms ease; }
+    .grade-row:last-child { border-bottom: 0; }
+    .grade-list.has-focus .grade-row:not(.is-active) { opacity: .58; }
+    .grade-row.is-active { background: color-mix(in srgb, var(--grade, var(--green)) 14%, white); }
+    .grade-badge { display: grid; place-items: center; width: 20px; height: 20px; border-radius: 5px; color: white; background: var(--grade); font-weight: 850; }
+    .grade-row strong { font-size: 11px; }
+    .grade-row small { color: var(--muted); font-size: 8px; text-align: right; }
+    .histogram-wrap { position: relative; min-width: 0; padding: 14px 0 4px; }
+    .histogram { display: flex; align-items: end; gap: 3px; height: 210px; border-bottom: 1px solid var(--line); background-image: linear-gradient(90deg, transparent 24.8%, rgba(220,225,232,.55) 25%, transparent 25.2%, transparent 49.8%, rgba(220,225,232,.55) 50%, transparent 50.2%, transparent 74.8%, rgba(220,225,232,.55) 75%, transparent 75.2%); }
+    .histogram i { flex: 1 1 0; min-width: 3px; height: var(--h); border-radius: 2px 2px 0 0; background: var(--bar); opacity: .92; transition: opacity 220ms ease, filter 220ms ease, transform 220ms ease; transform-origin: bottom; }
+    .histogram.has-focus i:not(.is-active) { opacity: .28; filter: saturate(.55); }
+    .histogram.has-focus i.is-active { opacity: 1; filter: saturate(1.1); transform: scaleY(1.025); }
+    .histogram-labels { display: flex; justify-content: space-between; margin-top: 9px; color: var(--muted); font-size: 8px; }
+    .prospect-toolbar { display: flex; justify-content: space-between; gap: 18px; align-items: center; padding: 14px 20px; border-bottom: 1px solid var(--line); }
+    .prospect-toolbar strong { font-size: 13px; }
+    .prospect-toolbar strong span { margin-left: 6px; color: var(--muted); font-weight: 500; }
+    .toolbar-actions { display: flex; gap: 8px; color: var(--muted); font-size: 9px; }
+    .toolbar-actions span { padding: 6px 8px; border: 1px solid var(--line); border-radius: 6px; }
+    .prospect-table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+    .prospect-table th { padding: 10px 12px; color: var(--muted); background: #fafbfc; font-size: 8px; font-weight: 800; text-align: left; text-transform: uppercase; }
+    .prospect-table td { overflow: hidden; padding: 11px 12px; border-top: 1px solid #edf0f3; font-size: 9px; text-overflow: ellipsis; white-space: nowrap; }
+    .prospect-table td:first-child { font-weight: 750; }
+    .score-chip { display: inline-flex; align-items: center; gap: 5px; font-weight: 800; }
+    .score-chip i { display: grid; place-items: center; width: 18px; height: 18px; border-radius: 5px; color: var(--ink); background: var(--green); font-size: 8px; font-style: normal; }
+    .match-chip, .category-chip { display: inline-block; padding: 4px 7px; border: 1px solid var(--line); border-radius: 999px; background: #f8fafc; color: var(--body); font-size: 8px; }
+    .prospect-foot { display: flex; justify-content: space-between; padding: 10px 20px; border-top: 1px solid var(--line); color: var(--muted); background: #fafbfc; font-size: 8px; }
+
+    /* Best fit */
+    .fit-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .fit-card { min-height: 210px; padding: 27px; border: 1px solid var(--line); border-radius: 15px; background: white; }
+    .fit-card span { color: #315c17; font-size: 10px; font-weight: 850; letter-spacing: .08em; text-transform: uppercase; }
+    .fit-card h3 { margin: 35px 0 10px; font-size: 22px; letter-spacing: -.03em; }
+    .fit-card p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.6; }
+    .positioning { display: grid; grid-template-columns: 1fr 1fr; gap: 70px; align-items: start; }
+    .positioning-list { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--line); }
+    .positioning-list li { padding: 19px 0; border-bottom: 1px solid var(--line); color: var(--body); font-size: 15px; line-height: 1.55; }
+    .positioning-list strong { color: var(--ink); }
+
+    .final-cta { position: relative; overflow: hidden; padding: 100px 40px 40px; color: white; text-align: center; background: var(--ink); }
+    .final-cta::before { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 16% 18%, rgba(180,147,234,.24), transparent 30%), radial-gradient(circle at 88% 30%, rgba(168,216,98,.16), transparent 30%), linear-gradient(120deg, rgba(3,21,58,.62), rgba(10,37,80,.36)); }
+    .final-cta > * { position: relative; z-index: 2; }
+    .final-cta h2 { max-width: 780px; margin: 18px auto 20px; font-size: clamp(46px, 4.8vw, 64px); line-height: 1; letter-spacing: -.04em; text-wrap: balance; }
+    .final-cta > p { max-width: 700px; margin: 0 auto; color: rgba(255,255,255,.74); font-size: 16px; line-height: 1.65; }
+    .final-actions { display: flex; justify-content: center; gap: 12px; margin-top: 30px; }
+    @media (max-width: 980px) {
+      .hero-inner { grid-template-columns: 1fr; gap: 50px; }
+      .hero-copy { max-width: 760px; }
+      .score-panel { max-width: 650px; transform: none; }
+      .signal-grid { grid-template-columns: repeat(3, 1fr); }
+      .tier-grid { grid-template-columns: 1fr 1fr; }
+      .market-view, .positioning { grid-template-columns: 1fr; }
+      .signal-flow { grid-template-columns: 1fr; }
+      .signal-flow-step + .signal-flow-step { border-left: 0; border-top: 1px solid var(--line); }
+      .signal-flow-step + .signal-flow-step::before { top: -12px; left: 50%; transform: translateX(-50%); }
+    }
+    @media (max-width: 720px) {
+      .shell { width: calc(100% - 36px); }
+      .hero, .hero-inner { min-height: 0; }
+      .hero-inner { padding: 130px 0 80px; }
+      .hero h1 { font-size: 52px; }
+      .section { padding: 82px 0; }
+      .section-heading h2 { font-size: 43px; }
+      .question-grid, .steps, .fit-grid { grid-template-columns: 1fr; }
+      .question-card { min-height: 190px; }
+      .question-card h3 { margin-top: 46px; }
+      .step + .step { border-left: 0; border-top: 1px solid var(--line); }
+      .signal-gallery { padding: 20px; }
+      .signal-gallery-head { align-items: start; flex-direction: column; }
+      .signal-gallery-head p { text-align: left; }
+      .signal-grid { grid-template-columns: 1fr 1fr; }
+      .distribution-body { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 500px) {
+      .hero h1 { font-size: 45px; }
+      .hero-actions { flex-direction: column; align-items: stretch; }
+      .score-summary, .tier-grid, .signal-grid { grid-template-columns: 1fr; }
+      .score-stat + .score-stat { border-left: 0; border-top: 1px solid var(--hair); }
+      .signal-card { min-height: 0; }
+      .owner-strip { grid-template-columns: auto 1fr; }
+      .owner-contact { grid-column: 2; text-align: left; }
+      .panel-kicker { font-size: 11px; line-height: 1.4; }
+      .owner-details span, .owner-contact { font-size: 11px; line-height: 1.45; }
+      .criterion small { font-size: 11.5px; }
+      .points, .score-stat small { font-size: 11px; }
+      .signal-card p { font-size: 13px; }
+      .histogram-labels { font-size: 9.5px; }
+      .prospect-toolbar { align-items: flex-start; flex-direction: column; }
+      .toolbar-actions { font-size: 10px; }
+      .prospect-table th, .prospect-table td { font-size: 10px; }
+      .prospect-table th:nth-child(n+4), .prospect-table td:nth-child(n+4) { display: none; }
+      .prospect-table th:first-child { width: 48% !important; }
+      .prospect-table th:nth-child(2) { width: 20% !important; }
+      .prospect-table th:nth-child(3) { width: 32% !important; }
+      .final-cta { padding: 84px 18px 30px; }
+      .final-actions { flex-direction: column; align-items: center; }
+      .final-actions .button { width: 100%; max-width: 320px; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition-duration: .01ms !important; } }
+  </style>
+</head>
+<body>
+  <scorecard-site-header active="solutions" tone-mode="adaptive" cta-label="Score your search" cta-short-label="Score search" cta-href="index.html#book"></scorecard-site-header>
+
+  <main id="top">
+    <section class="hero" data-header-tone="dark">
+      <div class="hero-grid" aria-hidden="true"></div>
+      <div class="shell hero-inner">
+        <div class="hero-copy">
+          <div class="eyebrow"><span class="spark"></span> Account scoring for proprietary search</div>
+          <h1>Know which owners are <em>worth pursuing.</em></h1>
+          <p class="hero-lede">Turn your acquisition thesis into an explainable score. Rank the businesses that fit, focus your research, and know where to invest the personal letter, the phone call, and the hundredth follow-up.</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="index.html#book">Score your search</a>
+            <a class="button button-secondary" href="#how-it-works">See how scoring works</a>
+          </div>
+          <p class="hero-note">For search funds, self-funded searchers, independent sponsors, and small acquisition teams.</p>
+        </div>
+
+        <article class="score-panel" id="example" aria-label="Example scored acquisition target">
+          <div class="score-head">
+            <span class="panel-kicker">Illustrative example · Commercial landscaping</span>
+            <div class="company-row">
+              <div><h2>Evergreen Grounds Management</h2><div class="company-meta">Raleigh, NC · Independent · 35–55 employees</div></div>
+              <div class="score-ring" aria-label="Score 86 out of 100"><span>86</span></div>
+            </div>
+          </div>
+          <div class="owner-strip" aria-label="Owner contact found for Evergreen Grounds Management">
+            <span class="owner-avatar" aria-label="LinkedIn profile photo for Michael Torres"><i>in</i></span>
+            <div class="owner-details"><strong>Michael Torres</strong><span>Founder &amp; President · 24 years in role</span></div>
+            <div class="owner-contact"><span class="owner-profile-found">LinkedIn profile found</span><span>michael@evergreengrounds.example · (919) 555-0148</span></div>
+          </div>
+          <div class="score-summary">
+            <div class="score-stat"><strong>Tier A</strong><small>Outreach priority</small></div>
+            <div class="score-stat"><strong>Strong fit</strong><small>Thesis match</small></div>
+            <div class="score-stat"><strong>Medium</strong><small>Evidence confidence</small></div>
+          </div>
+          <ul class="criteria">
+            <li class="criterion"><span class="criterion-mark pass">✓</span><span><strong>Recurring commercial maintenance</strong><small>Contracted grounds care appears central to the offering.</small></span><span class="points">+18</span></li>
+            <li class="criterion"><span class="criterion-mark pass">✓</span><span><strong>Dense regional routes</strong><small>Service coverage clusters across three adjacent counties.</small></span><span class="points">+12</span></li>
+            <li class="criterion"><span class="criterion-mark unknown">?</span><span><strong>Owner independence</strong><small>Operations leadership is visible; sales dependence needs verification.</small></span><span class="points">Open</span></li>
+            <li class="criterion"><span class="criterion-mark concern">!</span><span><strong>Construction exposure</strong><small>Installation work may introduce project and housing-cycle risk.</small></span><span class="points">−5</span></li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" data-header-tone="light">
+      <div class="shell">
+        <div class="section-heading center narrow">
+          <div class="eyebrow"><span class="spark"></span> The searcher's constraint</div>
+          <h2>A list tells you who exists. It does not tell you who deserves your time.</h2>
+          <p>The hard part of proprietary search is not finding another thousand company names. It is applying your judgment consistently across all of them.</p>
+        </div>
+        <div class="question-grid">
+          <article class="question-card"><span class="question-num">01 · THESIS FIT</span><h3>Who actually matches the thesis—not just the industry code?</h3></article>
+          <article class="question-card"><span class="question-num">02 · RESEARCH</span><h3>Who deserves deeper work before anyone reaches out?</h3></article>
+          <article class="question-card"><span class="question-num">03 · ATTENTION</span><h3>Who is worth a handwritten letter and persistent follow-up?</h3></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt" id="how-it-works" data-header-tone="light">
+      <div class="shell">
+        <div class="section-heading">
+          <div class="eyebrow"><span class="spark"></span> How it works</div>
+          <h2>Your thesis, turned into a working score.</h2>
+          <p>Scorecard makes the qualitative parts of your buy box explicit, researches the available evidence, and ranks every account against the same standard.</p>
+        </div>
+        <div class="steps">
+          <article class="step"><span class="step-num">01 · DEFINE</span><h3>Define the thesis</h3><p>Translate your target profile, investment logic, must-haves, and red flags into a plain-language rubric.</p></article>
+          <article class="step"><span class="step-num">02 · SCORE</span><h3>Score the market</h3><p>Evaluate businesses using public evidence and the lists or sources already in your search process.</p></article>
+          <article class="step"><span class="step-num">03 · ALLOCATE</span><h3>Allocate attention</h3><p>Separate personal targets from scaled outreach, research queues, and companies that should be excluded.</p></article>
+        </div>
+
+        <div class="signal-gallery">
+          <div class="signal-gallery-head">
+            <h3>Signals worth noticing in commercial landscaping</h3>
+          </div>
+          <div class="signal-grid">
+            <article class="signal-card"><div class="signal-visual"><span class="browser-off" aria-hidden="true"></span></div><h4>Little digital presence</h4><p>May reveal an overlooked, referral-driven operator with room for professionalization.</p></article>
+            <article class="signal-card"><div class="signal-visual"><span class="locations" aria-hidden="true"><i class="pin"><span>1</span></i><i class="pin"><span>2</span></i><i class="pin"><span>3</span></i></span></div><h4>Multiple locations</h4><p>Can indicate operating scale, route density, management depth, and a repeatable branch model.</p></article>
+            <article class="signal-card"><div class="signal-visual"><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span></div><h4>Recurring commercial work</h4><p>Property-manager language, maintenance programs, and seasonal contracts suggest repeat revenue.</p></article>
+            <article class="signal-card"><div class="signal-visual"><span class="team" aria-hidden="true"><i class="person"></i><i class="person lead"></i><i class="person"></i></span></div><h4>Management beyond the owner</h4><p>Branch managers, operations leaders, estimators, and crew supervisors can reduce owner dependence.</p></article>
+            <article class="signal-card custom-signal"><div class="signal-visual"><span class="custom-signal-icon" aria-hidden="true"></span></div><h4>Your custom signal</h4><p>Add the nuance only you know matters—then apply it consistently across every company in the search.</p></article>
+          </div>
+          <p class="signal-footnote"><strong>25+ standard signals available.</strong></p>
+          <div class="signal-flow" aria-label="How signals turn a search thesis into action">
+            <article class="signal-flow-step"><span class="flow-label">Research at scale</span><h4>Read every business against your thesis.</h4><p>Standard and custom signals turn scattered public evidence into the same consistent screen across the full market.</p></article>
+            <article class="signal-flow-step"><span class="flow-label">Reason clearly</span><h4>See why each company ranks where it does.</h4><p>Each score carries its evidence, unknowns, and red flags—so you can trust the order and personalize the approach.</p></article>
+            <article class="signal-flow-step"><span class="flow-label">Move faster</span><h4>Put your attention where it can change the outcome.</h4><p>Sort thousands of names into a focused research and outreach plan, then get to the right owner conversations sooner.</p></article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section dark" data-header-tone="dark">
+      <div class="shell">
+        <div class="section-heading center narrow">
+          <div class="eyebrow"><span class="spark"></span> From market to action</div>
+          <h2>Not every owner should get the same outreach.</h2>
+          <p>A clear tier gives your team an operating decision—not another data point.</p>
+        </div>
+        <div class="tier-grid has-focus">
+          <button class="tier-card is-active" type="button" data-tier-select="A" aria-pressed="true" style="--tier-color:#7fb94a"><span class="tier-letter">A</span><span class="tier-title">Personal campaign</span><span class="tier-copy">Bespoke research, personal mail, direct calls, and persistent long-term follow-up.</span></button>
+          <button class="tier-card" type="button" data-tier-select="B" aria-pressed="false" style="--tier-color:#649be4"><span class="tier-letter">B</span><span class="tier-title">High-touch campaign</span><span class="tier-copy">Personalized multichannel outreach with a structured follow-up cadence.</span></button>
+          <button class="tier-card" type="button" data-tier-select="C" aria-pressed="false" style="--tier-color:#a47cdb"><span class="tier-letter">C</span><span class="tier-title">Thesis test</span><span class="tier-copy">Lower-cost outreach used to test the segment and gather more evidence.</span></button>
+          <button class="tier-card" type="button" data-tier-select="D" aria-pressed="false" style="--tier-color:#e7ad25"><span class="tier-letter">D</span><span class="tier-title">Hold or exclude</span><span class="tier-copy">Poor fit, insufficient evidence, wrong model, duplicate, franchise, or subsidiary.</span></button>
+        </div>
+
+        <div class="market-view">
+          <article class="distribution-panel" aria-label="Commercial landscaping score distribution">
+            <div class="panel-head"><div><h3>1,284 commercial landscapers scored</h3><p>Southeast market</p></div></div>
+            <div class="distribution-body">
+              <div class="histogram-wrap">
+                <div class="histogram has-focus" aria-label="Distribution of businesses by score">
+                  <i data-grade="F" style="--h:18%;--bar:#98a6b7"></i><i data-grade="F" style="--h:23%;--bar:#98a6b7"></i><i data-grade="F" style="--h:20%;--bar:#98a6b7"></i><i data-grade="D" style="--h:28%;--bar:#e7ad25"></i><i data-grade="D" style="--h:38%;--bar:#e7ad25"></i><i data-grade="D" style="--h:51%;--bar:#e7ad25"></i><i data-grade="D" style="--h:66%;--bar:#e7ad25"></i><i data-grade="D" style="--h:79%;--bar:#e7ad25"></i><i data-grade="D" style="--h:90%;--bar:#e7ad25"></i><i data-grade="D" style="--h:96%;--bar:#e7ad25"></i><i data-grade="D" style="--h:98%;--bar:#e7ad25"></i><i data-grade="D" style="--h:95%;--bar:#e7ad25"></i><i data-grade="D" style="--h:88%;--bar:#e7ad25"></i><i data-grade="D" style="--h:72%;--bar:#e7ad25"></i><i data-grade="D" style="--h:49%;--bar:#e7ad25"></i><i data-grade="C" style="--h:26%;--bar:#a47cdb"></i><i data-grade="C" style="--h:20%;--bar:#a47cdb"></i><i data-grade="C" style="--h:28%;--bar:#a47cdb"></i><i data-grade="C" style="--h:39%;--bar:#a47cdb"></i><i data-grade="C" style="--h:47%;--bar:#a47cdb"></i><i data-grade="B" style="--h:35%;--bar:#649be4"></i><i data-grade="B" style="--h:29%;--bar:#649be4"></i><i data-grade="B" style="--h:43%;--bar:#649be4"></i><i data-grade="B" style="--h:52%;--bar:#649be4"></i><i class="is-active" data-grade="A" style="--h:31%;--bar:#7fb94a"></i><i class="is-active" data-grade="A" style="--h:42%;--bar:#7fb94a"></i><i class="is-active" data-grade="A" style="--h:58%;--bar:#7fb94a"></i><i class="is-active" data-grade="A" style="--h:38%;--bar:#7fb94a"></i>
+                </div>
+                <div class="histogram-labels"><span>0</span><span>50</span><span>65</span><span>80</span><span>100</span></div>
+              </div>
+              <div class="grade-list has-focus" aria-label="Score grade legend">
+                <button class="grade-row is-active" type="button" data-tier-select="A" aria-pressed="true" style="--grade:#7fb94a"><span class="grade-badge">A</span><span>Ideal</span><strong>42</strong><small>3%</small></button>
+                <button class="grade-row" type="button" data-tier-select="B" aria-pressed="false" style="--grade:#649be4"><span class="grade-badge">B</span><span>Strong</span><strong>137</strong><small>11%</small></button>
+                <button class="grade-row" type="button" data-tier-select="C" aria-pressed="false" style="--grade:#a47cdb"><span class="grade-badge">C</span><span>Possible</span><strong>386</strong><small>30%</small></button>
+                <button class="grade-row" type="button" data-tier-select="D" aria-pressed="false" style="--grade:#e7ad25"><span class="grade-badge">D</span><span>Weak</span><strong>451</strong><small>35%</small></button>
+                <button class="grade-row" type="button" data-tier-select="F" aria-pressed="false" style="--grade:#98a6b7"><span class="grade-badge">F</span><span>Disqualified</span><strong>268</strong><small>21%</small></button>
+              </div>
+            </div>
+          </article>
+
+          <article class="prospect-panel" aria-label="Ranked commercial landscaping prospects">
+            <div class="prospect-toolbar"><strong>All prospects <span>1,284</span></strong><div class="toolbar-actions" aria-hidden="true"><span>Filter</span><span>Group</span><span>Score ↓</span><span>Fields</span></div></div>
+            <table class="prospect-table">
+              <thead><tr><th style="width:30%">Prospect</th><th style="width:10%">Score</th><th style="width:14%">Match</th><th style="width:18%">Category</th><th style="width:14%">Location</th><th style="width:14%">Pipeline</th></tr></thead>
+              <tbody>
+                <tr><td>Evergreen Grounds Management</td><td><span class="score-chip"><i>A</i> 86</span></td><td><span class="match-chip">Strong match</span></td><td><span class="category-chip">Commercial maintenance</span></td><td>Raleigh, NC</td><td>Scored</td></tr>
+                <tr><td>Blue Ridge Landscape Partners</td><td><span class="score-chip"><i>A</i> 85</span></td><td><span class="match-chip">Strong match</span></td><td><span class="category-chip">Grounds management</span></td><td>Greenville, SC</td><td>Scored</td></tr>
+                <tr><td>Piedmont Property Services</td><td><span class="score-chip"><i>A</i> 84</span></td><td><span class="match-chip">Strong match</span></td><td><span class="category-chip">Exterior services</span></td><td>Charlotte, NC</td><td>Scored</td></tr>
+                <tr><td>Coastal Green Commercial</td><td><span class="score-chip"><i>A</i> 83</span></td><td><span class="match-chip">Medium match</span></td><td><span class="category-chip">Commercial landscape</span></td><td>Charleston, SC</td><td>Scored</td></tr>
+                <tr><td>Triangle Grounds Group</td><td><span class="score-chip"><i style="background:#649be4">B</i> 81</span></td><td><span class="match-chip">Strong match</span></td><td><span class="category-chip">Grounds maintenance</span></td><td>Durham, NC</td><td>Scored</td></tr>
+                <tr><td>Atlantic Turf &amp; Irrigation</td><td><span class="score-chip"><i style="background:#649be4">B</i> 80</span></td><td><span class="match-chip">Medium match</span></td><td><span class="category-chip">Landscape &amp; irrigation</span></td><td>Wilmington, NC</td><td>Scored</td></tr>
+              </tbody>
+            </table>
+            <div class="prospect-foot"><span>6 of 1,284 shown</span><span>179 Tier A + B targets ready for prioritization</span></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" data-header-tone="light">
+      <div class="shell">
+        <div class="section-heading">
+          <div class="eyebrow"><span class="spark"></span> Practical search applications</div>
+          <h2>Use Scorecard when the list still leaves you with too much work.</h2>
+          <p>Databases can produce a broad universe. Scorecard helps when the real buy box depends on business model, customer mix, local presence, owner dynamics, or other details that filters miss.</p>
+        </div>
+        <div class="fit-grid">
+          <article class="fit-card"><span>Map the search</span><h3>Build a usable market, not another raw list.</h3><p>Combine directories, data providers, association lists, and your own research into one deduplicated universe that can be screened consistently.</p></article>
+          <article class="fit-card"><span>Remove the lookalikes</span><h3>Separate real fits from companies that only look right.</h3><p>Distinguish commercial maintenance from residential or project work, service from installation, and independent operators from franchises or subsidiaries.</p></article>
+          <article class="fit-card"><span>Prioritize the owners</span><h3>Find the few companies worth personal pursuit.</h3><p>Identify the businesses that justify deeper research, a tailored letter, a direct call, and months of thoughtful follow-up.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt" data-header-tone="light">
+      <div class="shell positioning">
+        <div class="section-heading">
+          <div class="eyebrow"><span class="spark"></span> Protect your search runway</div>
+          <h2>Spend less runway sorting. Spend more time with owners worth knowing.</h2>
+        </div>
+        <ul class="positioning-list">
+          <li><strong>Get to high-fit owner conversations faster.</strong> Start each week with the businesses most likely to justify your time.</li>
+          <li><strong>Personalize with something real.</strong> Use company-specific evidence to show an owner why you chose their business.</li>
+          <li><strong>Follow up persistently with the right targets.</strong> Save your most expensive attention for owners you would genuinely want to buy from.</li>
+          <li><strong>Let the search sharpen the thesis.</strong> Use replies, rejections, and discoveries to improve the next round of scoring.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="final-cta" id="score-your-search" data-header-tone="dark">
+      <div class="eyebrow" style="color:rgba(255,255,255,.7)"><span class="spark"></span> Start with your thesis</div>
+      <h2>Bring us your thesis. We’ll show you the score.</h2>
+      <p>Start with a target profile and a sample of companies. See how Scorecard separates the businesses worth pursuing from the rest of the market.</p>
+      <div class="final-actions">
+        <a class="button button-white" href="index.html#book">Score your search</a>
+        <a class="button" href="index.html" style="color:white;border-color:rgba(255,255,255,.38)">Back to Scorecard</a>
+      </div>
+      <scorecard-site-footer></scorecard-site-footer>
+    </section>
+  </main>
+
+  <script>
+    const tierControls = Array.from(document.querySelectorAll('[data-tier-select]'));
+    const histogramBars = Array.from(document.querySelectorAll('.histogram [data-grade]'));
+
+    function selectTier(grade) {
+      histogramBars.forEach((bar) => bar.classList.toggle('is-active', bar.dataset.grade === grade));
+      tierControls.forEach((control) => {
+        const active = control.dataset.tierSelect === grade;
+        control.classList.toggle('is-active', active);
+        control.setAttribute('aria-pressed', String(active));
+      });
+    }
+
+    tierControls.forEach((control) => control.addEventListener('click', () => selectTier(control.dataset.tierSelect)));
+    selectTier('A');
+  </script>
+
+</body>
+</html>

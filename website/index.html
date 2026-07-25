@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Scorecard: Turn revenue targets into qualified pipeline.</title>
-  <meta name="description" content="Scorecard finds what is holding B2B growth back, builds the plan and account system to fix it, and runs focused outbound when extra execution is needed." />
+  <meta name="description" content="Scorecard finds what is holding B2B growth back, builds the plan, implements it in your CRM, and runs the weekly reporting and account prioritization needed to keep it current." />
   <link rel="icon" type="image/png" sizes="32x32" href="design-system/assets/favicon-32.png" />
   <!-- PostHog: product analytics + session replay -->
   <script>
@@ -20,8 +20,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="design-system/tokens.css" />
-  <link rel="stylesheet" href="site-chrome.css?v=mobile-subpages" />
-  <script src="site-chrome.js?v=mobile-subpages"></script>
+  <link rel="stylesheet" href="site-chrome.css?v=grouped-footer" />
+  <script src="site-chrome.js?v=grouped-footer"></script>
   <style>
     /* Local alias layer: the v3 design names, bound to the canonical tokens in
        design-system/tokens.css. Keeps the ported design CSS verbatim while
@@ -199,6 +199,8 @@
     .investor-visual svg { width: 100%; height: 100%; display: block; overflow: visible; }
     .investor-panel h3 { max-width: 320px; margin: auto 0 12px; color: #fff; font-size: 27px; line-height: 1.08; letter-spacing: -.035em; }
     .investor-panel > p { max-width: 340px; margin: 0; color: rgba(255,255,255,.68); font-size: 14px; line-height: 1.62; }
+    .investor-panel .audience-link { display: inline-flex; align-items: center; width: fit-content; margin-top: 18px; color: var(--green); font-size: 14px; font-weight: 750; text-decoration: none; }
+    .investor-panel .audience-link:hover { color: #c2ec82; }
     .who-help-bridge { display: flex; align-items: center; gap: 18px; margin-top: 68px; color: var(--muted); font-size: 12px; font-weight: 750; letter-spacing: .08em; line-height: 1.3; text-align: center; text-transform: uppercase; }
     .who-help-bridge::before, .who-help-bridge::after { content: ""; height: 1px; flex: 1; background: rgba(100,116,139,.2); }
     .who-help-bridge span { flex: 0 0 auto; }
@@ -267,8 +269,6 @@
     .feature-card h3 { margin: 16px auto 10px; font-size: 28px; font-weight: 700; letter-spacing: -.025em; }
     .feature-card > p { color: var(--muted); max-width: 560px; font-size: 16px; line-height: 1.6; margin: 0 auto; }
     .feature-card > .card-link { display: inline-flex; margin-top: 18px; font-size: 14px; font-weight: 700; }
-    .feature-card.optional-execution { padding-block: 42px; }
-    .feature-card.optional-execution > p { max-width: 640px; }
     .visual { height: 280px; max-width: 680px; margin: 36px auto 0; border-radius: 12px; position: relative; overflow: hidden; }
     .feature-card .visual > * { scale: .85; transform-origin: center center; }
     .feature-card .ssq > * { scale: .78; }
@@ -404,42 +404,6 @@
     .play .acct.qc1 .b1 { animation: ss-fout .3s ease 5.75s forwards; }
     .play .acct.qc1 .aname { animation: sys-fin .4s ease 5.9s forwards; }
     @keyframes ss-fout { to { opacity: 0; } }
-
-    /* 04: Managed outbound */
-    .obx { position: relative; overflow: hidden; }
-    .obx-k { position: absolute; background: #fff; border: 1px solid var(--hair); border-radius: 16px; box-shadow: 0 14px 36px rgba(3,21,58,.09), 0 3px 9px rgba(3,21,58,.05); }
-    .obx-mini { width: 180px; padding: 13px 15px; opacity: .44; }
-    .play .obx-mini { animation: obx-fin8 .5s ease var(--t) forwards; }
-    @keyframes obx-fin8 { to { opacity: .8; } }
-    .obx-mt { display: flex; align-items: center; gap: 8px; font-size: 11px; font-weight: 700; letter-spacing: .1em; color: var(--muted); }
-    .obx-mt .sq { width: 9px; height: 9px; border-radius: 3px; }
-    .obx-tag { font-size: 8.5px; font-weight: 800; letter-spacing: .06em; color: #2f66b8; background: rgba(100,155,228,.14); border-radius: 5px; padding: 4px 5px; }
-    .obx-bub { border-radius: 10px; background: #EEF1F7; height: 20px; margin-top: 10px; width: 70%; }
-    .obx-bub.me { margin-left: auto; background: rgba(180,147,234,.18); width: 55%; border-bottom-right-radius: 3px; }
-    .obx-wv { display: flex; align-items: flex-end; gap: 4px; height: 26px; margin-top: 10px; }
-    .obx-wv i { display: block; width: 5px; border-radius: 3px; background: #CBD5E1; }
-    .obx-mrow { display: flex; align-items: center; gap: 6px; margin-top: 12px; font-size: 9px; font-weight: 800; letter-spacing: .07em; color: var(--muted); }
-    .obx-mrow .dt { width: 8px; height: 8px; border-radius: 3px; }
-    .cal-card { position: absolute; left: 216px; right: 16px; top: 44px; background: #fff; border: 1px solid var(--line); border-radius: 18px; padding: 20px 22px; box-shadow: 0 22px 55px rgba(3,21,58,.11), 0 4px 12px rgba(3,21,58,.05); }
-    .cal-head { display: flex; align-items: center; gap: 10px; }
-    .cal-ava { width: 28px; height: 28px; border-radius: 50%; background: rgba(180,147,234,.18); color: #6b3fb8; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 800; flex: 0 0 auto; }
-    .cal-t { font-size: 10.5px; font-weight: 700; letter-spacing: .1em; color: var(--muted); }
-    .cal-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0 10px; margin-top: 16px; }
-    .cal-day { font-size: 9.5px; font-weight: 800; letter-spacing: .08em; color: #94A3B8; text-align: center; padding-bottom: 8px; border-bottom: 1px solid var(--hair); }
-    .cal-col { display: flex; flex-direction: column; gap: 8px; min-height: 205px; padding-top: 10px; }
-    .cal-blk { border-radius: 9px; padding: 8px 9px; border: 1px solid; }
-    .cal-blk .tp { display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 800; color: var(--ink); font-variant-numeric: tabular-nums; }
-    .cal-blk .tp i { width: 8px; height: 8px; border-radius: 3px; display: block; }
-    .cal-blk .nm { font-size: 8.5px; font-weight: 800; letter-spacing: .05em; color: var(--muted); margin-top: 4px; }
-    .cal-blk .wgi-bar { height: 6px; margin-top: 6px; }
-    .cal-blk.ch-e { background: rgba(100,155,228,.1); border-color: rgba(100,155,228,.35); }
-    .cal-blk.ch-e .tp i { background: var(--blue); }
-    .cal-blk.ch-d { background: rgba(180,147,234,.12); border-color: rgba(180,147,234,.4); }
-    .cal-blk.ch-d .tp i { background: var(--purple); }
-    .cal-blk.ch-c { background: rgba(252,175,15,.1); border-color: rgba(252,175,15,.4); }
-    .cal-blk.ch-c .tp i { background: var(--gold); }
-    .cal-foot { display: flex; align-items: center; gap: 8px; margin-top: 6px; padding-top: 12px; border-top: 1px solid var(--hair); font-size: 10.5px; font-weight: 700; letter-spacing: .07em; color: var(--muted); font-variant-numeric: tabular-nums; }
-    .cal-foot .gd { width: 8px; height: 8px; border-radius: 50%; background: var(--green); }
 
     /* The artwork supplies its own cards and shadows; keep the stage frameless
        and allow those shadows to extend beyond the animation viewport. */
@@ -841,7 +805,7 @@
       <div class="hero-fold">
         <div class="hero-copy shell">
           <h1 class="serif"><span class="hero-line">Turn your revenue target into</span> <span class="hero-line">the right accounts and</span> <span class="hero-line"><em class="t-mosaic">qualified pipeline.</em></span></h1>
-          <p class="hero-description">Scorecard diagnoses what is holding growth back, builds the plan and account system to fix it, and runs focused outbound when execution is the gap.</p>
+          <p class="hero-description">Scorecard diagnoses what is holding growth back, builds the plan, implements it in your CRM, and reports on progress every week.</p>
         <div class="hero-cta">
           <button class="button button-primary" type="button" data-open-book>Build your growth plan <span aria-hidden="true">→</span></button>
           <a class="button button-secondary" href="#features">See how Scorecard works <span aria-hidden="true">→</span></a>
@@ -883,7 +847,7 @@
       <div class="system-scroll" id="system-scroll">
         <div class="system-stage" id="system-stage">
         <h2 class="system-h serif">See what is in the way. Know what to do next.</h2>
-        <div class="system-card play scrub" id="hero-stage" aria-label="Growth plan, CRM evidence, account sourcing and scoring, weekly reporting, and managed outbound connect in one growth system">
+        <div class="system-card play scrub" id="hero-stage" aria-label="Building the growth plan, implementing it in the CRM, weekly reporting, account and customer scoring, and evidence-led plan updates connect in one growth system">
           <svg viewBox="38 70 824 365" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
             <defs>
               <filter id="sys-chipshadow" x="-30%" y="-60%" width="160%" height="220%">
@@ -933,35 +897,35 @@
               <line x1="461" y1="323" x2="487" y2="346" stroke="rgba(100,116,139,.4)" stroke-dasharray="2 4"></line>
               <rect x="487" y="331" width="178" height="30" rx="15" fill="#0A214A" stroke="rgba(100,155,228,.42)" filter="url(#sys-chipshadow)"></rect>
               <g transform="translate(500,339)"><g class="sys-chip-check"><rect x="1" y="1" width="12" height="12" rx="3" fill="#A8D862"></rect><path d="M4.2 7.1 6.2 9 10 4.9" fill="none" stroke="#03153A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></g></g>
-              <text x="521" y="350" style="font-size:12px; font-weight:600;" fill="#FFFFFF">Growth plan</text>
+              <text x="521" y="350" style="font-size:12px; font-weight:600;" fill="#FFFFFF">Build growth plan</text>
             </g>
             <g class="sys-chip" data-t="3.35" data-check-t="3.49">
               <line x1="515" y1="296" x2="535" y2="301" stroke="rgba(100,116,139,.4)" stroke-dasharray="2 4"></line>
-              <rect x="535" y="286" width="170" height="30" rx="15" fill="#0A214A" stroke="rgba(100,155,228,.42)" filter="url(#sys-chipshadow)"></rect>
+              <rect x="535" y="286" width="200" height="30" rx="15" fill="#0A214A" stroke="rgba(100,155,228,.42)" filter="url(#sys-chipshadow)"></rect>
               <g transform="translate(548,294)"><g class="sys-chip-check"><rect x="1" y="1" width="12" height="12" rx="3" fill="#A8D862"></rect><path d="M4.2 7.1 6.2 9 10 4.9" fill="none" stroke="#03153A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></g></g>
-              <text x="569" y="305" style="font-size:12px; font-weight:600;" fill="#FFFFFF">CRM evidence</text>
+              <text x="569" y="305" style="font-size:12px; font-weight:600;" fill="#FFFFFF">Implement plan in CRM</text>
             </g>
             <g class="sys-chip" data-hero-target data-t="4.2" data-check-t="4.34">
               <line x1="581" y1="257" x2="607" y2="256" stroke="rgba(100,116,139,.4)" stroke-dasharray="2 4"></line>
-              <rect x="607" y="241" width="238" height="30" rx="15" fill="#0A214A" stroke="rgba(100,155,228,.42)" filter="url(#sys-chipshadow)"></rect>
+              <rect x="607" y="241" width="220" height="30" rx="15" fill="#0A214A" stroke="rgba(100,155,228,.42)" filter="url(#sys-chipshadow)"></rect>
               <g transform="translate(620,249)"><g class="sys-chip-check"><rect x="1" y="1" width="12" height="12" rx="3" fill="#A8D862"></rect><path d="M4.2 7.1 6.2 9 10 4.9" fill="none" stroke="#03153A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></g></g>
-              <text x="641" y="260" style="font-size:12px; font-weight:600;" fill="#FFFFFF">Account sourcing and scoring</text>
+              <text x="641" y="260" style="font-size:12px; font-weight:600;" fill="#FFFFFF">Report on plan, weekly</text>
             </g>
             <g class="sys-chip" data-t="5.05" data-check-t="5.19">
-              <line x1="635" y1="216" x2="640" y2="211" stroke="rgba(100,116,139,.4)" stroke-dasharray="2 4"></line>
-              <rect x="640" y="196" width="170" height="30" rx="15" fill="#0A214A" stroke="rgba(100,155,228,.42)" filter="url(#sys-chipshadow)"></rect>
-              <g transform="translate(653,204)"><g class="sys-chip-check"><rect x="1" y="1" width="12" height="12" rx="3" fill="#A8D862"></rect><path d="M4.2 7.1 6.2 9 10 4.9" fill="none" stroke="#03153A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></g></g>
-              <text x="674" y="215" style="font-size:12px; font-weight:600;" fill="#FFFFFF">Reporting</text>
+              <line x1="635" y1="216" x2="612" y2="211" stroke="rgba(100,116,139,.4)" stroke-dasharray="2 4"></line>
+              <rect x="612" y="196" width="238" height="30" rx="15" fill="#0A214A" stroke="rgba(100,155,228,.42)" filter="url(#sys-chipshadow)"></rect>
+              <g transform="translate(625,204)"><g class="sys-chip-check"><rect x="1" y="1" width="12" height="12" rx="3" fill="#A8D862"></rect><path d="M4.2 7.1 6.2 9 10 4.9" fill="none" stroke="#03153A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></g></g>
+              <text x="646" y="215" style="font-size:12px; font-weight:600;" fill="#FFFFFF">Score accounts and customers</text>
             </g>
             <g class="sys-chip" data-hero-target data-t="5.9" data-check-t="6.04">
-              <line x1="676" y1="161" x2="680" y2="166" stroke="rgba(100,116,139,.4)" stroke-dasharray="2 4"></line>
-              <rect x="680" y="151" width="180" height="30" rx="15" fill="#0A214A" stroke="rgba(100,155,228,.42)" filter="url(#sys-chipshadow)"></rect>
-              <g transform="translate(693,159)"><g class="sys-chip-check"><rect x="1" y="1" width="12" height="12" rx="3" fill="#A8D862"></rect><path d="M4.2 7.1 6.2 9 10 4.9" fill="none" stroke="#03153A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></g></g>
-              <text x="714" y="170" style="font-size:12px; font-weight:600;" fill="#FFFFFF">Managed outbound</text>
+              <line x1="676" y1="161" x2="650" y2="166" stroke="rgba(100,116,139,.4)" stroke-dasharray="2 4"></line>
+              <rect x="650" y="151" width="200" height="30" rx="15" fill="#0A214A" stroke="rgba(100,155,228,.42)" filter="url(#sys-chipshadow)"></rect>
+              <g transform="translate(663,159)"><g class="sys-chip-check"><rect x="1" y="1" width="12" height="12" rx="3" fill="#A8D862"></rect><path d="M4.2 7.1 6.2 9 10 4.9" fill="none" stroke="#03153A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></g></g>
+              <text x="684" y="170" style="font-size:12px; font-weight:600;" fill="#FFFFFF">Adapt plan with evidence</text>
             </g>
           </svg>
         </div>
-        <p class="system-sub">The plan, account priorities, weekly evidence, and execution stay connected, so every next move has a reason.</p>
+        <p class="system-sub">The plan, CRM evidence, weekly reporting, and account priorities stay connected, so every next move has a reason.</p>
         </div>
       </div>
 
@@ -975,22 +939,22 @@
             <section class="operating-audiences" aria-labelledby="operating-audiences-title">
               <h3 class="audience-group-label" id="operating-audiences-title">Operating companies</h3>
               <div class="operating-grid">
-                <article class="who-help-item">
+                <article class="who-help-item" id="audience-services">
                   <span class="who-help-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 8h16v11H4z"></path><path d="M9 8V5h6v3M4 12h16M10 12v2h4v-2"></path></svg></span>
                   <h4>B2B services and agencies</h4>
                   <p>Replace referral dependence with a clear market and a consistent way to reach it.</p>
                 </article>
-                <article class="who-help-item">
+                <article class="who-help-item" id="audience-saas">
                   <span class="who-help-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"></rect><path d="M3 9h18M8 14h3M8 17h7"></path></svg></span>
                   <h4>B2B SaaS and technology</h4>
                   <p>Connect the revenue target to the segments, accounts, and buying signals worth sales time.</p>
                 </article>
-                <article class="who-help-item">
+                <article class="who-help-item" id="audience-manufacturing">
                   <span class="who-help-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 20V9l6 3V8l6 4V5l6 4v11z"></path><path d="M7 16h2M12 16h2M17 16h2"></path></svg></span>
                   <h4>Manufacturing and distribution</h4>
                   <p>Prioritize across fragmented applications, channels, end markets, and territories.</p>
                 </article>
-                <article class="who-help-item">
+                <article class="who-help-item" id="audience-field-services">
                   <span class="who-help-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 21s6-5.2 6-11a6 6 0 1 0-12 0c0 5.8 6 11 6 11z"></path><circle cx="12" cy="10" r="2"></circle></svg></span>
                   <h4>Specialized and field services</h4>
                   <p>Account for geography, credentials, capacity, and service fit before outreach begins.</p>
@@ -1019,6 +983,7 @@
               </div>
               <h3>Private equity and search funds</h3>
               <p>Map a market around an investment thesis, rank the few businesses worth pursuing, and conduct careful direct outreach.</p>
+              <a class="audience-link" href="eta-search.html">See Scorecard for proprietary search →</a>
             </article>
           </div>
           <div class="who-help-bridge"><span>Different markets. The same question: what is holding growth back?</span></div>
@@ -1047,7 +1012,7 @@
             <li><span class="status">✓</span><span>One model shows what must be true to hit the number.</span></li>
             <li><span class="status">✓</span><span>Market, conversion, capacity, and investment are tested together.</span></li>
             <li><span class="status">✓</span><span>Weekly evidence reveals what changed and where to act next.</span></li>
-            <li><span class="status">✓</span><span>Account priorities and execution stay tied to the plan.</span></li>
+            <li><span class="status">✓</span><span>CRM evidence, weekly reporting, and account priorities stay tied to the plan.</span></li>
           </ul>
         </article>
       </div>
@@ -1057,7 +1022,7 @@
       <div class="section-heading narrow reveal">
         <div class="eyebrow services-eyebrow"><span class="spark"></span> How Scorecard works</div>
         <h2 class="serif" id="features-title">We find what is holding growth back, then build the system to fix it.</h2>
-        <p>The engagement starts with diagnosis. From there, we focus only on the planning, account, and execution work your business needs.</p>
+        <p>The engagement starts with diagnosis. From there, we build the planning, CRM, reporting, and account system your business needs.</p>
       </div>
       <div class="feature-stack">
         <article class="feature-card reveal" id="growth-strategy">
@@ -1195,12 +1160,64 @@
           </div>
         </article>
 
+        <article class="feature-card reveal platform-output" id="platform-evidence">
+          <div class="platform-output-label">Included operating layer</div>
+          <div class="feature-meta"><span class="feature-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><rect x="2.5" y="3.5" width="11" height="9" rx="1.5"></rect><path d="m3.5 5 4.5 3.5L12.5 5"></path></svg></span><span>Measure · Weekly reporting</span></div>
+          <h3>See what changed. Know what to do next.</h3>
+          <p>Scorecard reads CRM evidence against the plan, explains the constraint, and recommends the next action in a weekly operating cadence.</p>
+          <div class="mobile-visual-summary" aria-label="Weekly operating flow">
+            <div class="mobile-summary-flow">CRM evidence <b>→</b> Weekly report <b>→</b> Next action</div>
+            <div class="mobile-summary-row"><span>Performance vs. plan</span><strong>Visible</strong></div>
+            <div class="mobile-summary-row"><span>Constraint this week</span><strong>Explained</strong></div>
+          </div>
+          <div class="visual wgi" id="wgi-stage" aria-hidden="true" style="height:540px;">
+            <div class="wgi-client">
+              <div class="wgi-clientbar">
+                <div class="wgi-windowdots"><i></i><i></i><i></i></div>
+              </div>
+              <div class="wgi-clientbody">
+                <aside class="wgi-inbox">
+                  <div class="wgi-inboxhead"><strong>Inbox</strong><span>4</span></div>
+                  <div class="wgi-email-row wgi-new">
+                    <div class="wgi-row-avatar"><img src="design-system/assets/scorecard-sq.svg" alt="" /></div>
+                    <div class="wgi-email-copy"><strong>Pipeline below plan</strong><span>Follow-up is the constraint.</span><small>Monday briefing · Week 07</small><time>7:00</time></div>
+                  </div>
+                  <div class="wgi-email-row wgi-placeholder"><div class="wgi-row-avatar"></div><div class="wgi-email-copy"><span class="wgi-sk name"></span><span class="wgi-sk subject"></span><span class="wgi-sk preview"></span></div></div>
+                  <div class="wgi-email-row wgi-placeholder"><div class="wgi-row-avatar"></div><div class="wgi-email-copy"><span class="wgi-sk name"></span><span class="wgi-sk subject"></span><span class="wgi-sk preview"></span></div></div>
+                  <div class="wgi-email-row wgi-placeholder"><div class="wgi-row-avatar"></div><div class="wgi-email-copy"><span class="wgi-sk name"></span><span class="wgi-sk subject"></span><span class="wgi-sk preview"></span></div></div>
+                </aside>
+                <section class="wgi-reader">
+                  <div class="wgi-empty"><span class="wgi-empty-icon"></span><strong>Select a message</strong><small>Your message will open here.</small></div>
+                  <article class="wgi-message">
+                    <div class="wgi-reader-actions"><span>←</span><span>⌑</span><span>↗</span><span>•••</span></div>
+                    <div class="wgi-mailhead">
+                      <div class="wgi-avatar"><img src="design-system/assets/scorecard-sq.svg" alt="" /></div>
+                      <div class="wgi-from"><strong>Scorecard Intelligence</strong><span>weekly@scorecardgtm.com</span><span>to Revenue Team</span></div>
+                      <div class="wgi-when">MON · 7:00 AM</div>
+                    </div>
+                    <div class="wgi-subject"><span>Monday briefing · Week 07</span><strong>Pipeline below plan; follow-up is the constraint.</strong></div>
+                    <div class="wgi-letter">
+                      <p class="wgi-summary sys-fin" style="--t:2.15s;">Pipeline finished 20% below plan even though demand remains on target.</p>
+                      <p class="wgi-signal-line sys-fin" style="--t:2.65s;">
+                        <span class="wgi-signal"><strong>Pipeline:</strong><span class="wgi-value warn">↓ 20%</span></span>
+                        <span class="wgi-signal"><strong>Demand:</strong><span class="wgi-value good">On plan</span></span>
+                        <span class="wgi-signal"><strong>Proposals:</strong><span class="wgi-value info">↓ 18%</span></span>
+                      </p>
+                      <p class="wgi-diagnosis sys-fin" style="--t:3.2s;"><span>Our read</span><strong>Demand is there, but follow-up broke down: four accounts received no second call.</strong></p>
+                      <blockquote class="wgi-recommend sys-fin" style="--t:4.05s;"><span class="wgi-recommend-label">This week</span><strong>Call the four stalled accounts before adding new accounts.</strong></blockquote>
+                    </div>
+                  </article>
+                </section>
+              </div>
+            </div>
+          </div>
+        </article>
+
         <article class="feature-card reveal" id="account-scoring">
           <div class="feature-meta"><span class="feature-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="5.5"></circle><circle cx="8" cy="8" r="2.5"></circle><path d="M8 1v2M8 13v2M1 8h2M13 8h2"></path></svg></span><span>Prioritize · Account system</span></div>
           <h3>Turn what we learn into account priorities.</h3>
           <p>We define the market, build an explainable scorecard, and give your team a ranked queue connected to the plan. Every priority has a reason.</p>
-          <!-- Detail link hidden until the account system destination is ready. -->
-          <!-- <a class="card-link" href="account-scoring.html">Explore the account system →</a> -->
+          <a class="card-link" href="eta-search.html">See how search funds use the Account System →</a>
           <div class="mobile-visual-summary" aria-label="Account sourcing and scoring output">
             <div class="mobile-summary-flow">Target market <b>→</b> Ranked account queue</div>
             <div class="mobile-summary-row"><span>Best-fit account</span><strong>92 · Tier A</strong></div>
@@ -1258,65 +1275,6 @@
           </div>
         </article>
 
-        <article class="feature-card reveal optional-execution" id="fractional-outbound">
-          <div class="feature-meta"><span class="feature-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M2.5 9.5v-3l8-3v9z"></path><path d="M10.5 6a3.5 3.5 0 0 1 0 4M4.5 10l1 3"></path></svg></span><span>Execute · Managed outbound</span></div>
-          <h3>Add focused execution when capacity is the gap.</h3>
-          <p>Our team runs email, LinkedIn, and cold calls against the accounts that matter most. Qualified conversations and campaign evidence feed the next decision.</p>
-          <!-- Detail link hidden until the managed outbound destination is ready. -->
-          <!-- <a class="card-link" href="fractional-outbound.html">Explore managed outbound →</a> -->
-          <div class="mobile-visual-summary" aria-label="Managed outbound workflow">
-            <div class="mobile-summary-flow">Priority account <b>→</b> Qualified meeting</div>
-            <div class="mobile-summary-row"><span>List and messaging</span><strong>Managed</strong></div>
-            <div class="mobile-summary-row"><span>Campaign learning</span><strong>Weekly</strong></div>
-          </div>
-          <div class="visual obx" id="obx-stage" aria-hidden="true" style="height:400px;">
-            <div class="obx-k obx-mini" style="left:12px; top:56px; transform:rotate(-2.4deg); --t:.3s;">
-              <div class="obx-mt"><span class="sq" style="background:var(--blue);"></span>EMAIL CAMPAIGN</div>
-              <div style="display:flex; align-items:center; gap:8px; margin-top:12px;"><span class="obx-tag">SUBJECT</span><div class="wgi-bar" style="width:52%;"></div></div>
-              <div class="wgi-bar" style="width:78%; margin-top:10px;"></div>
-              <div class="obx-mrow sys-fin" style="--t:4.7s;"><span class="dt" style="background:var(--blue);"></span>3 MEETINGS</div>
-            </div>
-            <div class="obx-k obx-mini" style="left:20px; top:180px; transform:rotate(1.6deg); --t:.5s;">
-              <div class="obx-mt"><span class="sq" style="background:var(--purple);"></span>LINKEDIN DMS</div>
-              <div class="obx-bub"></div>
-              <div class="obx-bub me"></div>
-              <div class="obx-mrow sys-fin" style="--t:4.9s;"><span class="dt" style="background:var(--purple);"></span>2 MEETINGS</div>
-            </div>
-            <div class="obx-k obx-mini" style="left:12px; top:304px; transform:rotate(-1.4deg); --t:.7s;">
-              <div class="obx-mt"><span class="sq" style="background:var(--gold);"></span>COLD CALLS</div>
-              <div class="obx-wv"><i style="height:10px;"></i><i style="height:20px;"></i><i style="height:14px;"></i><i style="height:24px;"></i><i style="height:12px;"></i><i style="height:22px;"></i><i style="height:16px;"></i><i style="height:26px;"></i><i style="height:11px;"></i><i style="height:18px;"></i></div>
-              <div class="obx-mrow sys-fin" style="--t:5.1s;"><span class="dt" style="background:var(--gold);"></span>2 MEETINGS</div>
-            </div>
-            <div class="obx-k cal-card">
-              <div class="cal-head">
-                <div class="cal-ava">SJ</div>
-                <div class="cal-t">BOOKED BY SAM · YOUR FRACTIONAL REP</div>
-                <div class="wgi-when" style="margin-left:auto;">WK 07</div>
-              </div>
-              <div class="cal-grid">
-                <div class="cal-day">MON</div><div class="cal-day">TUE</div><div class="cal-day">WED</div><div class="cal-day">THU</div><div class="cal-day">FRI</div>
-                <div class="cal-col">
-                  <div class="cal-blk ch-e sys-pop" style="--t:1.4s;"><div class="tp"><i></i>88</div><div class="wgi-bar" style="width:80%;"></div></div>
-                </div>
-                <div class="cal-col">
-                  <div class="cal-blk ch-d sys-pop" style="--t:1.9s;"><div class="tp"><i></i>92</div><div class="nm">ACME IND.</div></div>
-                  <div class="cal-blk ch-c sys-pop" style="--t:2.4s;"><div class="tp"><i></i>74</div><div class="wgi-bar" style="width:70%;"></div></div>
-                </div>
-                <div class="cal-col">
-                  <div class="cal-blk ch-e sys-pop" style="--t:2.8s;"><div class="tp"><i></i>81</div><div class="wgi-bar" style="width:76%;"></div></div>
-                </div>
-                <div class="cal-col">
-                  <div class="cal-blk ch-d sys-pop" style="--t:3.2s;"><div class="tp"><i></i>86</div><div class="wgi-bar" style="width:72%;"></div></div>
-                  <div class="cal-blk ch-e sys-pop" style="--t:3.6s;"><div class="tp"><i></i>79</div><div class="wgi-bar" style="width:64%;"></div></div>
-                </div>
-                <div class="cal-col">
-                  <div class="cal-blk ch-c sys-pop" style="--t:4.0s;"><div class="tp"><i></i>90</div><div class="wgi-bar" style="width:78%;"></div></div>
-                </div>
-              </div>
-              <div class="cal-foot sys-fin" style="--t:4.5s;"><span class="gd"></span>7 QUALIFIED MEETINGS · ON YOUR TEAM'S CALENDAR</div>
-            </div>
-          </div>
-        </article>
       </div>
     </section>
 
@@ -1335,7 +1293,7 @@
             <li>Test market, funnel, capacity, and investment assumptions together.</li>
             <li>Decide which accounts and actions deserve attention.</li>
             <li>Review the evidence and change course when the facts change.</li>
-            <li>Run outbound when additional execution will solve the problem.</li>
+            <li>Turn weekly evidence into an updated forecast and a clear next action.</li>
           </ul>
         </article>
         <article class="division-card software">
@@ -1350,7 +1308,7 @@
           </ul>
         </article>
       </div>
-      <p class="client-role reveal"><strong>You steer the decisions.</strong> Scorecard does the analysis, operates the system, and adds execution. Your team takes the right conversations and closes.</p>
+      <p class="client-role reveal"><strong>You steer the decisions.</strong> Scorecard does the analysis, operates the system, and runs the weekly reporting. Your team acts on the priorities and closes.</p>
       <div class="crm-confidence reveal" aria-label="CRM compatibility">
         <div class="crm-confidence-label">Works with the CRM you already run</div>
         <div class="crm-logos">
@@ -1370,7 +1328,7 @@
         <div class="case-study-grid">
           <article class="case-study-part"><span>The business</span><p>[Anonymous company profile]</p></article>
           <article class="case-study-part"><span>The constraint</span><p>[What management believed versus what Scorecard discovered]</p></article>
-          <article class="case-study-part"><span>What Scorecard built</span><p>[Growth plan, account system, and execution scope]</p></article>
+          <article class="case-study-part"><span>What Scorecard built</span><p>[Growth plan, CRM implementation, weekly reporting, and account system]</p></article>
           <article class="case-study-part"><span>What changed</span><p>[Validated qualitative or quantitative result]</p></article>
         </div>
         <p class="case-study-note">Client identity withheld by agreement. Placeholder content for review. Not production proof.</p>
@@ -1381,7 +1339,7 @@
       <div class="section-heading narrow reveal">
         <div class="eyebrow"><span class="spark"></span> Engagements</div>
         <h2 class="serif" id="pricing-title">Start with the right problem.</h2>
-        <p>We recommend the smallest scope that solves the problem in front of you. Add the Account System or Managed Outbound only when the findings call for it.</p>
+        <p>We recommend the smallest scope that solves the problem in front of you. From there, add the Account System and weekly reporting needed to keep the plan current.</p>
       </div>
       <div class="pricing-wrap reveal">
         <div class="plan-table" aria-label="Scorecard service options">
@@ -1423,21 +1381,21 @@
             </ul>
           </article>
           <article class="plan-column" style="--plan-accent:#D78668;">
-            <span class="plan-stage">Execution option</span>
-            <span class="plan-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M2.5 9.5v-3l8-3v9z"></path><path d="M10.5 6a3.5 3.5 0 0 1 0 4M4.5 10l1 3"></path></svg></span>
-            <h3>Managed Outbound</h3>
+            <span class="plan-stage">Ongoing management</span>
+            <span class="plan-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><rect x="2.5" y="3.5" width="11" height="9" rx="1.5"></rect><path d="m3.5 5 4.5 3.5L12.5 5"></path></svg></span>
+            <h3>Weekly Reporting</h3>
             <div class="plan-model">
-              <div class="plan-quantity"><strong>3</strong><span>coordinated channels</span></div>
-              <div class="plan-quantity-caption">Email, LinkedIn, and calls</div>
-              <div class="plan-commercial"><strong>Optional managed execution</strong><span>Scoped to capacity, channels, and campaign complexity.</span></div>
+              <div class="plan-quantity"><strong>Weekly</strong><span>management read</span></div>
+              <div class="plan-quantity-caption">Plan versus actual</div>
+              <div class="plan-commercial"><strong>Recurring managed reporting</strong><span>Scoped to CRM complexity, operating cadence, and leadership needs.</span></div>
             </div>
-            <p class="plan-for">Add optional email, LinkedIn, and cold-call execution against your highest-priority accounts.</p>
-            <button class="button button-primary" type="button" data-open-book aria-label="Contact Scorecard about managed outbound">Discuss managed execution</button>
+            <p class="plan-for">Read CRM evidence against the plan, explain what changed, and recommend the next action.</p>
+            <button class="button button-primary" type="button" data-open-book aria-label="Contact Scorecard about weekly reporting">Set up weekly reporting</button>
             <ul class="plan-features">
-              <li><span class="check">✓</span><span>Email and LinkedIn campaigns</span></li>
-              <li><span class="check">✓</span><span>Fractional cold calling</span></li>
-              <li><span class="check">✓</span><span>Qualified meeting booking</span></li>
-              <li><span class="check">✓</span><span>Weekly campaign feedback</span></li>
+              <li><span class="check">✓</span><span>CRM evidence against plan</span></li>
+              <li><span class="check">✓</span><span>Plan-versus-actual reporting</span></li>
+              <li><span class="check">✓</span><span>Constraint and exception analysis</span></li>
+              <li><span class="check">✓</span><span>Forecast updates and next actions</span></li>
             </ul>
           </article>
         </div>
@@ -1830,11 +1788,6 @@
         onScroll();
       });
     }
-    const featureStack = document.querySelector('.feature-stack');
-    ['growth-strategy', 'account-scoring', 'fractional-outbound'].forEach(id => {
-      const card = el(id);
-      if (featureStack && card) featureStack.appendChild(card);
-    });
     function setState(patch) { Object.assign(state, patch); render(); }
 
     // ---- GPI card choreography ----
@@ -2106,16 +2059,16 @@
     };
 
     // ---- Scroll: play the service visuals once in view ----
-    let gPlayed = false, sPlayed = false, oPlayed = false;
+    let gPlayed = false, wPlayed = false, sPlayed = false;
     const inView = (node) => { if (!node) return false; const r = node.getBoundingClientRect(); return r.top < window.innerHeight * 0.8 && r.bottom > 0; };
     const gCheck = () => {
       if (!gPlayed && inView(el('gpi-stage'))) { gPlayed = true; playGpi(); }
+      if (!wPlayed && inView(el('wgi-stage'))) { wPlayed = true; el('wgi-stage').classList.add('play'); }
       if (!sPlayed && inView(el('ssq-stage'))) {
         sPlayed = true;
         ssPhase = 1; el('ssq-stage').classList.add('play'); render();
         setTimeout(() => { ssPhase = 2; render(); }, REDUCED ? 0 : 3900);
       }
-      if (!oPlayed && inView(el('obx-stage'))) { oPlayed = true; el('obx-stage').classList.add('play'); }
     };
 
     const onScroll = () => { onHdr(); onNavSpy(); onScrub(); onReveal(); gCheck(); onTicker(); };
@@ -2135,14 +2088,29 @@
   // ===================== Booking modal =====================
   (function () {
     const modal = document.getElementById('book-modal');
+    const bookingContext = new URLSearchParams(location.search).get('source') || '';
+    const isEtaSearch = bookingContext === 'eta-search';
+    const modalTitle = document.getElementById('modal-title');
+    const modalSub = modal.querySelector('.modal-state-form .modal-sub');
+    const icpLabel = modal.querySelector('label[for="icp"]');
+    const icpInput = document.getElementById('icp');
     let lastFocus = null;
+    let activeBookingSource = bookingContext || 'unknown';
+
+    if (isEtaSearch) {
+      modalTitle.textContent = 'Score your search';
+      modalSub.innerHTML = 'Tell us about your acquisition thesis. Next step: pick a time. <strong>We’ll show you how we would turn it into a working score.</strong>';
+      icpLabel.textContent = 'What kind of businesses are you looking to acquire?';
+      icpInput.placeholder = 'Commercial landscaping businesses in the Southeast with recurring maintenance revenue, dense local routes, and management beyond the owner.';
+    }
 
     function openModal(source) {
+      activeBookingSource = bookingContext || source || 'unknown';
       lastFocus = document.activeElement;
       modal.classList.add('is-open');
       modal.setAttribute('aria-hidden', 'false');
       document.body.classList.add('scroll-locked');
-      if (window.posthog) posthog.capture('book_call_started', { cta: source || 'unknown' });
+      if (window.posthog) posthog.capture('book_call_started', { cta: source || 'unknown', source: activeBookingSource });
       // Reset to form state on open
       modal.classList.remove('show-schedule');
       setTimeout(() => {
@@ -2203,6 +2171,7 @@
     }
 
     function mountCalendar(values) {
+      const targetLabel = isEtaSearch ? 'Acquisition thesis / target businesses' : 'Customers / how they sell';
       loadCalScript();
       Cal("init", CAL_NAMESPACE, { origin: "https://app.cal.com" });
       Cal.ns[CAL_NAMESPACE]("inline", {
@@ -2213,7 +2182,7 @@
           theme: "light", // force light until the site ships a dark mode
           name: values.name,
           email: values.email,
-          notes: `Company: ${values.company}\n\nCustomers / how they sell:\n${values.icp}`,
+          notes: `Company: ${values.company}\nSource: ${activeBookingSource}\n\n${targetLabel}:\n${values.icp}`,
         },
         calLink: CAL_LINK,
       });
@@ -2232,7 +2201,7 @@
         Cal.ns[CAL_NAMESPACE]("on", {
           action: "bookingSuccessful",
           callback: () => {
-            if (window.posthog) posthog.capture('book_call_booked', { company: lastValues && lastValues.company });
+            if (window.posthog) posthog.capture('book_call_booked', { company: lastValues && lastValues.company, source: activeBookingSource });
           }
         });
         calMounted = true;
@@ -2256,7 +2225,7 @@
       lastValues = values;
       if (window.posthog) {
         posthog.identify(values.email, { name: values.name, company: values.company });
-        posthog.capture('book_call_details_submitted', { company: values.company });
+        posthog.capture('book_call_details_submitted', { company: values.company, source: activeBookingSource });
       }
       thanksName.textContent = values.name.split(/\s+/)[0];
       recap.innerHTML = `

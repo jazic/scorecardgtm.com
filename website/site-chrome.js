@@ -46,9 +46,9 @@
                 <span class="brand-word" id="brand-word">Scorecard</span>
               </a>
               <nav class="site-nav" aria-label="Primary navigation">
-                <a class="nav-link${active === 'what' ? ' active' : ''}" href="${href(home, '#features', 'index.html#features')}" data-nav-section="services"${active === 'what' ? ' aria-current="page"' : ''}>How it works</a>
+                <a class="nav-link${active === 'what' ? ' active' : ''}" href="${href(home, '#features', 'index.html#features')}" data-nav-section="services"${active === 'what' ? ' aria-current="page"' : ''}>What we do</a>
                 <a class="nav-link" href="${href(home, '#who-we-help', 'index.html#who-we-help')}">Who we help</a>
-                <a class="nav-link" href="${href(home, '#pricing', 'index.html#pricing')}" data-nav-section="pricing">Pricing</a>
+                <a class="nav-link" href="${href(home, '#pricing', 'index.html#pricing')}" data-nav-section="pricing">Price</a>
                 <a class="nav-link" href="https://app.scorecardgtm.com">Client login</a>
                 <a class="hdr-cta" id="hdr-cta" href="${ctaHref}"><span class="hdr-cta-full">${ctaLabel}</span><span class="hdr-cta-short">${ctaShortLabel}</span></a>
               </nav>
@@ -57,9 +57,9 @@
               </button>
             </div>
             <nav class="mobile-nav-panel" id="mobile-nav-panel" aria-label="Mobile navigation" aria-hidden="true">
-              <a href="${href(home, '#features', 'index.html#features')}"${active === 'what' ? ' aria-current="page"' : ''}>How it works</a>
+              <a href="${href(home, '#features', 'index.html#features')}"${active === 'what' ? ' aria-current="page"' : ''}>What we do</a>
               <a href="${href(home, '#who-we-help', 'index.html#who-we-help')}">Who we help</a>
-              <a href="${href(home, '#pricing', 'index.html#pricing')}">Pricing</a>
+              <a href="${href(home, '#pricing', 'index.html#pricing')}">Price</a>
               <a href="https://app.scorecardgtm.com">Client login</a>
               <a class="mobile-nav-cta" href="${ctaHref}">${ctaLabel}</a>
             </nav>
@@ -138,12 +138,33 @@
       this.innerHTML = `
         ${home ? '' : '<div class="standalone-footer">'}
         <footer class="footer">
-          <div>
+          <div class="footer-intro">
             <a class="footer-brand" href="${href(home, '#top', 'index.html')}"><img src="design-system/assets/scorecard-mark-ondark.svg" alt="" /><span class="brand-word">Scorecard</span></a>
             <div class="footer-meta footer-tagline">Make revenue more predictable.</div>
           </div>
-          <div>
-            <nav class="footer-links" aria-label="Footer navigation"><a href="${href(home, '#features', 'index.html#features')}">How it works</a><a href="${href(home, '#who-we-help', 'index.html#who-we-help')}">Who we help</a><a href="${href(home, '#pricing', 'index.html#pricing')}">Pricing</a><a href="https://app.scorecardgtm.com">Client login</a><a href="#top">Back to top ↑</a></nav>
+          <div class="footer-nav-wrap">
+            <nav class="footer-nav-grid" aria-label="Footer navigation">
+              <section class="footer-nav-section" aria-labelledby="footer-what-we-do">
+                <h2 id="footer-what-we-do">What we do</h2>
+                <a href="${href(home, '#growth-strategy', 'index.html#growth-strategy')}">Growth plan</a>
+                <a href="${href(home, '#platform-evidence', 'index.html#platform-evidence')}">Weekly reporting</a>
+                <a href="${href(home, '#account-scoring', 'index.html#account-scoring')}">Account scoring</a>
+              </section>
+              <section class="footer-nav-section footer-nav-audiences" aria-labelledby="footer-who-we-help">
+                <h2 id="footer-who-we-help">Who we help</h2>
+                <a href="${href(home, '#audience-services', 'index.html#audience-services')}">B2B services and agencies</a>
+                <a href="${href(home, '#audience-saas', 'index.html#audience-saas')}">B2B SaaS and technology</a>
+                <a href="${href(home, '#audience-manufacturing', 'index.html#audience-manufacturing')}">Manufacturing and distribution</a>
+                <a href="${href(home, '#audience-field-services', 'index.html#audience-field-services')}">Specialized and field services</a>
+                <a class="footer-new-link" href="eta-search.html"><span>Private equity and search funds</span><span class="solution-new-badge">New</span></a>
+              </section>
+              <section class="footer-nav-section" aria-labelledby="footer-company">
+                <h2 id="footer-company">Scorecard</h2>
+                <a href="${href(home, '#pricing', 'index.html#pricing')}">Price</a>
+                <a href="https://app.scorecardgtm.com">Client login</a>
+                <a href="#top">Back to top ↑</a>
+              </section>
+            </nav>
             <div class="footer-meta footer-copyright">© 2026 Scorecard</div>
           </div>
         </footer>

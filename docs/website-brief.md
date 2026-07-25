@@ -6,7 +6,7 @@
 
 ## 1. Executive direction
 
-Scorecard should not present itself as account-scoring software, a collection of GTM services, or another dashboard. It should present itself as a **managed growth system**: Scorecard combines strategy, proprietary software, and embedded operators to turn a revenue goal into a plan the company can run—and then operates the reporting, sourcing, scoring, and execution needed to keep the plan moving.
+Scorecard should not present itself as account-scoring software, a collection of GTM services, or another dashboard. It should present itself as a **managed growth system**: Scorecard combines strategy, proprietary software, and embedded operators to turn a revenue goal into a plan the company can run—and then implements it in the CRM and operates the reporting, sourcing, scoring, and adaptation needed to keep it current.
 
 The website’s central promise is:
 
@@ -27,7 +27,7 @@ This category is intentionally broader than RevOps consulting, account scoring, 
 - A credible full-funnel plan behind the revenue target
 - Proprietary software that connects the plan to operating evidence
 - Forward-deployed GTM operators who run the recurring work
-- Managed services for reporting, market intelligence, sourcing, scoring, outbound, and other execution priorities
+- Managed services for CRM implementation, reporting, market intelligence, sourcing, scoring, and plan adaptation
 - A weekly management loop that shows what changed, what matters now, and what to do next
 
 An internal shorthand is “the Palantir model for revenue”: strategic advisory plus forward-deployed GTM engineering plus proprietary software. That analogy is useful for product and brand decisions, but it does not need to appear in customer-facing copy.
@@ -39,7 +39,7 @@ Scorecard helps a company make more revenue with fewer surprises by connecting f
 1. **Plan:** Turn the revenue goal into explicit market, funnel, capacity, and investment assumptions.
 2. **Measure:** Connect the plan to CRM and operating data so progress is visible every week.
 3. **Prioritize:** Source and score the accounts most likely to create leverage for the sales team.
-4. **Execute:** Operate the workstreams the plan requires, rather than handing the customer another login.
+4. **Implement:** Put the plan into the CRM and operating cadence the team already uses.
 5. **Adapt:** Use weekly intelligence to fix constraints and compound what works.
 
 ### What Scorecard is not
@@ -127,7 +127,7 @@ For CEOs and revenue leaders tired of reactive growth
 More revenue. Fewer surprises.
 
 **Supporting copy**
-Scorecard turns your revenue goal into a plan your team can run—and operates the reporting, sourcing, scoring, and execution that helps every week build on the last.
+Scorecard turns your revenue goal into a plan your team can run—then implements it in your CRM and reports on progress every week.
 
 **Primary CTA**
 Define your growth plan
@@ -143,7 +143,7 @@ The already-developed line—“We turn your revenue goals into a plan your team
    Make the required market, funnel, capacity, and investment explicit.
 
 2. **Work organized around the constraint**
-   Reporting, sourcing, scoring, outbound, and execution follow the shared plan rather than operating as isolated services.
+   CRM implementation, reporting, sourcing, scoring, and plan updates follow the shared plan rather than operating as isolated services.
 
 3. **Operators, not another login**
    Scorecard runs the system with the customer. The sales team continues working in the CRM.
@@ -174,9 +174,10 @@ The homepage should follow the emotional logic learned from the strongest refere
 The Solutions menu can contain:
 
 - Growth planning
+- CRM implementation
 - Weekly growth intelligence
 - Market intelligence, sourcing, and scoring
-- Managed execution
+- Plan adaptation
 
 ### 2. Hero: the promised outcome
 
@@ -196,7 +197,7 @@ The purpose of this section is recognition, not education. The buyer should thin
 
 Reveal the simple operating loop beneath the outcome:
 
-**Plan → Measure → Prioritize → Execute → repeat**
+**Plan → Implement → Measure → Prioritize → Adapt**
 
 Show how these actions convert disconnected weekly effort into compounding progress. Keep the explanation subordinate to the emotional before/after.
 
@@ -211,7 +212,7 @@ Suggested copy:
 Use three tangible outputs:
 
 1. **The plan behind the number** — the full-funnel model and its assumptions
-2. **The work the plan requires** — prioritized reporting and execution workstreams
+2. **The work the plan requires** — CRM implementation, account priorities, and reporting
 3. **The weekly management read** — plan versus actual, forecast, exceptions, and recommended actions
 
 These should be shown with real or faithfully anonymized artifacts, not generic feature cards.
@@ -223,7 +224,7 @@ Present capabilities as coordinated parts of one growth system rather than unrel
 - **Growth planning:** Define the market, funnel, capacity, and investment required.
 - **Reporting and intelligence:** Connect the plan to CRM evidence and produce the weekly operating read.
 - **Sourcing and scoring:** Find, enrich, rank, and verify the accounts most likely to create leverage.
-- **Managed execution:** Operate outbound and other priority workstreams around the current constraint.
+- **Plan adaptation:** Update the forecast, priorities, and next actions as weekly evidence changes.
 
 The key visual idea is convergence: separate workstreams feed one rising revenue motion. This is the appropriate place for the “One Revenue Motion” animation study if the hero remains focused on emotional outcome.
 
@@ -304,7 +305,7 @@ A series of weekly outcome marks rise, fall, and restart. Some weeks are good, s
 
 A restrained operating rail appears beneath the outcomes:
 
-**Plan · Measure · Prioritize · Execute**
+**Plan · Implement · Measure · Prioritize · Adapt**
 
 Each action briefly activates. The existing weekly marks do not disappear; they reorganize. This is important: Scorecard creates leverage from the company’s people, CRM, market, and activity rather than pretending to replace them.
 
@@ -315,7 +316,7 @@ The weekly units lock into an ascending staircase toward a higher goal. The path
 #### Suggested loop
 
 - **0–2 seconds:** Reactive weekly outcomes appear and fluctuate.
-- **2–4 seconds:** Plan, Measure, Prioritize, and Execute activate in sequence.
+- **2–4 seconds:** Plan, Implement, Measure, Prioritize, and Adapt activate in sequence.
 - **4–7 seconds:** The same units align into an ascending path.
 - **7–9 seconds:** Hold on the ambitious after-state, then dissolve gently into the next loop.
 
@@ -330,7 +331,7 @@ The weekly units lock into an ascending staircase toward a higher goal. The path
 
 ### Supporting animation: One Revenue Motion
 
-Use later on the page to explain the actions without overloading the hero. Four initially separate lanes—Plan, Measure, Prioritize, Execute—converge into one rising revenue trajectory. This is the simplest way to show that Scorecard’s services are coordinated by the plan.
+Use later on the page to explain the actions without overloading the hero. Five initially separate lanes—Plan, Implement, Measure, Prioritize, Adapt—converge into one rising revenue trajectory. This is the simplest way to show that Scorecard’s services are coordinated by the plan.
 
 The sourcing/scoring “Right Conversations” filter can be used within its solution section: a broad account field narrows to a small evidence-backed priority set, creating more selling time. It is valuable but too narrow to represent the whole company in the hero.
 
@@ -391,9 +392,10 @@ The Verbrio lesson to retain is not “papers become a dashboard.” It is that 
 1. **Home** — the complete managed-growth-system story
 2. **Solutions**
    - Growth planning
+   - CRM implementation
    - Weekly growth intelligence
    - Market intelligence, sourcing, and scoring
-   - Managed execution
+   - Plan adaptation
 3. **Pricing** — entry offer, engagement model, and cost drivers
 4. **About** — the operating philosophy, team, and why Scorecard works this way
 
@@ -464,9 +466,9 @@ The current strategic hierarchy is:
 
 1. **Company:** Managed growth system
 2. **Promise:** More revenue. Fewer surprises.
-3. **Operating logic:** Plan, measure, prioritize, execute, adapt
+3. **Operating logic:** Plan, implement, measure, prioritize, adapt
 4. **Delivery model:** Strategy + proprietary software + embedded GTM operators
-5. **Service modules:** Planning, reporting, sourcing, scoring, outbound, and managed execution
+5. **Service modules:** Planning, CRM implementation, reporting, sourcing, scoring, and plan adaptation
 
 ## 15. Definition of success
 
@@ -474,7 +476,7 @@ The website is working when a qualified buyer can answer these questions after o
 
 - What is Scorecard? A managed growth system, operated with us.
 - What business outcome does it create? More revenue with fewer surprises.
-- How does it work? It connects the plan, CRM evidence, priorities, and execution in a weekly loop.
+- How does it work? It connects the plan, CRM implementation, weekly reporting, account priorities, and adaptation in one loop.
 - Why is it different? The strategy, software, services, and accountable operator are one system.
 - What will I receive? A plan, operated workstreams, and a weekly management read.
 - What happens next? We define the growth plan together through the Growth Planning Intensive.

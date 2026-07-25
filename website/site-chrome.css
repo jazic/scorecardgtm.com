@@ -322,11 +322,11 @@ body.mobile-nav-open {
   z-index: 2;
   width: min(1220px, 100%);
   display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 24px;
-  align-items: end;
+  grid-template-columns: minmax(180px, .7fr) minmax(620px, 1.8fr);
+  gap: clamp(40px, 8vw, 112px);
+  align-items: start;
   margin: 72px auto 0;
-  padding-top: 28px;
+  padding-top: 36px;
   border-top: 1px solid rgba(255,255,255,.22);
   color: #fff;
   font-family: var(--sans, Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif);
@@ -380,23 +380,70 @@ body.mobile-nav-open {
   text-transform: none;
 }
 
-.footer-links {
-  display: flex;
-  gap: 16px;
-  font-size: 12px;
+.footer-nav-wrap {
+  min-width: 0;
 }
 
-.footer-links a {
-  min-width: 44px;
-  min-height: 44px;
+.footer-nav-grid {
+  display: grid;
+  grid-template-columns: minmax(130px, .75fr) minmax(250px, 1.45fr) minmax(100px, .6fr);
+  gap: clamp(28px, 5vw, 72px);
+}
+
+.footer-nav-section {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.footer .footer-nav-section h2 {
+  margin: 0 0 6px;
+  color: rgba(255,255,255,.5);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .11em;
+  line-height: 1.3;
+  text-transform: uppercase;
+}
+
+.footer-nav-section a {
   display: inline-flex;
   align-items: center;
+  gap: 8px;
   color: rgba(255,255,255,.82) !important;
+  font-size: 12px;
+  line-height: 1.4;
   text-decoration: none;
 }
 
+.footer-nav-section a:hover {
+  color: #fff !important;
+}
+
+.footer-new-link {
+  justify-content: flex-start;
+}
+
+.footer-new-link .solution-new-badge {
+  flex: 0 0 auto;
+  color: #d9f6ac;
+  background: rgba(168,216,98,.18);
+}
+
+#growth-strategy,
+#platform-evidence,
+#account-scoring,
+#audience-services,
+#audience-saas,
+#audience-manufacturing,
+#audience-field-services {
+  scroll-margin-top: 108px;
+}
+
 .footer-copyright {
-  margin-top: 12px;
+  margin-top: 28px;
   text-align: right;
 }
 
@@ -576,6 +623,7 @@ body.mobile-nav-open {
 
   .footer {
     grid-template-columns: 1fr;
+    gap: 36px;
     margin-top: 72px;
   }
 
@@ -587,9 +635,13 @@ body.mobile-nav-open {
     margin-top: 0;
   }
 
-  .footer-links {
-    flex-wrap: wrap;
-    gap: 4px 16px;
+  .footer-nav-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 32px 24px;
+  }
+
+  .footer-nav-section:last-child {
+    grid-column: 1 / -1;
   }
 
   .footer-copyright {
@@ -603,4 +655,6 @@ body.mobile-nav-open {
   .site-header .brand-word { font-size: 16px; }
   .hdr-cta { padding-inline: 11px; font-size: 12px; }
   .mobile-nav-sublinks { grid-template-columns: 1fr; }
+  .footer-nav-grid { grid-template-columns: 1fr; }
+  .footer-nav-section:last-child { grid-column: auto; }
 }

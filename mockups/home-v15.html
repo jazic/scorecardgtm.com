@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Scorecard — Target prospects worth the extra effort</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@500;600&family=Caveat:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1C1C1A; --fg2:#5F5E5A; --fg3:#6E6D69; --fg4:#6F6E69; --fg5:#77766F; --faint:#B9B8B3;
+    --paper:#F7F6F4; --line:#E6E4E0; --hair:#EDEBE7; --bar:#E4E2DE;
+    --a:#0F6FC0; --a-fill:#1A8FE8; --b:#7CBDF2; --b-ink:#0B3A63; --c:#DCEBF8; --d:#E2E1DE;
+    --wash:#EAF3FC; --coral:#FF4A3D;
+    --ease:cubic-bezier(.2,.8,.2,1); --spring:cubic-bezier(.34,1.4,.64,1);
+    --nav:68px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{overflow-x:clip}
+  body{font-family:Geist,system-ui,sans-serif;color:var(--ink);background:var(--paper);-webkit-font-smoothing:antialiased;font-synthesis:none}
+  ::selection{background:var(--c);color:var(--b-ink)}
+  a{color:inherit;text-decoration:none}
+  a:focus-visible,button:focus-visible,input:focus-visible,svg[data-sc-logo]:focus-visible{outline:2px solid var(--a-fill);outline-offset:3px;border-radius:6px}
+  .wrap{width:1184px;max-width:calc(100% - 64px);margin:0 auto}
+  .btn{display:inline-flex;align-items:center;justify-content:center;height:48px;padding:0 22px;border-radius:11px;font:500 15px/18px Geist,sans-serif;border:0;cursor:pointer;transition:transform .14s var(--ease)}
+  .btn:active{transform:scale(.97)}
+  .btn-coral{background:var(--coral);color:#fff}
+  .btn-line{background:#fff;color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
+  .h-xl{font-size:54px;line-height:56px;letter-spacing:-.04em;font-weight:600;text-wrap:balance}
+  .sub{font-size:13px;line-height:16px;color:var(--fg3)}
+  .g{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font-size:13px;font-weight:600;flex-shrink:0;transition:background .3s,color .3s}
+  .gA{background:var(--a);color:#fff}.gB{background:var(--b);color:var(--b-ink)}.gC{background:var(--c);color:var(--b-ink)}.gD{background:var(--d);color:var(--fg2)}
+  .hand{font-family:Caveat,cursive;color:var(--coral)}
+  .logo{display:flex;align-items:center;gap:9px;font-size:21px;line-height:26px;font-weight:700;letter-spacing:-.035em;color:var(--ink)}
+  .logo svg{width:22px;height:27px;color:var(--ink)}
+
+  /* nav */
+  nav.top{position:sticky;top:0;z-index:30;height:var(--nav);background:rgba(247,246,244,.88);backdrop-filter:saturate(1.4) blur(12px);-webkit-backdrop-filter:saturate(1.4) blur(12px);border-bottom:1px solid transparent;transition:border-color .2s}
+  nav.top.scrolled{border-bottom-color:var(--line)}
+  nav.top .wrap{display:flex;align-items:center;gap:28px;height:100%}
+  nav.top .logo{flex:1}
+  nav.top .links{display:flex;gap:28px}
+  nav.top .links a{font-size:15px;font-weight:500;color:var(--fg2)}
+  nav.top .links a:hover{color:var(--ink)}
+  nav.top .btn{height:40px;padding:0 16px;font-size:14px}
+
+  /* hero */
+  .hero .wrap{display:flex;align-items:center;gap:32px;padding:72px 0 56px}
+  .hero-copy{width:480px;flex-shrink:0}
+  .hero h1{font-size:76px;line-height:74px;letter-spacing:-.04em;font-weight:600;width:460px}
+  .hero p{font-size:19px;line-height:29.5px;color:var(--fg2);padding:26px 0 32px;max-width:470px}
+  .ctas{display:flex;align-items:center;gap:22px}
+  .ctas .more{font-size:17px;font-weight:500}
+  .hero-art{position:relative;width:688px;height:400px;flex-shrink:0}
+  .hero-art .map{position:absolute;left:6px;top:-20px;width:757px;height:440px;background:url(textures/v15/hero-map.svg) center/100% 100% no-repeat}
+  .hero-art .loop{position:absolute;left:17px;top:66px;width:130px;height:121px}
+  .hero-art .loop path{stroke-dasharray:1;stroke-dashoffset:1;animation:draw 1.1s var(--ease) .5s forwards}
+  .hero-art .note{position:absolute;left:136px;top:40px;font-size:30px;line-height:36px;font-weight:700;transform:rotate(-6deg);transform-origin:0 0;white-space:pre;opacity:0;animation:fadeup .6s var(--ease) 1.3s forwards}
+  @keyframes draw{to{stroke-dashoffset:0}}
+  @keyframes fadeup{from{opacity:0;transform:rotate(-6deg) translateY(6px)}to{opacity:1;transform:rotate(-6deg)}}
+  .acct{position:absolute;left:214px;top:150px;width:280px;background:#fff;border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:12px;box-shadow:0 0 0 1px var(--line),0 18px 40px -18px rgba(0,0,0,.28)}
+  .acct .top{display:flex;justify-content:space-between;align-items:center;gap:10px}
+  .acct ul{list-style:none;border-top:1px solid var(--line);padding-top:12px;display:flex;flex-direction:column;gap:6px}
+  .acct li{display:flex;gap:8px;font-size:14px;line-height:21px;color:var(--fg2)}
+  .acct li::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--a-fill);margin-top:8px;flex-shrink:0}
+  .acct .who{display:flex;align-items:center;gap:10px;border-top:1px solid var(--line);padding-top:12px}
+  .av{width:30px;height:30px;border-radius:50%;background:#EFEEEB;color:var(--fg2);display:grid;place-items:center;font-size:12px;font-weight:600;flex-shrink:0}
+  .mini-btn{height:30px;padding:0 12px;border-radius:8px;background:var(--ink);color:#fff;font-size:13px;font-weight:500;display:inline-flex;align-items:center}
+
+  /* why */
+  .why{padding:120px 0;border-top:1px solid var(--line)}
+  .why h2{text-align:center;padding-bottom:16px}
+  .why .lede{text-align:center;font-size:19px;line-height:29px;color:var(--fg2);max-width:620px;margin:0 auto;padding-bottom:56px}
+  .arch{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .arch article{display:flex;flex-direction:column;gap:14px}
+  .arch .who{font-size:14px;font-weight:600;color:var(--fg2)}
+  .arch h3{font-size:26px;line-height:31px;letter-spacing:-.025em;font-weight:600;text-wrap:balance}
+  .arch p{font-size:16px;line-height:25px;color:var(--fg2);min-height:75px}
+  .ex{margin-top:8px;background:#fff;border-radius:16px;box-shadow:0 0 0 1px var(--line);padding:22px 22px 20px;display:flex;flex-direction:column}
+  .ex .q{font-size:15px;line-height:22px;color:var(--ink);min-height:66px}
+  .ex .q::before{content:"“"} .ex .q::after{content:"”"}
+  .ex .n{display:flex;align-items:baseline;gap:8px;padding:14px 0;margin-top:12px;border-block:1px solid var(--line)}
+  .ex .n b{font-size:32px;line-height:32px;letter-spacing:-.04em;font-weight:600;font-variant-numeric:tabular-nums}
+  .ex .n span{font-size:14px;color:var(--fg2)}
+  .ex .co{display:flex;align-items:center;gap:10px;padding-top:14px;font-size:14px;font-weight:500}
+  .ex .co .g{width:26px;height:26px;font-size:12px}
+  .ex .co .nm{flex:1}
+  .ex .co i{font-style:normal;font-family:"Geist Mono",monospace;font-weight:600;color:var(--a)}
+  .ex .ev{font-size:13px;line-height:19px;color:var(--fg3);padding:6px 0 0 36px}
+
+  /* sticky agent sections */
+  .sec{position:relative}
+  .sec[data-steps="4"]{height:440vh}
+  .sec.blue{background:var(--wash)}
+  .sec.blue::before{content:"";position:absolute;inset:0;background:url(textures/v15/search-halftone-bg.svg) center/100% 100% no-repeat;opacity:.55;pointer-events:none}
+  .pin{position:sticky;top:var(--nav);height:calc(100vh - var(--nav));display:flex;align-items:center;justify-content:center;padding:0 32px}
+  .row{display:flex;align-items:center;gap:72px;width:1184px;max-width:100%;position:relative}
+  .copy{width:472px;flex-shrink:0;display:flex;flex-direction:column;gap:18px}
+  .rail{display:flex;align-items:center;gap:10px;font-size:14px;line-height:18px;font-weight:500;color:var(--fg4);padding-bottom:6px}
+  .rail i{width:28px;height:1px;background:var(--faint)}
+  .rail b{color:var(--ink);font-weight:600}
+  .copy h2{font-size:48px;line-height:52px;font-weight:600;letter-spacing:-.035em;text-wrap:balance}
+  .copy p{font-size:19px;line-height:29px;color:var(--fg2)}
+  .copy p.kick{color:var(--ink);font-weight:500}
+  .col{width:640px;flex-shrink:0;display:flex;flex-direction:column;gap:14px}
+  .stage{position:relative;width:640px;height:440px}
+  .pillrow{display:flex;align-items:center;gap:12px;min-height:28px;transition:opacity .4s var(--ease)}
+  .agent{display:inline-flex;align-items:center;gap:8px;padding:6px 12px 6px 9px;border-radius:999px;background:var(--ink);font-size:13px;line-height:16px;white-space:pre}
+  .agent svg{width:12px;height:15px;color:#F2F1EE;flex-shrink:0}
+  .agent b{color:#fff;font-weight:500}
+  .agent .status{color:var(--faint)}
+  .soon{font-size:13px;line-height:16px;color:var(--fg2);transition:opacity .4s var(--ease)}
+  .chip{padding:2px 8px;border-radius:999px;box-shadow:inset 0 0 0 1px #D9D7D2;font-size:12px;line-height:16px;color:var(--fg2)}
+  .ticks{display:flex;gap:6px;width:640px}
+  .ticks span{flex:1;height:3px;border-radius:2px;background:#D6D4CF;position:relative;overflow:hidden}
+  .ticks span::after{content:"";position:absolute;inset:0;background:var(--ink);transform:scaleX(var(--f,0));transform-origin:left}
+  .k-show{opacity:0;transition:opacity .45s var(--ease),transform .45s var(--ease)}
+
+  /* S1 search */
+  .ca{position:absolute;left:0;top:18px;width:363px;height:404px;overflow:visible;transition:opacity .6s var(--ease)}
+  .ca circle{transition:fill .5s var(--ease),r .5s var(--ease)}
+  .ca .m{fill:#D3D1CC;r:1.9px;transition-delay:calc(var(--i) * 18ms)}
+  .ca .tgt{fill:#D3D1CC}
+  .ca .ell{opacity:0;transition:opacity .5s .8s}
+  .ca .loop{stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 1s var(--ease) .1s}
+  [data-k="0"] .ca{opacity:.45}
+  [data-k="2"] .ca .m,[data-k="3"] .ca .m{fill:#7CBDF2;r:2.5px}
+  [data-k="2"] .ca .tgt,[data-k="3"] .ca .tgt{fill:#0F6FC0}
+  [data-k="2"] .ca .ell,[data-k="3"] .ca .ell{opacity:1}
+  [data-k="3"] .ca .loop{stroke-dashoffset:0}
+  .tahoe{position:absolute;left:176px;top:160px;font-size:11px;line-height:14px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:#3F6A8F}
+  .canote{position:absolute;left:184px;top:62px;width:210px;font-size:24px;line-height:24px;transform:rotate(-4deg);transform-origin:0 0}
+  .readout{position:absolute;left:400px;top:150px;width:240px;display:flex;flex-direction:column;gap:10px}
+  .readout .q{font-size:15px;line-height:20px;color:var(--fg2);min-height:40px}
+  .readout .cnt{display:flex;align-items:baseline;gap:10px;font-size:40px;line-height:44px;font-weight:600;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+  .readout .from{color:var(--faint)} .readout .arr{font-size:20px;line-height:24px;color:var(--faint);font-weight:400}
+  .readout .res{font-size:14px;line-height:18px;color:var(--fg2)}
+  [data-k="2"] .tahoe,[data-k="3"] .tahoe,[data-k="3"] .canote,
+  [data-k="1"] .from,[data-k="2"] .from,[data-k="3"] .from,
+  [data-k="2"] .arr,[data-k="3"] .arr,[data-k="2"] .to,[data-k="3"] .to,
+  [data-k="2"] .res,[data-k="3"] .res,
+  .sec:not([data-k="0"]) .pillrow.p1{opacity:1}
+  .pillrow.p1{opacity:0}
+  [data-k="3"] .canote{transition-delay:.6s}
+
+  /* S2 signals */
+  .srcs{height:100%;display:flex;flex-direction:column;justify-content:center;gap:18px}
+  .src{display:flex;align-items:center}
+  .slip{width:250px;flex-shrink:0;display:flex;flex-direction:column;gap:8px;font-size:12px;line-height:16px;color:var(--fg2);opacity:0;transform:translateY(10px) rotate(var(--rot));transition:opacity .5s var(--ease),transform .5s var(--ease);transition-delay:calc(var(--i) * 90ms)}
+  .sec[data-k] .slip{opacity:1;transform:rotate(var(--rot))}
+  .slip .hd{display:flex;align-items:center;gap:7px}
+  .bar{height:4px;border-radius:2px;background:var(--bar)}
+  .hl{height:8px;border-radius:3px;background:#CFE5F8;padding:2px;opacity:.2;transition:opacity .4s var(--ease)}
+  .hl i{display:block;height:4px;border-radius:2px;background:var(--a)}
+  .s-web{background:#fff;border-radius:4px 14px 4px 4px;box-shadow:0 0 0 1px var(--line);padding:12px 14px 14px;--rot:-1.2deg}
+  .s-soc{background:#fff;border-radius:16px;box-shadow:0 0 0 1px var(--line);padding:12px 14px;--rot:.8deg}
+  .s-ser{border-left:2px solid var(--bar);padding:10px 14px;gap:7px;--rot:0deg}
+  .s-fil{background:#FBFAF7;border-radius:2px;box-shadow:inset 0 0 0 4px #FBFAF7,inset 0 0 0 5px var(--line),0 0 0 1px #D9D7D2;padding:12px 14px;flex-direction:row;align-items:center;gap:12px;--rot:1.1deg}
+  .conn{width:70px;height:20px;flex-shrink:0}
+  .conn line{stroke-dasharray:58;stroke-dashoffset:58;transition:stroke-dashoffset .5s var(--ease) .25s}
+  .conn circle{opacity:0;transition:opacity .2s .7s}
+  .ans{padding-left:10px;display:flex;flex-direction:column;gap:2px;opacity:0;transform:translateX(-6px);transition:opacity .45s var(--ease) .75s,transform .45s var(--ease) .75s}
+  .ans span{font-size:12px;line-height:16px;color:var(--fg4)}
+  .ans b{font-size:18px;line-height:22px;font-weight:500}
+  .src.lit .hl{opacity:1}.src.lit .conn line{stroke-dashoffset:0}.src.lit .conn circle{opacity:1}.src.lit .ans{opacity:1;transform:none}
+  .soon2{opacity:0}[data-k="3"] .soon2{opacity:1}
+
+  /* S3 score */
+  .score{height:100%;display:flex;align-items:center;gap:28px}
+  .marks{width:230px;display:flex;flex-direction:column;gap:22px}
+  .eyebrow{font-size:11px;line-height:14px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--fg4)}
+  .mk{display:flex;align-items:center;gap:12px;font-size:18px;line-height:22px;font-weight:500;opacity:0;transform:translateY(6px);transition:opacity .4s var(--ease),transform .4s var(--ease);transition-delay:calc(var(--i) * 260ms)}
+  .mk.x span{color:#9A9994}
+  .marks .eyebrow,.marks .hand{opacity:0;transition:opacity .4s var(--ease)}
+  .marks .hand{font-size:24px;line-height:24px;transform:rotate(-3deg);transition-delay:.9s}
+  [data-k="1"] .marks *,[data-k="2"] .marks *,[data-k="3"] .marks *{opacity:1;transform:none}
+  [data-k="1"] .marks .hand,[data-k="2"] .marks .hand,[data-k="3"] .marks .hand{transform:rotate(-3deg)}
+  .curvy{width:80px;height:40px;flex-shrink:0}
+  .curvy path{stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset .7s var(--ease)}
+  [data-k="2"] .curvy path,[data-k="3"] .curvy path{stroke-dashoffset:0}
+  .rank{width:260px;display:flex;flex-direction:column;gap:8px}
+  .list{position:relative;height:236px;margin-top:8px;transition:opacity .5s var(--ease)}
+  [data-k="2"] .list{opacity:.35}
+  .lr{position:absolute;left:0;right:0;display:flex;align-items:center;gap:10px;height:28px;top:calc(var(--r) * 38px);transition:top .7s var(--spring)}
+  .lr .nm{font-size:16px;line-height:20px}
+  .lr .pb{height:6px;border-radius:3px;background:var(--bar)}
+  .lr-s{--r:1}.lr-a{--r:0}
+  [data-k="3"] .lr-s{--r:0}[data-k="3"] .lr-a{--r:1}
+  [data-k="3"] .lr-s .g{background:var(--a);color:#fff}
+  [data-k="3"] .lr-s .nm{font-weight:600}
+  .pillrow.p3{opacity:0}.sec:not([data-k="0"]) .pillrow.p3{opacity:1}
+
+  /* and more */
+  .andmore{padding:120px 0}
+  .andmore h2{padding-bottom:48px}
+  .tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .tile{background:#fff;border-radius:16px;box-shadow:0 0 0 1px var(--line);overflow:hidden;display:flex;flex-direction:column}
+  .tile .viz{height:190px;background:var(--paper);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:center}
+  .tile .txt{padding:22px 24px 26px;display:flex;flex-direction:column;gap:8px}
+  .tile h3{font-size:20px;line-height:25px;letter-spacing:-.02em;font-weight:600}
+  .tile p{font-size:15px;line-height:23px;color:var(--fg2)}
+
+  /* pricing */
+  .pricing{padding:120px 0;border-top:1px solid var(--line)}
+  .pricing h2{text-align:center;padding-bottom:56px}
+  .ptable{position:relative;background:#fff;border-radius:16px;box-shadow:0 0 0 1px var(--line);overflow:hidden}
+  .ptable .hl-col{position:absolute;left:calc(100% - 512px);top:0;width:240px;height:100%;background:var(--wash);border-top:3px solid var(--a-fill)}
+  .prow{position:relative;display:grid;grid-template-columns:1fr 240px 240px 240px;padding:0 32px}
+  .prow > div{padding:0 12px}.prow > div:first-child{padding-left:0}
+  .phead{align-items:end;padding-top:32px;padding-bottom:24px;border-bottom:1px solid var(--line)}
+  .phead .pc{display:flex;flex-direction:column;gap:14px}
+  .phead .nm{font-size:16px;line-height:20px;font-weight:600}
+  .price{display:flex;align-items:baseline;gap:6px}
+  .price b{font-size:44px;line-height:44px;letter-spacing:-.04em;font-weight:600}
+  .price span{font-size:15px;color:var(--fg2)}
+  .phead .btn{height:44px;border-radius:10px}
+  .badge{align-self:flex-start;height:24px;padding:0 9px;border-radius:999px;background:var(--a);color:#fff;font-size:12px;font-weight:600;display:inline-flex;align-items:center}
+  .pbody{padding:8px 0 16px}
+  .pbody .prow > div{display:flex;align-items:center;min-height:52px;font-size:15px;line-height:18px;border-bottom:1px solid var(--hair)}
+  .pbody .prow.nb > div{border-bottom:0}
+  .pbody .prow.sep > div{border-top:1px solid var(--hair);border-bottom:0}
+  .pbody b{font-weight:600}
+  .dash{color:var(--fg3)}
+  .soonpill{padding:4px 9px;border-radius:999px;background:#EFEEEB;font-size:13px;line-height:16px;font-weight:500}
+  .pnote{text-align:center;padding-top:20px;font-size:15px;color:var(--fg2)}
+
+  /* faq */
+  .faq{padding:120px 0;border-top:1px solid var(--line)}
+  .faq .wrap{display:flex;gap:72px}
+  .faq .side{width:380px;flex-shrink:0;display:flex;flex-direction:column;gap:20px}
+  .faq .side h2{font-size:42px;line-height:44.5px;letter-spacing:-.04em;font-weight:600}
+  .faq .side p{font-size:17px;line-height:26px;color:var(--fg2)}
+  .faq .side p a{color:var(--ink);font-weight:500;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}
+  .faq dl{flex:1;border-top:1px solid var(--line)}
+  .faq .qa{border-bottom:1px solid var(--line);padding:24px 0;display:flex;flex-direction:column;gap:8px}
+  .faq dt{font-size:18px;line-height:22px;font-weight:600}
+  .faq dd{font-size:16px;line-height:25px;color:var(--fg2);max-width:64ch}
+
+  /* close */
+  .close{position:relative;background:#121211;padding:120px 0;text-align:center}
+  .close::before{content:"";position:absolute;inset:0;background:url(textures/v15/close-halftone-bg.svg) center/100% 100% no-repeat;pointer-events:none}
+  .close .wrap{position:relative;display:flex;flex-direction:column;align-items:center}
+  .close h2{width:720px;max-width:100%;color:#F2F1EE}
+  .close p{font-size:19px;line-height:29.5px;color:#B5B4AE;padding-top:18px}
+  .close form{display:flex;gap:10px;padding-top:28px}
+  .close input{width:340px;height:48px;padding:0 16px;border-radius:11px;background:#121211;border:1px solid #45453F;color:#F2F1EE;font:17px/22px Geist,sans-serif}
+  .close input::placeholder{color:#8A8984}
+  .close .after{padding-top:16px;font-size:14px;line-height:18px;color:#B5B4AE}
+  .sr{position:absolute;left:-9999px}
+
+  /* footer */
+  footer.foot{border-top:1px solid var(--line);padding:64px 0 32px}
+  .foot .cols{display:flex;gap:40px}
+  .foot .brand{width:265px;flex-shrink:0;display:flex;flex-direction:column;gap:14px}
+  .foot .brand p{font-size:15px;line-height:23px;color:var(--fg3);width:260px}
+  .foot .fc{flex:1;display:flex;flex-direction:column;gap:11px;font-size:15px;line-height:18px;color:var(--fg2)}
+  .foot .fc h4{font:500 12px/16px "Geist Mono",monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--fg3);padding-bottom:4px}
+  .foot .fc a:hover{color:var(--ink)}
+  .foot .legal{margin-top:48px;padding-top:20px;border-top:1px solid var(--line);font-size:14px;line-height:18px;color:var(--fg3)}
+
+  /* review mode: #s2-3 freezes section 2 on keyframe 3 */
+  body.review > *:not(.review-on){display:none!important}
+  body.review .sec{height:auto!important}
+  body.review .pin{position:relative;top:0;height:100vh}
+  body.review *,body.review *::after{transition:none!important;animation:none!important}
+
+  @media (max-width:1100px){
+    nav.top .links{display:none}
+    .hero .wrap{flex-direction:column;align-items:flex-start}
+    .hero h1{font-size:50px;line-height:52px;width:auto}
+    .hero-copy{width:auto}
+    .hero-art{transform:scale(.52);transform-origin:0 0;height:210px}
+    .arch,.tiles{grid-template-columns:1fr}
+    .row{flex-direction:column;gap:20px;align-items:stretch}
+    .copy,.col{width:100%}
+    .copy h2{font-size:30px;line-height:34px}.copy p{font-size:16px;line-height:24px}
+    .stage{transform:scale(.56);transform-origin:0 0;height:250px;width:640px}
+    .ticks{width:100%}
+    .pin{align-items:flex-start;padding-top:24px}
+    .ptable{overflow-x:auto}.prow{min-width:1000px}
+    .faq .wrap,.foot .cols{flex-direction:column;gap:32px}
+    .faq .side{width:auto}
+    .close form{flex-direction:column;width:100%;max-width:340px}.close input{width:100%}
+    .h-xl{font-size:36px;line-height:40px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *,*::after{transition:none!important;animation:none!important}
+    .hero-art .loop path{stroke-dashoffset:0}.hero-art .note{opacity:1}
+  }
+</style>
+</head>
+<body>
+
+<nav class="top" aria-label="Main"><div class="wrap">
+  <a class="logo" href="#top" aria-label="Scorecard home"><svg data-sc-logo="once" viewBox="0 -4 24 30" role="img" aria-label="Scorecard logo, click to replay"></svg>Scorecard</a>
+  <div class="links"><a href="#search">How it works</a><a href="#why">For sales teams</a><a href="#why">For acquisition search</a><a href="#pricing">Pricing</a><a href="#">Sign in</a></div>
+  <a class="btn btn-coral" href="#signup">Sign up free</a>
+</div></nav>
+
+<!-- HOME -->
+<header class="hero" id="top"><div class="wrap">
+  <div class="hero-copy">
+    <h1>Target prospects worth the extra effort.</h1>
+    <p>Scorecard researches every company in your market, scores each one against what your best deals have in common, and shows you who deserves a real conversation.</p>
+    <div class="ctas"><a class="btn btn-coral" href="#signup">Sign up free</a><a class="more" href="#search">How it works →</a></div>
+  </div>
+  <div class="hero-art" aria-hidden="true">
+    <div class="map"></div>
+    <svg class="loop" viewBox="0 0 140 130"><path pathLength="1" d="M27.8,31.2 L33.1,26.7 L39.3,22.5 L46.6,19.5 L54.8,19.1 L62.8,20.1 L70.1,23.2 L77.4,24.7 L85.1,26.1 L92.4,29.0 L99.2,32.8 L102.8,38.8 L105.5,44.9 L106.4,51.3 L107.9,57.2 L109.3,63.4 L109.2,69.8 L108.1,76.3 L104.1,82.0 L99.1,87.0 L92.5,90.7 L85.8,93.7 L80.1,98.2 L72.9,100.9 L65.3,103.4 L57.1,102.6 L49.6,100.4 L42.3,98.6 L36.0,95.2 L29.0,92.7 L21.4,90.0 L15.8,85.2 L13.3,79.0 L11.3,72.9 L11.9,66.6 L11.7,60.6 L12.1,54.6 L11.7,48.0 L14.8,42.0 L19.7,36.8 L26.5,33.2 L34.0,31.0 L40.7,28.3 L47.5,25.6 L54.9,23.2" transform="translate(10,20)" fill="none" stroke="#FF4A3D" stroke-width="2.4" stroke-linecap="round"/></svg>
+    <span class="note hand">your top accounts.</span>
+    <div class="acct">
+      <div class="top"><div style="display:flex;flex-direction:column"><b style="font-size:14px;line-height:21px;font-weight:600">Sierra Line Grounds</b><span style="font-size:13px;line-height:21px;color:var(--fg3)">Truckee, CA · Landscaping</span></div><span class="g gA" style="width:34px;height:34px;font-size:14px">A</span></div>
+      <ul><li>Does commercial snow removal</li><li>Serves businesses and HOAs</li><li>Owner-run, from its About page</li></ul>
+      <div class="who"><span class="av">DK</span><div style="display:flex;flex-direction:column;flex:1"><b style="font-size:14px;line-height:18px;font-weight:600">Dana Kessler, owner</b><span class="sub">Direct line and email</span></div><span class="mini-btn">Call</span></div>
+    </div>
+  </div>
+</div></header>
+
+<!-- WHY -->
+<section class="why" id="why"><div class="wrap">
+  <h2 class="h-xl">Spend your time on the businesses that fit.</h2>
+  <p class="lede">Whoever you are, attention is the scarce part. Scorecard tells you where to spend it, and why.</p>
+  <div class="arch">
+    <article>
+      <span class="who">Sales teams</span>
+      <h3>Know which accounts are worth a call.</h3>
+      <p>Stop handing reps a list of everyone. Give them the businesses that fit, with the reason to call.</p>
+      <div class="ex"><span class="q">Hose and fitting distributors in the Mountain West that sell to contractors.</span><div class="n"><b>74</b><span>Matches, of 5,417 checked</span></div><div class="co"><span class="g gA">A</span><span class="nm">Hartwell Industrial Supply</span><i>94</i></div><span class="ev">Sells hose and fittings to contractors, Provo branch</span></div>
+    </article>
+    <article>
+      <span class="who">Founders who sell</span>
+      <h3>Make your few selling hours count.</h3>
+      <p>Describe your best customer in a sentence. Get a short list you can work this week.</p>
+      <div class="ex"><span class="q">B2B software companies in California with usage-based pricing.</span><div class="n"><b>52</b><span>Matches, of 18,240 checked</span></div><div class="co"><span class="g gA">A</span><span class="nm">Tallyline</span><i>93</i></div><span class="ev">Usage-based pricing, on its pricing page</span></div>
+    </article>
+    <article>
+      <span class="who">Acquisition search</span>
+      <h3>Know which owners are worth pursuing.</h3>
+      <p>Find owner-run businesses that fit your thesis, with how long the founder has run it.</p>
+      <div class="ex"><span class="q">Pest control companies in Texas, founder-run for 20+ years.</span><div class="n"><b>31</b><span>Matches, of 2,614 checked</span></div><div class="co"><span class="g gA">A</span><span class="nm">Hill Country Pest Control</span><i>94</i></div><span class="ev">Founder-run since 1998, from its About page</span></div>
+    </article>
+  </div>
+</div></section>
+
+<!-- SEARCH · Search agent -->
+<section class="sec blue" id="search" data-steps="4"><div class="pin"><div class="row">
+  <div class="copy">
+    <div class="rail"><b>1 Search</b><i></i><span>2 Signals</span><i></i><span>3 Score</span></div>
+    <h2>Search the states you sell to, the way you’d describe it.</h2>
+    <p>Describe the businesses you want. The Search agent reads each website and keeps the Matches, with the line that proves it. You choose which ones to add.</p>
+  </div>
+  <div class="col">
+    <div class="stage">
+      <svg class="ca" viewBox="0 0 363 404" aria-hidden="true"><path d="M 24.5 14.4 L 159.5 14.4 L 159.5 134.4 L 331.0 294.0 L 330.7 299.2 L 336.2 305.6 L 340.6 316.0 L 347.0 323.6 L 337.4 330.8 L 334.2 336.8 L 335.2 346.4 L 328.2 357.6 L 328.5 370.4 L 336.2 380.4 L 328.2 385.2 L 251.4 392.8 L 247.2 387.6 L 244.6 369.2 L 240.2 362.0 L 230.2 352.4 L 217.4 343.6 L 210.1 344.4 L 205.3 332.4 L 197.6 334.4 L 184.2 328.0 L 173.3 317.6 L 158.9 315.6 L 144.8 316.0 L 138.7 311.2 L 138.7 288.4 L 130.7 284.0 L 127.2 275.6 L 118.2 267.2 L 104.2 246.0 L 98.7 241.6 L 101.9 229.2 L 99.0 216.4 L 91.7 215.6 L 84.3 209.2 L 80.2 186.0 L 78.9 182.8 L 64.2 173.2 L 63.2 162.4 L 48.8 146.8 L 38.6 132.8 L 38.9 116.0 L 36.3 100.4 L 27.7 89.6 L 19.7 83.6 L 18.1 76.4 L 27.7 54.8 L 26.7 35.6 L 24.5 14.4 Z" fill="none" stroke="#E2E0DB" stroke-width="1"/><circle cx="26" cy="18" r="1.9" fill="#D3D1CC"/><circle cx="34" cy="18" r="1.9" fill="#D3D1CC"/><circle cx="42" cy="18" r="1.9" fill="#D3D1CC"/><circle cx="50" cy="18" r="1.9" fill="#D3D1CC"/><circle cx="58" cy="18" r="1.9" fill="#D3D1CC"/><circle cx="66" cy="18" r="1.9" fill="#D3D1CC"/><circle cx="74" cy="18" r="1.9" fill="#D3D1CC"/><circle cx="82" cy="18" r="1.9" fill="#D3D1CC"/><circle cx="90" cy="18" r="1.9" fill="#D3D1CC"/><circle cx="98" cy="18" r="1.9" fill="#D3D1CC"/><circle cx="106" cy="18" r="1.9" fill="#D3D1CC"/><circle cx="114" cy="18" r="1.9" fill="#D3D1CC"/><circle cx="122" cy="18" r="1.9" fill="#D3D1CC"/><circle cx="130" cy="18" r="1.9" fill="#D3D1CC"/><circle cx="138" cy="18" r="1.9" fill="#D3D1CC"/><circle cx="146" cy="18" r="1.9" fill="#D3D1CC"/><circle cx="154" cy="18" r="1.9" fill="#D3D1CC"/><circle cx="30" cy="26" r="1.9" fill="#D3D1CC"/><circle cx="38" cy="26" r="1.9" fill="#D3D1CC"/><circle cx="46" cy="26" r="1.9" fill="#D3D1CC"/><circle cx="54" cy="26" r="1.9" fill="#D3D1CC"/><circle cx="62" cy="26" r="1.9" fill="#D3D1CC"/><circle cx="70" cy="26" r="1.9" fill="#D3D1CC"/><circle cx="78" cy="26" r="1.9" fill="#D3D1CC"/><circle cx="86" cy="26" r="1.9" fill="#D3D1CC"/><circle cx="94" cy="26" r="1.9" fill="#D3D1CC"/><circle cx="102" cy="26" r="1.9" fill="#D3D1CC"/><circle cx="110" cy="26" r="1.9" fill="#D3D1CC"/><circle cx="118" cy="26" r="1.9" fill="#D3D1CC"/><circle cx="126" cy="26" r="1.9" fill="#D3D1CC"/><circle cx="134" cy="26" r="1.9" fill="#D3D1CC"/><circle cx="142" cy="26" r="1.9" fill="#D3D1CC"/><circle cx="150" cy="26" r="1.9" fill="#D3D1CC"/><circle cx="158" cy="26" r="1.9" fill="#D3D1CC"/><circle cx="34" cy="34" r="1.9" fill="#D3D1CC"/><circle cx="42" cy="34" r="1.9" fill="#D3D1CC"/><circle cx="50" cy="34" r="1.9" fill="#D3D1CC"/><circle cx="58" cy="34" r="1.9" fill="#D3D1CC"/><circle cx="66" cy="34" r="1.9" fill="#D3D1CC"/><circle cx="74" cy="34" r="1.9" fill="#D3D1CC"/><circle cx="82" cy="34" r="1.9" fill="#D3D1CC"/><circle cx="90" cy="34" r="1.9" fill="#D3D1CC"/><circle cx="98" cy="34" r="1.9" fill="#D3D1CC"/><circle cx="106" cy="34" r="1.9" fill="#D3D1CC"/><circle cx="114" cy="34" r="1.9" fill="#D3D1CC"/><circle cx="122" cy="34" r="1.9" fill="#D3D1CC"/><circle cx="130" cy="34" r="1.9" fill="#D3D1CC"/><circle cx="138" cy="34" r="1.9" fill="#D3D1CC"/><circle cx="146" cy="34" r="1.9" fill="#D3D1CC"/><circle cx="154" cy="34" r="1.9" fill="#D3D1CC"/><circle cx="30" cy="42" r="1.9" fill="#D3D1CC"/><circle cx="38" cy="42" r="1.9" fill="#D3D1CC"/><circle cx="46" cy="42" r="1.9" fill="#D3D1CC"/><circle cx="54" cy="42" r="1.9" fill="#D3D1CC"/><circle cx="62" cy="42" r="1.9" fill="#D3D1CC"/><circle cx="70" cy="42" r="1.9" fill="#D3D1CC"/><circle cx="78" cy="42" r="1.9" fill="#D3D1CC"/><circle cx="86" cy="42" r="1.9" fill="#D3D1CC"/><circle cx="94" cy="42" r="1.9" fill="#D3D1CC"/><circle cx="102" cy="42" r="1.9" fill="#D3D1CC"/><circle cx="110" cy="42" r="1.9" fill="#D3D1CC"/><circle cx="118" cy="42" r="1.9" fill="#D3D1CC"/><circle cx="126" cy="42" r="1.9" fill="#D3D1CC"/><circle cx="134" cy="42" r="1.9" fill="#D3D1CC"/><circle cx="142" cy="42" r="1.9" fill="#D3D1CC"/><circle cx="150" cy="42" r="1.9" fill="#D3D1CC"/><circle cx="158" cy="42" r="1.9" fill="#D3D1CC"/><circle cx="34" cy="50" r="1.9" fill="#D3D1CC"/><circle cx="42" cy="50" r="1.9" fill="#D3D1CC"/><circle cx="50" cy="50" r="1.9" fill="#D3D1CC"/><circle cx="58" cy="50" r="1.9" fill="#D3D1CC"/><circle cx="66" cy="50" r="1.9" fill="#D3D1CC"/><circle cx="74" cy="50" r="1.9" fill="#D3D1CC"/><circle cx="82" cy="50" r="1.9" fill="#D3D1CC"/><circle cx="90" cy="50" r="1.9" fill="#D3D1CC"/><circle cx="98" cy="50" r="1.9" fill="#D3D1CC"/><circle cx="106" cy="50" r="1.9" fill="#D3D1CC"/><circle cx="114" cy="50" r="1.9" fill="#D3D1CC"/><circle cx="122" cy="50" r="1.9" fill="#D3D1CC"/><circle cx="130" cy="50" r="1.9" fill="#D3D1CC"/><circle cx="138" cy="50" r="1.9" fill="#D3D1CC"/><circle cx="146" cy="50" r="1.9" fill="#D3D1CC"/><circle cx="154" cy="50" r="1.9" fill="#D3D1CC"/><circle cx="30" cy="58" r="1.9" fill="#D3D1CC"/><circle cx="38" cy="58" r="1.9" fill="#D3D1CC"/><circle cx="46" cy="58" r="1.9" fill="#D3D1CC"/><circle cx="54" cy="58" r="1.9" fill="#D3D1CC"/><circle cx="62" cy="58" r="1.9" fill="#D3D1CC"/><circle cx="70" cy="58" r="1.9" fill="#D3D1CC"/><circle cx="78" cy="58" r="1.9" fill="#D3D1CC"/><circle cx="86" cy="58" r="1.9" fill="#D3D1CC"/><circle cx="94" cy="58" r="1.9" fill="#D3D1CC"/><circle cx="102" cy="58" r="1.9" fill="#D3D1CC"/><circle cx="134" cy="58" r="1.9" fill="#D3D1CC"/><circle cx="142" cy="58" r="1.9" fill="#D3D1CC"/><circle cx="150" cy="58" r="1.9" fill="#D3D1CC"/><circle cx="158" cy="58" r="1.9" fill="#D3D1CC"/><circle cx="26" cy="66" r="1.9" fill="#D3D1CC"/><circle cx="34" cy="66" r="1.9" fill="#D3D1CC"/><circle cx="42" cy="66" r="1.9" fill="#D3D1CC"/><circle cx="50" cy="66" r="1.9" fill="#D3D1CC"/><circle cx="58" cy="66" r="1.9" fill="#D3D1CC"/><circle cx="66" cy="66" r="1.9" fill="#D3D1CC"/><circle cx="74" cy="66" r="1.9" fill="#D3D1CC"/><circle cx="82" cy="66" r="1.9" fill="#D3D1CC"/><circle cx="90" cy="66" r="1.9" fill="#D3D1CC"/><circle cx="98" cy="66" r="1.9" fill="#D3D1CC"/><circle cx="122" cy="66" r="1.9" fill="#D3D1CC"/><circle cx="130" cy="66" r="1.9" fill="#D3D1CC"/><circle cx="138" cy="66" r="1.9" fill="#D3D1CC"/><circle cx="146" cy="66" r="1.9" fill="#D3D1CC"/><circle cx="154" cy="66" r="1.9" fill="#D3D1CC"/><circle cx="22" cy="74" r="1.9" fill="#D3D1CC"/><circle cx="30" cy="74" r="1.9" fill="#D3D1CC"/><circle cx="38" cy="74" r="1.9" fill="#D3D1CC"/><circle cx="46" cy="74" r="1.9" fill="#D3D1CC"/><circle cx="54" cy="74" r="1.9" fill="#D3D1CC"/><circle cx="62" cy="74" r="1.9" fill="#D3D1CC"/><circle cx="70" cy="74" r="1.9" fill="#D3D1CC"/><circle cx="78" cy="74" r="1.9" fill="#D3D1CC"/><circle cx="86" cy="74" r="1.9" fill="#D3D1CC"/><circle cx="94" cy="74" r="1.9" fill="#D3D1CC"/><circle cx="102" cy="74" r="1.9" fill="#D3D1CC"/><circle cx="118" cy="74" r="1.9" fill="#D3D1CC"/><circle cx="142" cy="74" r="1.9" fill="#D3D1CC"/><circle cx="150" cy="74" r="1.9" fill="#D3D1CC"/><circle cx="158" cy="74" r="1.9" fill="#D3D1CC"/><circle cx="26" cy="82" r="1.9" fill="#D3D1CC"/><circle cx="34" cy="82" r="1.9" fill="#D3D1CC"/><circle cx="42" cy="82" r="1.9" fill="#D3D1CC"/><circle cx="50" cy="82" r="1.9" fill="#D3D1CC"/><circle cx="58" cy="82" r="1.9" fill="#D3D1CC"/><circle cx="66" cy="82" r="1.9" fill="#D3D1CC"/><circle cx="74" cy="82" r="1.9" fill="#D3D1CC"/><circle cx="82" cy="82" r="1.9" fill="#D3D1CC"/><circle cx="90" cy="82" r="1.9" fill="#D3D1CC"/><circle cx="98" cy="82" r="1.9" fill="#D3D1CC"/><circle cx="106" cy="82" r="1.9" fill="#D3D1CC"/><circle cx="114" cy="82" r="1.9" fill="#D3D1CC"/><circle cx="122" cy="82" r="1.9" fill="#D3D1CC"/><circle cx="130" cy="82" r="1.9" fill="#D3D1CC"/><circle cx="138" cy="82" r="1.9" fill="#D3D1CC"/><circle cx="146" cy="82" r="1.9" fill="#D3D1CC"/><circle cx="154" cy="82" r="1.9" fill="#D3D1CC"/><circle cx="30" cy="90" r="1.9" fill="#D3D1CC"/><circle cx="38" cy="90" r="1.9" fill="#D3D1CC"/><circle cx="46" cy="90" r="1.9" fill="#D3D1CC"/><circle cx="54" cy="90" r="1.9" fill="#D3D1CC"/><circle cx="62" cy="90" r="1.9" fill="#D3D1CC"/><circle cx="70" cy="90" r="1.9" fill="#D3D1CC"/><circle cx="78" cy="90" r="1.9" fill="#D3D1CC"/><circle cx="86" cy="90" r="1.9" fill="#D3D1CC"/><circle cx="94" cy="90" r="1.9" fill="#D3D1CC"/><circle cx="102" cy="90" r="1.9" fill="#D3D1CC"/><circle cx="110" cy="90" r="1.9" fill="#D3D1CC"/><circle cx="118" cy="90" r="1.9" fill="#D3D1CC"/><circle cx="134" cy="90" r="1.9" fill="#D3D1CC"/><circle cx="150" cy="90" r="1.9" fill="#D3D1CC"/><circle cx="42" cy="98" r="1.9" fill="#D3D1CC"/><circle cx="50" cy="98" r="1.9" fill="#D3D1CC"/><circle cx="58" cy="98" r="1.9" fill="#D3D1CC"/><circle cx="66" cy="98" r="1.9" fill="#D3D1CC"/><circle cx="74" cy="98" r="1.9" fill="#D3D1CC"/><circle cx="82" cy="98" r="1.9" fill="#D3D1CC"/><circle cx="90" cy="98" r="1.9" fill="#D3D1CC"/><circle cx="98" cy="98" r="1.9" fill="#D3D1CC"/><circle cx="106" cy="98" r="1.9" fill="#D3D1CC"/><circle cx="114" cy="98" r="1.9" fill="#D3D1CC"/><circle cx="122" cy="98" r="1.9" fill="#D3D1CC"/><circle cx="38" cy="106" r="1.9" fill="#D3D1CC"/><circle cx="46" cy="106" r="1.9" fill="#D3D1CC"/><circle cx="54" cy="106" r="1.9" fill="#D3D1CC"/><circle cx="62" cy="106" r="1.9" fill="#D3D1CC"/><circle cx="70" cy="106" r="1.9" fill="#D3D1CC"/><circle cx="78" cy="106" r="1.9" fill="#D3D1CC"/><circle cx="86" cy="106" r="1.9" fill="#D3D1CC"/><circle cx="94" cy="106" r="1.9" fill="#D3D1CC"/><circle cx="102" cy="106" r="1.9" fill="#D3D1CC"/><circle cx="110" cy="106" r="1.9" fill="#D3D1CC"/><circle cx="118" cy="106" r="1.9" fill="#D3D1CC"/><circle cx="126" cy="106" r="1.9" fill="#D3D1CC"/><circle cx="42" cy="114" r="1.9" fill="#D3D1CC"/><circle cx="50" cy="114" r="1.9" fill="#D3D1CC"/><circle cx="58" cy="114" r="1.9" fill="#D3D1CC"/><circle cx="66" cy="114" r="1.9" fill="#D3D1CC"/><circle cx="74" cy="114" r="1.9" fill="#D3D1CC"/><circle cx="82" cy="114" r="1.9" fill="#D3D1CC"/><circle cx="90" cy="114" r="1.9" fill="#D3D1CC"/><circle cx="98" cy="114" r="1.9" fill="#D3D1CC"/><circle cx="106" cy="114" r="1.9" fill="#D3D1CC"/><circle cx="114" cy="114" r="1.9" fill="#D3D1CC"/><circle cx="122" cy="114" r="1.9" fill="#D3D1CC"/><circle cx="146" cy="114" r="1.9" fill="#D3D1CC"/><circle cx="46" cy="122" r="1.9" fill="#D3D1CC"/><circle cx="54" cy="122" r="1.9" fill="#D3D1CC"/><circle cx="62" cy="122" r="1.9" fill="#D3D1CC"/><circle cx="70" cy="122" r="1.9" fill="#D3D1CC"/><circle cx="78" cy="122" r="1.9" fill="#D3D1CC"/><circle cx="86" cy="122" r="1.9" fill="#D3D1CC"/><circle cx="94" cy="122" r="1.9" fill="#D3D1CC"/><circle cx="102" cy="122" r="1.9" fill="#D3D1CC"/><circle cx="110" cy="122" r="1.9" fill="#D3D1CC"/><circle cx="134" cy="122" r="1.9" fill="#D3D1CC"/><circle cx="142" cy="122" r="1.9" fill="#D3D1CC"/><circle cx="42" cy="130" r="1.9" fill="#D3D1CC"/><circle cx="50" cy="130" r="1.9" fill="#D3D1CC"/><circle cx="58" cy="130" r="1.9" fill="#D3D1CC"/><circle cx="66" cy="130" r="1.9" fill="#D3D1CC"/><circle cx="74" cy="130" r="1.9" fill="#D3D1CC"/><circle cx="82" cy="130" r="1.9" fill="#D3D1CC"/><circle cx="90" cy="130" r="1.9" fill="#D3D1CC"/><circle cx="98" cy="130" r="1.9" fill="#D3D1CC"/><circle cx="106" cy="130" r="1.9" fill="#D3D1CC"/><circle cx="122" cy="130" r="1.9" fill="#D3D1CC"/><circle cx="130" cy="130" r="1.9" fill="#D3D1CC"/><circle cx="46" cy="138" r="1.9" fill="#D3D1CC"/><circle cx="54" cy="138" r="1.9" fill="#D3D1CC"/><circle cx="62" cy="138" r="1.9" fill="#D3D1CC"/><circle cx="70" cy="138" r="1.9" fill="#D3D1CC"/><circle cx="78" cy="138" r="1.9" fill="#D3D1CC"/><circle cx="86" cy="138" r="1.9" fill="#D3D1CC"/><circle cx="94" cy="138" r="1.9" fill="#D3D1CC"/><circle cx="102" cy="138" r="1.9" fill="#D3D1CC"/><circle cx="110" cy="138" r="1.9" fill="#D3D1CC"/><circle cx="134" cy="138" r="1.9" fill="#D3D1CC"/><circle cx="50" cy="146" r="1.9" fill="#D3D1CC"/><circle cx="58" cy="146" r="1.9" fill="#D3D1CC"/><circle cx="66" cy="146" r="1.9" fill="#D3D1CC"/><circle cx="74" cy="146" r="1.9" fill="#D3D1CC"/><circle cx="82" cy="146" r="1.9" fill="#D3D1CC"/><circle cx="90" cy="146" r="1.9" fill="#D3D1CC"/><circle cx="98" cy="146" r="1.9" fill="#D3D1CC"/><circle cx="106" cy="146" r="1.9" fill="#D3D1CC"/><circle cx="114" cy="146" r="1.9" fill="#D3D1CC"/><circle cx="62" cy="154" r="1.9" fill="#D3D1CC"/><circle cx="70" cy="154" r="1.9" fill="#D3D1CC"/><circle cx="78" cy="154" r="1.9" fill="#D3D1CC"/><circle cx="86" cy="154" r="1.9" fill="#D3D1CC"/><circle cx="94" cy="154" r="1.9" fill="#D3D1CC"/><circle cx="102" cy="154" r="1.9" fill="#D3D1CC"/><circle cx="110" cy="154" r="1.9" fill="#D3D1CC"/><circle cx="118" cy="154" r="1.9" fill="#D3D1CC"/><circle cx="134" cy="154" r="1.9" fill="#D3D1CC"/><circle cx="174" cy="154" r="1.9" fill="#D3D1CC"/><circle cx="66" cy="162" r="1.9" fill="#D3D1CC"/><circle cx="74" cy="162" r="1.9" fill="#D3D1CC"/><circle cx="82" cy="162" r="1.9" fill="#D3D1CC"/><circle cx="90" cy="162" r="1.9" fill="#D3D1CC"/><circle cx="98" cy="162" r="1.9" fill="#D3D1CC"/><circle cx="106" cy="162" r="1.9" fill="#D3D1CC"/><circle cx="114" cy="162" r="1.9" fill="#D3D1CC"/><circle cx="122" cy="162" r="1.9" fill="#D3D1CC"/><circle cx="138" cy="162" r="1.9" fill="#D3D1CC"/><circle cx="170" cy="162" r="1.9" fill="#D3D1CC"/><circle cx="178" cy="162" r="1.9" fill="#D3D1CC"/><circle cx="186" cy="162" r="1.9" fill="#D3D1CC"/><circle cx="70" cy="170" r="1.9" fill="#D3D1CC"/><circle cx="78" cy="170" r="1.9" fill="#D3D1CC"/><circle cx="86" cy="170" r="1.9" fill="#D3D1CC"/><circle cx="94" cy="170" r="1.9" fill="#D3D1CC"/><circle cx="102" cy="170" r="1.9" fill="#D3D1CC"/><circle cx="110" cy="170" r="1.9" fill="#D3D1CC"/><circle cx="118" cy="170" r="1.9" fill="#D3D1CC"/><circle cx="126" cy="170" r="1.9" fill="#D3D1CC"/><circle cx="134" cy="170" r="1.9" fill="#D3D1CC"/><circle cx="142" cy="170" r="1.9" fill="#D3D1CC"/><circle cx="166" cy="170" r="1.9" fill="#D3D1CC"/><circle cx="182" cy="170" r="1.9" fill="#D3D1CC"/><circle cx="74" cy="178" r="1.9" fill="#D3D1CC"/><circle cx="82" cy="178" r="1.9" fill="#D3D1CC"/><circle cx="90" cy="178" r="1.9" fill="#D3D1CC"/><circle cx="98" cy="178" r="1.9" fill="#D3D1CC"/><circle cx="106" cy="178" r="1.9" fill="#D3D1CC"/><circle cx="114" cy="178" r="1.9" fill="#D3D1CC"/><circle cx="122" cy="178" r="1.9" fill="#D3D1CC"/><circle cx="130" cy="178" r="1.9" fill="#D3D1CC"/><circle cx="138" cy="178" r="1.9" fill="#D3D1CC"/><circle cx="146" cy="178" r="1.9" fill="#D3D1CC"/><circle cx="154" cy="178" r="1.9" fill="#D3D1CC"/><circle cx="162" cy="178" r="1.9" fill="#D3D1CC"/><circle cx="178" cy="178" r="1.9" fill="#D3D1CC"/><circle cx="194" cy="178" r="1.9" fill="#D3D1CC"/><circle cx="202" cy="178" r="1.9" fill="#D3D1CC"/><circle cx="86" cy="186" r="1.9" fill="#D3D1CC"/><circle cx="94" cy="186" r="1.9" fill="#D3D1CC"/><circle cx="102" cy="186" r="1.9" fill="#D3D1CC"/><circle cx="110" cy="186" r="1.9" fill="#D3D1CC"/><circle cx="118" cy="186" r="1.9" fill="#D3D1CC"/><circle cx="126" cy="186" r="1.9" fill="#D3D1CC"/><circle cx="134" cy="186" r="1.9" fill="#D3D1CC"/><circle cx="142" cy="186" r="1.9" fill="#D3D1CC"/><circle cx="150" cy="186" r="1.9" fill="#D3D1CC"/><circle cx="158" cy="186" r="1.9" fill="#D3D1CC"/><circle cx="166" cy="186" r="1.9" fill="#D3D1CC"/><circle cx="174" cy="186" r="1.9" fill="#D3D1CC"/><circle cx="190" cy="186" r="1.9" fill="#D3D1CC"/><circle cx="198" cy="186" r="1.9" fill="#D3D1CC"/><circle cx="206" cy="186" r="1.9" fill="#D3D1CC"/><circle cx="214" cy="186" r="1.9" fill="#D3D1CC"/><circle cx="82" cy="194" r="1.9" fill="#D3D1CC"/><circle cx="90" cy="194" r="1.9" fill="#D3D1CC"/><circle cx="98" cy="194" r="1.9" fill="#D3D1CC"/><circle cx="106" cy="194" r="1.9" fill="#D3D1CC"/><circle cx="114" cy="194" r="1.9" fill="#D3D1CC"/><circle cx="122" cy="194" r="1.9" fill="#D3D1CC"/><circle cx="130" cy="194" r="1.9" fill="#D3D1CC"/><circle cx="138" cy="194" r="1.9" fill="#D3D1CC"/><circle cx="146" cy="194" r="1.9" fill="#D3D1CC"/><circle cx="154" cy="194" r="1.9" fill="#D3D1CC"/><circle cx="162" cy="194" r="1.9" fill="#D3D1CC"/><circle cx="170" cy="194" r="1.9" fill="#D3D1CC"/><circle cx="186" cy="194" r="1.9" fill="#D3D1CC"/><circle cx="202" cy="194" r="1.9" fill="#D3D1CC"/><circle cx="210" cy="194" r="1.9" fill="#D3D1CC"/><circle cx="218" cy="194" r="1.9" fill="#D3D1CC"/><circle cx="86" cy="202" r="1.9" fill="#D3D1CC"/><circle cx="94" cy="202" r="1.9" fill="#D3D1CC"/><circle cx="102" cy="202" r="1.9" fill="#D3D1CC"/><circle cx="110" cy="202" r="1.9" fill="#D3D1CC"/><circle cx="118" cy="202" r="1.9" fill="#D3D1CC"/><circle cx="126" cy="202" r="1.9" fill="#D3D1CC"/><circle cx="134" cy="202" r="1.9" fill="#D3D1CC"/><circle cx="142" cy="202" r="1.9" fill="#D3D1CC"/><circle cx="150" cy="202" r="1.9" fill="#D3D1CC"/><circle cx="158" cy="202" r="1.9" fill="#D3D1CC"/><circle cx="166" cy="202" r="1.9" fill="#D3D1CC"/><circle cx="174" cy="202" r="1.9" fill="#D3D1CC"/><circle cx="182" cy="202" r="1.9" fill="#D3D1CC"/><circle cx="190" cy="202" r="1.9" fill="#D3D1CC"/><circle cx="206" cy="202" r="1.9" fill="#D3D1CC"/><circle cx="222" cy="202" r="1.9" fill="#D3D1CC"/><circle cx="230" cy="202" r="1.9" fill="#D3D1CC"/><circle cx="90" cy="210" r="1.9" fill="#D3D1CC"/><circle cx="98" cy="210" r="1.9" fill="#D3D1CC"/><circle cx="106" cy="210" r="1.9" fill="#D3D1CC"/><circle cx="114" cy="210" r="1.9" fill="#D3D1CC"/><circle cx="122" cy="210" r="1.9" fill="#D3D1CC"/><circle cx="130" cy="210" r="1.9" fill="#D3D1CC"/><circle cx="138" cy="210" r="1.9" fill="#D3D1CC"/><circle cx="146" cy="210" r="1.9" fill="#D3D1CC"/><circle cx="154" cy="210" r="1.9" fill="#D3D1CC"/><circle cx="162" cy="210" r="1.9" fill="#D3D1CC"/><circle cx="170" cy="210" r="1.9" fill="#D3D1CC"/><circle cx="178" cy="210" r="1.9" fill="#D3D1CC"/><circle cx="186" cy="210" r="1.9" fill="#D3D1CC"/><circle cx="194" cy="210" r="1.9" fill="#D3D1CC"/><circle cx="210" cy="210" r="1.9" fill="#D3D1CC"/><circle cx="218" cy="210" r="1.9" fill="#D3D1CC"/><circle cx="226" cy="210" r="1.9" fill="#D3D1CC"/><circle cx="234" cy="210" r="1.9" fill="#D3D1CC"/><circle cx="102" cy="218" r="1.9" fill="#D3D1CC"/><circle cx="110" cy="218" r="1.9" fill="#D3D1CC"/><circle cx="118" cy="218" r="1.9" fill="#D3D1CC"/><circle cx="126" cy="218" r="1.9" fill="#D3D1CC"/><circle cx="134" cy="218" r="1.9" fill="#D3D1CC"/><circle cx="142" cy="218" r="1.9" fill="#D3D1CC"/><circle cx="150" cy="218" r="1.9" fill="#D3D1CC"/><circle cx="158" cy="218" r="1.9" fill="#D3D1CC"/><circle cx="166" cy="218" r="1.9" fill="#D3D1CC"/><circle cx="174" cy="218" r="1.9" fill="#D3D1CC"/><circle cx="182" cy="218" r="1.9" fill="#D3D1CC"/><circle cx="190" cy="218" r="1.9" fill="#D3D1CC"/><circle cx="198" cy="218" r="1.9" fill="#D3D1CC"/><circle cx="214" cy="218" r="1.9" fill="#D3D1CC"/><circle cx="222" cy="218" r="1.9" fill="#D3D1CC"/><circle cx="230" cy="218" r="1.9" fill="#D3D1CC"/><circle cx="238" cy="218" r="1.9" fill="#D3D1CC"/><circle cx="246" cy="218" r="1.9" fill="#D3D1CC"/><circle cx="106" cy="226" r="1.9" fill="#D3D1CC"/><circle cx="114" cy="226" r="1.9" fill="#D3D1CC"/><circle cx="122" cy="226" r="1.9" fill="#D3D1CC"/><circle cx="130" cy="226" r="1.9" fill="#D3D1CC"/><circle cx="138" cy="226" r="1.9" fill="#D3D1CC"/><circle cx="146" cy="226" r="1.9" fill="#D3D1CC"/><circle cx="154" cy="226" r="1.9" fill="#D3D1CC"/><circle cx="162" cy="226" r="1.9" fill="#D3D1CC"/><circle cx="170" cy="226" r="1.9" fill="#D3D1CC"/><circle cx="178" cy="226" r="1.9" fill="#D3D1CC"/><circle cx="186" cy="226" r="1.9" fill="#D3D1CC"/><circle cx="194" cy="226" r="1.9" fill="#D3D1CC"/><circle cx="202" cy="226" r="1.9" fill="#D3D1CC"/><circle cx="210" cy="226" r="1.9" fill="#D3D1CC"/><circle cx="226" cy="226" r="1.9" fill="#D3D1CC"/><circle cx="234" cy="226" r="1.9" fill="#D3D1CC"/><circle cx="242" cy="226" r="1.9" fill="#D3D1CC"/><circle cx="250" cy="226" r="1.9" fill="#D3D1CC"/><circle cx="102" cy="234" r="1.9" fill="#D3D1CC"/><circle cx="110" cy="234" r="1.9" fill="#D3D1CC"/><circle cx="118" cy="234" r="1.9" fill="#D3D1CC"/><circle cx="126" cy="234" r="1.9" fill="#D3D1CC"/><circle cx="134" cy="234" r="1.9" fill="#D3D1CC"/><circle cx="142" cy="234" r="1.9" fill="#D3D1CC"/><circle cx="150" cy="234" r="1.9" fill="#D3D1CC"/><circle cx="158" cy="234" r="1.9" fill="#D3D1CC"/><circle cx="166" cy="234" r="1.9" fill="#D3D1CC"/><circle cx="174" cy="234" r="1.9" fill="#D3D1CC"/><circle cx="182" cy="234" r="1.9" fill="#D3D1CC"/><circle cx="190" cy="234" r="1.9" fill="#D3D1CC"/><circle cx="198" cy="234" r="1.9" fill="#D3D1CC"/><circle cx="206" cy="234" r="1.9" fill="#D3D1CC"/><circle cx="222" cy="234" r="1.9" fill="#D3D1CC"/><circle cx="230" cy="234" r="1.9" fill="#D3D1CC"/><circle cx="238" cy="234" r="1.9" fill="#D3D1CC"/><circle cx="246" cy="234" r="1.9" fill="#D3D1CC"/><circle cx="254" cy="234" r="1.9" fill="#D3D1CC"/><circle cx="262" cy="234" r="1.9" fill="#D3D1CC"/><circle cx="106" cy="242" r="1.9" fill="#D3D1CC"/><circle cx="114" cy="242" r="1.9" fill="#D3D1CC"/><circle cx="122" cy="242" r="1.9" fill="#D3D1CC"/><circle cx="130" cy="242" r="1.9" fill="#D3D1CC"/><circle cx="138" cy="242" r="1.9" fill="#D3D1CC"/><circle cx="146" cy="242" r="1.9" fill="#D3D1CC"/><circle cx="154" cy="242" r="1.9" fill="#D3D1CC"/><circle cx="162" cy="242" r="1.9" fill="#D3D1CC"/><circle cx="170" cy="242" r="1.9" fill="#D3D1CC"/><circle cx="178" cy="242" r="1.9" fill="#D3D1CC"/><circle cx="186" cy="242" r="1.9" fill="#D3D1CC"/><circle cx="202" cy="242" r="1.9" fill="#D3D1CC"/><circle cx="210" cy="242" r="1.9" fill="#D3D1CC"/><circle cx="218" cy="242" r="1.9" fill="#D3D1CC"/><circle cx="226" cy="242" r="1.9" fill="#D3D1CC"/><circle cx="234" cy="242" r="1.9" fill="#D3D1CC"/><circle cx="242" cy="242" r="1.9" fill="#D3D1CC"/><circle cx="250" cy="242" r="1.9" fill="#D3D1CC"/><circle cx="258" cy="242" r="1.9" fill="#D3D1CC"/><circle cx="266" cy="242" r="1.9" fill="#D3D1CC"/><circle cx="274" cy="242" r="1.9" fill="#D3D1CC"/><circle cx="110" cy="250" r="1.9" fill="#D3D1CC"/><circle cx="118" cy="250" r="1.9" fill="#D3D1CC"/><circle cx="126" cy="250" r="1.9" fill="#D3D1CC"/><circle cx="134" cy="250" r="1.9" fill="#D3D1CC"/><circle cx="142" cy="250" r="1.9" fill="#D3D1CC"/><circle cx="150" cy="250" r="1.9" fill="#D3D1CC"/><circle cx="158" cy="250" r="1.9" fill="#D3D1CC"/><circle cx="166" cy="250" r="1.9" fill="#D3D1CC"/><circle cx="174" cy="250" r="1.9" fill="#D3D1CC"/><circle cx="182" cy="250" r="1.9" fill="#D3D1CC"/><circle cx="190" cy="250" r="1.9" fill="#D3D1CC"/><circle cx="198" cy="250" r="1.9" fill="#D3D1CC"/><circle cx="214" cy="250" r="1.9" fill="#D3D1CC"/><circle cx="222" cy="250" r="1.9" fill="#D3D1CC"/><circle cx="230" cy="250" r="1.9" fill="#D3D1CC"/><circle cx="238" cy="250" r="1.9" fill="#D3D1CC"/><circle cx="246" cy="250" r="1.9" fill="#D3D1CC"/><circle cx="254" cy="250" r="1.9" fill="#D3D1CC"/><circle cx="262" cy="250" r="1.9" fill="#D3D1CC"/><circle cx="270" cy="250" r="1.9" fill="#D3D1CC"/><circle cx="278" cy="250" r="1.9" fill="#D3D1CC"/><circle cx="114" cy="258" r="1.9" fill="#D3D1CC"/><circle cx="122" cy="258" r="1.9" fill="#D3D1CC"/><circle cx="130" cy="258" r="1.9" fill="#D3D1CC"/><circle cx="138" cy="258" r="1.9" fill="#D3D1CC"/><circle cx="146" cy="258" r="1.9" fill="#D3D1CC"/><circle cx="154" cy="258" r="1.9" fill="#D3D1CC"/><circle cx="162" cy="258" r="1.9" fill="#D3D1CC"/><circle cx="170" cy="258" r="1.9" fill="#D3D1CC"/><circle cx="178" cy="258" r="1.9" fill="#D3D1CC"/><circle cx="186" cy="258" r="1.9" fill="#D3D1CC"/><circle cx="194" cy="258" r="1.9" fill="#D3D1CC"/><circle cx="202" cy="258" r="1.9" fill="#D3D1CC"/><circle cx="210" cy="258" r="1.9" fill="#D3D1CC"/><circle cx="218" cy="258" r="1.9" fill="#D3D1CC"/><circle cx="226" cy="258" r="1.9" fill="#D3D1CC"/><circle cx="234" cy="258" r="1.9" fill="#D3D1CC"/><circle cx="242" cy="258" r="1.9" fill="#D3D1CC"/><circle cx="250" cy="258" r="1.9" fill="#D3D1CC"/><circle cx="258" cy="258" r="1.9" fill="#D3D1CC"/><circle cx="266" cy="258" r="1.9" fill="#D3D1CC"/><circle cx="274" cy="258" r="1.9" fill="#D3D1CC"/><circle cx="282" cy="258" r="1.9" fill="#D3D1CC"/><circle cx="290" cy="258" r="1.9" fill="#D3D1CC"/><circle cx="118" cy="266" r="1.9" fill="#D3D1CC"/><circle cx="126" cy="266" r="1.9" fill="#D3D1CC"/><circle cx="134" cy="266" r="1.9" fill="#D3D1CC"/><circle cx="142" cy="266" r="1.9" fill="#D3D1CC"/><circle cx="150" cy="266" r="1.9" fill="#D3D1CC"/><circle cx="158" cy="266" r="1.9" fill="#D3D1CC"/><circle cx="166" cy="266" r="1.9" fill="#D3D1CC"/><circle cx="174" cy="266" r="1.9" fill="#D3D1CC"/><circle cx="182" cy="266" r="1.9" fill="#D3D1CC"/><circle cx="190" cy="266" r="1.9" fill="#D3D1CC"/><circle cx="198" cy="266" r="1.9" fill="#D3D1CC"/><circle cx="214" cy="266" r="1.9" fill="#D3D1CC"/><circle cx="222" cy="266" r="1.9" fill="#D3D1CC"/><circle cx="230" cy="266" r="1.9" fill="#D3D1CC"/><circle cx="238" cy="266" r="1.9" fill="#D3D1CC"/><circle cx="246" cy="266" r="1.9" fill="#D3D1CC"/><circle cx="254" cy="266" r="1.9" fill="#D3D1CC"/><circle cx="262" cy="266" r="1.9" fill="#D3D1CC"/><circle cx="270" cy="266" r="1.9" fill="#D3D1CC"/><circle cx="278" cy="266" r="1.9" fill="#D3D1CC"/><circle cx="286" cy="266" r="1.9" fill="#D3D1CC"/><circle cx="294" cy="266" r="1.9" fill="#D3D1CC"/><circle cx="130" cy="274" r="1.9" fill="#D3D1CC"/><circle cx="138" cy="274" r="1.9" fill="#D3D1CC"/><circle cx="146" cy="274" r="1.9" fill="#D3D1CC"/><circle cx="154" cy="274" r="1.9" fill="#D3D1CC"/><circle cx="162" cy="274" r="1.9" fill="#D3D1CC"/><circle cx="170" cy="274" r="1.9" fill="#D3D1CC"/><circle cx="178" cy="274" r="1.9" fill="#D3D1CC"/><circle cx="186" cy="274" r="1.9" fill="#D3D1CC"/><circle cx="194" cy="274" r="1.9" fill="#D3D1CC"/><circle cx="202" cy="274" r="1.9" fill="#D3D1CC"/><circle cx="218" cy="274" r="1.9" fill="#D3D1CC"/><circle cx="226" cy="274" r="1.9" fill="#D3D1CC"/><circle cx="234" cy="274" r="1.9" fill="#D3D1CC"/><circle cx="242" cy="274" r="1.9" fill="#D3D1CC"/><circle cx="250" cy="274" r="1.9" fill="#D3D1CC"/><circle cx="258" cy="274" r="1.9" fill="#D3D1CC"/><circle cx="266" cy="274" r="1.9" fill="#D3D1CC"/><circle cx="274" cy="274" r="1.9" fill="#D3D1CC"/><circle cx="282" cy="274" r="1.9" fill="#D3D1CC"/><circle cx="290" cy="274" r="1.9" fill="#D3D1CC"/><circle cx="298" cy="274" r="1.9" fill="#D3D1CC"/><circle cx="306" cy="274" r="1.9" fill="#D3D1CC"/><circle cx="134" cy="282" r="1.9" fill="#D3D1CC"/><circle cx="142" cy="282" r="1.9" fill="#D3D1CC"/><circle cx="150" cy="282" r="1.9" fill="#D3D1CC"/><circle cx="158" cy="282" r="1.9" fill="#D3D1CC"/><circle cx="166" cy="282" r="1.9" fill="#D3D1CC"/><circle cx="174" cy="282" r="1.9" fill="#D3D1CC"/><circle cx="182" cy="282" r="1.9" fill="#D3D1CC"/><circle cx="190" cy="282" r="1.9" fill="#D3D1CC"/><circle cx="198" cy="282" r="1.9" fill="#D3D1CC"/><circle cx="206" cy="282" r="1.9" fill="#D3D1CC"/><circle cx="214" cy="282" r="1.9" fill="#D3D1CC"/><circle cx="222" cy="282" r="1.9" fill="#D3D1CC"/><circle cx="230" cy="282" r="1.9" fill="#D3D1CC"/><circle cx="238" cy="282" r="1.9" fill="#D3D1CC"/><circle cx="246" cy="282" r="1.9" fill="#D3D1CC"/><circle cx="254" cy="282" r="1.9" fill="#D3D1CC"/><circle cx="262" cy="282" r="1.9" fill="#D3D1CC"/><circle cx="270" cy="282" r="1.9" fill="#D3D1CC"/><circle cx="278" cy="282" r="1.9" fill="#D3D1CC"/><circle cx="286" cy="282" r="1.9" fill="#D3D1CC"/><circle cx="294" cy="282" r="1.9" fill="#D3D1CC"/><circle cx="302" cy="282" r="1.9" fill="#D3D1CC"/><circle cx="310" cy="282" r="1.9" fill="#D3D1CC"/><circle cx="318" cy="282" r="1.9" fill="#D3D1CC"/><circle cx="146" cy="290" r="1.9" fill="#D3D1CC"/><circle cx="154" cy="290" r="1.9" fill="#D3D1CC"/><circle cx="162" cy="290" r="1.9" fill="#D3D1CC"/><circle cx="170" cy="290" r="1.9" fill="#D3D1CC"/><circle cx="178" cy="290" r="1.9" fill="#D3D1CC"/><circle cx="186" cy="290" r="1.9" fill="#D3D1CC"/><circle cx="194" cy="290" r="1.9" fill="#D3D1CC"/><circle cx="202" cy="290" r="1.9" fill="#D3D1CC"/><circle cx="210" cy="290" r="1.9" fill="#D3D1CC"/><circle cx="218" cy="290" r="1.9" fill="#D3D1CC"/><circle cx="226" cy="290" r="1.9" fill="#D3D1CC"/><circle cx="234" cy="290" r="1.9" fill="#D3D1CC"/><circle cx="242" cy="290" r="1.9" fill="#D3D1CC"/><circle cx="250" cy="290" r="1.9" fill="#D3D1CC"/><circle cx="258" cy="290" r="1.9" fill="#D3D1CC"/><circle cx="266" cy="290" r="1.9" fill="#D3D1CC"/><circle cx="274" cy="290" r="1.9" fill="#D3D1CC"/><circle cx="282" cy="290" r="1.9" fill="#D3D1CC"/><circle cx="290" cy="290" r="1.9" fill="#D3D1CC"/><circle cx="298" cy="290" r="1.9" fill="#D3D1CC"/><circle cx="306" cy="290" r="1.9" fill="#D3D1CC"/><circle cx="314" cy="290" r="1.9" fill="#D3D1CC"/><circle cx="322" cy="290" r="1.9" fill="#D3D1CC"/><circle cx="142" cy="298" r="1.9" fill="#D3D1CC"/><circle cx="150" cy="298" r="1.9" fill="#D3D1CC"/><circle cx="158" cy="298" r="1.9" fill="#D3D1CC"/><circle cx="166" cy="298" r="1.9" fill="#D3D1CC"/><circle cx="174" cy="298" r="1.9" fill="#D3D1CC"/><circle cx="182" cy="298" r="1.9" fill="#D3D1CC"/><circle cx="190" cy="298" r="1.9" fill="#D3D1CC"/><circle cx="198" cy="298" r="1.9" fill="#D3D1CC"/><circle cx="206" cy="298" r="1.9" fill="#D3D1CC"/><circle cx="214" cy="298" r="1.9" fill="#D3D1CC"/><circle cx="222" cy="298" r="1.9" fill="#D3D1CC"/><circle cx="230" cy="298" r="1.9" fill="#D3D1CC"/><circle cx="238" cy="298" r="1.9" fill="#D3D1CC"/><circle cx="246" cy="298" r="1.9" fill="#D3D1CC"/><circle cx="254" cy="298" r="1.9" fill="#D3D1CC"/><circle cx="262" cy="298" r="1.9" fill="#D3D1CC"/><circle cx="270" cy="298" r="1.9" fill="#D3D1CC"/><circle cx="278" cy="298" r="1.9" fill="#D3D1CC"/><circle cx="286" cy="298" r="1.9" fill="#D3D1CC"/><circle cx="294" cy="298" r="1.9" fill="#D3D1CC"/><circle cx="302" cy="298" r="1.9" fill="#D3D1CC"/><circle cx="310" cy="298" r="1.9" fill="#D3D1CC"/><circle cx="318" cy="298" r="1.9" fill="#D3D1CC"/><circle cx="326" cy="298" r="1.9" fill="#D3D1CC"/><circle cx="146" cy="306" r="1.9" fill="#D3D1CC"/><circle cx="154" cy="306" r="1.9" fill="#D3D1CC"/><circle cx="162" cy="306" r="1.9" fill="#D3D1CC"/><circle cx="170" cy="306" r="1.9" fill="#D3D1CC"/><circle cx="178" cy="306" r="1.9" fill="#D3D1CC"/><circle cx="186" cy="306" r="1.9" fill="#D3D1CC"/><circle cx="194" cy="306" r="1.9" fill="#D3D1CC"/><circle cx="202" cy="306" r="1.9" fill="#D3D1CC"/><circle cx="210" cy="306" r="1.9" fill="#D3D1CC"/><circle cx="218" cy="306" r="1.9" fill="#D3D1CC"/><circle cx="226" cy="306" r="1.9" fill="#D3D1CC"/><circle cx="234" cy="306" r="1.9" fill="#D3D1CC"/><circle cx="242" cy="306" r="1.9" fill="#D3D1CC"/><circle cx="250" cy="306" r="1.9" fill="#D3D1CC"/><circle cx="258" cy="306" r="1.9" fill="#D3D1CC"/><circle cx="266" cy="306" r="1.9" fill="#D3D1CC"/><circle cx="274" cy="306" r="1.9" fill="#D3D1CC"/><circle cx="282" cy="306" r="1.9" fill="#D3D1CC"/><circle cx="290" cy="306" r="1.9" fill="#D3D1CC"/><circle cx="298" cy="306" r="1.9" fill="#D3D1CC"/><circle cx="306" cy="306" r="1.9" fill="#D3D1CC"/><circle cx="314" cy="306" r="1.9" fill="#D3D1CC"/><circle cx="322" cy="306" r="1.9" fill="#D3D1CC"/><circle cx="330" cy="306" r="1.9" fill="#D3D1CC"/><circle cx="150" cy="314" r="1.9" fill="#D3D1CC"/><circle cx="158" cy="314" r="1.9" fill="#D3D1CC"/><circle cx="166" cy="314" r="1.9" fill="#D3D1CC"/><circle cx="174" cy="314" r="1.9" fill="#D3D1CC"/><circle cx="182" cy="314" r="1.9" fill="#D3D1CC"/><circle cx="190" cy="314" r="1.9" fill="#D3D1CC"/><circle cx="198" cy="314" r="1.9" fill="#D3D1CC"/><circle cx="206" cy="314" r="1.9" fill="#D3D1CC"/><circle cx="214" cy="314" r="1.9" fill="#D3D1CC"/><circle cx="222" cy="314" r="1.9" fill="#D3D1CC"/><circle cx="230" cy="314" r="1.9" fill="#D3D1CC"/><circle cx="238" cy="314" r="1.9" fill="#D3D1CC"/><circle cx="246" cy="314" r="1.9" fill="#D3D1CC"/><circle cx="254" cy="314" r="1.9" fill="#D3D1CC"/><circle cx="262" cy="314" r="1.9" fill="#D3D1CC"/><circle cx="270" cy="314" r="1.9" fill="#D3D1CC"/><circle cx="278" cy="314" r="1.9" fill="#D3D1CC"/><circle cx="286" cy="314" r="1.9" fill="#D3D1CC"/><circle cx="294" cy="314" r="1.9" fill="#D3D1CC"/><circle cx="302" cy="314" r="1.9" fill="#D3D1CC"/><circle cx="310" cy="314" r="1.9" fill="#D3D1CC"/><circle cx="318" cy="314" r="1.9" fill="#D3D1CC"/><circle cx="326" cy="314" r="1.9" fill="#D3D1CC"/><circle cx="334" cy="314" r="1.9" fill="#D3D1CC"/><circle cx="178" cy="322" r="1.9" fill="#D3D1CC"/><circle cx="186" cy="322" r="1.9" fill="#D3D1CC"/><circle cx="194" cy="322" r="1.9" fill="#D3D1CC"/><circle cx="202" cy="322" r="1.9" fill="#D3D1CC"/><circle cx="210" cy="322" r="1.9" fill="#D3D1CC"/><circle cx="218" cy="322" r="1.9" fill="#D3D1CC"/><circle cx="226" cy="322" r="1.9" fill="#D3D1CC"/><circle cx="234" cy="322" r="1.9" fill="#D3D1CC"/><circle cx="242" cy="322" r="1.9" fill="#D3D1CC"/><circle cx="250" cy="322" r="1.9" fill="#D3D1CC"/><circle cx="258" cy="322" r="1.9" fill="#D3D1CC"/><circle cx="266" cy="322" r="1.9" fill="#D3D1CC"/><circle cx="274" cy="322" r="1.9" fill="#D3D1CC"/><circle cx="282" cy="322" r="1.9" fill="#D3D1CC"/><circle cx="290" cy="322" r="1.9" fill="#D3D1CC"/><circle cx="298" cy="322" r="1.9" fill="#D3D1CC"/><circle cx="306" cy="322" r="1.9" fill="#D3D1CC"/><circle cx="314" cy="322" r="1.9" fill="#D3D1CC"/><circle cx="322" cy="322" r="1.9" fill="#D3D1CC"/><circle cx="330" cy="322" r="1.9" fill="#D3D1CC"/><circle cx="338" cy="322" r="1.9" fill="#D3D1CC"/><circle cx="190" cy="330" r="1.9" fill="#D3D1CC"/><circle cx="198" cy="330" r="1.9" fill="#D3D1CC"/><circle cx="206" cy="330" r="1.9" fill="#D3D1CC"/><circle cx="214" cy="330" r="1.9" fill="#D3D1CC"/><circle cx="222" cy="330" r="1.9" fill="#D3D1CC"/><circle cx="230" cy="330" r="1.9" fill="#D3D1CC"/><circle cx="238" cy="330" r="1.9" fill="#D3D1CC"/><circle cx="246" cy="330" r="1.9" fill="#D3D1CC"/><circle cx="254" cy="330" r="1.9" fill="#D3D1CC"/><circle cx="262" cy="330" r="1.9" fill="#D3D1CC"/><circle cx="270" cy="330" r="1.9" fill="#D3D1CC"/><circle cx="278" cy="330" r="1.9" fill="#D3D1CC"/><circle cx="286" cy="330" r="1.9" fill="#D3D1CC"/><circle cx="294" cy="330" r="1.9" fill="#D3D1CC"/><circle cx="302" cy="330" r="1.9" fill="#D3D1CC"/><circle cx="310" cy="330" r="1.9" fill="#D3D1CC"/><circle cx="318" cy="330" r="1.9" fill="#D3D1CC"/><circle cx="326" cy="330" r="1.9" fill="#D3D1CC"/><circle cx="334" cy="330" r="1.9" fill="#D3D1CC"/><circle cx="210" cy="338" r="1.9" fill="#D3D1CC"/><circle cx="218" cy="338" r="1.9" fill="#D3D1CC"/><circle cx="226" cy="338" r="1.9" fill="#D3D1CC"/><circle cx="234" cy="338" r="1.9" fill="#D3D1CC"/><circle cx="242" cy="338" r="1.9" fill="#D3D1CC"/><circle cx="250" cy="338" r="1.9" fill="#D3D1CC"/><circle cx="258" cy="338" r="1.9" fill="#D3D1CC"/><circle cx="266" cy="338" r="1.9" fill="#D3D1CC"/><circle cx="274" cy="338" r="1.9" fill="#D3D1CC"/><circle cx="282" cy="338" r="1.9" fill="#D3D1CC"/><circle cx="290" cy="338" r="1.9" fill="#D3D1CC"/><circle cx="298" cy="338" r="1.9" fill="#D3D1CC"/><circle cx="306" cy="338" r="1.9" fill="#D3D1CC"/><circle cx="314" cy="338" r="1.9" fill="#D3D1CC"/><circle cx="322" cy="338" r="1.9" fill="#D3D1CC"/><circle cx="330" cy="338" r="1.9" fill="#D3D1CC"/><circle cx="222" cy="346" r="1.9" fill="#D3D1CC"/><circle cx="230" cy="346" r="1.9" fill="#D3D1CC"/><circle cx="238" cy="346" r="1.9" fill="#D3D1CC"/><circle cx="246" cy="346" r="1.9" fill="#D3D1CC"/><circle cx="254" cy="346" r="1.9" fill="#D3D1CC"/><circle cx="262" cy="346" r="1.9" fill="#D3D1CC"/><circle cx="270" cy="346" r="1.9" fill="#D3D1CC"/><circle cx="278" cy="346" r="1.9" fill="#D3D1CC"/><circle cx="286" cy="346" r="1.9" fill="#D3D1CC"/><circle cx="294" cy="346" r="1.9" fill="#D3D1CC"/><circle cx="302" cy="346" r="1.9" fill="#D3D1CC"/><circle cx="310" cy="346" r="1.9" fill="#D3D1CC"/><circle cx="318" cy="346" r="1.9" fill="#D3D1CC"/><circle cx="326" cy="346" r="1.9" fill="#D3D1CC"/><circle cx="334" cy="346" r="1.9" fill="#D3D1CC"/><circle cx="234" cy="354" r="1.9" fill="#D3D1CC"/><circle cx="242" cy="354" r="1.9" fill="#D3D1CC"/><circle cx="250" cy="354" r="1.9" fill="#D3D1CC"/><circle cx="258" cy="354" r="1.9" fill="#D3D1CC"/><circle cx="266" cy="354" r="1.9" fill="#D3D1CC"/><circle cx="274" cy="354" r="1.9" fill="#D3D1CC"/><circle cx="282" cy="354" r="1.9" fill="#D3D1CC"/><circle cx="290" cy="354" r="1.9" fill="#D3D1CC"/><circle cx="298" cy="354" r="1.9" fill="#D3D1CC"/><circle cx="306" cy="354" r="1.9" fill="#D3D1CC"/><circle cx="314" cy="354" r="1.9" fill="#D3D1CC"/><circle cx="322" cy="354" r="1.9" fill="#D3D1CC"/><circle cx="330" cy="354" r="1.9" fill="#D3D1CC"/><circle cx="246" cy="362" r="1.9" fill="#D3D1CC"/><circle cx="254" cy="362" r="1.9" fill="#D3D1CC"/><circle cx="262" cy="362" r="1.9" fill="#D3D1CC"/><circle cx="270" cy="362" r="1.9" fill="#D3D1CC"/><circle cx="278" cy="362" r="1.9" fill="#D3D1CC"/><circle cx="286" cy="362" r="1.9" fill="#D3D1CC"/><circle cx="294" cy="362" r="1.9" fill="#D3D1CC"/><circle cx="302" cy="362" r="1.9" fill="#D3D1CC"/><circle cx="310" cy="362" r="1.9" fill="#D3D1CC"/><circle cx="318" cy="362" r="1.9" fill="#D3D1CC"/><circle cx="326" cy="362" r="1.9" fill="#D3D1CC"/><circle cx="250" cy="370" r="1.9" fill="#D3D1CC"/><circle cx="258" cy="370" r="1.9" fill="#D3D1CC"/><circle cx="266" cy="370" r="1.9" fill="#D3D1CC"/><circle cx="274" cy="370" r="1.9" fill="#D3D1CC"/><circle cx="282" cy="370" r="1.9" fill="#D3D1CC"/><circle cx="290" cy="370" r="1.9" fill="#D3D1CC"/><circle cx="298" cy="370" r="1.9" fill="#D3D1CC"/><circle cx="306" cy="370" r="1.9" fill="#D3D1CC"/><circle cx="314" cy="370" r="1.9" fill="#D3D1CC"/><circle cx="322" cy="370" r="1.9" fill="#D3D1CC"/><circle cx="246" cy="378" r="1.9" fill="#D3D1CC"/><circle cx="254" cy="378" r="1.9" fill="#D3D1CC"/><circle cx="262" cy="378" r="1.9" fill="#D3D1CC"/><circle cx="270" cy="378" r="1.9" fill="#D3D1CC"/><circle cx="278" cy="378" r="1.9" fill="#D3D1CC"/><circle cx="286" cy="378" r="1.9" fill="#D3D1CC"/><circle cx="294" cy="378" r="1.9" fill="#D3D1CC"/><circle cx="302" cy="378" r="1.9" fill="#D3D1CC"/><circle cx="310" cy="378" r="1.9" fill="#D3D1CC"/><circle cx="318" cy="378" r="1.9" fill="#D3D1CC"/><circle cx="326" cy="378" r="1.9" fill="#D3D1CC"/><circle cx="334" cy="378" r="1.9" fill="#D3D1CC"/><circle cx="250" cy="386" r="1.9" fill="#D3D1CC"/><circle cx="258" cy="386" r="1.9" fill="#D3D1CC"/><circle cx="266" cy="386" r="1.9" fill="#D3D1CC"/><circle cx="274" cy="386" r="1.9" fill="#D3D1CC"/><circle cx="282" cy="386" r="1.9" fill="#D3D1CC"/><circle cx="290" cy="386" r="1.9" fill="#D3D1CC"/><circle cx="298" cy="386" r="1.9" fill="#D3D1CC"/><circle cx="306" cy="386" r="1.9" fill="#D3D1CC"/><circle cx="314" cy="386" r="1.9" fill="#D3D1CC"/><circle class="m" style="--i:1" cx="110" cy="58" r="2.5" fill="#7CBDF2"/><circle class="m" style="--i:2" cx="118" cy="58" r="2.5" fill="#7CBDF2"/><circle class="m" style="--i:3" cx="126" cy="58" r="2.5" fill="#7CBDF2"/><circle class="m" style="--i:4" cx="106" cy="66" r="2.5" fill="#7CBDF2"/><circle class="m" style="--i:5" cx="114" cy="66" r="2.5" fill="#7CBDF2"/><circle class="m" style="--i:6" cx="110" cy="74" r="2.5" fill="#7CBDF2"/><circle class="m" style="--i:7" cx="126" cy="74" r="2.5" fill="#7CBDF2"/><circle class="m" style="--i:8" cx="134" cy="74" r="2.5" fill="#7CBDF2"/><circle class="m" style="--i:9" cx="126" cy="90" r="2.5" fill="#7CBDF2"/><circle class="m" style="--i:10" cx="142" cy="90" r="2.5" fill="#7CBDF2"/><circle class="m" style="--i:11" cx="158" cy="90" r="2.5" fill="#7CBDF2"/><circle class="m" style="--i:12" cx="130" cy="98" r="2.5" fill="#7CBDF2"/><circle class="m" style="--i:13" cx="138" cy="98" r="2.5" fill="#7CBDF2"/><circle class="m" style="--i:14" cx="146" cy="98" r="2.5" fill="#7CBDF2"/><circle class="m" style="--i:15" cx="154" cy="98" r="2.5" fill="#7CBDF2"/><circle class="m" style="--i:16" cx="134" cy="106" r="2.5" fill="#7CBDF2"/><circle class="m" style="--i:17" cx="142" cy="106" r="2.5" fill="#7CBDF2"/><circle class="m" style="--i:18" cx="150" cy="106" r="2.5" fill="#7CBDF2"/><circle class="m" style="--i:19" cx="158" cy="106" r="2.5" fill="#7CBDF2"/><circle class="m" style="--i:20" cx="130" cy="114" r="2.5" fill="#7CBDF2"/><circle class="m" style="--i:21" cx="138" cy="114" r="2.5" fill="#7CBDF2"/><circle class="m" style="--i:22" cx="154" cy="114" r="2.5" fill="#7CBDF2"/><circle class="m" style="--i:23" cx="118" cy="122" r="2.5" fill="#7CBDF2"/><circle class="m" style="--i:24" cx="126" cy="122" r="2.5" fill="#7CBDF2"/><circle class="m" style="--i:25" cx="150" cy="122" r="2.5" fill="#7CBDF2"/><circle class="m" style="--i:26" cx="114" cy="130" r="2.5" fill="#7CBDF2"/><circle class="m" style="--i:27" cx="138" cy="130" r="2.5" fill="#7CBDF2"/><circle class="m" style="--i:28" cx="146" cy="130" r="2.5" fill="#7CBDF2"/><circle class="m" style="--i:29" cx="118" cy="138" r="2.5" fill="#7CBDF2"/><circle class="m" style="--i:30" cx="126" cy="138" r="2.5" fill="#7CBDF2"/><circle class="m" style="--i:31" cx="142" cy="138" r="2.5" fill="#7CBDF2"/><circle class="m" style="--i:32" cx="150" cy="138" r="2.5" fill="#7CBDF2"/><circle class="m" style="--i:33" cx="122" cy="146" r="2.5" fill="#7CBDF2"/><circle class="m" style="--i:34" cx="130" cy="146" r="2.5" fill="#7CBDF2"/><circle class="m" style="--i:35" cx="138" cy="146" r="2.5" fill="#7CBDF2"/><circle class="m" style="--i:36" cx="146" cy="146" r="2.5" fill="#7CBDF2"/><circle class="m" style="--i:37" cx="154" cy="146" r="2.5" fill="#7CBDF2"/><circle class="m" style="--i:38" cx="162" cy="146" r="2.5" fill="#7CBDF2"/><circle class="m" style="--i:39" cx="170" cy="146" r="2.5" fill="#7CBDF2"/><circle class="m" style="--i:40" cx="126" cy="154" r="2.5" fill="#7CBDF2"/><circle class="m" style="--i:41" cx="142" cy="154" r="2.5" fill="#7CBDF2"/><circle class="m" style="--i:42" cx="150" cy="154" r="2.5" fill="#7CBDF2"/><circle class="m" style="--i:43" cx="158" cy="154" r="2.5" fill="#7CBDF2"/><circle class="m" style="--i:44" cx="166" cy="154" r="2.5" fill="#7CBDF2"/><circle class="m" style="--i:45" cx="130" cy="162" r="2.5" fill="#7CBDF2"/><circle class="m" style="--i:46" cx="146" cy="162" r="2.5" fill="#7CBDF2"/><circle class="m" style="--i:47" cx="154" cy="162" r="2.5" fill="#7CBDF2"/><circle class="m" style="--i:48" cx="162" cy="162" r="2.5" fill="#7CBDF2"/><circle class="m" style="--i:49" cx="150" cy="170" r="2.5" fill="#7CBDF2"/><circle class="m" style="--i:50" cx="158" cy="170" r="2.5" fill="#7CBDF2"/><circle class="m" style="--i:51" cx="174" cy="170" r="2.5" fill="#7CBDF2"/><circle class="m" style="--i:52" cx="190" cy="170" r="2.5" fill="#7CBDF2"/><circle class="m" style="--i:53" cx="170" cy="178" r="2.5" fill="#7CBDF2"/><circle class="m" style="--i:54" cx="186" cy="178" r="2.5" fill="#7CBDF2"/><circle class="m" style="--i:55" cx="182" cy="186" r="2.5" fill="#7CBDF2"/><circle class="m" style="--i:56" cx="178" cy="194" r="2.5" fill="#7CBDF2"/><circle class="m" style="--i:57" cx="194" cy="194" r="2.5" fill="#7CBDF2"/><circle class="m" style="--i:58" cx="198" cy="202" r="2.5" fill="#7CBDF2"/><circle class="m" style="--i:59" cx="214" cy="202" r="2.5" fill="#7CBDF2"/><circle class="m" style="--i:60" cx="202" cy="210" r="2.5" fill="#7CBDF2"/><circle class="m" style="--i:61" cx="206" cy="218" r="2.5" fill="#7CBDF2"/><circle class="m" style="--i:62" cx="218" cy="226" r="2.5" fill="#7CBDF2"/><circle class="m" style="--i:63" cx="214" cy="234" r="2.5" fill="#7CBDF2"/><circle class="m" style="--i:64" cx="194" cy="242" r="2.5" fill="#7CBDF2"/><circle class="m" style="--i:65" cx="206" cy="250" r="2.5" fill="#7CBDF2"/><circle class="m" style="--i:66" cx="206" cy="266" r="2.5" fill="#7CBDF2"/><circle class="m" style="--i:67" cx="210" cy="274" r="2.5" fill="#7CBDF2"/><ellipse class="ell" cx="157.9" cy="130.4" rx="4.5" ry="8" fill="#B9D9F4" stroke="#7CBDF2" stroke-width="1"/><circle class="tgt" cx="152.8" cy="120.8" r="5.5" fill="#0F6FC0"/><path class="loop" pathLength="1" d="M 169.8 120.8 L 171.1 123.7 L 171.3 126.9 L 170.3 129.9 L 168.0 132.3 L 164.9 133.7 L 161.5 134.3 L 158.2 134.2 L 155.4 133.9 L 152.8 133.8 L 150.2 134.0 L 147.3 134.4 L 144.0 134.5 L 140.5 134.0 L 137.2 132.6 L 134.8 130.2 L 133.6 127.1 L 133.7 123.8 L 134.9 120.8 L 136.6 118.2 L 138.3 116.0 L 139.7 114.0 L 140.9 111.8 L 142.1 109.3 L 143.7 106.6 L 146.0 104.0 L 149.2 102.2 L 152.8 101.5 L 156.5 102.1 L 159.6 103.9 L 162.1 106.3 L 163.8 109.0 L 165.1 111.5 L 166.4 113.7 L 168.0 115.8 L 169.9 118.1 L 171.7 120.8 L 172.9 124.0" fill="none" stroke="#FF4A3D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span class="tahoe k-show">Lake Tahoe</span>
+      <span class="canote hand k-show">plows Truckee and Tahoe all winter</span>
+      <div class="readout">
+        <span class="q"><span class="typed" data-text="landscapers that also plow snow, California"></span></span>
+        <div class="cnt"><span class="from k-show">9,840</span><span class="arr k-show">→</span><span class="to k-show" data-to='["","","212","412"]'>412</span></div>
+        <span class="res k-show" data-texts='["","","Matches so far","Matches, most in the Sierra"]'>Matches, most in the Sierra</span>
+      </div>
+    </div>
+    <div class="pillrow p1"><span class="agent"><svg viewBox="0 -4 24 30"></svg><b>Search agent</b><span class="status" data-texts='["","checking 9,840 businesses","reading websites","checked 9,840 businesses"]'></span></span></div>
+    <div class="ticks"><span></span><span></span><span></span><span></span></div>
+  </div>
+</div></div></section>
+
+<!-- SIGNALS · Research agent -->
+<section class="sec" id="signals" data-steps="4"><div class="pin"><div class="row">
+  <div class="copy">
+    <div class="rail"><span>1 Search</span><i></i><b>2 Signals</b><i></i><span>3 Score</span></div>
+    <h2>See what’s true about each one.</h2>
+    <p>The Research agent reads their website, social posts, search results and state records. It answers every Signal and shows where each answer came from.</p>
+  </div>
+  <div class="col">
+    <div class="stage"><div class="srcs">
+      <div class="src" data-lit="1">
+        <div class="slip s-web" style="--i:0"><div class="hd"><svg width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6.5" fill="none" stroke="#5F5E5A" stroke-width="1.3"/><ellipse cx="8" cy="8" rx="2.8" ry="6.5" fill="none" stroke="#5F5E5A" stroke-width="1.3"/><line x1="1.5" y1="8" x2="14.5" y2="8" stroke="#5F5E5A" stroke-width="1.3"/></svg>company website</div><div class="bar" style="width:200px"></div><div class="hl" style="width:150px"><i style="width:136px"></i></div><div class="bar" style="width:180px"></div></div>
+        <svg class="conn" viewBox="0 0 70 20"><line x1="4" y1="10" x2="62" y2="10" stroke="#7CBDF2" stroke-width="1.5"/><circle cx="64" cy="10" r="3.5" fill="#0F6FC0"/></svg>
+        <div class="ans"><span>Business specialty</span><b>Commercial snow removal</b></div>
+      </div>
+      <div class="src" data-lit="2">
+        <div class="slip s-soc" style="--i:1"><div class="hd" style="gap:8px"><span style="width:22px;height:22px;border-radius:50%;background:var(--bar)"></span>Social post<svg style="margin-left:auto" width="16" height="16" viewBox="0 0 16 16"><path d="M2 3.5 C2 2.7 2.7 2 3.5 2 H12.5 C13.3 2 14 2.7 14 3.5 V9.5 C14 10.3 13.3 11 12.5 11 H6.5 L3.5 14 V11 H3.5 C2.7 11 2 10.3 2 9.5 Z" fill="none" stroke="#5F5E5A" stroke-width="1.3" stroke-linejoin="round"/></svg></div><div class="hl" style="width:150px"><i style="width:116px"></i></div><div class="bar" style="width:170px"></div></div>
+        <svg class="conn" viewBox="0 0 70 20"><line x1="4" y1="10" x2="62" y2="10" stroke="#7CBDF2" stroke-width="1.5"/><circle cx="64" cy="10" r="3.5" fill="#0F6FC0"/></svg>
+        <div class="ans"><span>People</span><b>Mark Ruiz, ops manager</b></div>
+      </div>
+      <div class="src" data-lit="2">
+        <div class="slip s-ser" style="--i:2"><div class="hd"><svg width="16" height="16" viewBox="0 0 16 16"><circle cx="7" cy="7" r="4.8" fill="none" stroke="#5F5E5A" stroke-width="1.4"/><path d="M10.6 10.6 L14 14" stroke="#5F5E5A" stroke-width="1.4" stroke-linecap="round"/></svg>Search result</div><div style="width:170px;height:5px;border-radius:2px;background:#7CBDF2"></div><div style="width:110px;height:3px;border-radius:2px;background:#C9C7C2"></div><div class="hl" style="width:150px"><i style="width:96px"></i></div></div>
+        <svg class="conn" viewBox="0 0 70 20"><line x1="4" y1="10" x2="62" y2="10" stroke="#7CBDF2" stroke-width="1.5"/><circle cx="64" cy="10" r="3.5" fill="#0F6FC0"/></svg>
+        <div class="ans"><span>Firmographics</span><b>2 yards, Truckee and Tahoe City</b></div>
+      </div>
+      <div class="src" data-lit="3">
+        <div class="slip s-fil" style="--i:3"><div style="flex:1;display:flex;flex-direction:column;gap:7px"><div class="hd"><svg width="16" height="16" viewBox="0 0 16 16"><path d="M2 6 L8 2.5 L14 6 Z" fill="none" stroke="#5F5E5A" stroke-width="1.3" stroke-linejoin="round"/><line x1="4" y1="7.5" x2="4" y2="12" stroke="#5F5E5A" stroke-width="1.3"/><line x1="8" y1="7.5" x2="8" y2="12" stroke="#5F5E5A" stroke-width="1.3"/><line x1="12" y1="7.5" x2="12" y2="12" stroke="#5F5E5A" stroke-width="1.3"/><line x1="2" y1="13.5" x2="14" y2="13.5" stroke="#5F5E5A" stroke-width="1.3"/></svg>State business filing</div><div class="hl" style="width:140px"><i style="width:116px"></i></div><div class="bar" style="width:130px"></div></div><svg width="34" height="34" viewBox="0 0 34 34"><circle cx="17" cy="17" r="14" fill="none" stroke="#7CBDF2" stroke-width="1.5" stroke-dasharray="2 2.5"/><circle cx="17" cy="17" r="9" fill="none" stroke="#7CBDF2" stroke-width="1.2"/></svg></div>
+        <svg class="conn" viewBox="0 0 70 20"><line x1="4" y1="10" x2="62" y2="10" stroke="#7CBDF2" stroke-width="1.5"/><circle cx="64" cy="10" r="3.5" fill="#0F6FC0"/></svg>
+        <div class="ans"><span>Business ownership</span><b>Owner-run since 2009</b></div>
+      </div>
+    </div></div>
+    <div class="pillrow"><span class="agent"><svg viewBox="0 -4 24 30"></svg><b>Research agent</b><span class="status" data-texts='["gathering sources","reading the website","reading social and search","Sierra Line Grounds"]'></span></span><span class="soon soon2">Coming soon: re-reads every month.</span></div>
+    <div class="ticks"><span></span><span></span><span></span><span></span></div>
+  </div>
+</div></div></section>
+
+<!-- SCORE · Scoring agent -->
+<section class="sec" id="score" data-steps="4" style="border-top:1px solid var(--line)"><div class="pin"><div class="row">
+  <div class="copy">
+    <div class="rail"><span>1 Search</span><i></i><span>2 Signals</span><i></i><b>3 Score</b></div>
+    <h2>Tell it what you want. It ranks the rest.</h2>
+    <p>Put your Signals in order and say which answers you prefer. Every Account gets a Score and a Grade, with the reasons. Soon the Scoring agent learns from your marks and suggests better weights.</p>
+    <p class="kick">Then your reps do the talking, starting with the A’s.</p>
+  </div>
+  <div class="col">
+    <div class="stage"><div class="score">
+      <div class="marks">
+        <span class="eyebrow">You mark a few</span>
+        <div class="mk" style="--i:0"><svg width="22" height="22" viewBox="0 0 22 22"><path d="M3 12 L9 18 L20 4" fill="none" stroke="#0F6FC0" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Oak &amp; Stone Outdoor</span></div>
+        <div class="mk" style="--i:1"><svg width="22" height="22" viewBox="0 0 22 22"><path d="M3 12 L9 18 L20 4" fill="none" stroke="#0F6FC0" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Summit Snow Co.</span></div>
+        <div class="mk x" style="--i:2"><svg width="22" height="22" viewBox="0 0 22 22"><path d="M5 5 L17 17 M17 5 L5 17" fill="none" stroke="#FF4A3D" stroke-width="2.6" stroke-linecap="round"/></svg><span>Sunnyside Plowing</span></div>
+        <span class="hand">“driveways only, skip”</span>
+      </div>
+      <svg class="curvy" viewBox="0 0 80 40"><path pathLength="1" d="M4 20 C 30 6, 50 34, 72 20" fill="none" stroke="#1C1C1A" stroke-width="1.8" stroke-linecap="round"/><path pathLength="1" d="M64 14 L73 20 L64 26" fill="none" stroke="#1C1C1A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <div class="rank">
+        <span class="eyebrow" data-texts='["Today’s ranking","Today’s ranking","Re-ranking the other 409","It ranks the other 409"]'>It ranks the other 409</span>
+        <div class="list">
+          <div class="lr lr-a"><span class="g gA">A</span><span class="nm">Alpine Edge Landscapes</span></div>
+          <div class="lr lr-s"><span class="g gB" data-texts='["B","B","B","A"]'>B</span><span class="nm">Sierra Line Grounds</span></div>
+          <div class="lr" style="--r:2"><span class="g gB">B</span><span class="pb" style="width:150px"></span></div>
+          <div class="lr" style="--r:3"><span class="g gB">B</span><span class="pb" style="width:130px"></span></div>
+          <div class="lr" style="--r:4;opacity:.7"><span class="g gC">C</span><span class="pb" style="width:140px"></span></div>
+          <div class="lr" style="--r:5;opacity:.45"><span class="g gD">D</span><span class="pb" style="width:120px"></span></div>
+        </div>
+      </div>
+    </div></div>
+    <div class="pillrow p3"><span class="agent"><svg viewBox="0 -4 24 30"></svg><b>Scoring agent</b><span class="status" data-texts='["","reading your marks","learning from 3 marks","learned from 3 marks"]'></span></span><span class="chip">Coming soon</span></div>
+    <div class="ticks"><span></span><span></span><span></span><span></span></div>
+  </div>
+</div></div></section>
+
+<!-- AND MORE -->
+<section class="andmore" style="border-top:1px solid var(--line)"><div class="wrap">
+  <h2 class="h-xl">And more</h2>
+  <div class="tiles">
+    <article class="tile">
+      <div class="viz"><svg width="260" height="120" viewBox="0 0 260 120" aria-hidden="true"><rect x="8" y="22" width="110" height="76" rx="10" fill="#fff" stroke="#E6E4E0"/><circle cx="28" cy="44" r="7" fill="#0F6FC0"/><rect x="42" y="40" width="58" height="7" rx="3.5" fill="#E4E2DE"/><circle cx="28" cy="62" r="7" fill="#0F6FC0"/><rect x="42" y="58" width="48" height="7" rx="3.5" fill="#E4E2DE"/><circle cx="28" cy="80" r="7" fill="#7CBDF2"/><rect x="42" y="76" width="54" height="7" rx="3.5" fill="#E4E2DE"/><path d="M128 60 H168" stroke="#7CBDF2" stroke-width="1.5"/><circle cx="171" cy="60" r="3.5" fill="#0F6FC0"/><rect x="182" y="34" width="70" height="52" rx="10" fill="#1C1C1A"/><text x="217" y="65" text-anchor="middle" font-family="Geist" font-size="13" font-weight="500" fill="#fff">Your CRM</text></svg></div>
+      <div class="txt"><h3>Send your list to your CRM.</h3><p>Export any list to CSV and bring it into the CRM you already use.</p></div>
+    </article>
+    <article class="tile">
+      <div class="viz"><svg width="260" height="120" viewBox="0 0 260 120" aria-hidden="true"><g fill="#1C1C1A"><circle cx="40" cy="40" r="6"/><circle cx="58" cy="40" r="6"/><circle cx="76" cy="40" r="6"/><circle cx="40" cy="58" r="6"/><circle cx="58" cy="58" r="6"/><circle cx="76" cy="58" r="6"/><circle cx="40" cy="76" r="6"/><circle cx="58" cy="76" r="6"/></g><path d="M100 58 H136" stroke="#7CBDF2" stroke-width="1.5"/><circle cx="139" cy="58" r="3.5" fill="#0F6FC0"/><rect x="150" y="30" width="102" height="22" rx="11" fill="#EEF6FD"/><text x="201" y="45" text-anchor="middle" font-family="Geist" font-size="11.5" fill="#0B3A63">Commercial clients</text><rect x="150" y="60" width="102" height="22" rx="11" fill="#EEF6FD"/><text x="201" y="75" text-anchor="middle" font-family="Geist" font-size="11.5" fill="#0B3A63">2+ locations</text></svg></div>
+      <div class="txt"><h3>Start from your best customers.</h3><p>Upload the customers you already have. Scorecard reads them and suggests what your best ones share.</p></div>
+    </article>
+    <article class="tile">
+      <div class="viz"><svg width="260" height="120" viewBox="0 0 260 120" aria-hidden="true"><circle cx="60" cy="60" r="9" fill="#FF4A3D"/><circle cx="60" cy="60" r="17" fill="none" stroke="#FF4A3D" stroke-opacity=".35"/><g fill="#1A8FE8"><circle cx="130" cy="34" r="6"/><circle cx="158" cy="52" r="6"/><circle cx="142" cy="78" r="6"/><circle cx="186" cy="36" r="6"/><circle cx="196" cy="70" r="6"/></g><g fill="#7CBDF2"><circle cx="222" cy="48" r="5"/><circle cx="170" cy="96" r="5"/><circle cx="232" cy="86" r="5"/></g><g fill="#D6D4CF"><circle cx="112" cy="98" r="4"/><circle cx="244" cy="22" r="4"/><circle cx="214" cy="102" r="4"/></g><path d="M78 60 H112" stroke="#7CBDF2" stroke-width="1.5" stroke-dasharray="3 3"/></svg></div>
+      <div class="txt"><h3>Find more like your best one.</h3><p>Pick a customer you’d clone. Get the businesses most like it, ranked.</p></div>
+    </article>
+  </div>
+</div></section>
+
+<!-- PRICING -->
+<section class="pricing" id="pricing"><div class="wrap">
+  <h2 class="h-xl">Pricing</h2>
+  <div class="ptable">
+    <div class="hl-col" aria-hidden="true"></div>
+    <div class="prow phead"><div></div>
+      <div class="pc"><span class="nm">Free trial</span><div class="price"><b>$0</b><span>for 14 days</span></div><a class="btn btn-line" href="#signup">Sign up free</a></div>
+      <div class="pc"><span class="badge">Most teams</span><span class="nm">Monthly</span><div class="price"><b>$59</b><span>per month</span></div><a class="btn btn-coral" href="#signup">Start with the free trial</a></div>
+      <div class="pc"><span class="nm">Done for you</span><div class="price"><b>Custom</b></div><a class="btn btn-line" href="#" style="background:transparent">Book a demo</a></div>
+    </div>
+    <div class="pbody"><div class="prow"><div>Credits</div><div><b>500</b></div><div><b>1,000 every month</b></div><div><b>Scaled to your market</b></div></div><div class="prow"><div>Extra credits</div><div><span class="dash">—</span></div><div><b>$10 per 100</b></div><div><b>Included</b></div></div><div class="prow"><div>Search agent: find and add businesses</div><div><svg width="16" height="16" viewBox="0 0 16 16" aria-label="Included"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="#1C1C1A" stroke-width="1.8"/></svg></div><div><svg width="16" height="16" viewBox="0 0 16 16" aria-label="Included"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="#0F6FC0" stroke-width="1.8"/></svg></div><div><svg width="16" height="16" viewBox="0 0 16 16" aria-label="Included"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="#1C1C1A" stroke-width="1.8"/></svg></div></div><div class="prow"><div>Research agent: Standard Signals with sources</div><div><svg width="16" height="16" viewBox="0 0 16 16" aria-label="Included"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="#1C1C1A" stroke-width="1.8"/></svg></div><div><svg width="16" height="16" viewBox="0 0 16 16" aria-label="Included"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="#0F6FC0" stroke-width="1.8"/></svg></div><div><svg width="16" height="16" viewBox="0 0 16 16" aria-label="Included"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="#1C1C1A" stroke-width="1.8"/></svg></div></div><div class="prow"><div>Custom Signals</div><div><svg width="16" height="16" viewBox="0 0 16 16" aria-label="Included"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="#1C1C1A" stroke-width="1.8"/></svg></div><div><svg width="16" height="16" viewBox="0 0 16 16" aria-label="Included"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="#0F6FC0" stroke-width="1.8"/></svg></div><div><svg width="16" height="16" viewBox="0 0 16 16" aria-label="Included"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="#1C1C1A" stroke-width="1.8"/></svg></div></div><div class="prow"><div>LinkedIn, Google Places and owner contacts</div><div><span class="dash">—</span></div><div><svg width="16" height="16" viewBox="0 0 16 16" aria-label="Included"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="#0F6FC0" stroke-width="1.8"/></svg></div><div><svg width="16" height="16" viewBox="0 0 16 16" aria-label="Included"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="#1C1C1A" stroke-width="1.8"/></svg></div></div><div class="prow nb"><div>Research agent re-reads Accounts each month</div><div><span class="dash">—</span></div><div><span class="soonpill">Coming soon</span></div><div><span class="soonpill">Coming soon</span></div></div><div class="prow nb"><div>Scoring agent learns from your marks</div><div><span class="dash">—</span></div><div><span class="soonpill">Coming soon</span></div><div><span class="soonpill">Coming soon</span></div></div><div class="prow sep"><div>We set up, run and tune it for you</div><div><span class="dash">—</span></div><div><span class="dash">—</span></div><div><svg width="16" height="16" viewBox="0 0 16 16" aria-label="Included"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="#1C1C1A" stroke-width="1.8"/></svg></div></div></div>
+  </div>
+  <p class="pnote">Credits add businesses to your list and pay for premium reads.</p>
+</div></section>
+
+<!-- FAQ -->
+<section class="faq"><div class="wrap">
+  <div class="side"><h2>Questions</h2><p>Something else? <a href="#">Book a demo</a> and ask us.</p></div>
+  <dl><div class="qa"><dt>What happens after the 14-day trial?</dt><dd>Pick the monthly plan to keep going. The trial covers Search, Scores and Standard Signals. LinkedIn, Google Places and owner contacts need the monthly plan.</dd></div><div class="qa"><dt>Where does the data come from?</dt><dd>Business listings, PPP loan records and each business’s own website. Premium adds LinkedIn and Google Places. Every answer shows its source.</dd></div><div class="qa"><dt>How is this different from buying a list?</dt><dd>A list gives you businesses in an industry code. Scorecard reads each one, checks it against what you described, and shows why it ranks where it does.</dd></div><div class="qa"><dt>Does it work with my CRM?</dt><dd>Export any list to CSV and bring it into your CRM.</dd></div><div class="qa"><dt>What do the agents do?</dt><dd>The Search agent finds businesses that match what you described. The Research agent reads their websites and answers your Signals. The Scoring agent, coming soon, learns from your marks and suggests better weights.</dd></div><div class="qa"><dt>Will it change my Scores on its own?</dt><dd>No. The Scoring agent suggests changes. You preview them, then go ahead. You can undo any time.</dd></div><div class="qa"><dt>What if I run out of credits?</dt><dd>Add more any time at $10 per 100.</dd></div></dl>
+</div></section>
+
+<!-- SIGN UP -->
+<section class="close" id="signup"><div class="wrap">
+  <h2 class="h-xl">Stop spending time on accounts that won’t buy.</h2>
+  <p>Try it free for 14 days with 500 credits.</p>
+  <form onsubmit="event.preventDefault()"><label class="sr" for="em">Work email</label><input id="em" type="email" placeholder="Work email" autocomplete="email" required><button class="btn btn-coral">Sign up free</button></form>
+  <span class="after">Next, you’ll describe your best customers.</span>
+</div></section>
+
+<footer class="foot"><div class="wrap">
+  <div class="cols">
+    <div class="brand"><a class="logo" href="#top"><svg data-sc-logo="none" viewBox="0 -4 24 30" role="img" aria-label="Scorecard logo, click to replay"></svg>Scorecard</a><p>Target prospects worth the extra effort.</p></div>
+    <div class="fc"><h4>Product</h4><a href="#search">How it works</a><a href="#why">For sales teams</a><a href="#why">For acquisition search</a><a href="#pricing">Pricing</a><a href="#">Sign in</a></div>
+    <div class="fc"><h4>Company</h4><a href="#">About</a><a href="#">Careers</a><a href="#">Contact</a></div>
+    <div class="fc"><h4>Resources</h4><a href="#">Guides</a><a href="#">Data sources</a><a href="#">Changelog</a><a href="#">Help center</a></div>
+    <div class="fc"><h4>Legal</h4><a href="#">Privacy policy</a><a href="#">Terms of service</a><a href="#">Security</a><a href="#">Cookie settings</a></div>
+  </div>
+  <div class="legal">© 2026 Scorecard</div>
+</div></footer>
+
+<script src="scorecard-logo.js"></script>
+<script>
+(() => {
+  ScLogo.init();
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const ease = t => 1 - Math.pow(2, -10 * t);
+  function tween(el, from, to) {
+    cancelAnimationFrame(el._raf); const t0 = performance.now();
+    const tick = now => { const t = Math.min(1, (now - t0) / 1100); el.textContent = Math.round(from + (to - from) * ease(t)).toLocaleString(); if (t < 1) el._raf = requestAnimationFrame(tick); };
+    el._raf = requestAnimationFrame(tick);
+  }
+  function typeOut(el) {
+    const s = el.dataset.text; let i = 0; clearInterval(el._iv); el.textContent = '';
+    el._iv = setInterval(() => { el.textContent = s.slice(0, ++i); if (i >= s.length) clearInterval(el._iv); }, 40);
+  }
+
+  const secs = [...document.querySelectorAll('.sec')].map(sec => {
+    const logo = sec.querySelector('.agent svg');
+    return { sec, n: 4, k: -1, ticks: [...sec.querySelectorAll('.ticks span')], mark: ScLogo.mount(logo) };
+  });
+
+  function setK(s, k, instant) {
+    if (k === s.k) return;
+    const prev = s.k; s.k = k; s.sec.dataset.k = k;
+    s.sec.querySelectorAll('[data-texts]').forEach(el => { const t = JSON.parse(el.dataset.texts)[k]; if (t) el.textContent = t; });
+    s.sec.querySelectorAll('.src').forEach(el => el.classList.toggle('lit', k >= +el.dataset.lit));
+    const to = s.sec.querySelector('.to[data-to]');
+    if (to) { const v = +JSON.parse(to.dataset.to)[k] || 0; if (v) { if (instant || reduce) to.textContent = v.toLocaleString(); else tween(to, k > prev && prev >= 2 ? +to.textContent.replace(/,/g, '') : 0, v); } }
+    const typed = s.sec.querySelector('.typed');
+    if (typed) { if (k === 0 && !instant && !reduce) typeOut(typed); else { clearInterval(typed._iv); typed.textContent = typed.dataset.text; } }
+    // the agent's mark loops while it works, then settles on the ranked mark at the end frame
+    if (k >= s.n - 1) s.mark.settle(); else if (!s.mark.looping && !instant && s.near) s.mark.play('loop');
+  }
+
+  function update() {
+    const vh = innerHeight;
+    for (const s of secs) {
+      const r = s.sec.getBoundingClientRect(), total = s.sec.offsetHeight - vh;
+      const p = Math.min(1, Math.max(0, -r.top / total)), f = p * s.n;
+      const k = reduce ? s.n - 1 : Math.min(s.n - 1, Math.floor(f));
+      s.ticks.forEach((t, i) => t.style.setProperty('--f', Math.min(1, Math.max(0, f - i))));
+      s.near = r.top < vh && r.bottom > 0;
+      if (s.near || s.k === -1) setK(s, k);
+    }
+  }
+  const nav = document.querySelector('nav.top');
+  addEventListener('scroll', () => { update(); nav.classList.toggle('scrolled', scrollY > 8); }, { passive: true });
+  addEventListener('resize', update);
+
+  const m = location.hash.match(/^#s(\d)-(\d)$/);
+  if (m) {
+    const s = secs[m[1] - 1], k = +m[2];
+    document.body.classList.add('review'); s.sec.classList.add('review-on');
+    s.ticks.forEach((t, i) => t.style.setProperty('--f', i <= k ? 1 : 0));
+    setK(s, k, true); return;
+  }
+  update();
+})();
+</script>
+</body>
+</html>

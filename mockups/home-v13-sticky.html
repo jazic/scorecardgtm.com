@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Scorecard — v13 sticky sections (mockup)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Caveat:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1C1C1A; --fg2:#5F5E5A; --fg3:#6E6D69; --fg4:#6F6E69; --fg5:#77766F;
+    --paper:#F7F6F4; --card:#FFFFFF; --line:#E6E4E0; --hair:#EDEBE7;
+    --a:#0F6FC0; --a-fill:#1A8FE8; --b:#7CBDF2; --b-ink:#0B3A63; --c:#C4E0F8; --d:#E2E1DE;
+    --tint:#EEF6FD; --tint-ink:#3F6A8F;
+    --coral:#FF4A3D;
+    --ease: cubic-bezier(.16,1,.3,1);
+    --shadow: 0 0 0 1px var(--line), 0 24px 48px -28px rgba(0,0,0,.35);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:auto}
+  body{font-family:Geist,system-ui,sans-serif;color:var(--ink);background:var(--paper);-webkit-font-smoothing:antialiased}
+  ::selection{background:var(--c);color:var(--b-ink)}
+
+  /* stub hero + after, for scroll context */
+  .stub{min-height:70vh;display:flex;flex-direction:column;justify-content:center;gap:16px;padding:0 max(32px,calc(50vw - 592px))}
+  .stub h1{font-size:64px;line-height:1.02;letter-spacing:-.04em;font-weight:600;max-width:12ch}
+  .stub p{font-size:19px;line-height:29px;color:var(--fg2);max-width:52ch}
+  .stub .cta{align-self:flex-start;background:var(--coral);color:#fff;border-radius:10px;padding:12px 18px;font-weight:500;text-decoration:none}
+
+  /* sticky sections */
+  .sec{position:relative}
+  .sec[data-steps="4"]{height:420vh}
+  .sec[data-steps="5"]{height:500vh}
+  .sec.blue{background:#EAF2FB}
+  .sec.blue::before{content:"";position:absolute;inset:0;background:url(textures/ht2-map-blue-920.svg) center/cover no-repeat;opacity:.5;pointer-events:none}
+  .pin{position:sticky;top:0;height:100vh;display:flex;align-items:center;justify-content:center;padding:0 32px}
+  .row{display:flex;align-items:center;gap:72px;width:1184px;max-width:100%;position:relative}
+  .copy{width:472px;flex-shrink:0;display:flex;flex-direction:column;gap:18px}
+  .rail{display:flex;align-items:center;gap:10px;font-size:14px;font-weight:500;color:var(--fg4);padding-bottom:6px}
+  .rail i{width:28px;height:1px;background:#B9B8B3}
+  .rail b{color:var(--ink);font-weight:600}
+  .copy h2{font-size:48px;line-height:52px;font-weight:600;letter-spacing:-.035em;text-wrap:balance}
+  .copy p{font-size:19px;line-height:29px;color:var(--fg2);max-width:44ch}
+  .copy p.strong{color:var(--ink);font-weight:500}
+
+  .stagecol{width:640px;display:flex;flex-direction:column;gap:14px}
+  .agent{align-self:flex-start;display:flex;align-items:center;gap:8px;padding:7px 14px 7px 11px;border-radius:999px;background:var(--ink);color:#fff;font-size:13px}
+  .agent .dot{width:8px;height:8px;border-radius:50%;background:var(--b);animation:pulse 1.6s ease-in-out infinite}
+  .agent b{font-weight:500}
+  .agent .status{color:#B9B8B3;transition:opacity .25s}
+  @keyframes pulse{50%{opacity:.35}}
+  .stage{position:relative;height:460px}
+  .scene{position:absolute;inset:0;opacity:0;transform:translateY(14px) scale(.985);filter:blur(6px);transition:opacity .5s var(--ease),transform .7s var(--ease),filter .5s var(--ease);pointer-events:none}
+  .scene.on{opacity:1;transform:none;filter:none;pointer-events:auto}
+  .ticks{display:flex;gap:6px;align-items:center}
+  .ticks span{flex:1;height:3px;border-radius:2px;background:#D6D4CF;position:relative;overflow:hidden}
+  .ticks span::after{content:"";position:absolute;inset:0;background:var(--ink);transform:scaleX(var(--f,0));transform-origin:left}
+  .tickcap{font-size:13px;color:var(--fg3);min-height:18px}
+
+  /* shared bits */
+  .card{background:var(--card);border-radius:16px;box-shadow:var(--shadow)}
+  .pad{padding:22px 24px}
+  .lab{font-size:12px;color:var(--fg4)}
+  .h{font-size:17px;font-weight:600}
+  .sub{font-size:13px;color:var(--fg3)}
+  .g{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-size:13px;font-weight:600;flex-shrink:0}
+  .gA{background:var(--a);color:#fff}.gB{background:var(--b);color:var(--b-ink)}.gC{background:var(--c);color:var(--b-ink)}.gD{background:var(--d);color:var(--fg2)}
+  .chip{padding:5px 11px;border-radius:999px;background:#fff;box-shadow:inset 0 0 0 1px #D6E6F5;font-size:13px;color:var(--tint-ink)}
+  .pill{padding:4px 10px;border-radius:999px;font-size:12px;font-weight:600}
+  .r{display:flex;align-items:center;gap:12px;padding:11px 12px;border-radius:10px;background:var(--paper);font-size:14px}
+  .r .grow{flex:1}
+  .r.keep{background:var(--tint)}
+  .r.drop{color:var(--fg5)}
+  .r.unsure{background:#fff;box-shadow:inset 0 0 0 1px #D6D4CF;border:0;outline:1px dashed #B9B8B3;outline-offset:-1px}
+  .tag{width:52px;font-size:12px;font-weight:600}
+  .keep .tag{color:var(--a)} .drop .tag{color:var(--fg4)} .unsure .tag{color:var(--fg2)}
+  .hand{font-family:Caveat,cursive;font-size:27px;line-height:1;color:var(--coral)}
+  .search{display:flex;align-items:center;gap:12px;height:56px;padding:0 20px;border-radius:14px;background:#fff;box-shadow:0 0 0 1.5px var(--ink),0 12px 24px -16px rgba(0,0,0,.3);font-size:17px}
+  .search .grow{flex:1}
+  .caret{display:inline-block;width:2px;height:20px;background:var(--a-fill);vertical-align:-4px;margin-left:2px;animation:blink 1s steps(1) infinite}
+  @keyframes blink{50%{opacity:0}}
+  mark{background:var(--c);color:var(--b-ink);border-radius:4px;padding:1px 3px;font-weight:500}
+  .big{font-size:88px;line-height:1;font-weight:600;letter-spacing:-.045em;font-variant-numeric:tabular-nums}
+  .center{padding:44px 24px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px}
+
+  /* stagger in when scene turns on */
+  .st > *{opacity:0;transform:translateY(8px)}
+  .scene.on .st > *{animation:rowIn .55s var(--ease) both;animation-delay:calc(var(--i,0) * 140ms + 150ms)}
+  @keyframes rowIn{to{opacity:1;transform:none}}
+
+  /* log typing */
+  .log{background:var(--ink);border-radius:16px;padding:24px;display:flex;flex-direction:column;gap:12px;font-family:"Geist Mono",monospace;font-size:13.5px;line-height:20px;color:#E6E4E0}
+  .log .ln{white-space:nowrap;overflow:hidden;clip-path:inset(0 100% 0 0)}
+  .scene.on .log .ln{animation:type .7s steps(28) both;animation-delay:calc(var(--i) * 420ms + 200ms)}
+  @keyframes type{to{clip-path:inset(0 0 0 0)}}
+  .log .live{color:var(--b)}
+
+  /* strike-through draws in */
+  .strike{position:relative}
+  .strike::after{content:"";position:absolute;left:0;top:52%;height:1.5px;background:var(--fg4);width:0;transition:width .5s var(--ease) .9s}
+  .scene.on .strike::after{width:100%}
+
+  /* bars grow */
+  .bar{height:9px;border-radius:5px;background:var(--hair);overflow:hidden}
+  .bar i{display:block;height:100%;border-radius:5px;width:0;transition:width 1s var(--ease)}
+  .scene.on .bar i{width:var(--w)}
+
+  /* grid card */
+  .grid2{display:grid;grid-template-columns:1fr 1fr}
+  .grid2 > div{padding:18px 24px;display:flex;flex-direction:column;gap:11px}
+  .grid2 > div:nth-child(odd){border-right:1px solid var(--hair)}
+  .grid2 > div:nth-child(-n+2){border-bottom:1px solid var(--hair)}
+  .fact b{display:block;font-size:15px;font-weight:400}
+  .fact span{font-size:12px;color:var(--fg3)}
+
+  /* ranked list */
+  .rank{display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid var(--hair)}
+  .rank:last-child{border-bottom:0}
+  .rank .grow{flex:1;display:flex;flex-direction:column}
+  .rank .why{font-size:12px;color:var(--fg3)}
+  .up{font-size:13px;font-weight:500;color:var(--a)}
+  .dn{font-size:13px;color:var(--fg4)}
+
+  .soon{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--fg2);padding:0 4px}
+  .soon span:first-child{padding:3px 9px;border-radius:999px;box-shadow:inset 0 0 0 1px #D6D4CF;font-size:12px;font-weight:500}
+
+  .divider{height:1px;background:var(--line);width:1184px;max-width:calc(100% - 64px);margin:0 auto}
+
+  @media (max-width:1100px){
+    .row{flex-direction:column;gap:28px;align-items:stretch}
+    .copy,.stagecol{width:100%}
+    .copy h2{font-size:34px;line-height:38px}
+    .copy p{font-size:17px;line-height:26px}
+    .stage{height:420px}
+    .pin{align-items:flex-start;padding-top:40px}
+  }
+  body.review > *:not(.review-on){display:none}
+  body.review .sec{height:auto!important}
+  body.review .pin{position:relative}
+  body.review *,body.review *::after{animation:none!important;transition:none!important}
+  body.review .st > *{opacity:1;transform:none}
+  body.review .log .ln{clip-path:none}
+
+  @media (prefers-reduced-motion:reduce){
+    .scene,.scene *{transition:none!important;animation:none!important}
+    .st > *{opacity:1;transform:none}
+    .log .ln{clip-path:none}
+    .agent .dot{animation:none}
+  }
+</style>
+</head>
+<body>
+
+<header class="stub">
+  <h1>Target prospects worth the extra effort.</h1>
+  <p>Mockup of the v13 sticky sections. Scroll down: each section pins while its agent works through the keyframes.</p>
+  <a class="cta" href="#s1">Sign up free</a>
+</header>
+
+<!-- ============ 1 SEARCH ============ -->
+<section class="sec blue" id="s1" data-steps="4">
+  <div class="pin"><div class="row">
+    <div class="copy">
+      <div class="rail"><b>1 Search</b><i></i><span>2 Signals</span><i></i><span>3 Score</span></div>
+      <h2>Search every business in the US the way you’d describe it.</h2>
+      <p>Location, category, and details from public records like state licenses, SBA loans, OSHA filings and permits. More sources every week.</p>
+    </div>
+    <div class="stagecol">
+      <div class="agent"><span class="dot"></span><b>Prospecting agent</b><span class="status" data-status='["reading your ask","gathering candidates","checking each website","412 matches found"]'></span></div>
+      <div class="stage">
+        <!-- 0 read the ask -->
+        <div class="scene">
+          <div class="search"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="8" cy="8" r="5.5" stroke="#1C1C1A" stroke-width="1.6"/><path d="M12 12l4 4" stroke="#1C1C1A" stroke-width="1.6" stroke-linecap="round"/></svg><span class="grow"><span class="typed" data-text="landscapers that also plow snow"></span><span class="caret"></span></span></div>
+          <div class="card pad" style="margin-top:18px;display:flex;flex-direction:column;gap:10px">
+            <span class="lab">Turned into 3 checks</span>
+            <div class="st" style="display:flex;flex-direction:column;gap:8px">
+              <div class="r" style="--i:3"><span class="grow">Type of business</span><b style="color:var(--a);font-weight:500">Landscaping</b></div>
+              <div class="r" style="--i:4"><span class="grow">Must offer</span><b style="color:var(--a);font-weight:500">Snow removal</b></div>
+              <div class="r" style="--i:5"><span class="grow">Where</span><b style="color:var(--a);font-weight:500">Your territory, Illinois</b></div>
+            </div>
+          </div>
+        </div>
+        <!-- 1 gather -->
+        <div class="scene">
+          <div class="card center">
+            <span class="big" data-count="9840">0</span>
+            <span class="sub" style="font-size:16px">landscaping businesses in Illinois</span>
+            <div class="st" style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center;max-width:460px">
+              <span class="chip" style="--i:0">State registry</span><span class="chip" style="--i:1">Google Places</span><span class="chip" style="--i:2">State licenses</span><span class="chip" style="--i:3">SBA and PPP loans</span><span class="chip" style="--i:4">OSHA records</span><span class="chip" style="--i:5">Permits</span>
+            </div>
+          </div>
+        </div>
+        <!-- 2 check each -->
+        <div class="scene">
+          <div class="card pad" style="display:flex;flex-direction:column;gap:9px">
+            <span class="lab">Reading websites…</span>
+            <div class="st" style="display:flex;flex-direction:column;gap:9px">
+              <div class="r keep" style="--i:0"><span class="tag">Keep</span><span class="grow">Prairie Line Grounds</span><span style="font-size:13px;color:var(--tint-ink)">“snow removal”</span></div>
+              <div class="r drop" style="--i:1"><span class="tag">Drop</span><span class="grow">Greenleaf Lawn Co.</span><span style="font-size:13px">mowing only</span></div>
+              <div class="r keep" style="--i:2"><span class="tag">Keep</span><span class="grow">Oak &amp; Stone Outdoor</span><span style="font-size:13px;color:var(--tint-ink)">“plowing”</span></div>
+              <div class="r unsure" style="--i:3"><span class="tag">Unsure</span><span class="grow">Riverbend Lawn</span><span style="font-size:13px;color:var(--fg3)">no website, sent to research</span></div>
+              <div class="r drop" style="--i:4"><span class="tag">Drop</span><span class="grow">Sunnyside Grounds</span><span style="font-size:13px">homeowners only</span></div>
+              <div class="r keep" style="--i:5"><span class="tag">Keep</span><span class="grow">Ridgeway Turf &amp; Tree</span><span style="font-size:13px;color:var(--tint-ink)">“winter services”</span></div>
+            </div>
+          </div>
+        </div>
+        <!-- 3 proof (end frame) -->
+        <div class="scene">
+          <div class="search" style="box-shadow:0 0 0 1px #D6D4CF"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="8" cy="8" r="5.5" stroke="#1C1C1A" stroke-width="1.6"/><path d="M12 12l4 4" stroke="#1C1C1A" stroke-width="1.6" stroke-linecap="round"/></svg><span class="grow">landscapers that also <mark>plow snow</mark></span><span class="sub">412 found</span></div>
+          <div style="width:2px;height:28px;background:var(--a-fill);margin:0 auto"></div>
+          <div class="card pad" style="display:flex;flex-direction:column;gap:14px">
+            <div style="display:flex;align-items:center;gap:12px"><span class="g gA">A</span><div style="display:flex;flex-direction:column"><span class="h">Prairie Line Grounds</span><span class="sub">Peoria, IL · Ranked #1</span></div></div>
+            <div style="padding:14px 16px;border-radius:10px;background:var(--paper);display:flex;flex-direction:column;gap:8px">
+              <span style="font-size:16px;line-height:25px;color:var(--fg2)">“We keep commercial properties sharp all year. Mowing and planting in summer, and <mark>commercial snow removal, November through March</mark>.”</span>
+              <span class="sub">From prairielinegrounds.com/services</span>
+            </div>
+            <div style="display:flex;justify-content:flex-end"><span class="hand">found on their own website</span></div>
+          </div>
+          <div style="width:94%;margin:0 auto;padding:12px 22px;border-radius:0 0 14px 14px;background:#fff;opacity:.7;box-shadow:0 0 0 1px var(--line);display:flex;align-items:center;gap:12px;font-size:14px;color:var(--fg2)"><span class="g gA" style="width:24px;height:24px;font-size:11px">A</span>Oak &amp; Stone Outdoor</div>
+        </div>
+      </div>
+      <div class="ticks"><span></span><span></span><span></span><span></span></div>
+      <div class="tickcap" data-caps='["Read the ask","Gather candidates","Check each one","Show the proof"]'></div>
+    </div>
+  </div></div>
+</section>
+
+<!-- ============ 2 SIGNALS ============ -->
+<section class="sec" id="s2" data-steps="5">
+  <div class="pin"><div class="row">
+    <div class="copy">
+      <div class="rail"><span>1 Search</span><i></i><b>2 Signals</b><i></i><span>3 Score</span></div>
+      <h2>See what’s true about each one.</h2>
+      <p>Agents read websites, social posts, government records and the news. Then they note size, fit, timing and who’s in charge.</p>
+    </div>
+    <div class="stagecol">
+      <div class="agent"><span class="dot"></span><b>Research agent</b><span class="status" data-status='["planning where to look","reading 7 sources","checking what’s still true","settling a conflict","read 7 sources"]'></span></div>
+      <div class="stage">
+        <!-- 0 plan -->
+        <div class="scene">
+          <div class="card pad" style="display:flex;flex-direction:column;gap:10px">
+            <span class="h">Prairie Line Grounds</span><span class="lab">To check, based on what you care about</span>
+            <div class="st" style="display:flex;flex-direction:column;gap:9px">
+              <div class="r" style="--i:0"><span class="grow">Company website</span><span class="sub">services, team</span></div>
+              <div class="r" style="--i:1"><span class="grow">County permits</span><span class="sub">new sites</span></div>
+              <div class="r" style="--i:2"><span class="grow">LinkedIn and job posts</span><span class="sub">size, hiring</span></div>
+              <div class="r" style="--i:3"><span class="grow">State filings</span><span class="sub">owner</span></div>
+              <div class="r drop" style="--i:4"><span class="grow"><span class="strike">Social media ads</span></span><span class="sub">not useful here</span></div>
+            </div>
+          </div>
+        </div>
+        <!-- 1 read -->
+        <div class="scene">
+          <div class="log">
+            <span style="color:var(--fg4)">research log · Prairie Line Grounds</span>
+            <span class="ln" style="--i:0">Reading /services … found “snow removal”</span>
+            <span class="ln" style="--i:1">County permits … permit filed Nov 4</span>
+            <span class="ln" style="--i:2">Job posts … 3 crew lead roles</span>
+            <span class="ln" style="--i:3">State filing … owner: Dana Kessler</span>
+            <span class="ln" style="--i:4">State licenses … certified applicator</span>
+            <span class="ln live" style="--i:5">LinkedIn … reading</span>
+          </div>
+        </div>
+        <!-- 2 stale -->
+        <div class="scene">
+          <div class="card pad" style="display:flex;flex-direction:column;gap:9px">
+            <span class="lab">Is it still true?</span>
+            <div class="st" style="display:flex;flex-direction:column;gap:9px">
+              <div class="r keep" style="--i:0"><span class="tag">Use</span><span class="grow">Permit for a second yard</span><span class="sub">Nov 2026</span></div>
+              <div class="r keep" style="--i:1"><span class="tag">Use</span><span class="grow">Hiring 3 crew leads</span><span class="sub">this month</span></div>
+              <div class="r drop" style="--i:2"><span class="tag">Skip</span><span class="grow"><span class="strike">Hiring a sales rep</span></span><span class="sub">2021</span></div>
+              <div class="r drop" style="--i:3"><span class="tag">Skip</span><span class="grow"><span class="strike">Old address, Pekin</span></span><span class="sub">moved</span></div>
+            </div>
+          </div>
+        </div>
+        <!-- 3 conflict -->
+        <div class="scene">
+          <div class="card pad center" style="align-items:stretch;gap:12px">
+            <span class="lab">Two sources disagree on size</span>
+            <div class="st" style="display:flex;flex-direction:column;gap:10px">
+              <div class="r drop" style="--i:0"><span class="grow"><span class="strike">“Over 60 team members”</span></span><span class="sub">Website, 2022</span></div>
+              <div class="r keep" style="--i:1"><span class="grow" style="font-weight:500">42 employees</span><span style="font-size:13px;color:var(--tint-ink)">LinkedIn, this week</span></div>
+              <span style="--i:3;font-size:16px;padding:6px 2px">Picked LinkedIn. It’s newer.</span>
+            </div>
+          </div>
+        </div>
+        <!-- 4 card (end frame) -->
+        <div class="scene">
+          <div class="card">
+            <div style="display:flex;align-items:center;padding:18px 24px;border-bottom:1px solid var(--hair)"><div style="display:flex;flex-direction:column"><span class="h">Prairie Line Grounds</span><span class="sub">Peoria, IL</span></div></div>
+            <div class="grid2 st">
+              <div style="--i:0"><span style="font-size:13px;font-weight:600">Size</span><div class="fact"><b>42 employees</b><span>LinkedIn</span></div><div class="fact"><b>2 yards, Peoria and Morton</b><span>County records</span></div></div>
+              <div style="--i:1"><span style="font-size:13px;font-weight:600">Fit</span><div class="fact"><b>Commercial snow removal</b><span>Company website</span></div><div class="fact"><b>State-certified applicator</b><span>State license lookup</span></div></div>
+              <div style="--i:2"><span style="font-size:13px;font-weight:600">Timing</span><div class="fact"><b>Filed a permit for a second yard</b><span>County permits · Nov 4</span></div><div class="fact"><b>Hiring 3 crew leads</b><span>Job posts · this month</span></div></div>
+              <div style="--i:3"><span style="font-size:13px;font-weight:600">People</span><div class="fact"><b>Dana Kessler, owner</b><span>State business filing</span></div><div class="fact"><b>New ops manager, hired in October</b><span>LinkedIn</span></div></div>
+            </div>
+          </div>
+          <div class="soon" style="margin-top:14px"><span>Coming soon</span><span>Agents re-check every month and alert you when something changes.</span></div>
+        </div>
+      </div>
+      <div class="ticks"><span></span><span></span><span></span><span></span><span></span></div>
+      <div class="tickcap" data-caps='["Plan where to look","Read and pull facts","Throw out what’s stale","Settle conflicts","Sort into the card"]'></div>
+    </div>
+  </div></div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ============ 3 SCORE ============ -->
+<section class="sec" id="s3" data-steps="5">
+  <div class="pin"><div class="row">
+    <div class="copy">
+      <div class="rail"><span>1 Search</span><i></i><span>2 Signals</span><i></i><b>3 Score</b></div>
+      <h2>Tell it what you want. It ranks the rest.</h2>
+      <p>Mark a few good and bad fits. Scoring gets sharper the more you use it.</p>
+      <p class="strong">Then your reps do the talking, starting with the A’s.</p>
+    </div>
+    <div class="stagecol">
+      <div class="agent"><span class="dot"></span><b>Scoring agent</b><span class="status" data-status='["reading your marks","finding the pattern","weighing what matters","re-ranking 412","re-ranked 412 from 14 marks"]'></span></div>
+      <div class="stage">
+        <!-- 0 marks -->
+        <div class="scene">
+          <div class="card pad" style="display:flex;flex-direction:column;gap:10px">
+            <span class="lab">You marked</span>
+            <div class="st" style="display:flex;flex-direction:column;gap:9px">
+              <div class="r" style="--i:0"><span class="grow">Oak &amp; Stone Outdoor</span><span class="pill" style="background:var(--a);color:#fff">Good fit</span></div>
+              <div class="r" style="--i:1"><span class="grow">Prairie Line Grounds</span><span class="pill" style="background:var(--a);color:#fff">Good fit</span></div>
+              <div class="r" style="--i:2"><span class="grow">Greenleaf Lawn Co.</span><span class="pill" style="background:var(--d);color:var(--fg2)">Not a fit</span></div>
+              <div class="r" style="--i:3"><span class="grow">Sunnyside Grounds</span><span class="pill" style="background:var(--d);color:var(--fg2)">Not a fit</span></div>
+              <div class="r" style="--i:4"><span class="grow">Midstate Mowing</span><span class="pill" style="background:var(--d);color:var(--fg2)">Not a fit</span></div>
+            </div>
+          </div>
+        </div>
+        <!-- 1 difference -->
+        <div class="scene">
+          <div class="card pad center" style="align-items:stretch;gap:12px">
+            <div class="st" style="display:flex;flex-direction:column;gap:12px">
+              <span class="lab" style="--i:0">What your good fits share</span>
+              <div style="--i:1;padding:16px;border-radius:10px;background:var(--tint);display:flex;flex-direction:column;gap:10px;color:var(--b-ink);font-size:16px"><span>Work for businesses, not homeowners</span><span>Run year-round, including snow</span></div>
+              <span class="lab" style="--i:2">What your bad fits share</span>
+              <div style="--i:3;padding:16px;border-radius:10px;background:var(--paper);font-size:16px;color:var(--fg2)">Homeowners only</div>
+            </div>
+          </div>
+        </div>
+        <!-- 2 weights -->
+        <div class="scene">
+          <div class="card pad center" style="align-items:stretch;gap:22px">
+            <div><div style="display:flex;justify-content:space-between;font-size:15px;margin-bottom:8px"><span>Commercial clients</span><span style="font-size:13px;color:var(--a)">matters a lot</span></div><div class="bar"><i style="--w:88%;background:var(--a-fill)"></i></div></div>
+            <div><div style="display:flex;justify-content:space-between;font-size:15px;margin-bottom:8px"><span>Snow removal</span><span style="font-size:13px;color:var(--a)">matters</span></div><div class="bar"><i style="--w:64%;background:#4DA6EE;transition-delay:.15s"></i></div></div>
+            <div><div style="display:flex;justify-content:space-between;font-size:15px;margin-bottom:8px"><span>Hiring now</span><span style="font-size:13px;color:var(--a)">a little</span></div><div class="bar"><i style="--w:30%;background:#9ACBF5;transition-delay:.3s"></i></div></div>
+            <div><div style="display:flex;justify-content:space-between;font-size:15px;margin-bottom:8px"><span>Homeowners only</span><span style="font-size:13px;color:var(--fg2)">counts against</span></div><div class="bar"><i style="--w:72%;background:#B9B8B3;transition-delay:.45s"></i></div></div>
+          </div>
+        </div>
+        <!-- 3 re-rank -->
+        <div class="scene">
+          <div class="card center">
+            <span class="big" data-count="412">0</span>
+            <span class="sub" style="font-size:16px">businesses re-scored</span>
+            <div class="st" style="display:flex;gap:8px">
+              <span class="pill" style="--i:3;background:var(--a);color:#fff;font-size:13px;padding:6px 12px">38 A</span>
+              <span class="pill" style="--i:4;background:var(--b);color:var(--b-ink);font-size:13px;padding:6px 12px">71 B</span>
+              <span class="pill" style="--i:5;background:var(--c);color:var(--b-ink);font-size:13px;padding:6px 12px">120 C</span>
+              <span class="pill" style="--i:6;background:var(--d);color:var(--fg2);font-size:13px;padding:6px 12px">183 D</span>
+            </div>
+          </div>
+        </div>
+        <!-- 4 explain (end frame) -->
+        <div class="scene">
+          <div class="card pad" style="display:flex;flex-direction:column">
+            <span class="lab" style="padding-bottom:4px">Ranked for you</span>
+            <div class="st">
+              <div class="rank" style="--i:0"><span class="g gA">A</span><span class="grow"><b style="font-weight:600">Prairie Line Grounds</b><span class="why">Commercial clients and snow removal</span></span><span class="up">Up 6, now A</span></div>
+              <div class="rank" style="--i:1"><span class="g gA">A</span><span class="grow"><span>Oak &amp; Stone Outdoor</span><span class="why">You marked it a good fit</span></span><span class="dn">Same</span></div>
+              <div class="rank" style="--i:2"><span class="g gB">B</span><span class="grow"><span>Ridgeway Turf &amp; Tree</span><span class="why">Snow removal, mostly residential</span></span><span class="up">Up 2</span></div>
+              <div class="rank" style="--i:3"><span class="g gD">D</span><span class="grow"><span style="color:var(--fg5)">Sunnyside Grounds</span><span class="why">Homeowners only</span></span><span class="dn">Down 31, now D</span></div>
+            </div>
+            <div style="display:flex;justify-content:flex-end;padding-top:8px"><span class="hand">gets sharper as you go</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="ticks"><span></span><span></span><span></span><span></span><span></span></div>
+      <div class="tickcap" data-caps='["Look at your marks","Spot the difference","Weigh what matters","Re-rank everyone","Explain each move"]'></div>
+    </div>
+  </div></div>
+</section>
+
+<footer class="stub" style="min-height:60vh"><h1 style="font-size:40px">Example searches by industry…</h1><p>(rest of the page)</p></footer>
+
+<script>
+(() => {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const ease = t => 1 - Math.pow(2, -10 * t);
+
+  function countUp(el) {
+    const to = +el.dataset.count, t0 = performance.now(), dur = 1400;
+    cancelAnimationFrame(el._raf);
+    const tick = now => {
+      const t = Math.min(1, (now - t0) / dur);
+      el.textContent = Math.round(to * ease(t)).toLocaleString();
+      if (t < 1) el._raf = requestAnimationFrame(tick);
+    };
+    el._raf = requestAnimationFrame(tick);
+  }
+  function typeOut(el) {
+    const s = el.dataset.text; let i = 0;
+    clearInterval(el._iv); el.textContent = '';
+    el._iv = setInterval(() => { el.textContent = s.slice(0, ++i); if (i >= s.length) clearInterval(el._iv); }, 45);
+  }
+
+  const secs = [...document.querySelectorAll('.sec')].map(sec => ({
+    sec, n: +sec.dataset.steps, step: -1,
+    scenes: [...sec.querySelectorAll('.scene')],
+    ticks: [...sec.querySelectorAll('.ticks span')],
+    cap: sec.querySelector('.tickcap'), caps: JSON.parse(sec.querySelector('.tickcap').dataset.caps),
+    status: sec.querySelector('.status'), statuses: JSON.parse(sec.querySelector('.status').dataset.status),
+  }));
+
+  function setStep(s, step) {
+    if (step === s.step) return;
+    s.step = step;
+    s.scenes.forEach((el, i) => el.classList.toggle('on', i === step));
+    s.cap.textContent = s.caps[step];
+    s.status.textContent = s.statuses[step];
+    if (reduce) return;
+    const on = s.scenes[step];
+    on.querySelectorAll('[data-count]').forEach(countUp);
+    on.querySelectorAll('.typed').forEach(typeOut);
+  }
+
+  function update() {
+    const vh = innerHeight;
+    for (const s of secs) {
+      const r = s.sec.getBoundingClientRect();
+      const total = s.sec.offsetHeight - vh;
+      const p = Math.min(1, Math.max(0, -r.top / total));
+      const f = p * s.n;
+      const step = reduce ? s.n - 1 : Math.min(s.n - 1, Math.floor(f));
+      s.ticks.forEach((t, i) => t.style.setProperty('--f', Math.min(1, Math.max(0, f - i))));
+      setStep(s, step);
+    }
+  }
+  addEventListener('scroll', update, { passive: true });
+  addEventListener('resize', update);
+
+  // #s2-3 jumps to section 2, keyframe 3 (for reviewing/screenshots)
+  // #s2-3 = review mode: show only section 2, frozen on keyframe 3 (no scrolling needed)
+  const m = location.hash.match(/^#s(\d)-(\d)$/);
+  if (m) {
+    const s = secs[m[1] - 1], k = +m[2];
+    document.body.classList.add('review');
+    s.sec.classList.add('review-on');
+    s.ticks.forEach((t, i) => t.style.setProperty('--f', i <= k ? 1 : 0));
+    setStep(s, k);
+    s.sec.querySelectorAll('[data-count]').forEach(el => { cancelAnimationFrame(el._raf); el.textContent = (+el.dataset.count).toLocaleString(); });
+    s.sec.querySelectorAll('.typed').forEach(el => { clearInterval(el._iv); el.textContent = el.dataset.text; });
+    return;
+  }
+  update();
+})();
+</script>
+</body>
+</html>

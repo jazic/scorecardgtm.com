@@ -1422,3 +1422,10 @@ nav.top .btn{white-space:nowrap}@media (max-width:760px){nav.top .wrap{gap:10px}
 .post-image{margin-top:28px;border-radius:12px;width:100%;height:auto}
 .notfound .ctas{padding-top:28px}
 @media (max-width:760px){.blog .wrap{padding:48px 0 72px}.blog .pts-head h1,.post h1{font-size:34px;line-height:38px}}
+/* 2026-11-14 feedback: nav divider, agent headings beside their console, centered features heading, FAQ "Expand all" above the questions */
+nav.top .links{padding-right:28px;border-right:1px solid var(--border-default);line-height:20px}
+@media (min-width:1101px){.v-head h2{text-align:right;margin-left:auto}}
+#features h2{text-align:center}
+.faq-main{flex:1;display:flex;flex-direction:column;gap:16px}
+.faq .faq-main .qall{align-self:flex-end}
+.faq{scroll-margin-top:88px}

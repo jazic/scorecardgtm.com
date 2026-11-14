@@ -208,6 +208,11 @@
 				},
 				{
 					"type": "custom",
+					"label": "FAQ",
+					"url": "#faq"
+				},
+				{
+					"type": "custom",
 					"label": "Sign in",
 					"url": "https://app.scorecardgtm.com/sign-in",
 					"cssClasses": "btn btn-ghost nav-signin"
@@ -238,6 +243,11 @@
 					"type": "custom",
 					"label": "Pricing",
 					"url": "#pricing"
+				},
+				{
+					"type": "custom",
+					"label": "FAQ",
+					"url": "#faq"
 				},
 				{
 					"type": "custom",
@@ -592,7 +602,7 @@
 							"_type": "pricing",
 							"_version": 1,
 							"_key": "home-pricing-7",
-							"heading": "Start free. Pay monthly if it’s useful.",
+							"heading": "Get a ranked list of the accounts worth your time.",
 							"plans": [
 								{
 									"name": "Free trial",
@@ -643,7 +653,7 @@
 								},
 								{
 									"label": "Credits",
-									"note": "You only spend credits on businesses that match your search. 1 credit per match, with website research and scoring. Premium details and recurring research use additional credits.",
+									"note": "You only spend credits on businesses that match your search. Premium details and recurring research use additional credits.",
 									"coming_soon": false,
 									"values": "500\n1,000 every month\nScaled to your market"
 								},
@@ -702,27 +712,27 @@
 							"items": [
 								{
 									"question": "What do I need to run my first search?",
-									"answer": "Start with the kind of company you want, a geography, and the characteristics that make it a good fit. For example, landscapers in California that offer commercial snow removal. [Verify signup and first-search requirements]"
+									"answer": "Start with the kind of company you want, a geography, and the characteristics that make it a good fit. For example, landscapers in California that offer commercial snow removal."
 								},
 								{
 									"question": "Can it find companies that match my specific criteria?",
-									"answer": "Describe what a business actually does, then use Signals to check the criteria that matter to you. Acquisition searchers can describe their thesis too, but a matching company does not mean its owner wants to sell. [Verify geographic coverage, supported criteria, and custom Signal access]"
+									"answer": "Describe what a business actually does, then use Signals to check the criteria that matter to you. Acquisition searchers can describe their thesis too, but a matching company does not mean its owner wants to sell."
 								},
 								{
 									"question": "How do I check whether the research is right?",
-									"answer": "Review the source behind a finding before acting on it. Missing information should remain unknown rather than be treated as a confirmed match. [Verify source links, checked dates, and the correction workflow]"
+									"answer": "Review the source behind a finding before acting on it. Missing information should remain unknown rather than be treated as a confirmed match."
 								},
 								{
 									"question": "What owner and contact information is available?",
-									"answer": "Owner names may be available from websites and public records. Phone and email coverage varies by company; private-company revenue and willingness to sell may be unknown. [Confirm contact coverage, plan access, and credit costs]"
+									"answer": "Owner names may be available from websites and public records. Phone and email coverage varies by company; private-company revenue and willingness to sell may be unknown."
 								},
 								{
 									"question": "Can I export my results?",
-									"answer": "The intended workflow is to download your research as CSV for your spreadsheet or CRM. Direct CRM integration is coming soon. [Verify CSV availability and included fields: company details, Signals, scores, and sources]"
+									"answer": "Yes. Download your research as a CSV for your spreadsheet or CRM. Direct CRM integration is coming soon."
 								},
 								{
 									"question": "What’s included in the trial, and what happens afterward?",
-									"answer": "The current offer is a 14-day trial with 500 credits for Search, Research, and scoring. [Confirm trial duration, credits, and feature access] Before launch, confirm whether a card is required, whether billing starts automatically, and what happens to saved lists and exports when the trial ends. [Confirm card and billing rules, post-trial access, and retention]"
+									"answer": "The free trial runs 14 days and includes 500 credits for Search, Research and scoring."
 								}
 							]
 						},
@@ -800,11 +810,7 @@
 								},
 								{
 									"question": "What does “accepted” mean?",
-									"answer": "We read every search and take the ones Scorecard can run well today. If yours isn’t one of them, we’ll tell you why. [Confirm acceptance criteria]"
-								},
-								{
-									"question": "How long until I get my list?",
-									"answer": "[Confirm turnaround time]"
+									"answer": "We read every search and take the ones Scorecard can run well today. If yours isn’t one of them, we’ll tell you why."
 								},
 								{
 									"question": "What do you ask in return?",
@@ -1123,12 +1129,8 @@
 									"answer": "No, and nothing public does. Scorecard shows owner names and founding dates where public records and websites have them, and marks willingness to sell as unknown."
 								},
 								{
-									"question": "Can I score a list I already have?",
-									"answer": "[Confirm CSV upload of an existing list, and which plan includes it]"
-								},
-								{
 									"question": "Which industries and geographies work?",
-									"answer": "Any kind of US business you can describe in plain words. Coverage is strongest where companies have a web presence. [Confirm coverage details]"
+									"answer": "Any kind of US business you can describe in plain words. Coverage is strongest where companies have a web presence."
 								}
 							]
 						},

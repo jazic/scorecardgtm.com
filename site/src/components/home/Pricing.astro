@@ -1,0 +1,22 @@
+---
+const { value: v } = Astro.props;
+const plans: any[] = v.plans ?? [];
+const rows: any[] = v.rows ?? [];
+// Mobile cards lead with the highlighted plan.
+const cards = [...plans.filter((p) => p.highlight), ...plans.filter((p) => !p.highlight)];
+const lines = (s?: string) => (s ?? "").split("\n").map((x) => x.trim()).filter(Boolean);
+const btn = (p: any) => `btn btn-${p.cta_style === "coral" ? "coral" : "line"}`;
+---
+<section class="pricing" id="pricing"><div class="wrap">
+  <h2 class="h-xl">{v.heading}</h2>
+  <div class="ptable">
+    <div class="hl-col" aria-hidden="true"></div>
+    <div class="prow phead"><div></div>
+      {plans.map((p) => <div class="pc"><span class="nm">{p.name}</span><div class="price"><b>{p.price}</b>{p.price_note && <span>{p.price_note}</span>}</div><a class={btn(p)} href={p.cta_href} style={p.cta_style === "line-clear" ? "background:transparent" : undefined}>{p.cta_label}</a>{p.then_note && <span class="pthen">{p.then_note}</span>}</div>)}
+    </div>
+    <div class="pbody">{rows.map((r) => <div class="prow"><div>{r.label}{r.note && <small class="psub">{r.note}</small>}{r.coming_soon && " "}{r.coming_soon && <span class="soon-pill">Coming soon</span>}</div>{lines(r.values).map((val) => <div>{val === "✓" ? <svg width="16" height="16" viewBox="0 0 16 16" aria-label="Included"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="#1C1C1A" stroke-width="1.8"/></svg> : val === "—" ? <span class="dash">—</span> : <b>{val}</b>}</div>)}</div>)}
+  </div></div>
+  <div class="pcards">
+    {cards.map((p) => <div class={p.highlight ? "pcard hi" : "pcard"}><span class="nm">{p.name}</span><div class="price"><b>{p.price}</b>{p.price_note && <span>{p.price_note}</span>}</div><ul>{lines(p.card_features).map((x) => <li>{x}</li>)}</ul><a class={btn(p)} href={p.cta_href}>{p.cta_label}</a>{p.then_note && <span class="pthen">{p.then_note}</span>}</div>)}
+  </div>
+</div></section>

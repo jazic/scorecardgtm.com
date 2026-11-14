@@ -1,0 +1,309 @@
+
+// Scorecard mark, ported from the design system's Logo.jsx (logoFrame / logoLoopFrame).
+// A pile of businesses is scored, non-fits go pale and fade, the rest sort into 1-2-4 steps and the match (coral) hops to the top.
+window.ScLogo = (() => {
+  const NS = 'http://www.w3.org/2000/svg';
+  const H = 0.866, DR = 0.41;
+  const FINAL = [[0, 0], [1, 0], [2, 0], [1, -1], [2, -1], [2, -2]], TOP = [2, -3];
+  const PILE = [[[0.5, 0], 0], [[1.5, 0], 1], [[2, -H], 2], [[0, -H], 3], [[1.5, -2 * H], 4], [[0.5, -2 * H], 5], [[1, -H], 'c'], [[-0.5, 0], null], [[2.5, 0], null], [[1, -3 * H], null]];
+  const cl = t => Math.max(0, Math.min(1, t));
+  const eio = t => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
+  const eo = t => 1 - Math.pow(1 - t, 3);
+  const T_SCORE = 800, T_FADE = 1650, T_SORT = 1750, T_COR = 2250, DURATION = 3050, CYCLE = 3700, RA = 700;
+  function frame(T) {
+    return PILE.map(([f, to], i) => {
+      const tgt = to === 'c' ? TOP : to == null ? null : FINAL[to];
+      let x = f[0], y = f[1], sc, op, tone = 'ink';
+      const a = cl((T - i * 45) / 260);
+      sc = a < 0.6 ? 1.7 - 0.78 * eio(a / 0.6) : 0.92 + 0.08 * eo((a - 0.6) / 0.4);
+      op = cl(a * 3);
+      const p = cl((T - T_SCORE - i * 65) / 220);
+      if (p > 0 && p < 1) sc *= 1 + 0.3 * Math.sin(Math.PI * p);
+      if (to === 'c' && p >= 0.5) tone = 'acc';
+      if (tgt == null) { if (p >= 1) tone = 'pale'; op *= 1 - eo(cl((T - T_FADE - (i - 7) * 70) / 380)); }
+      else if (to === 'c') {
+        const u = eio(cl((T - T_COR) / 560));
+        x = f[0] + (tgt[0] - f[0]) * u; y = f[1] + (tgt[1] - f[1]) * u - 0.9 * Math.sin(Math.PI * u);
+        const l = cl((T - T_COR - 560) / 220); if (l > 0 && l < 1) sc *= 1 - 0.12 * Math.sin(Math.PI * l);
+      } else {
+        const u = eio(cl((T - T_SORT - to * 70) / 520));
+        x = f[0] + (tgt[0] - f[0]) * u; y = f[1] + (tgt[1] - f[1]) * u;
+      }
+      return { x, y, r: DR * Math.max(0, sc), op, tone };
+    });
+  }
+  const ENDPOS = [...FINAL, TOP];
+  const MAPS = [[3, 0, 1, 4, 2, 5, 8], [6, 0, 1, 3, 2, 4, 8], [0, 1, 7, 5, 2, 4, 3], [7, 0, 1, 3, 4, 2, 9]];
+  function loopFrame(t) {
+    const tt = t % CYCLE, k = Math.floor(t / CYCLE);
+    if (tt >= RA) return frame(tt - RA + T_SCORE);
+    const M = MAPS[k % MAPS.length]; let ni = 0;
+    return PILE.map(([f], s) => {
+      const j = M.indexOf(s);
+      if (j >= 0) {
+        const p = ENDPOS[j], u = eio(cl((tt - j * 40) / 560));
+        return { x: p[0] + (f[0] - p[0]) * u, y: p[1] + (f[1] - p[1]) * u - (j === 6 ? 0.5 * Math.sin(Math.PI * u) : 0), r: DR, op: 1, tone: j === 6 && u < 0.5 ? 'acc' : 'ink' };
+      }
+      const a = cl((tt - 240 - (ni++) * 90) / 260);
+      const sc = a < 0.6 ? 1.7 - 0.78 * eio(a / 0.6) : 0.92 + 0.08 * eo((a - 0.6) / 0.4);
+      return { x: f[0], y: f[1], r: a > 0 ? DR * sc : 0, op: cl(a * 3), tone: 'ink' };
+    });
+  }
+  const settled = () => frame(DURATION + 100);
+  const reduce = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const FILL = { ink: 'currentColor', acc: 'var(--signal-500)', pale: 'var(--border-strong)' };
+  function mount(svg) {
+    if (svg._sc) return svg._sc;
+    svg.setAttribute('viewBox', '-0.5 -3.5 3 4'); svg.style.overflow = 'visible'; svg.textContent = '';
+    const cs = PILE.map(() => { const c = document.createElementNS(NS, 'circle'); svg.appendChild(c); return c; });
+    const paint = fr => fr.forEach((d, i) => { const c = cs[i]; c.setAttribute('cx', d.x.toFixed(3)); c.setAttribute('cy', d.y.toFixed(3)); c.setAttribute('r', d.r.toFixed(3)); c.setAttribute('opacity', d.op.toFixed(3)); c.setAttribute('fill', FILL[d.tone]); });
+    let raf = 0, stopReq = false;
+    const api = {
+      looping: false,
+      once() {
+        cancelAnimationFrame(raf); this.looping = false;
+        if (reduce()) return paint(settled());
+        const t0 = performance.now();
+        const step = now => { const t = now - t0; paint(frame(t)); if (t < DURATION + 60) raf = requestAnimationFrame(step); };
+        raf = requestAnimationFrame(step);
+      },
+      play() {
+        if (reduce()) return paint(settled());
+        cancelAnimationFrame(raf); this.looping = true; stopReq = false;
+        const t0 = performance.now();
+        const step = now => {
+          const T = now - t0 + CYCLE - 600, tt = T % CYCLE;
+          if (stopReq && tt >= 2950) { paint(settled()); stopReq = false; return; }
+          paint(loopFrame(T)); raf = requestAnimationFrame(step);
+        };
+        raf = requestAnimationFrame(step);
+      },
+      // let the current cycle land on the ranked mark, then stop
+      settle() { this.looping = false; stopReq = true; },
+    };
+    paint(settled());
+    svg._sc = api; return api;
+  }
+  return {
+    mount,
+    init() {
+      document.querySelectorAll('svg[data-sc-logo]').forEach(svg => {
+        const m = mount(svg); if (svg.dataset.scLogo === 'once') m.once();
+        svg.closest('a') && svg.closest('a').addEventListener('click', () => m.once());
+      });
+    },
+  };
+})();
+
+// Halftone lattice map, ported from the MVP sign-in screen (AuthScreen drawMap).
+// Land is a square lattice of dots (one tone sample per cell). Businesses are stamped onto the same lattice,
+// scored on the neutral ramp (A coral · B ink · C grey · D pale) and the lowest fade out.
+window.ScLattice = (() => {
+  const OUT = ['02', '15', '60', '66', '69', '72', '78'];
+  const topo = window.__usAtlas;
+  const states = topojson.feature(topo, topo.objects.states).features.filter(s => !OUT.includes(s.id));
+  const l48 = { type: 'FeatureCollection', features: states };
+  const byId = id => states.find(s => s.id === id);
+  const cl = x => Math.max(0, Math.min(1, x)), eo = x => 1 - Math.pow(1 - cl(x), 3);
+  const eio = x => { x = cl(x); return x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; };
+  // the logo's stamp: 1.7× → 0.92× → 1×, opacity in over the first third
+  const stamp = a => (a <= 0 ? [0, 0] : [a < 0.6 ? 1.35 - 0.43 * eio(a / 0.6) : 0.92 + 0.08 * eo((a - 0.6) / 0.4), cl(a * 3)]);
+  const rng = s => () => ((s = (s * 16807) % 2147483647) / 2147483647);
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function colors(el) {
+    const cs = getComputedStyle(el), g = (n, d) => cs.getPropertyValue(n).trim() || d;
+    const ink = g('--text-primary', '#1c1c1a');
+    return { ink, pale: g('--border-strong', '#b9b8b3'), mid: g('--text-tertiary', '#8a8984'), coral: g('--signal-500', '#ff4a3d'),
+      A: g('--grade-a', '#1a8fe8'), B: g('--grade-b', '#7cbdf2'), C: g('--grade-c', '#c4e0f8'), blue: g('--data-500', '#1a8fe8') };
+  }
+  // tone raster: one alpha sample per lattice cell
+  function makeTone(P, ox, oy, W, H) {
+    const gw = Math.ceil((W - ox) / P) + 2, gh = Math.ceil((H - oy) / P) + 2;
+    const tc = document.createElement('canvas'); tc.width = gw; tc.height = gh; const tx = tc.getContext('2d', { willReadFrequently: true });
+    return {
+      gw, gh,
+      sample(proj, feat) {
+        tx.setTransform(1, 0, 0, 1, 0, 0); tx.clearRect(0, 0, gw, gh); tx.filter = 'blur(0.7px)';
+        tx.setTransform(1 / P, 0, 0, 1 / P, 0.5 - ox / P, 0.5 - oy / P); tx.fillStyle = '#000'; tx.beginPath(); d3.geoPath(proj, tx)(feat || l48); tx.fill(); tx.filter = 'none';
+        return tx.getImageData(0, 0, gw, gh).data;
+      },
+    };
+  }
+  function halftone(ctx, tone, T, P, ox, oy, DR, ink, gain = 1) {
+    ctx.fillStyle = ink;
+    for (let gy = 0; gy < T.gh; gy++) for (let gx = 0; gx < T.gw; gx++) {
+      const av = tone[(gy * T.gw + gx) * 4 + 3] / 255; if (av < 0.03) continue;
+      ctx.globalAlpha = (0.05 + av * 0.09) * gain; ctx.beginPath(); ctx.arc(ox + gx * P, oy + gy * P, DR * (0.3 + 0.32 * av), 0, 6.2832); ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+  }
+  const poolCache = {};
+  function poolFor(f, n, seed) {
+    const k = f.id + ':' + n; if (poolCache[k]) return poolCache[k];
+    const rnd = rng(seed), [[x0, y0], [x1, y1]] = d3.geoBounds(f), pts = []; let g = 0;
+    while (pts.length < n && g++ < 9000) { const p = [x0 + rnd() * (x1 - x0), y0 + rnd() * (y1 - y0)]; if (d3.geoContains(f, p)) pts.push(p); }
+    return (poolCache[k] = pts);
+  }
+
+  // ───────── Hero: a live map. States run on their own; hover a state to run it.
+  function hero(canvas, host) {
+    const C = colors(canvas), P = 6, DR = 0.41 * P;
+    let mark = null, cardX = 0, W, H, proj, path, tone, T, base, raf = 0, last = 0, visible = true, t0 = performance.now() / 1000, runs = [], hoverId = null;
+    const rnd = rng(11);
+    const ORDER = ['06', '48', '17', '36', '13', '53', '37', '27', '42', '12', '39', '47', '26', '29', '04', '55'];
+    let oi = 0, nextAuto = 0.6;
+    const snap = (x, y) => [Math.round(x / P) * P, Math.round(y / P) * P];
+    const pick = (active, drop) => {
+      const sc = active.map(i => [i, rnd()]).sort((u, v) => v[1] - u[1]), g = new Map(), n = sc.length - drop;
+      sc.forEach(([i], j) => g.set(i, j >= n ? 'x' : j < 3 ? 'A' : j < 3 + Math.round(n * 0.2) ? 'B' : j < 3 + Math.round(n * 0.5) ? 'C' : 'D'));
+      return g;
+    };
+    const start = (f, Tn) => {
+      runs = runs.filter(r => r.f.id !== f.id).slice(-3);
+      const pool = poolFor(f, 48, 7 + +f.id), n = pool.length, active = [...Array(n).keys()].sort(() => rnd() - 0.5);
+      runs.push({ f, pool, active, grade: pick(active, Math.round(n * 0.3)), start: Tn });
+    };
+    function layout() {
+      const dpr = devicePixelRatio || 1; W = canvas.clientWidth; H = canvas.clientHeight; if (!W || !H) return false;
+      canvas.width = W * dpr; canvas.height = H * dpr; const ctx = canvas.getContext('2d'); ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      const copy = host.querySelector('.hero-copy').getBoundingClientRect(), hb = canvas.getBoundingClientRect();
+      const wide = W > 900, x0 = wide ? copy.right - hb.left + 12 : W * 0.04, x1 = wide ? Math.min(W - 8, x0 + 820) : W * 0.96;
+      proj = d3.geoAlbers().rotate([96, 0]).fitExtent([[x0, wide ? H * 0.1 : H * 0.42], [x1, H * 0.93]], l48);
+      path = d3.geoPath(proj);
+      // pin the example card next to its dot
+      const card = host.querySelector('.acct'), art = host.querySelector('.hero-art');
+      mark = null;
+      if (card && art) {
+        const tk = proj([-120.18, 39.33]); mark = snap(tk[0], tk[1]);
+        if (wide) {
+          const ar = art.getBoundingClientRect(); cardX = mark[0] + 44;
+          card.style.left = (hb.left + cardX - ar.left) + 'px'; card.style.top = (hb.top + mark[1] - 46 - ar.top) + 'px'; card.style.right = 'auto'; card.style.bottom = 'auto';
+        } else { card.style.cssText = ''; mark = null; }
+      }
+      T = makeTone(P, 0, 0, W, H); tone = T.sample(proj);
+      base = document.createElement('canvas'); base.width = W * dpr; base.height = H * dpr;
+      const bx = base.getContext('2d'); bx.setTransform(dpr, 0, 0, dpr, 0, 0); halftone(bx, tone, T, P, 0, 0, DR, C.ink, 1.35);
+      return true;
+    }
+    const tim = n => ({ st: j => (j / n) * 0.5, score: 0.85, step: 0.9 / n, fade: 1.75, end: 3.1 });
+    function paint(now) {
+      raf = 0; if (!visible) return;
+      if (!reduce) raf = requestAnimationFrame(paint);
+      if (now - last < 30) return; last = now;
+      const Tn = now / 1000, ctx = canvas.getContext('2d'), dpr = devicePixelRatio || 1;
+      if (!reduce && Tn - t0 > nextAuto) { const f = byId(ORDER[oi++ % ORDER.length]); if (f) start(f, Tn); nextAuto = Tn - t0 + 2.4; }
+      ctx.save(); ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.clearRect(0, 0, canvas.width, canvas.height); ctx.globalAlpha = cl((Tn - t0) / 0.8); ctx.drawImage(base, 0, 0); ctx.restore();
+      if (hoverId && !runs.some(r => r.f.id === hoverId)) { const f = byId(hoverId); if (f) start(f, Tn); }
+      runs = runs.filter(r => reduce || Tn - r.start < 10 || r.f.id === hoverId);
+      for (const r of runs) {
+        const n = r.active.length, tm = tim(n), s = reduce ? 99 : Tn - r.start, hov = r.f.id === hoverId;
+        const life = hov ? 1 : 1 - eio((s - 6.5) / 3.5);
+        const ol = hov ? 0.35 : 0.3 * (1 - cl((s - tm.end) / 1.5));
+        if (ol > 0.01) { ctx.globalAlpha = ol * life; ctx.strokeStyle = C.ink; ctx.lineWidth = 1; ctx.beginPath(); path.context(ctx)(r.f); path.context(null); ctx.stroke(); }
+        const used = new Set(), GC = { A: C.A, B: C.B, C: C.C, D: C.pale, x: C.pale };
+        r.active.forEach((i, o) => {
+          const xy = proj(r.pool[i]); if (!xy) return; const [x, y] = snap(xy[0], xy[1]), key = x + ',' + y; if (used.has(key)) return; used.add(key);
+          const [sc, op0] = stamp((s - tm.st(o)) / 0.26); if (op0 <= 0) return;
+          const scored = s >= tm.score + o * tm.step + 0.11, g = r.grade.get(i);
+          let col = scored ? GC[g] : C.ink, op = op0 * life;
+          if (scored && g === 'x') { op *= 1 - eo((s - tm.fade) / 0.38); if (op <= 0.01) return; }
+          ctx.globalAlpha = op; ctx.fillStyle = col; ctx.beginPath(); ctx.arc(x, y, DR * sc * (g === 'A' && scored ? 1.15 : 1), 0, 6.2832); ctx.fill();
+        });
+      }
+      // the example account: Truckee, CA, an A, tied to the card
+      if (mark) {
+        const a = cl((Tn - t0 - 1.2) / 0.5), [mx, my] = mark;
+        if (a > 0) {
+          const ln = eio((Tn - t0 - 1.5) / 0.45); if (ln > 0) { ctx.globalAlpha = a * 0.5; ctx.strokeStyle = C.A; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(mx + DR + 5, my); ctx.lineTo(mx + DR + 5 + (cardX - mx - DR - 5) * ln, my); ctx.stroke(); }
+          const pulse = reduce ? 0 : (Tn % 2.2) / 2.2;
+          ctx.globalAlpha = a * 0.35 * (1 - pulse); ctx.beginPath(); ctx.arc(mx, my, DR + 2 + pulse * 10, 0, 6.2832); ctx.stroke();
+          ctx.globalAlpha = a; ctx.fillStyle = C.A; ctx.beginPath(); ctx.arc(mx, my, DR * 1.3, 0, 6.2832); ctx.fill();
+        }
+      }
+      ctx.globalAlpha = 1;
+    }
+    const kick = () => { if (!raf) raf = requestAnimationFrame(paint); };
+    function init() {
+      if (!layout()) return;
+      if (reduce) { ['06', '48', '17', '36', '53'].forEach(id => start(byId(id), t0 - 30)); }
+      kick();
+    }
+    host.addEventListener('pointermove', e => {
+      if (!proj || reduce || e.target.closest('.acct,a,button,h1,p')) { hoverId = null; return; }
+      const r = canvas.getBoundingClientRect(), ll = proj.invert([e.clientX - r.left, e.clientY - r.top]);
+      const f = ll && states.find(s => d3.geoContains(s, ll)); hoverId = f ? f.id : null;
+    });
+    host.addEventListener('pointerleave', () => { hoverId = null; });
+    new IntersectionObserver(es => { visible = es[0].isIntersecting; if (visible) kick(); }).observe(host);
+    let rt; addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => { layout(); kick(); }, 120); });
+    init();
+  }
+
+  // ───────── Search stage: scroll draws it. p is the section's progress (0→1).
+  // .12 index scan · .28 landscapers stamp in · .48 the ones that plow snow stay · .7 zoom into California
+  function search(canvas) {
+    const C = colors(canvas), Wd = 640, Hd = 440, P = 6, DR = 0.41 * P, ca = byId('06');
+    const p0 = d3.geoAlbers().rotate([96, 0]).fitExtent([[18, 34], [622, 420]], l48);
+    const p1 = d3.geoAlbers().rotate([96, 0]).fitExtent([[160, 24], [480, 424]], ca);
+    const cc = d3.geoCentroid(ca), c0 = p0(cc), c1 = p1(cc), s0 = p0.scale(), s1 = p1.scale();
+    const proj = d3.geoAlbers().rotate([96, 0]).scale(s0).translate(p0.translate());
+    const T = makeTone(P, 0, 0, Wd, Hd);
+    // businesses: lattice cells on land at the US view, a share of them landscapers, the snowy-north ones plow
+    const rnd = rng(23), toneUS = T.sample(p0), biz = [];
+    for (let gy = 0; gy < T.gh; gy++) for (let gx = 0; gx < T.gw; gx++) {
+      if (toneUS[(gy * T.gw + gx) * 4 + 3] < 170 || rnd() > 0.34) continue;
+      const ll = p0.invert([gx * P, gy * P]); if (!ll) continue;
+      const lat = ll[1], snow = rnd() < (lat > 41 ? 0.5 : lat > 38 ? 0.3 : lat > 35.5 ? 0.1 : 0.03);
+      biz.push({ ll, x: gx * P / Wd, snow, inCA: d3.geoContains(ca, ll) });
+    }
+    // extra California detail, revealed as the map zooms in; snow work is in the Sierra and the north
+    const caPts = poolFor(ca, 170, 5).map(ll => ({ ll, snow: (ll[1] > 38.6 || (ll[0] > -121 && ll[1] > 35.8)) ? rnd() < 0.75 : rnd() < 0.06 }));
+    let dpr = 0, z = 1, lastP = null;
+    function resize(zoom) { const nz = zoom || 1; if (dpr && nz === z) return; z = nz; dpr = (devicePixelRatio || 1) * z; canvas.width = Wd * dpr; canvas.height = Hd * dpr; if (lastP != null) draw(lastP); }
+    resize(1);
+    const snap = (x, y) => [Math.round(x / P) * P, Math.round(y / P) * P];
+    function draw(p) {
+      lastP = p;
+      const ctx = canvas.getContext('2d'); ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, Wd, Hd);
+      const u = eio((p - 0.7) / 0.18);
+      proj.scale(s0 * Math.pow(s1 / s0, u)).translate([0, 0]);
+      const cp = proj(cc); proj.translate([c0[0] + (c1[0] - c0[0]) * u - cp[0], c0[1] + (c1[1] - c0[1]) * u - cp[1]]);
+      const tone = T.sample(proj);
+      // the index scan: land darkens west → east
+      const scan = cl((p - 0.1) / 0.18);
+      ctx.fillStyle = C.ink;
+      for (let gy = 0; gy < T.gh; gy++) for (let gx = 0; gx < T.gw; gx++) {
+        const av = tone[(gy * T.gw + gx) * 4 + 3] / 255; if (av < 0.03) continue;
+        const lit = scan > 0 && scan < 1 ? Math.max(0, 1 - Math.abs(gx * P / Wd - scan) * 9) : 0;
+        ctx.globalAlpha = (0.05 + av * 0.09) * (1.3 + lit * 2.2) * (1 - u * 0.25); ctx.beginPath(); ctx.arc(gx * P, gy * P, DR * (0.3 + 0.32 * av + lit * 0.25), 0, 6.2832); ctx.fill();
+      }
+      const used = new Set();
+      const dot = (x, y, r, col, op) => { const [sx, sy] = snap(x, y), k = sx + ',' + sy; if (used.has(k) || op <= 0.01) return; used.add(k); ctx.globalAlpha = op; ctx.fillStyle = col; ctx.beginPath(); ctx.arc(sx, sy, r, 0, 6.2832); ctx.fill(); };
+      const sn = cl((p - 0.48) / 0.12);          // snow filter
+      const outFade = 1 - cl((p - 0.7) / 0.12);  // everything outside California leaves
+      // California outline as it comes into view
+      if (u > 0.05) { ctx.globalAlpha = 0.3 * u; ctx.strokeStyle = C.ink; ctx.lineWidth = 1; ctx.beginPath(); d3.geoPath(proj, ctx)(ca); ctx.stroke(); }
+      // snow plowers draw on top, so the pale ones go first
+      const order = [false, true];
+      for (const pass of order) for (const b of biz) {
+        if (b.snow !== pass) continue;
+        const a = (p - 0.28 - b.x * 0.12) / 0.05; if (a <= 0) continue;
+        const [sc, op0] = stamp(a), xy = proj(b.ll); if (!xy || xy[0] < -10 || xy[0] > Wd + 10 || xy[1] < -10 || xy[1] > Hd + 10) continue;
+        let op = op0, col = C.ink, r = DR * sc * 0.85;
+        if (!b.snow) { op *= 1 - sn * 0.72; col = sn > 0.5 ? C.pale : C.ink; r *= 1 - sn * 0.2; }
+        else { r *= 1 + sn * 0.15; if (sn > 0.5) col = C.blue; }
+        if (!b.inCA) op *= outFade; else if (!b.snow) op *= 1 - u * 0.5;
+        dot(xy[0], xy[1], r, col, op);
+      }
+      if (u > 0.3) caPts.forEach((c, i) => {
+        const a = (u - 0.3 - (i / caPts.length) * 0.4) / 0.12; if (a <= 0) return;
+        const [sc, op0] = stamp(a), xy = proj(c.ll); if (!xy) return;
+        dot(xy[0], xy[1], DR * sc * (c.snow ? 1 : 0.8), c.snow ? C.blue : C.pale, op0 * (c.snow ? 1 : 0.45));
+      });
+      ctx.globalAlpha = 1;
+    }
+    return { draw, resize };
+  }
+  return { hero, search };
+})();
+

@@ -1,0 +1,74 @@
+
+// Score step, driven by scroll (p 0→1):
+// .06–.30 signals sort into tiers · .32–.40 they fold into one dot · .40–.47 that dot takes the first A slot
+// .46–.63 the other 411 join, graded as they land · .63–.74 hold on the grades
+// .74–.86 the top five dots travel into the list and become its grade badges · rows fill in around them
+window.ScoreFlow = (stage) => {
+  if (!stage) return () => {};
+  const NS = 'http://www.w3.org/2000/svg';
+  const small = matchMedia('(max-width: 760px)');
+  const cl = x => Math.max(0, Math.min(1, x));
+  const eio = x => { x = cl(x); return x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; };
+  const eo = x => 1 - Math.pow(1 - cl(x), 3);
+  const stamp = a => (a <= 0 ? 0 : a < 0.6 ? 1.35 - 0.43 * eio(a / 0.6) : 0.92 + 0.08 * eo((a - 0.6) / 0.4));
+  const svg = stage.querySelector('.grid');
+  const dots = [...svg.querySelectorAll('circle')].map(c => ({ c, x: +c.getAttribute('cx'), y: +c.getAttribute('cy') }));
+  const labels = [...svg.querySelectorAll('.bl')];
+  const pills = [...stage.querySelectorAll('.tiers .sp')], tls = [...stage.querySelectorAll('.tiers .tl')];
+  const rows = [...stage.querySelectorAll('.rows .rw')].sort((a, b) => getComputedStyle(a).getPropertyValue('--r1') - getComputedStyle(b).getPropertyValue('--r1'));
+  const N = dots.length, C = [320, 200];
+  // grade groups in DOM order (A, B, C, D); the label for each group shows when its first dot lands
+  const grp = dots.map(d => (d.c.getAttribute('style').match(/--gc:([^;]+)/) || [])[1]);
+  const firsts = []; grp.forEach((g, i) => { if (i === 0 || g !== grp[i - 1]) firsts.push(i); });
+  // the five dots that become the list's badges: A, A, B, B, C
+  const movers = [0, 1, firsts[1], firsts[1] + 1, firsts[2]];
+  const seed = document.createElementNS(NS, 'circle'); seed.style.fill = 'var(--grade-a)'; svg.appendChild(seed);
+  const start = i => 0.46 + (i / N) * 0.17;
+  return function draw(p) {
+    if (small.matches) return;
+    // 1. signals fold into one dot
+    const f = eio((p - 0.32) / 0.08);
+    pills.forEach((el, k) => {
+      if (f <= 0) { el.style.transform = ''; el.style.opacity = ''; return; }
+      const cx = el.offsetLeft + el.offsetWidth / 2, cy = el.offsetTop + el.offsetHeight / 2, fk = eio((p - 0.32 - k * 0.006) / 0.07);
+      el.style.transform = `translate(${(C[0] - cx) * fk}px, ${(C[1] - cy) * fk}px) scale(${1 - 0.85 * fk})`;
+      el.style.opacity = String(1 - cl((fk - 0.6) / 0.4));
+    });
+    tls.forEach(el => { el.style.opacity = f > 0 ? String(1 - f) : ''; });
+    // 2. the scored dot takes the first A slot
+    const sg = cl((p - 0.36) / 0.04), mv = eio((p - 0.40) / 0.07);
+    if (sg > 0 && p < 0.47) {
+      seed.setAttribute('cx', (C[0] + (dots[0].x - C[0]) * mv).toFixed(1)); seed.setAttribute('cy', (C[1] + (dots[0].y - C[1]) * mv).toFixed(1));
+      seed.setAttribute('r', ((9 - 2.5 * mv) * stamp(sg)).toFixed(2)); seed.setAttribute('opacity', '1');
+    } else seed.setAttribute('opacity', '0');
+    // 3. the rest join, graded as they land; 4. five of them travel into the list
+    const out = cl((p - 0.74) / 0.06);
+    dots.forEach((d, i) => {
+      const c = d.c; let x = d.x, y = d.y, r = 6.5, op = 1;
+      if (i === 0) { op = p >= 0.47 ? 1 : 0; }
+      else {
+        const a = (p - start(i)) / 0.03;
+        if (a <= 0) op = 0;
+        else { const u = eo(a); x = C[0] + (d.x - C[0]) * u; y = C[1] + (d.y - C[1]) * u; r = 6.5 * stamp(a); op = cl(a * 3); }
+      }
+      const m = movers.indexOf(i);
+      if (m >= 0 && p > 0.74) {
+        const row = rows[m], g = row && row.querySelector('.g');
+        if (g) {
+          const tx = row.offsetLeft + g.offsetLeft + g.offsetWidth / 2, ty = row.offsetTop + g.offsetTop + g.offsetHeight / 2;
+          const u = eio((p - 0.74 - m * 0.015) / 0.08);
+          x = d.x + (tx - d.x) * u; y = d.y + (ty - d.y) * u; r = 6.5 + (g.offsetWidth / 2 - 6.5) * u;
+          op = u >= 1 ? 0 : 1;
+          row.style.setProperty('--go', u >= 1 ? '1' : '0');
+        }
+      } else if (m < 0) op *= 1 - out;
+      c.setAttribute('cx', x.toFixed(1)); c.setAttribute('cy', y.toFixed(1)); c.setAttribute('r', Math.max(0, r).toFixed(2));
+      c.style.opacity = op.toFixed(3); c.style.fill = 'var(--gc)';
+    });
+    if (p <= 0.74) rows.forEach(r => r.style.setProperty('--go', '0'));
+    labels.forEach((l, k) => { l.style.opacity = String(cl((p - start(firsts[k] || 0)) / 0.03) * (1 - out)); });
+    // rows fill in around their badges
+    rows.forEach((r, k) => r.style.setProperty('--ro', cl((p - 0.8 - k * 0.015) / 0.05).toFixed(3)));
+  };
+};
+

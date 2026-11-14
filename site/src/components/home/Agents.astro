@@ -1,0 +1,15 @@
+---
+import Agent from "./Agent.astro";
+
+// The how-it-works intro, its step bar and the agent stories share one wrapper (sticky bar scope).
+const { intro, agents } = Astro.props as { intro?: any; agents: any[] };
+---
+<div class="agents">
+{intro && <section class="hiw" id="how"><div class="wrap">
+  <h2 class="h2c">{intro.heading}</h2>
+</div></section>}
+
+<div class="agentbar"><nav aria-label="How it works steps">{agents.map((a, i) => <a href={`#${a.visual}`} data-k={a.visual}><i><span class="n">{i + 1}</span><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 6.2l2.3 2.3 4.7-5"/></svg></i>{a.nav_label}</a>)}</nav></div>
+
+{agents.map((a) => <Agent value={a} />)}
+</div>

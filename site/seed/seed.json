@@ -1,0 +1,1271 @@
+{
+	"$schema": "https://emdashcms.com/seed.schema.json",
+	"version": "1",
+	"meta": {
+		"name": "Scorecard",
+		"description": "Scorecard marketing site",
+		"author": "Scorecard"
+	},
+	"settings": {
+		"title": "Scorecard",
+		"tagline": "Target prospects worth the extra effort."
+	},
+	"collections": [
+		{
+			"slug": "posts",
+			"label": "Posts",
+			"labelSingular": "Post",
+			"urlPattern": "/posts/{slug}",
+			"supports": [
+				"drafts",
+				"revisions",
+				"preview",
+				"scheduling",
+				"search",
+				"seo"
+			],
+			"fields": [
+				{
+					"slug": "title",
+					"label": "Title",
+					"type": "string",
+					"required": true,
+					"searchable": true
+				},
+				{
+					"slug": "featured_image",
+					"label": "Featured Image",
+					"type": "image"
+				},
+				{
+					"slug": "content",
+					"label": "Content",
+					"type": "portableText",
+					"searchable": true
+				},
+				{
+					"slug": "excerpt",
+					"label": "Excerpt",
+					"type": "text"
+				}
+			]
+		},
+		{
+			"slug": "pages",
+			"label": "Pages",
+			"labelSingular": "Page",
+			"urlPattern": "/{slug}",
+			"supports": [
+				"drafts",
+				"revisions",
+				"preview",
+				"search",
+				"seo"
+			],
+			"fields": [
+				{
+					"slug": "title",
+					"label": "Title",
+					"type": "string",
+					"required": true,
+					"searchable": true
+				},
+				{
+					"slug": "content",
+					"label": "Content",
+					"type": "portableText",
+					"searchable": true
+				}
+			]
+		},
+		{
+			"slug": "landing",
+			"label": "Landing pages",
+			"labelSingular": "Landing page",
+			"description": "Marketing pages built from sections. The home entry renders at /.",
+			"urlPattern": "/{slug}",
+			"supports": [
+				"drafts",
+				"revisions",
+				"preview",
+				"seo"
+			],
+			"fields": [
+				{
+					"slug": "title",
+					"label": "Title",
+					"type": "string",
+					"required": true,
+					"searchable": true
+				},
+				{
+					"slug": "description",
+					"label": "Meta description",
+					"type": "text"
+				},
+				{
+					"slug": "sections",
+					"label": "Sections",
+					"type": "blocks",
+					"validation": {
+						"allowedTypes": [
+							"hero",
+							"audiences",
+							"how_intro",
+							"agent",
+							"features",
+							"pricing",
+							"faq",
+							"signup"
+						]
+					}
+				}
+			]
+		}
+	],
+	"taxonomies": [
+		{
+			"name": "category",
+			"label": "Categories",
+			"labelSingular": "Category",
+			"hierarchical": true,
+			"collections": [
+				"posts"
+			],
+			"terms": [
+				{
+					"slug": "general",
+					"label": "General"
+				},
+				{
+					"slug": "updates",
+					"label": "Updates"
+				}
+			]
+		},
+		{
+			"name": "tag",
+			"label": "Tags",
+			"labelSingular": "Tag",
+			"hierarchical": false,
+			"collections": [
+				"posts"
+			],
+			"terms": [
+				{
+					"slug": "starter",
+					"label": "Starter"
+				},
+				{
+					"slug": "example",
+					"label": "Example"
+				}
+			]
+		}
+	],
+	"menus": [
+		{
+			"name": "primary",
+			"label": "Primary navigation",
+			"items": [
+				{
+					"type": "custom",
+					"label": "How it works",
+					"url": "#how"
+				},
+				{
+					"type": "custom",
+					"label": "Who it’s for",
+					"url": "#why"
+				},
+				{
+					"type": "custom",
+					"label": "Pricing",
+					"url": "#pricing"
+				},
+				{
+					"type": "custom",
+					"label": "Sign in",
+					"url": "#",
+					"cssClasses": "btn btn-ghost nav-signin"
+				},
+				{
+					"type": "custom",
+					"label": "Start free trial",
+					"url": "#signup",
+					"cssClasses": "btn btn-coral"
+				}
+			]
+		},
+		{
+			"name": "footer",
+			"label": "Footer links",
+			"items": [
+				{
+					"type": "custom",
+					"label": "How it works",
+					"url": "#how"
+				},
+				{
+					"type": "custom",
+					"label": "Who it’s for",
+					"url": "#why"
+				},
+				{
+					"type": "custom",
+					"label": "Pricing",
+					"url": "#pricing"
+				},
+				{
+					"type": "custom",
+					"label": "Changelog",
+					"url": "#"
+				},
+				{
+					"type": "custom",
+					"label": "Contact",
+					"url": "#"
+				},
+				{
+					"type": "custom",
+					"label": "Sign in",
+					"url": "#"
+				}
+			]
+		},
+		{
+			"name": "legal",
+			"label": "Footer legal links",
+			"items": [
+				{
+					"type": "custom",
+					"label": "Privacy",
+					"url": "#"
+				},
+				{
+					"type": "custom",
+					"label": "Terms",
+					"url": "#"
+				}
+			]
+		}
+	],
+	"content": {
+		"pages": [
+			{
+				"id": "about",
+				"slug": "about",
+				"status": "published",
+				"data": {
+					"title": "About",
+					"content": [
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "This is the about page. Edit it in the admin panel or replace this template with your own design.",
+									"_key": "k1"
+								}
+							],
+							"_key": "k0"
+						}
+					]
+				}
+			}
+		],
+		"posts": [
+			{
+				"id": "post-1",
+				"slug": "welcome",
+				"status": "published",
+				"data": {
+					"title": "Welcome",
+					"excerpt": "Your first post. Replace this with your own content.",
+					"content": [
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "This is a starter post. The templates in this project show the basic patterns for querying and rendering EmDash content. Replace them with your own design.",
+									"_key": "k1"
+								}
+							],
+							"_key": "k0"
+						},
+						{
+							"_type": "block",
+							"style": "h2",
+							"children": [
+								{
+									"_type": "span",
+									"text": "What to do next",
+									"_key": "k3"
+								}
+							],
+							"_key": "k2"
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Open the admin panel to add content, or edit the Astro pages in src/pages to change how content is displayed.",
+									"_key": "k5"
+								}
+							],
+							"_key": "k4"
+						}
+					]
+				},
+				"taxonomies": {
+					"category": [
+						"general"
+					],
+					"tag": [
+						"starter",
+						"example"
+					]
+				}
+			}
+		],
+		"landing": [
+			{
+				"id": "home",
+				"slug": "home",
+				"status": "published",
+				"data": {
+					"title": "Home",
+					"description": "Describe the businesses you want in plain words. Scorecard finds US companies that match, checks the evidence, and ranks them by what matters to you. Find the right accounts without building a research workflow or sorting through a noisy database.",
+					"sections": [
+						{
+							"_type": "hero",
+							"_version": 1,
+							"_key": "home-hero-0",
+							"heading": "Target prospects worth the extra effort.",
+							"body": "Describe the businesses you want in plain words. Scorecard finds US companies that match, checks the evidence, and ranks them by what matters to you. Find the right accounts without building a research workflow or sorting through a noisy database.",
+							"cta_label": "Start free trial",
+							"cta_href": "#signup",
+							"more_label": "How it works →",
+							"more_href": "#how"
+						},
+						{
+							"_type": "audiences",
+							"_version": 1,
+							"_key": "home-audiences-1",
+							"heading": "Built for lean sales teams, founders, and acquisition searchers.",
+							"cards": [
+								{
+									"who": "Sales teams",
+									"title": "Give every rep a list worth calling.",
+									"query": "Snow-plowing landscapers in my territory",
+									"visual": "rank",
+									"outcome": "Each rep gets the best-fit accounts in their territory, ranked, with the person to approach.",
+									"cta_label": "Find your best-fit accounts →",
+									"cta_href": "#signup"
+								},
+								{
+									"who": "Founders and CEOs",
+									"title": "Size a market before you hire for it.",
+									"query": "Snow-plow landscapers vs. irrigation, US",
+									"visual": "size",
+									"outcome": "See how many businesses match, where they are and what a typical one looks like, before you commit a rep.",
+									"cta_label": "Size your market →",
+									"cta_href": "#signup"
+								},
+								{
+									"who": "Acquisition search",
+									"title": "Find owner-run companies that fit your thesis.",
+									"query": "Owner-run landscapers, 20+ years old",
+									"visual": "years",
+									"outcome": "Owner names and founding dates from public records. We mark “wants to sell” as unknown, because no record says so.",
+									"cta_label": "Find acquisition targets →",
+									"cta_href": "#signup"
+								}
+							]
+						},
+						{
+							"_type": "how_intro",
+							"_version": 1,
+							"_key": "home-how_intro-2",
+							"heading": "How it works"
+						},
+						{
+							"_type": "agent",
+							"_version": 1,
+							"_key": "home-agent-3",
+							"visual": "search",
+							"nav_label": "Search",
+							"heading": "The Search agent sizes your market.",
+							"query_label": "Your search",
+							"query": "Landscapers that also plow snow · California",
+							"agent_name": "Search agent",
+							"steps": [
+								{
+									"title": "Reading your search"
+								},
+								{
+									"title": "Scanning every US business"
+								},
+								{
+									"title": "Keeping landscapers that plow snow"
+								},
+								{
+									"title": "Narrowing to California"
+								}
+							]
+						},
+						{
+							"_type": "agent",
+							"_version": 1,
+							"_key": "home-agent-4",
+							"visual": "signals",
+							"nav_label": "Research",
+							"heading": "The Research agent checks the facts and finds the owner.",
+							"query_label": "Researching",
+							"query": "Sierra Line Grounds · Truckee, CA",
+							"agent_name": "Research agent",
+							"steps": [
+								{
+									"title": "Opening its website and records"
+								},
+								{
+									"title": "Confirming snow removal"
+								},
+								{
+									"title": "Answering your Signals"
+								},
+								{
+									"title": "Finding the owner"
+								}
+							]
+						},
+						{
+							"_type": "agent",
+							"_version": 1,
+							"_key": "home-agent-5",
+							"visual": "score",
+							"nav_label": "Score",
+							"heading": "The Scoring agent puts the best fits first.",
+							"query_label": "Your priorities",
+							"query": "Snow removal + commercial clients",
+							"agent_name": "Scoring agent",
+							"steps": [
+								{
+									"title": "Collecting every Signal"
+								},
+								{
+									"title": "Weighting your priorities"
+								},
+								{
+									"title": "Grading all 412"
+								},
+								{
+									"title": "Ranking the best fits"
+								}
+							]
+						},
+						{
+							"_type": "features",
+							"_version": 1,
+							"_key": "home-features-6",
+							"heading": "More ways to use Scorecard.",
+							"cards": [
+								{
+									"visual": "lookalike",
+									"title": "Find more companies like your best customers.",
+									"body": "Upload your customer list and find companies with similar characteristics.",
+									"coming_soon": false
+								},
+								{
+									"visual": "signals",
+									"title": "Ask the questions that matter to you.",
+									"body": "Add custom Signals to check each company against your criteria, with supporting sources.",
+									"coming_soon": false
+								},
+								{
+									"visual": "export",
+									"title": "Take your research with you.",
+									"body": "Export company details, Signals, scores, and source links to CSV.",
+									"coming_soon": false
+								},
+								{
+									"visual": "crm",
+									"title": "Connect your CRM.",
+									"body": "Bring Scorecard research into your CRM workflow.",
+									"coming_soon": true
+								},
+								{
+									"visual": "mcp",
+									"title": "Use Scorecard from your AI assistant.",
+									"body": "Search and research companies through MCP access.",
+									"coming_soon": true
+								}
+							],
+							"coverage_title": "New sources every month.",
+							"coverage_stats": [
+								{
+									"value": "140+",
+									"label": "Signals you can check",
+									"note": "+18 this quarter",
+									"icon": "trending-up"
+								},
+								{
+									"value": "28",
+									"label": "Data sources",
+									"note": "+4 this quarter",
+									"icon": "trending-up"
+								},
+								{
+									"value": "Weekly",
+									"label": "Records refreshed",
+									"note": "Last update Nov 10",
+									"icon": "refresh-cw"
+								}
+							],
+							"coverage_sources": [
+								{
+									"label": "Company websites",
+									"icon": "globe"
+								},
+								{
+									"label": "Google Places",
+									"icon": "map-pin"
+								},
+								{
+									"label": "LinkedIn",
+									"icon": "linkedin"
+								},
+								{
+									"label": "State business filings",
+									"icon": "landmark"
+								}
+							],
+							"coverage_cta_label": "See what’s new in the changelog →",
+							"coverage_cta_href": "#",
+							"cta_heading": "Try it on your own market.",
+							"cta_label": "Start free trial",
+							"cta_href": "#signup",
+							"challenge_label": "Have a difficult search? Challenge Scorecard →",
+							"challenge_href": "challenge-v31.html"
+						},
+						{
+							"_type": "pricing",
+							"_version": 1,
+							"_key": "home-pricing-7",
+							"heading": "Start free. Pay monthly if it’s useful.",
+							"plans": [
+								{
+									"name": "Free trial",
+									"price": "$0",
+									"price_note": "for 14 days",
+									"cta_label": "Start free trial",
+									"cta_href": "#signup",
+									"cta_style": "line",
+									"then_note": "",
+									"highlight": false,
+									"card_features": "500 credits\nSearch, Research and scoring\nBuilt-in Signals with sources"
+								},
+								{
+									"name": "Monthly",
+									"price": "$59",
+									"price_note": "per month",
+									"cta_label": "Start free trial",
+									"cta_href": "#signup",
+									"cta_style": "coral",
+									"then_note": "Trial first, then $59/month",
+									"highlight": true,
+									"card_features": "1,000 credits every month\nSearch, Research and scoring\nCustom Signals\nLinkedIn, Google Places, owner phone and email\nCRM integration and MCP access (coming soon)"
+								},
+								{
+									"name": "Teams",
+									"price": "Custom",
+									"price_note": "",
+									"cta_label": "Talk about a pilot",
+									"cta_href": "#",
+									"cta_style": "line-clear",
+									"then_note": "",
+									"highlight": false,
+									"card_features": "Seats for your whole team\nSetup help and a first territory scored for you\nCredits sized to your market\nCRM integration and MCP access (coming soon)"
+								}
+							],
+							"rows": [
+								{
+									"label": "Seats",
+									"note": "",
+									"coming_soon": false,
+									"values": "1\n1\nYour whole team"
+								},
+								{
+									"label": "Setup help and a first territory scored for you",
+									"note": "",
+									"coming_soon": false,
+									"values": "—\n—\nIncluded"
+								},
+								{
+									"label": "Credits",
+									"note": "You only spend credits on businesses that match your search. 1 credit per match, with website research and scoring. Premium details and recurring research use additional credits.",
+									"coming_soon": false,
+									"values": "500\n1,000 every month\nScaled to your market"
+								},
+								{
+									"label": "Extra credits",
+									"note": "",
+									"coming_soon": false,
+									"values": "—\n$10 per 100\nCustom"
+								},
+								{
+									"label": "Search: find and add businesses",
+									"note": "",
+									"coming_soon": false,
+									"values": "✓\n✓\n✓"
+								},
+								{
+									"label": "Research: built-in Signals with sources",
+									"note": "",
+									"coming_soon": false,
+									"values": "✓\n✓\n✓"
+								},
+								{
+									"label": "Custom Signals",
+									"note": "",
+									"coming_soon": false,
+									"values": "—\n✓\n✓"
+								},
+								{
+									"label": "LinkedIn, Google Places, owner phone and email",
+									"note": "",
+									"coming_soon": false,
+									"values": "—\n✓\n✓"
+								},
+								{
+									"label": "CRM integration",
+									"note": "",
+									"coming_soon": true,
+									"values": "—\n✓\n✓"
+								},
+								{
+									"label": "MCP access for AI assistants",
+									"note": "",
+									"coming_soon": true,
+									"values": "—\n✓\n✓"
+								}
+							]
+						},
+						{
+							"_type": "faq",
+							"_version": 1,
+							"_key": "home-faq-8",
+							"heading": "Frequently asked questions",
+							"contact_prompt": "Something else?",
+							"contact_label": "Talk to us",
+							"contact_href": "#",
+							"items": [
+								{
+									"question": "What do I need to run my first search?",
+									"answer": "Start with the kind of company you want, a geography, and the characteristics that make it a good fit. For example, landscapers in California that offer commercial snow removal. [Verify signup and first-search requirements]"
+								},
+								{
+									"question": "Can it find companies that match my specific criteria?",
+									"answer": "Describe what a business actually does, then use Signals to check the criteria that matter to you. Acquisition searchers can describe their thesis too, but a matching company does not mean its owner wants to sell. [Verify geographic coverage, supported criteria, and custom Signal access]"
+								},
+								{
+									"question": "How do I check whether the research is right?",
+									"answer": "Review the source behind a finding before acting on it. Missing information should remain unknown rather than be treated as a confirmed match. [Verify source links, checked dates, and the correction workflow]"
+								},
+								{
+									"question": "What owner and contact information is available?",
+									"answer": "Owner names may be available from websites and public records. Phone and email coverage varies by company; private-company revenue and willingness to sell may be unknown. [Confirm contact coverage, plan access, and credit costs]"
+								},
+								{
+									"question": "Can I export my results?",
+									"answer": "The intended workflow is to download your research as CSV for your spreadsheet or CRM. Direct CRM integration is coming soon. [Verify CSV availability and included fields: company details, Signals, scores, and sources]"
+								},
+								{
+									"question": "What’s included in the trial, and what happens afterward?",
+									"answer": "The current offer is a 14-day trial with 500 credits for Search, Research, and scoring. [Confirm trial duration, credits, and feature access] Before launch, confirm whether a card is required, whether billing starts automatically, and what happens to saved lists and exports when the trial ends. [Confirm card and billing rules, post-trial access, and retention]"
+								}
+							]
+						},
+						{
+							"_type": "signup",
+							"_version": 1,
+							"_key": "home-signup-9",
+							"heading": "Find accounts worth the extra effort.",
+							"body": "Free for 14 days with 500 credits.",
+							"cta_label": "Start free trial",
+							"cta_href": "#"
+						}
+					]
+				}
+			}
+		]
+	},
+	"blockTypes": [
+		{
+			"slug": "hero",
+			"label": "Hero",
+			"description": "Top of the page: headline, intro and buttons. The account card on the right is a coded visual.",
+			"currentVersion": 1,
+			"versions": [
+				{
+					"version": 1,
+					"fields": [
+						{
+							"slug": "heading",
+							"label": "Heading",
+							"type": "string",
+							"required": true
+						},
+						{
+							"slug": "body",
+							"label": "Intro",
+							"type": "text"
+						},
+						{
+							"slug": "cta_label",
+							"label": "Button label",
+							"type": "string"
+						},
+						{
+							"slug": "cta_href",
+							"label": "Button link",
+							"type": "string"
+						},
+						{
+							"slug": "more_label",
+							"label": "Secondary link label",
+							"type": "string"
+						},
+						{
+							"slug": "more_href",
+							"label": "Secondary link link",
+							"type": "string"
+						}
+					]
+				}
+			]
+		},
+		{
+			"slug": "audiences",
+			"label": "Who it's for",
+			"description": "Audience cards. Each card picks one coded mini-visual.",
+			"currentVersion": 1,
+			"versions": [
+				{
+					"version": 1,
+					"fields": [
+						{
+							"slug": "heading",
+							"label": "Heading",
+							"type": "string"
+						},
+						{
+							"slug": "cards",
+							"label": "Cards",
+							"type": "repeater",
+							"validation": {
+								"subFields": [
+									{
+										"slug": "who",
+										"label": "Audience",
+										"type": "string"
+									},
+									{
+										"slug": "title",
+										"label": "Title",
+										"type": "string"
+									},
+									{
+										"slug": "query",
+										"label": "Example search",
+										"type": "string"
+									},
+									{
+										"slug": "visual",
+										"label": "Visual",
+										"type": "select",
+										"options": [
+											"rank",
+											"size",
+											"years"
+										]
+									},
+									{
+										"slug": "outcome",
+										"label": "Outcome",
+										"type": "text"
+									},
+									{
+										"slug": "cta_label",
+										"label": "Link label",
+										"type": "string"
+									},
+									{
+										"slug": "cta_href",
+										"label": "Link",
+										"type": "string"
+									}
+								]
+							}
+						}
+					]
+				}
+			]
+		},
+		{
+			"slug": "how_intro",
+			"label": "How it works intro",
+			"description": "Heading above the agent stories. Following Agent story blocks share its step bar.",
+			"currentVersion": 1,
+			"versions": [
+				{
+					"version": 1,
+					"fields": [
+						{
+							"slug": "heading",
+							"label": "Heading",
+							"type": "string"
+						}
+					]
+				}
+			]
+		},
+		{
+			"slug": "agent",
+			"label": "Agent story",
+			"description": "One scroll-driven agent section. Visual picks the coded animation (search, signals or score); keep 4 steps, the animation timing is coded per visual.",
+			"currentVersion": 1,
+			"versions": [
+				{
+					"version": 1,
+					"fields": [
+						{
+							"slug": "visual",
+							"label": "Visual",
+							"type": "select",
+							"validation": {
+								"options": [
+									"search",
+									"signals",
+									"score"
+								]
+							},
+							"required": true
+						},
+						{
+							"slug": "nav_label",
+							"label": "Step bar label",
+							"type": "string"
+						},
+						{
+							"slug": "heading",
+							"label": "Heading",
+							"type": "string"
+						},
+						{
+							"slug": "query_label",
+							"label": "Query label",
+							"type": "string"
+						},
+						{
+							"slug": "query",
+							"label": "Query text",
+							"type": "string"
+						},
+						{
+							"slug": "agent_name",
+							"label": "Agent name",
+							"type": "string"
+						},
+						{
+							"slug": "steps",
+							"label": "Thinking steps",
+							"type": "repeater",
+							"validation": {
+								"subFields": [
+									{
+										"slug": "title",
+										"label": "Step",
+										"type": "string"
+									}
+								]
+							}
+						}
+					]
+				}
+			]
+		},
+		{
+			"slug": "features",
+			"label": "Features grid",
+			"description": "Feature cards, the coverage card and the try-it CTA. Card visuals are coded.",
+			"currentVersion": 1,
+			"versions": [
+				{
+					"version": 1,
+					"fields": [
+						{
+							"slug": "heading",
+							"label": "Heading",
+							"type": "string"
+						},
+						{
+							"slug": "cards",
+							"label": "Cards",
+							"type": "repeater",
+							"validation": {
+								"subFields": [
+									{
+										"slug": "visual",
+										"label": "Visual",
+										"type": "select",
+										"options": [
+											"lookalike",
+											"signals",
+											"export",
+											"crm",
+											"mcp"
+										]
+									},
+									{
+										"slug": "title",
+										"label": "Title",
+										"type": "string"
+									},
+									{
+										"slug": "body",
+										"label": "Body",
+										"type": "text"
+									},
+									{
+										"slug": "coming_soon",
+										"label": "Coming soon",
+										"type": "boolean"
+									}
+								]
+							}
+						},
+						{
+							"slug": "coverage_title",
+							"label": "Coverage card title",
+							"type": "string"
+						},
+						{
+							"slug": "coverage_stats",
+							"label": "Coverage figures",
+							"type": "repeater",
+							"validation": {
+								"subFields": [
+									{
+										"slug": "value",
+										"label": "Figure",
+										"type": "string"
+									},
+									{
+										"slug": "label",
+										"label": "Label",
+										"type": "string"
+									},
+									{
+										"slug": "note",
+										"label": "Note",
+										"type": "string"
+									},
+									{
+										"slug": "icon",
+										"label": "Note icon",
+										"type": "select",
+										"options": [
+											"upload",
+											"snowflake",
+											"truck",
+											"user-round",
+											"file-spreadsheet",
+											"sheet",
+											"sparkles",
+											"bot",
+											"plug",
+											"trending-up",
+											"refresh-cw",
+											"globe",
+											"map-pin",
+											"linkedin",
+											"landmark"
+										]
+									}
+								]
+							}
+						},
+						{
+							"slug": "coverage_sources",
+							"label": "Coverage sources",
+							"type": "repeater",
+							"validation": {
+								"subFields": [
+									{
+										"slug": "label",
+										"label": "Source",
+										"type": "string"
+									},
+									{
+										"slug": "icon",
+										"label": "Icon",
+										"type": "select",
+										"options": [
+											"upload",
+											"snowflake",
+											"truck",
+											"user-round",
+											"file-spreadsheet",
+											"sheet",
+											"sparkles",
+											"bot",
+											"plug",
+											"trending-up",
+											"refresh-cw",
+											"globe",
+											"map-pin",
+											"linkedin",
+											"landmark"
+										]
+									}
+								]
+							}
+						},
+						{
+							"slug": "coverage_cta_label",
+							"label": "Coverage link label",
+							"type": "string"
+						},
+						{
+							"slug": "coverage_cta_href",
+							"label": "Coverage link link",
+							"type": "string"
+						},
+						{
+							"slug": "cta_heading",
+							"label": "CTA heading",
+							"type": "string"
+						},
+						{
+							"slug": "cta_label",
+							"label": "CTA button label",
+							"type": "string"
+						},
+						{
+							"slug": "cta_href",
+							"label": "CTA button link",
+							"type": "string"
+						},
+						{
+							"slug": "challenge_label",
+							"label": "Challenge link label",
+							"type": "string"
+						},
+						{
+							"slug": "challenge_href",
+							"label": "Challenge link link",
+							"type": "string"
+						}
+					]
+				}
+			]
+		},
+		{
+			"slug": "pricing",
+			"label": "Pricing",
+			"description": "Plan table (desktop) and plan cards (mobile, highlighted plan first).",
+			"currentVersion": 1,
+			"versions": [
+				{
+					"version": 1,
+					"fields": [
+						{
+							"slug": "heading",
+							"label": "Heading",
+							"type": "string"
+						},
+						{
+							"slug": "plans",
+							"label": "Plans (table column order)",
+							"type": "repeater",
+							"validation": {
+								"subFields": [
+									{
+										"slug": "name",
+										"label": "Name",
+										"type": "string"
+									},
+									{
+										"slug": "price",
+										"label": "Price",
+										"type": "string"
+									},
+									{
+										"slug": "price_note",
+										"label": "Price note",
+										"type": "string"
+									},
+									{
+										"slug": "cta_label",
+										"label": "Button label",
+										"type": "string"
+									},
+									{
+										"slug": "cta_href",
+										"label": "Button link",
+										"type": "string"
+									},
+									{
+										"slug": "cta_style",
+										"label": "Button style",
+										"type": "select",
+										"options": [
+											"coral",
+											"line",
+											"line-clear"
+										]
+									},
+									{
+										"slug": "then_note",
+										"label": "Note under button",
+										"type": "string"
+									},
+									{
+										"slug": "highlight",
+										"label": "Highlighted plan",
+										"type": "boolean"
+									},
+									{
+										"slug": "card_features",
+										"label": "Mobile card bullets (one per line)",
+										"type": "text"
+									}
+								]
+							}
+						},
+						{
+							"slug": "rows",
+							"label": "Comparison rows",
+							"type": "repeater",
+							"validation": {
+								"subFields": [
+									{
+										"slug": "label",
+										"label": "Feature",
+										"type": "string"
+									},
+									{
+										"slug": "note",
+										"label": "Small print",
+										"type": "text"
+									},
+									{
+										"slug": "coming_soon",
+										"label": "Coming soon",
+										"type": "boolean"
+									},
+									{
+										"slug": "values",
+										"label": "Values, one line per plan (✓ = included, — = not included)",
+										"type": "text"
+									}
+								]
+							}
+						}
+					]
+				}
+			]
+		},
+		{
+			"slug": "faq",
+			"label": "FAQ",
+			"description": "Questions and answers. Text in [square brackets] renders as a highlighted placeholder.",
+			"currentVersion": 1,
+			"versions": [
+				{
+					"version": 1,
+					"fields": [
+						{
+							"slug": "heading",
+							"label": "Heading",
+							"type": "string"
+						},
+						{
+							"slug": "contact_prompt",
+							"label": "Contact prompt",
+							"type": "string"
+						},
+						{
+							"slug": "contact_label",
+							"label": "Contact link label",
+							"type": "string"
+						},
+						{
+							"slug": "contact_href",
+							"label": "Contact link link",
+							"type": "string"
+						},
+						{
+							"slug": "items",
+							"label": "Questions",
+							"type": "repeater",
+							"validation": {
+								"subFields": [
+									{
+										"slug": "question",
+										"label": "Question",
+										"type": "string"
+									},
+									{
+										"slug": "answer",
+										"label": "Answer",
+										"type": "text"
+									}
+								]
+							}
+						}
+					]
+				}
+			]
+		},
+		{
+			"slug": "signup",
+			"label": "Sign-up close",
+			"description": "Closing call to action.",
+			"currentVersion": 1,
+			"versions": [
+				{
+					"version": 1,
+					"fields": [
+						{
+							"slug": "heading",
+							"label": "Heading",
+							"type": "string"
+						},
+						{
+							"slug": "body",
+							"label": "Body",
+							"type": "text"
+						},
+						{
+							"slug": "cta_label",
+							"label": "Button label",
+							"type": "string"
+						},
+						{
+							"slug": "cta_href",
+							"label": "Button link",
+							"type": "string"
+						}
+					]
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,17 @@
+---
+// A heading and a set of items: three-up columns, or a list with a badge per item (e.g. A–D tiers).
+const { value: v } = Astro.props;
+const list = v.layout === "list";
+---
+<section class="pts"><div class="wrap">
+  <div class="pts-head">
+    {v.eyebrow && <span class="who">{v.eyebrow}</span>}
+    <h2>{v.heading}</h2>
+    {v.body && <p>{v.body}</p>}
+  </div>
+  {list ? (
+    <ol class="pts-list">{(v.items ?? []).map((i: any) => <li>{i.label && <b class="pts-badge">{i.label}</b>}<div><h3>{i.title}</h3><p>{i.body}</p></div></li>)}</ol>
+  ) : (
+    <div class="mlist">{(v.items ?? []).map((i: any) => <div>{i.label && <span class="pts-label">{i.label}</span>}<h3>{i.title}</h3><p>{i.body}</p></div>)}</div>
+  )}
+</div></section>

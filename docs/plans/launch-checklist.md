@@ -10,6 +10,9 @@ Written 2026-11-14 from the state of `cloudflare-astro-migration` (EmDash 1.5.0)
 | Home | `/` | Built (`landing` entry `home`). Copy placeholders to resolve (section 2). |
 | Challenge | `/challenge` | Built. Form saves to the CMS and emails the team. Two FAQ answers to confirm. |
 | Contact | `/contact` | Built 2026-11-14. Form saves to the CMS and emails the team. |
+| Acquisition search | `/acquisition-search` | Built 2026-11-14: the old `eta-search.html`, rewritten in the new design. Two FAQ placeholders. |
+| Sales teams | `/sales-teams` | **Placeholder**: hero from the homepage card and a sign-up close. Needs a page like acquisition search. |
+| Founders and CEOs | `/founders` | **Placeholder**: same. |
 | Privacy | `/privacy` | **Missing.** Nothing exists today (scorecardgtm.com and app.scorecardgtm.com both 404). |
 | Terms | `/terms` | **Missing.** Same. |
 | About | `/about` | Maybe. Decide (J). |
@@ -62,16 +65,19 @@ instead of sending it.
 - [ ] **J** Coverage card figures, marked `data-placeholder="figures"`: "140+ Signals (+18 this quarter)", "28 data sources (+4)", "Weekly refresh, last update Nov 10". Real numbers, or drop the card.
 - [ ] **J** Pricing: confirm $59/month, 14 days / 500 credits, and the 10 comparison rows.
 - [ ] **J** Coded example data in the visuals (hero account card, the who-it's-for charts, the agent stages): it's fine as labelled examples. Confirm nothing in them reads as a real customer or a real claim.
-- [ ] **J** Final copy read of `/`, `/challenge` and `/contact`, with one eye on the brand voice in `docs/vision.md`.
+- [ ] **J+C** Sales teams and founders pages: write them out like `/acquisition-search` (problem, how it works, examples, FAQ). The old
+  `sales-leaders.html` and `ceos-founders.html` in git history are a starting point.
+- [ ] **J** Acquisition search FAQ: CSV upload of an existing list, and coverage details.
+- [ ] **J** Final copy read of `/`, `/challenge`, `/contact` and `/acquisition-search`, with one eye on the brand voice in `docs/vision.md`.
 
 ## 3. Legacy pages: not shipping
 
 Decided 2026-11-14: none of the `website/` pages go to production. The build no longer copies them
 (`sync:design-system` copies only `design-system/`). All 11 still return 200 on scorecardgtm.com today, so cutover needs redirects:
 
-- [ ] **C** 301 redirects to `/` (or a better match) for `account-scoring`, `ceos-founders`, `eta-search`, `eta-search-wireframe`,
-  `fractional-outbound`, `growth-strategy`, `private-equity`, `sales-leaders`, `solutions-coming-soon`, `what-we-do-coming-soon`
-  (`.html` and extensionless), plus `how-scorecard-works` → `/#how` and `/index.html` → `/`.
+- [x] 301 redirects in `site/astro.config.mjs` (2026-11-14): `eta-search`, `eta-search-wireframe` and `private-equity` → `/acquisition-search`,
+  `sales-leaders` → `/sales-teams`, `ceos-founders` → `/founders`, `how-scorecard-works` → `/#how`, the rest and `/index.html` → `/`
+  (`.html` and extensionless).
 - [ ] **C** After cutover: delete `website/` and `.github/workflows/pages.yml`, and update `CLAUDE.md` (it still describes GitHub Pages).
 
 ## 4. Site basics we don't have yet

@@ -1378,3 +1378,22 @@ nav.top .btn{white-space:nowrap}@media (max-width:760px){nav.top .wrap{gap:10px}
 .chalt{font-size:14px;line-height:20px;color:#A9A7A2}.chalt a{color:#fff;text-decoration:underline;text-underline-offset:3px}
 .chpage .bridge{grid-column:1/-1;margin-top:24px}
 @media (max-width:760px){.chpage .wrap{grid-template-columns:1fr}.chpage .chl h1{font-size:36px;line-height:40px}.chform{padding:20px}}
+/* audience pages: hero with the who-it's-for card, and points sections */
+.ahero .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,440px);gap:40px 72px;align-items:center;padding:88px 0 96px}
+.ahero-copy{display:flex;flex-direction:column;gap:20px}
+.ahero h1{font-size:56px;line-height:58px;letter-spacing:-.04em;font-weight:600;text-wrap:balance}
+.ahero-copy > p{font-size:19px;line-height:29px;color:var(--fg2);max-width:620px}
+.ahero .ctas{padding-top:8px;flex-wrap:wrap}
+.ahero-copy .ahero-note{font-size:14px;line-height:20px;color:var(--fg3)}
+.who{font-family:var(--font-mono);font-size:var(--text-2xs);font-weight:var(--weight-semibold);letter-spacing:var(--tracking-caps);text-transform:uppercase;color:var(--a)}
+.pts{padding:104px 0;border-top:1px solid var(--line)}
+.pts-head{display:flex;flex-direction:column;gap:16px;max-width:760px;padding-bottom:44px}
+.pts-head h2{font-family:var(--font-display);font-size:44px;line-height:48px;letter-spacing:-.035em;font-weight:600;text-wrap:balance}
+.pts-head p{font-size:18px;line-height:28px;color:var(--fg2)}
+.pts-label{display:block;font-family:var(--font-mono);font-size:var(--text-2xs);font-weight:var(--weight-semibold);letter-spacing:var(--tracking-caps);text-transform:uppercase;color:var(--fg3);padding-bottom:10px}
+.pts-list{list-style:none;display:flex;flex-direction:column;border-top:1px solid var(--line)}
+.pts-list li{display:flex;gap:24px;align-items:flex-start;padding:22px 0;border-bottom:1px solid var(--line)}
+.pts-badge{flex:none;display:grid;place-items:center;width:40px;height:40px;border-radius:10px;background:var(--ink);color:#fff;font:600 17px/1 var(--font-sans)}
+.pts-list h3{font-size:19px;line-height:25px;font-weight:600;padding-bottom:4px}
+.pts-list p{font-size:16px;line-height:24px;color:var(--fg2);max-width:680px}
+@media (max-width:760px){.ahero .wrap{grid-template-columns:1fr;padding:48px 0 64px}.ahero h1{font-size:38px;line-height:42px}.pts{padding:64px 0}.pts-head h2{font-size:32px;line-height:36px}}

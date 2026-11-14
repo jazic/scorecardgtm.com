@@ -1,6 +1,7 @@
 ---
 import { getMenu, getSeoMeta, getSiteSettings } from "emdash";
 import Agents from "./Agents.astro";
+import AudienceHero from "./AudienceHero.astro";
 import Audiences from "./Audiences.astro";
 import Challenge from "./Challenge.astro";
 import Contact from "./Contact.astro";
@@ -9,6 +10,7 @@ import Features from "./Features.astro";
 import Footer from "./Footer.astro";
 import Hero from "./Hero.astro";
 import Nav from "./Nav.astro";
+import Points from "./Points.astro";
 import Pricing from "./Pricing.astro";
 import Signup from "./Signup.astro";
 // Design CSS/JS ship verbatim, inline as in website/index.html. Bundling the CSS let Lightning CSS drop
@@ -37,7 +39,7 @@ const seo = getSeoMeta(entry, {
 	defaultDescription: entry.data.description,
 });
 
-const blocks = { hero: Hero, challenge: Challenge, contact: Contact, audiences: Audiences, features: Features, pricing: Pricing, faq: Faq, signup: Signup } as Record<string, any>;
+const blocks = { hero: Hero, challenge: Challenge, contact: Contact, audience_hero: AudienceHero, points: Points, audiences: Audiences, features: Features, pricing: Pricing, faq: Faq, signup: Signup } as Record<string, any>;
 // how_intro + the agent blocks after it render together inside one .agents wrapper.
 type Group = { type: "agents"; intro?: any; agents: any[] } | { type: "block"; value: any };
 const groups: Group[] = [];

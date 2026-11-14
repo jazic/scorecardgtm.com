@@ -1,0 +1,22 @@
+---
+import rank from "./visuals/job-rank.html?raw";
+import size from "./visuals/job-size.html?raw";
+import years from "./visuals/job-years.html?raw";
+
+// Top of an audience page. The card on the right repeats the homepage's who-it's-for card and visual.
+const visuals: Record<string, string> = { rank, size, years };
+const { value: v } = Astro.props;
+---
+<header class="ahero" id="top"><div class="wrap">
+  <div class="ahero-copy">
+    <span class="who">{v.who}</span>
+    <h1>{v.heading}</h1>
+    <p>{v.body}</p>
+    <div class="ctas"><a class="btn btn-coral" href={v.cta_href}>{v.cta_label}</a>{v.more_label && <a class="more" href={v.more_href}>{v.more_label}</a>}</div>
+    {v.note && <p class="ahero-note">{v.note}</p>}
+  </div>
+  <article class="job in">
+    <div class="jq"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><span>{v.query}</span></div><Fragment set:html={visuals[v.visual] ?? ""} />
+    <p class="jout">{v.outcome}</p>
+  </article>
+</div></header>

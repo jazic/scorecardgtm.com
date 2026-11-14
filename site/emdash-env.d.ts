@@ -70,6 +70,38 @@ export interface LandingSectionsContactV1Block {
 
 export type LandingSectionsContactBlock = LandingSectionsContactV1Block;
 
+export interface LandingSectionsAudienceHeroV1Block {
+  _type: "audience_hero";
+  _version: 1;
+  _key: string;
+  "who"?: string | null;
+  "heading": string;
+  "body"?: string | null;
+  "cta_label"?: string | null;
+  "cta_href"?: string | null;
+  "more_label"?: string | null;
+  "more_href"?: string | null;
+  "note"?: string | null;
+  "query"?: string | null;
+  "visual"?: "rank" | "size" | "years" | null;
+  "outcome"?: string | null;
+}
+
+export type LandingSectionsAudienceHeroBlock = LandingSectionsAudienceHeroV1Block;
+
+export interface LandingSectionsPointsV1Block {
+  _type: "points";
+  _version: 1;
+  _key: string;
+  "eyebrow"?: string | null;
+  "heading"?: string | null;
+  "body"?: string | null;
+  "layout"?: "columns" | "list" | null;
+  "items"?: { "label"?: string | null; "title"?: string | null; "body"?: string | null }[] | null;
+}
+
+export type LandingSectionsPointsBlock = LandingSectionsPointsV1Block;
+
 export interface LandingSectionsAudiencesV1Block {
   _type: "audiences";
   _version: 1;
@@ -160,7 +192,7 @@ export interface LandingSectionsSignupV1Block {
 
 export type LandingSectionsSignupBlock = LandingSectionsSignupV1Block;
 
-export type LandingSectionsBlock = LandingSectionsHeroBlock | LandingSectionsChallengeBlock | LandingSectionsContactBlock | LandingSectionsAudiencesBlock | LandingSectionsHowIntroBlock | LandingSectionsAgentBlock | LandingSectionsFeaturesBlock | LandingSectionsPricingBlock | LandingSectionsFaqBlock | LandingSectionsSignupBlock;
+export type LandingSectionsBlock = LandingSectionsHeroBlock | LandingSectionsChallengeBlock | LandingSectionsContactBlock | LandingSectionsAudienceHeroBlock | LandingSectionsPointsBlock | LandingSectionsAudiencesBlock | LandingSectionsHowIntroBlock | LandingSectionsAgentBlock | LandingSectionsFeaturesBlock | LandingSectionsPricingBlock | LandingSectionsFaqBlock | LandingSectionsSignupBlock;
 
 export interface Landing {
   id: string;

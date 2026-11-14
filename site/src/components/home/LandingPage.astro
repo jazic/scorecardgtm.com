@@ -35,7 +35,7 @@ for (const b of entry.data.sections ?? []) {
 	else groups.push({ type: "block", value: b });
 }
 ---
-<Layout title={seo.title} description={seo.description} home={entry.id === "home"} hasAgents={groups.some((g) => g.type === "agents")}>
+<Layout title={seo.title} description={seo.description} content={{ collection: "landing", id: entry.data.id, slug: entry.id }} home={entry.id === "home"} hasAgents={groups.some((g) => g.type === "agents")}>
 {groups.map((g) => {
 	if (g.type === "agents") return <Agents intro={g.intro} agents={g.agents} />;
 	const Block = blocks[g.value._type];

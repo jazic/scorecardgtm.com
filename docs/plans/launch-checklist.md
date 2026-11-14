@@ -36,6 +36,8 @@ Not shipping: the 11 legacy `website/` pages. They now 301 to their new homes (`
 - [x] **A4.** Keep workers.dev out of search engines until cutover (`noindex` on any host other than scorecardgtm.com).
 - [x] **A5.** (Dropped the rule: the texture was never visible in the approved v35 page. It's in `mockups/textures/v15/` if wanted.) Fix the missing `textures/v15/close-halftone-bg.svg` (sign-up section background): find the asset or drop the rule.
 - [x] **A6.** PostHog events (`start_trial_click`, `sign_in_click`, `form_submit`): "Start free trial" clicks, "Sign in" clicks, contact and challenge submissions.
+- [x] **A10.** Layout renders `EmDashHead`/`EmDashBodyStart`/`EmDashBodyEnd` (2026-11-14): each entry's SEO panel, JSON-LD,
+  verification tags, the staging noindex and plugin contributions now apply.
 - [x] **A7.** Performance (CSS and scripts now static cached files: page HTML 838→96 KB home, 693→26 KB contact). Was:: pages without agent sections still inline the 175 KB d3/topojson bundle (the logo script needs it),
   and every page inlines 465 KB of CSS. Measure with Lighthouse; trim or serve as cached files only if it matters. Homepage visuals stay identical.
 - [x] **A8.** Decided: no confirmation email for launch. Automatic confirmation email to people who submit a form.
@@ -64,6 +66,15 @@ Delete the two "Claude (launch check)" entries under Form submissions when conve
 - [ ] Example data in the coded visuals: confirm nothing reads as a real customer or claim (that one is code; tell Claude what to change).
 - [ ] Final copy read of every page against `docs/vision.md`.
 
+### EmDash settings worth setting (Admin → Settings, any time)
+
+- [ ] **J** Timezone and date format (blog dates); social links (LinkedIn) in site settings.
+- [ ] **J** SEO: decide "ask AI crawlers not to train on the site" (robots.txt rule); title separator.
+- [ ] **J** Settings → Email: Send test email (Cloudflare provider, `notifications@tx.scorecardgtm.com`).
+- [ ] **J** Users: invite editors; don't add allowed self-signup domains unless everyone at that domain should get access.
+- Not needed: site favicon/logo and the default share image in settings (the layout ships the dot-mark icons and
+  `og-default.png`); search, comments, widgets, i18n. Optional later: an `objectCache` (KV) or Astro route cache to cut D1 reads.
+
 ## D. QA (before cutover)
 
 - [ ] **C** Screenshots at 1440 / 1024 / 768 / 390 for every page; console clean; no asset 404s.
@@ -74,6 +85,8 @@ Delete the two "Claude (launch check)" entries under Form submissions when conve
 ## E. Cutover
 
 - [ ] **J** Root-domain DMARC: TXT `_dmarc` = `v=DMARC1; p=none; rua=mailto:hello@scorecardgtm.com` (dashboard; Wrangler can't edit DNS).
+- [ ] **J** Admin → Settings: turn **staging** off (the wizard turns it on; it adds `noindex` everywhere), set **Site URL** to
+  `https://scorecardgtm.com` (sitemap, robots.txt and JSON-LD use it), and add the **Google Search Console** (and Bing) verification codes.
 - [ ] **C** Set `EMDASH_SITE_URL=https://scorecardgtm.com`; add `routes` for the apex (and `www` → apex) to `wrangler.jsonc`.
 - [ ] **J+C** Delete the apex/`www` records pointing at GitHub Pages, deploy, then register the admin passkey again on scorecardgtm.com
   (passkeys are per hostname). Leave `app.` (Vercel) and the Google MX/TXT records alone.

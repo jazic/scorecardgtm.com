@@ -12,7 +12,7 @@ const seo = post ? getSeoMeta(post, { defaultTitle: `${post.data.title} · Score
 const date = post?.data.publishedAt ? new Date(post.data.publishedAt) : null;
 ---
 {post && seo ? (
-  <Layout title={seo.title} description={seo.description} type="article" image={post.data.featured_image?.src}>
+  <Layout title={seo.title} description={seo.description} type="article" image={post.data.featured_image?.src} content={{ collection: "posts", id: post.data.id, slug: post.id }} publishedTime={date?.toISOString()}>
     <article class="prose post" id="top"><div class="wrap">
       <a class="who" href="/blog">← Blog</a>
       <h1>{post.data.title}</h1>

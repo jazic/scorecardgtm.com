@@ -53,10 +53,59 @@ dependency scanner out of the UMD bundle. CRM logos are `src/assets/crm/`.
 **Fresh database:** the seed (`site/seed/seed.json`) holds the schema and the full home copy.
 Schema applies on the first request; content applies when setup runs (admin wizard with sample
 content, or `/_emdash/api/setup/dev-bypass` locally). Production D1 already finished setup with the
-starter schema, so the seed won't auto-apply there: before the next deploy, add the block types,
-the `landing` collection, menus and the home entry to prod (untested options: `npx emdash site export`
-locally then `site import` against prod, or rebuild prod D1 and rerun setup). Until then `/` on prod
-returns a 500.
+starter schema, so the seed won't auto-apply there. Until that's fixed, `/` on prod returns a 500. See the plan below.
+
+### Getting the new schema + content into production D1 (proposed 2026-11-14, waiting for Justin's OK)
+
+Nothing below has been run against production. Prod today is workers.dev only, the D1 holds the
+starter schema, maybe the starter sample posts, and one admin passkey. Nothing in it is worth keeping.
+
+**Options looked at:**
+
+- `emdash seed`: local only. It writes a SQLite file (`--database ./data.db`) and can't reach remote D1.
+- `emdash site export` (local dev) → `emdash site import --url <prod>`: only imports into an *empty*
+  site. Prod finished setup, so its seeded scaffold is allowed, but any starter entries or menu rows block
+  the import (`TRANSFER_TARGET_NOT_EMPTY`). We'd only find out by running `--analyze` against prod.
+  It's also the path we've tested least.
+- Adding the schema one piece at a time through the API/CLI (`schema create`, block types, menus,
+  content): 8 block types plus nested repeaters. A lot of hand work, easy to get subtly wrong.
+- **Fresh D1 + rerun setup (recommended).** It's the same path the local dev setup takes, and that's
+  tested: an empty DB gets the schema from `seed/seed.json` on the first request, and the setup wizard
+  applies the content (home, challenge, menus). Rollback is a one-line binding change, and the old DB
+  stays untouched.
+
+**Steps (from `site/`, prefix with `mise exec node@24 --`):**
+
+```bash
+npx wrangler whoami                                   # logged in to the right account
+npx wrangler d1 export scorecardgtm --remote --output ../scorecardgtm-d1-backup-$(date +%F).sql   # backup (keep out of git)
+npx wrangler deployments list                         # note the current version id, for rollback
+npx wrangler d1 create scorecardgtm-v2                # prints the database_id
+```
+
+Edit `wrangler.jsonc`: under `d1_databases`, set `"database_name": "scorecardgtm-v2"` and
+`"database_id": "<id from create>"`. Leave the binding as `DB`. Then:
+
+```bash
+npm run deploy
+# right away (first person through the wizard becomes admin):
+open https://scorecardgtm.justinziccardi.workers.dev/_emdash/admin/
+#   site title "Scorecard", tagline "Target prospects worth the extra effort." (the wizard writes these over the seed's),
+#   tick "include sample content" (this is what applies the home/challenge entries and menus), register the passkey.
+curl -sI https://scorecardgtm.justinziccardi.workers.dev/ | head -1            # expect 200
+curl -sI https://scorecardgtm.justinziccardi.workers.dev/challenge | head -1   # expect 200
+```
+
+The `EMDASH_ENCRYPTION_KEY` secret, R2 and KV carry over, since they don't depend on the DB. Old KV
+sessions point at users in the old DB and simply stop working. Log in again.
+
+**Rollback:** `npx wrangler rollback <previous version id>`. A version carries its bindings, so this
+puts the Worker back on `scorecardgtm`. Or revert the `wrangler.jsonc` change and run `npm run deploy`.
+The old DB is never written to, so it's always there to go back to. Once v2 has been live for a while,
+`npx wrangler d1 delete scorecardgtm`, and optionally rename v2 in config only (D1 names can't be renamed).
+
+**Before running:** check whether Workers Builds (cutover step 5) is connected. If it is, a push to
+`main` would deploy and could beat this procedure.
 
 **Still legacy (static, from `website/`):** every other page (`eta-search.html`, `sales-leaders.html`, …).
 

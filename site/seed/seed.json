@@ -110,6 +110,7 @@
 					"validation": {
 						"allowedTypes": [
 							"hero",
+							"challenge",
 							"audiences",
 							"how_intro",
 							"agent",
@@ -551,7 +552,7 @@
 							"cta_label": "Start free trial",
 							"cta_href": "#signup",
 							"challenge_label": "Have a difficult search? Challenge Scorecard →",
-							"challenge_href": "challenge-v31.html"
+							"challenge_href": "/challenge"
 						},
 						{
 							"_type": "pricing",
@@ -702,6 +703,87 @@
 						}
 					]
 				}
+			},
+			{
+				"id": "challenge",
+				"slug": "challenge",
+				"status": "published",
+				"data": {
+					"title": "Challenge Scorecard",
+					"description": "Send us a hard search: the kind of company, the geography and what makes a great fit. We'll run it through Scorecard and send up to 100 candidates, with the 10 strongest highlighted. The first 10 accepted searches are free.",
+					"sections": [
+						{
+							"_type": "challenge",
+							"_version": 1,
+							"_key": "challenge-0",
+							"heading": "What companies are you struggling to find at scale?",
+							"body": "Too much noise from prospect databases? Too much setup to build your own research workflow? Give us your query, geography and what makes a company a great fit. We’ll run it through Scorecard and send you the list.",
+							"points": [
+								{
+									"title": "Up to 100 candidates.",
+									"body": "Every company that matches your search, with the evidence behind each match."
+								},
+								{
+									"title": "The 10 strongest highlighted.",
+									"body": "Ranked by what you told us makes a great fit."
+								},
+								{
+									"title": "An honest count.",
+									"body": "If the evidence supports fewer, we’ll say so."
+								}
+							],
+							"query_label": "What kind of company?",
+							"query_placeholder": "Landscapers that offer commercial snow removal",
+							"geo_label": "Where?",
+							"geo_placeholder": "Colorado and Utah",
+							"fit_label": "What makes one a great fit?",
+							"fit_placeholder": "Owner-operated, 10–50 employees, at least five years in business, serves HOAs or property managers",
+							"submit_label": "Send us your search",
+							"offer": "First 10 accepted searches free, in exchange for honest feedback. No signup required to receive your list.",
+							"email": "hello@scorecardgtm.com",
+							"email_subject": "Challenge Scorecard: my search",
+							"alt_prompt": "Button not opening your email? Write to",
+							"bridge_heading": "Keep the search going.",
+							"bridge_body": "If the results are useful, continue in Scorecard: refine your criteria, explore another territory, and research your next accounts yourself. Start with the free trial, then choose the monthly plan if it earns its place in your workflow."
+						},
+						{
+							"_type": "faq",
+							"_version": 1,
+							"_key": "challenge-faq-1",
+							"heading": "About the challenge",
+							"contact_prompt": "Something else?",
+							"contact_label": "Talk to us",
+							"contact_href": "mailto:hello@scorecardgtm.com",
+							"items": [
+								{
+									"question": "What makes a search a good fit for the challenge?",
+									"answer": "A kind of US business you can describe in plain words, a geography, and the traits that separate a great match from an ordinary one. The harder it is to find in a prospect database, the better."
+								},
+								{
+									"question": "What does “accepted” mean?",
+									"answer": "We read every search and take the ones Scorecard can run well today. If yours isn’t one of them, we’ll tell you why. [Confirm acceptance criteria]"
+								},
+								{
+									"question": "How long until I get my list?",
+									"answer": "[Confirm turnaround time]"
+								},
+								{
+									"question": "What do you ask in return?",
+									"answer": "Honest feedback on the list: which companies were right, which weren’t, and what you’d do with it."
+								}
+							]
+						},
+						{
+							"_type": "signup",
+							"_version": 1,
+							"_key": "challenge-signup-2",
+							"heading": "Rather run it yourself?",
+							"body": "Free for 14 days with 500 credits.",
+							"cta_label": "Start free trial",
+							"cta_href": "/#signup"
+						}
+					]
+				}
 			}
 		]
 	},
@@ -745,6 +827,113 @@
 							"slug": "more_href",
 							"label": "Secondary link link",
 							"type": "string"
+						}
+					]
+				}
+			]
+		},
+		{
+			"slug": "challenge",
+			"label": "Challenge offer",
+			"description": "Send-us-your-search offer with its form. The form opens the visitor's email app addressed to Email, with their answers filled in.",
+			"currentVersion": 1,
+			"versions": [
+				{
+					"version": 1,
+					"fields": [
+						{
+							"slug": "heading",
+							"label": "Heading",
+							"type": "string"
+						},
+						{
+							"slug": "body",
+							"label": "Intro",
+							"type": "text"
+						},
+						{
+							"slug": "points",
+							"label": "What you get",
+							"type": "repeater",
+							"validation": {
+								"subFields": [
+									{
+										"slug": "title",
+										"label": "Point",
+										"type": "string"
+									},
+									{
+										"slug": "body",
+										"label": "Detail",
+										"type": "text"
+									}
+								]
+							}
+						},
+						{
+							"slug": "query_label",
+							"label": "Search field label",
+							"type": "string"
+						},
+						{
+							"slug": "query_placeholder",
+							"label": "Search field example",
+							"type": "string"
+						},
+						{
+							"slug": "geo_label",
+							"label": "Geography field label",
+							"type": "string"
+						},
+						{
+							"slug": "geo_placeholder",
+							"label": "Geography field example",
+							"type": "string"
+						},
+						{
+							"slug": "fit_label",
+							"label": "Great-fit field label",
+							"type": "string"
+						},
+						{
+							"slug": "fit_placeholder",
+							"label": "Great-fit field example",
+							"type": "string"
+						},
+						{
+							"slug": "submit_label",
+							"label": "Button label",
+							"type": "string"
+						},
+						{
+							"slug": "offer",
+							"label": "Offer note",
+							"type": "text"
+						},
+						{
+							"slug": "email",
+							"label": "Email (where searches go)",
+							"type": "string"
+						},
+						{
+							"slug": "email_subject",
+							"label": "Email subject",
+							"type": "string"
+						},
+						{
+							"slug": "alt_prompt",
+							"label": "Email-us prompt",
+							"type": "string"
+						},
+						{
+							"slug": "bridge_heading",
+							"label": "Bridge heading",
+							"type": "string"
+						},
+						{
+							"slug": "bridge_body",
+							"label": "Bridge text",
+							"type": "text"
 						}
 					]
 				}

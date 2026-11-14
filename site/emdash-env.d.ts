@@ -19,6 +19,30 @@ export interface LandingSectionsHeroV1Block {
 
 export type LandingSectionsHeroBlock = LandingSectionsHeroV1Block;
 
+export interface LandingSectionsChallengeV1Block {
+  _type: "challenge";
+  _version: 1;
+  _key: string;
+  "heading"?: string | null;
+  "body"?: string | null;
+  "points"?: { "title"?: string | null; "body"?: string | null }[] | null;
+  "query_label"?: string | null;
+  "query_placeholder"?: string | null;
+  "geo_label"?: string | null;
+  "geo_placeholder"?: string | null;
+  "fit_label"?: string | null;
+  "fit_placeholder"?: string | null;
+  "submit_label"?: string | null;
+  "offer"?: string | null;
+  "email"?: string | null;
+  "email_subject"?: string | null;
+  "alt_prompt"?: string | null;
+  "bridge_heading"?: string | null;
+  "bridge_body"?: string | null;
+}
+
+export type LandingSectionsChallengeBlock = LandingSectionsChallengeV1Block;
+
 export interface LandingSectionsAudiencesV1Block {
   _type: "audiences";
   _version: 1;
@@ -109,7 +133,7 @@ export interface LandingSectionsSignupV1Block {
 
 export type LandingSectionsSignupBlock = LandingSectionsSignupV1Block;
 
-export type LandingSectionsBlock = LandingSectionsHeroBlock | LandingSectionsAudiencesBlock | LandingSectionsHowIntroBlock | LandingSectionsAgentBlock | LandingSectionsFeaturesBlock | LandingSectionsPricingBlock | LandingSectionsFaqBlock | LandingSectionsSignupBlock;
+export type LandingSectionsBlock = LandingSectionsHeroBlock | LandingSectionsChallengeBlock | LandingSectionsAudiencesBlock | LandingSectionsHowIntroBlock | LandingSectionsAgentBlock | LandingSectionsFeaturesBlock | LandingSectionsPricingBlock | LandingSectionsFaqBlock | LandingSectionsSignupBlock;
 
 export interface Landing {
   id: string;

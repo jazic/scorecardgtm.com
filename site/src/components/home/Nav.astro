@@ -4,14 +4,16 @@ import type { MenuItem } from "emdash";
 interface Props {
 	items: MenuItem[];
 	siteTitle: string;
+	home: boolean;
 }
-const { items, siteTitle } = Astro.props;
+const { items, siteTitle, home } = Astro.props;
+const href = (url: string) => (!home && url.length > 1 && url.startsWith("#") ? `/${url}` : url);
 // Menu items with CSS classes (Sign in, Start free trial) render as buttons after the links.
 const links = items.filter((i) => !i.cssClasses);
 const buttons = items.filter((i) => i.cssClasses);
 ---
 <nav class="top" aria-label="Main"><div class="wrap">
-  <a class="logo" href="#top" aria-label={`${siteTitle} home`}><svg data-sc-logo="once" viewBox="0 -4 24 30" role="img" aria-label={`${siteTitle} logo, click to replay`}></svg>{siteTitle}</a>
-  <div class="links">{links.map((i) => <a href={i.url}>{i.label}</a>)}</div>
-  {buttons.map((i) => <a class={i.cssClasses} href={i.url}>{i.label}</a>)}
+  <a class="logo" href={home ? "#top" : "/"} aria-label={`${siteTitle} home`}><svg data-sc-logo="once" viewBox="0 -4 24 30" role="img" aria-label={`${siteTitle} logo, click to replay`}></svg>{siteTitle}</a>
+  <div class="links">{links.map((i) => <a href={href(i.url)}>{i.label}</a>)}</div>
+  {buttons.map((i) => <a class={i.cssClasses} href={href(i.url)}>{i.label}</a>)}
 </div></nav>

@@ -1,0 +1,22 @@
+---
+const { value: v } = Astro.props;
+// No form backend yet: the form opens the visitor's mail client with the answers filled in.
+const fields = [
+	{ name: "Search", label: v.query_label, placeholder: v.query_placeholder, rows: 2 },
+	{ name: "Geography", label: v.geo_label, placeholder: v.geo_placeholder, rows: 1 },
+	{ name: "Great fit", label: v.fit_label, placeholder: v.fit_placeholder, rows: 4 },
+];
+---
+<section class="challenge chpage" id="top"><div class="wrap">
+  <div class="chl">
+    <h1>{v.heading}</h1>
+    <p>{v.body}</p>
+    <ul class="chpts">{(v.points ?? []).map((p: any) => <li><b>{p.title}</b> {p.body}</li>)}</ul>
+  </div>
+  <form class="chform" action={`mailto:${v.email}?subject=${encodeURIComponent(v.email_subject ?? "")}`} method="post" enctype="text/plain">
+    {fields.map((f, i) => <label for={`ch-f${i}`}>{f.label}<textarea id={`ch-f${i}`} name={f.name} rows={f.rows} placeholder={f.placeholder} required></textarea></label>)}
+    <div class="chcta"><button class="btn btn-coral" type="submit">{v.submit_label}</button><span>{v.offer}</span></div>
+    <p class="chalt">{v.alt_prompt} <a href={`mailto:${v.email}`}>{v.email}</a></p>
+  </form>
+  {v.bridge_body && <div class="bridge"><b>{v.bridge_heading}</b> {v.bridge_body}</div>}
+</div></section>

@@ -5,12 +5,14 @@ interface Props {
 	links: MenuItem[];
 	legal: MenuItem[];
 	siteTitle: string;
+	home: boolean;
 }
-const { links, legal, siteTitle } = Astro.props;
+const { links, legal, siteTitle, home } = Astro.props;
+const href = (url: string) => (!home && url.length > 1 && url.startsWith("#") ? `/${url}` : url);
 const year = new Date().getFullYear();
 ---
 <footer class="foot"><div class="wrap foot-min">
-  <a class="logo" href="#top"><svg data-sc-logo="none" viewBox="0 -4 24 30" role="img" aria-label={`${siteTitle} logo, click to replay`}></svg>{siteTitle}</a>
-  <nav class="foot-nav" aria-label="Footer">{links.map((i) => <a href={i.url}>{i.label}</a>)}</nav>
-  <div class="legal">{legal.map((i) => <a href={i.url}>{i.label}</a>)}<span>© {year} {siteTitle}</span></div>
+  <a class="logo" href={home ? "#top" : "/"}><svg data-sc-logo="none" viewBox="0 -4 24 30" role="img" aria-label={`${siteTitle} logo, click to replay`}></svg>{siteTitle}</a>
+  <nav class="foot-nav" aria-label="Footer">{links.map((i) => <a href={href(i.url)}>{i.label}</a>)}</nav>
+  <div class="legal">{legal.map((i) => <a href={href(i.url)}>{i.label}</a>)}<span>© {year} {siteTitle}</span></div>
 </div></footer>

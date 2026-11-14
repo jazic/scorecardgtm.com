@@ -58,6 +58,7 @@ Every other page is still legacy static HTML: `npm run dev`/`build` run `sync:le
 | Page         | Path      | What it shows                                                     |
 | ------------ | --------- | ----------------------------------------------------------------- |
 | Home         | `/`       | `landing` entry `home`                                            |
+| Challenge    | `/challenge` | `landing` entry `challenge` (challenge, faq, signup blocks)    |
 | Landing page | `/[slug]` | Other `landing` entries and draft previews (`/home` redirects `/`) |
 | Legacy pages | `/*.html` | Static files from `../website/`                                   |
 
@@ -66,12 +67,14 @@ Every other page is still legacy static HTML: `npm run dev`/`build` run `sync:le
 - `landing` collection (drafts, revisions, preview, SEO): `title`, `description` (meta description
   fallback), `sections` (blocks).
 - Block types, one per homepage section: `hero`, `audiences`, `how_intro`, `agent`, `features`,
-  `pricing`, `faq`, `signup`. `how_intro` and the `agent` blocks after it render inside one
+  `pricing`, `faq`, `signup`, plus `challenge` (the Send-us-your-search offer and form; the form opens the
+  visitor's mail app addressed to the block's `email`). `how_intro` and the `agent` blocks after it render inside one
   `.agents` wrapper with the step bar. `agent.visual` (search|signals|score), `audiences` card
   `visual` and `features` card `visual` pick coded visuals in `src/components/home/visuals/`.
 - Text conventions: pricing row `values` and plan `card_features` are one item per line (`✓`/`—` in
   values render the check/dash); FAQ `[bracketed text]` renders as a placeholder highlight.
-- Menus: `primary` (items with CSS classes render as buttons), `footer`, `legal`.
+- Menus: `primary` (items with CSS classes render as buttons), `footer`, `legal`. On pages other than home,
+  `#section` links render as `/#section`.
 - Site settings: `title` (logo, ©) and `tagline` (default `<title>` is "title: tagline").
 - Starter `posts` and `pages` collections and the `category`/`tag` taxonomies are kept but have no routes.
 

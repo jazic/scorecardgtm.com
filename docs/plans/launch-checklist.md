@@ -50,11 +50,11 @@ instead of sending it.
   the records: bounce MX and SPF on `cf-bounce.tx`, DKIM `cf-bounce._domainkey.tx`, and DMARC `p=reject` on `_dmarc.tx`.
   The root domain's Google MX/SPF/DKIM are untouched. Sender `notifications@tx.scorecardgtm.com`, replies and
   notifications to `hello@scorecardgtm.com` (both in `site/astro.config.mjs`). A test email was queued to hello@.
-- [ ] **J** Confirm the test email arrived (not in spam), and use Gmail "Show original" to check SPF, DKIM and DMARC = PASS.
+- [x] Test email delivered to the inbox (2026-11-14): mailed-by `cf-bounce.tx.scorecardgtm.com` (SPF), signed-by `tx.scorecardgtm.com` (DKIM, aligned).
 - [ ] **J** Add DMARC for the root domain (none today): TXT `_dmarc` = `v=DMARC1; p=none; rua=mailto:hello@scorecardgtm.com`.
   Wrangler's login can't edit DNS, so this goes in the dashboard. Tighten it to `p=quarantine` once reports look clean.
 - [ ] **J** Keep marketing or newsletter mail off `tx.`. Use its own subdomain (e.g. `news.`) so complaints can't hurt sign-in and form mail.
-- [ ] **J** Check that `hello@scorecardgtm.com` is a real inbox (Google Workspace) that someone reads.
+- [x] `hello@scorecardgtm.com` is an alias of justin@ (Google Workspace, 2026-11-14). Switch it to a Google Group when more people should get it.
 - [ ] **C** After deploy: Admin → Settings → Email → Send test email, then one real submission of each form.
 - [ ] **J** Decide whether submitters get an automatic confirmation email ("we got your search"). **C** adds it to the plugin if yes.
 - [ ] **C** If spam shows up: add Cloudflare Turnstile to both forms (today there's only a honeypot).

@@ -97,8 +97,9 @@ Decided 2026-11-14: none of the `website/` pages go to production. The build no 
 
 ## 5. Production infrastructure (in order)
 
-- [ ] **J** OK the fresh-D1 plan in `plan-cloudflare-emdash-migration.md`. **C** runs it: backup, new D1, deploy, setup wizard (J registers the admin passkey).
-- [ ] **J** Check whether Workers Builds is connected. Decide whether pushes to `main` should auto-deploy.
+- [x] Fresh D1 `scorecardgtm-v2` deployed to workers.dev (2026-11-14). Pages, redirects and both forms checked in production.
+- [ ] **C** Just before cutover, rebuild the production DB from the final seed (another fresh D1 + setup), since the DB is scratch until then.
+- [ ] **J** Workers Builds isn't connected (every deploy so far came from Wrangler). Decide whether pushes to `main` should auto-deploy.
 - [ ] **C** Verify on workers.dev: both pages, the CMS edit → publish → page updates (cache), draft preview, and scheduled tasks (the cron runs every minute).
 - [ ] **J** Decide on EmDash staging mode (keeps search engines out) for workers.dev until cutover.
 - [ ] **J+C** Custom domain: set `EMDASH_SITE_URL`, delete the apex/`www` records pointing at GitHub Pages, add `routes` (apex + `www` → apex redirect) to `wrangler.jsonc`, deploy, then redo the admin passkey on scorecardgtm.com (passkeys are per hostname). Leave `app.` (Vercel) and the Google MX/TXT records alone.

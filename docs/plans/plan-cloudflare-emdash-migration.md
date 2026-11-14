@@ -55,7 +55,16 @@ Schema applies on the first request; content applies when setup runs (admin wiza
 content, or `/_emdash/api/setup/dev-bypass` locally). Production D1 already finished setup with the
 starter schema, so the seed won't auto-apply there. Until that's fixed, `/` on prod returns a 500. See the plan below.
 
-### Getting the new schema + content into production D1 (proposed 2026-11-14, waiting for Justin's OK)
+### Getting the new schema + content into production D1 (done 2026-11-14)
+
+**Done 2026-11-14.** New D1 `scorecardgtm-v2` (`31927595-b9dd-442d-9efd-82ab561af3ca`) deployed, setup wizard run with sample
+content, all pages and both forms checked on workers.dev. The old `scorecardgtm` D1 is untouched. `wrangler d1 export` fails
+on databases with FTS5 tables, so instead of an SQL dump the restore point is a Time Travel bookmark,
+`00000018-000005fc-00005123-45447c524c3fce0228dd3bd7954d1faf` (saved in `~/src/scorecardgtm-backups/`, valid 30 days).
+Rollback version: `0a8edcff-febf-4922-9e6c-2b1cd4d3eba6`. Until launch, treat the production DB as scratch: copy changes go
+into `seed/seed.json`, and the production DB is rebuilt from it once more (a fresh D1 + setup) just before cutover.
+
+The plan as proposed:
 
 Nothing below has been run against production. Prod today is workers.dev only, the D1 holds the
 starter schema, maybe the starter sample posts, and one admin passkey. Nothing in it is worth keeping.

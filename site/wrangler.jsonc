@@ -7,7 +7,9 @@
 	"d1_databases": [
 		{
 			"binding": "DB",
-			"database_name": "scorecardgtm",
+			// Fresh DB 2026-11-14 (the first one, "scorecardgtm", had the starter schema; kept for rollback).
+			"database_name": "scorecardgtm-v2",
+			"database_id": "31927595-b9dd-442d-9efd-82ab561af3ca",
 		},
 	],
 	"r2_buckets": [

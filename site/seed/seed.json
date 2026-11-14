@@ -13,9 +13,9 @@
 	"collections": [
 		{
 			"slug": "posts",
-			"label": "Posts",
-			"labelSingular": "Post",
-			"urlPattern": "/posts/{slug}",
+			"label": "Blog posts",
+			"labelSingular": "Blog post",
+			"urlPattern": "/blog/{slug}",
 			"supports": [
 				"drafts",
 				"revisions",
@@ -47,34 +47,6 @@
 					"slug": "excerpt",
 					"label": "Excerpt",
 					"type": "text"
-				}
-			]
-		},
-		{
-			"slug": "pages",
-			"label": "Pages",
-			"labelSingular": "Page",
-			"urlPattern": "/{slug}",
-			"supports": [
-				"drafts",
-				"revisions",
-				"preview",
-				"search",
-				"seo"
-			],
-			"fields": [
-				{
-					"slug": "title",
-					"label": "Title",
-					"type": "string",
-					"required": true,
-					"searchable": true
-				},
-				{
-					"slug": "content",
-					"label": "Content",
-					"type": "portableText",
-					"searchable": true
 				}
 			]
 		},
@@ -199,25 +171,6 @@
 	],
 	"taxonomies": [
 		{
-			"name": "category",
-			"label": "Categories",
-			"labelSingular": "Category",
-			"hierarchical": true,
-			"collections": [
-				"posts"
-			],
-			"terms": [
-				{
-					"slug": "general",
-					"label": "General"
-				},
-				{
-					"slug": "updates",
-					"label": "Updates"
-				}
-			]
-		},
-		{
 			"name": "tag",
 			"label": "Tags",
 			"labelSingular": "Tag",
@@ -227,12 +180,8 @@
 			],
 			"terms": [
 				{
-					"slug": "starter",
-					"label": "Starter"
-				},
-				{
-					"slug": "example",
-					"label": "Example"
+					"slug": "new-feature",
+					"label": "New feature"
 				}
 			]
 		}
@@ -293,7 +242,7 @@
 				{
 					"type": "custom",
 					"label": "Changelog",
-					"url": "#"
+					"url": "/blog/tag/new-feature"
 				},
 				{
 					"type": "custom",
@@ -325,84 +274,96 @@
 		}
 	],
 	"content": {
-		"pages": [
-			{
-				"id": "about",
-				"slug": "about",
-				"status": "published",
-				"data": {
-					"title": "About",
-					"content": [
-						{
-							"_type": "block",
-							"style": "normal",
-							"children": [
-								{
-									"_type": "span",
-									"text": "This is the about page. Edit it in the admin panel or replace this template with your own design.",
-									"_key": "k1"
-								}
-							],
-							"_key": "k0"
-						}
-					]
-				}
-			}
-		],
 		"posts": [
 			{
-				"id": "post-1",
-				"slug": "welcome",
+				"id": "challenge-launch",
+				"slug": "send-us-your-hardest-search",
 				"status": "published",
 				"data": {
-					"title": "Welcome",
-					"excerpt": "Your first post. Replace this with your own content.",
+					"title": "Send us your hardest search",
+					"excerpt": "Describe the companies you’re struggling to find. We’ll run the search through Scorecard and send you up to 100 candidates, with the 10 strongest highlighted.",
 					"content": [
 						{
 							"_type": "block",
+							"_key": "c0",
 							"style": "normal",
+							"markDefs": [],
 							"children": [
 								{
 									"_type": "span",
-									"text": "This is a starter post. The templates in this project show the basic patterns for querying and rendering EmDash content. Replace them with your own design.",
-									"_key": "k1"
+									"_key": "c0s",
+									"text": "Some searches are hard to run in a prospect database: the companies you want are defined by what they actually do, not by an industry code. So we’re offering to run a few of them for you.",
+									"marks": []
 								}
-							],
-							"_key": "k0"
+							]
 						},
 						{
 							"_type": "block",
+							"_key": "c1",
 							"style": "h2",
+							"markDefs": [],
 							"children": [
 								{
 									"_type": "span",
-									"text": "What to do next",
-									"_key": "k3"
+									"_key": "c1s",
+									"text": "How it works",
+									"marks": []
 								}
-							],
-							"_key": "k2"
+							]
 						},
 						{
 							"_type": "block",
+							"_key": "c2",
 							"style": "normal",
+							"markDefs": [],
 							"children": [
 								{
 									"_type": "span",
-									"text": "Open the admin panel to add content, or edit the Astro pages in src/pages to change how content is displayed.",
-									"_key": "k5"
+									"_key": "c2s",
+									"text": "Tell us the kind of company you want, the geography, and what makes one a great fit. We’ll run it through Scorecard and email you up to 100 candidates, with the 10 strongest matches highlighted and the evidence behind them. If the evidence supports fewer, we’ll say so.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "c3",
+							"style": "normal",
+							"markDefs": [
+								{
+									"_type": "link",
+									"_key": "lc",
+									"href": "/challenge"
 								}
 							],
-							"_key": "k4"
+							"children": [
+								{
+									"_type": "span",
+									"_key": "c3a",
+									"text": "The first 10 accepted searches are free, in exchange for honest feedback on the list. Send yours from the ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "c3b",
+									"text": "challenge page",
+									"marks": [
+										"lc"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "c3c",
+									"text": ".",
+									"marks": []
+								}
+							]
 						}
 					]
 				},
 				"taxonomies": {
-					"category": [
-						"general"
-					],
 					"tag": [
-						"starter",
-						"example"
+						"new-feature"
 					]
 				}
 			}
@@ -620,7 +581,7 @@
 								}
 							],
 							"coverage_cta_label": "See what’s new in the changelog →",
-							"coverage_cta_href": "#",
+							"coverage_cta_href": "/blog/tag/new-feature",
 							"cta_heading": "Try it on your own market.",
 							"cta_label": "Start free trial",
 							"cta_href": "https://app.scorecardgtm.com/sign-up",

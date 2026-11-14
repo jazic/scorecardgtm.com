@@ -1,0 +1,32 @@
+---
+import { getEmDashCollection, getTermsForEntries } from "emdash";
+
+// Post list for /blog and /blog/tag/{tag}. Newest first; tagged posts show their tags.
+interface Props { heading: string; intro: string; tag?: string }
+const { heading, intro, tag } = Astro.props;
+const { entries: posts, cacheHint } = await getEmDashCollection("posts", {
+	status: "published",
+	orderBy: { published_at: "desc" },
+	limit: 50,
+	...(tag ? { where: { tag } } : {}),
+});
+if (Astro.cache?.enabled) Astro.cache.set(cacheHint);
+const tags = await getTermsForEntries("posts", posts.map((p: any) => p.data.id), "tag");
+const date = (d: Date | null) => (d ? new Date(d).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" }) : "");
+---
+<section class="blog" id="top"><div class="wrap">
+  <div class="pts-head">
+    {tag && <a class="who" href="/blog">← All posts</a>}
+    <h1>{heading}</h1>
+    <p>{intro}</p>
+  </div>
+  {posts.length === 0 ? <p class="blog-empty">Nothing here yet.</p> : (
+  <ol class="blog-list">{posts.map((p: any) => (
+    <li>
+      <div class="blog-meta"><time datetime={p.data.publishedAt ? new Date(p.data.publishedAt).toISOString() : undefined}>{date(p.data.publishedAt)}</time>{(tags.get(p.data.id) ?? []).map((t: any) => <a class="soontag" href={`/blog/tag/${t.slug}`}>{t.label}</a>)}</div>
+      <h2><a href={`/blog/${p.id}`}>{p.data.title}</a></h2>
+      {p.data.excerpt && <p>{p.data.excerpt}</p>}
+    </li>
+  ))}</ol>
+  )}
+</div></section>

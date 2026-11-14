@@ -1,0 +1,15 @@
+---
+import { getTerm } from "emdash";
+import BlogList from "../../../components/home/BlogList.astro";
+import Layout from "../../../components/home/Layout.astro";
+import NotFound from "../../../components/home/NotFound.astro";
+
+// /blog/tag/new-feature is the changelog the footer links to.
+const term = await getTerm("tag", Astro.params.tag!);
+if (!term) Astro.response.status = 404;
+---
+{term ? (
+  <Layout title={`${term.slug === "new-feature" ? "What’s new" : term.label} · Scorecard`} description={`Scorecard posts tagged ${term.label}.`}>
+    <BlogList heading={term.slug === "new-feature" ? "What’s new" : term.label} intro={term.slug === "new-feature" ? "What we’ve shipped lately, newest first." : `Posts tagged ${term.label}.`} tag={term.slug} />
+  </Layout>
+) : <NotFound />}

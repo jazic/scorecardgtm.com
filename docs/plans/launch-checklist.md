@@ -1,120 +1,89 @@
 # Launch checklist: EmDash site → scorecardgtm.com
 
-Written 2026-11-14 from the state of `cloudflare-astro-migration` (EmDash 1.5.0). Each item says who acts:
-**J** = Justin decides or supplies, **C** = Claude can do it, **J+C** = Justin decides, Claude builds.
+Updated 2026-11-14 (`cloudflare-astro-migration`, EmDash 1.5.0). **J** = Justin decides or supplies, **C** = Claude builds.
+
+**Order:** finish the code blockers (A), rebuild the production DB once from the final seed (B), then Justin edits content
+in the production CMS (C) while QA runs (D), then cutover (E). After step B, production is the source of truth for copy.
+EmDash only installs schema (block types, collections) when a fresh database is set up, so any schema change after B goes
+through the EmDash CLI/API instead of `seed.json`.
 
 ## Pages going to production
 
-| Page | URL | Status |
-| --- | --- | --- |
-| Home | `/` | Built (`landing` entry `home`). Copy placeholders to resolve (section 2). |
-| Challenge | `/challenge` | Built. Form saves to the CMS and emails the team. Two FAQ answers to confirm. |
-| Contact | `/contact` | Built 2026-11-14. Form saves to the CMS and emails the team. |
-| Acquisition search | `/acquisition-search` | Built 2026-11-14: the old `eta-search.html`, rewritten in the new design. Two FAQ placeholders. |
-| Sales teams | `/sales-teams` | **Placeholder**: hero from the homepage card and a sign-up close. Needs a page like acquisition search. |
-| Founders and CEOs | `/founders` | **Placeholder**: same. |
-| Privacy | `/privacy` | **Draft** (2026-11-14), from `legal/privacy.md`. Needs review and the [bracketed] facts. |
-| Terms | `/terms` | **Draft** (2026-11-14), from `legal/terms.md`. Same. |
-| About | `/about` | Maybe. Decide (J). |
-| Blog | `/blog`, `/blog/{slug}` | Maybe. The starter `posts` collection is ready, but it has no routes or design yet. |
-| 404 | any unknown URL | **Missing.** Needs a designed page (section 4). |
-| App sign-up | `https://app.scorecardgtm.com/sign-up` | Linked from every "Start free trial". |
-| App sign-in | `https://app.scorecardgtm.com/sign-in` | Linked from nav and footer "Sign in". |
+| Page | URL | Code | Content (CMS) |
+| --- | --- | --- | --- |
+| Home | `/` | Done | FAQ placeholders, coverage figures, pricing |
+| Challenge | `/challenge` | Done (form → CMS + email) | Acceptance and turnaround FAQ |
+| Contact | `/contact` | Done (form → CMS + email) | Reply-time promise |
+| Acquisition search | `/acquisition-search` | Done | Two FAQ placeholders |
+| Sales teams | `/sales-teams` | Done (`audience_hero`, `points`, `faq`, `signup` blocks) | Placeholder: write it out like acquisition search |
+| Founders and CEOs | `/founders` | Done (same blocks) | Placeholder: same |
+| Privacy | `/privacy` | Done (`prose` block) | Draft: [bracketed] facts and a lawyer review |
+| Terms | `/terms` | Done (`prose` block) | Draft: same |
+| About | `/about` | Ready: create a landing entry with slug `about` from the existing blocks | Optional |
+| Blog | `/blog`, `/blog/{slug}`, `/blog/tag/new-feature` (changelog) | Done | Posts; tag new features "New feature" |
+| 404 | unknown URLs | Done | – |
+| App sign-up / sign-in | `app.scorecardgtm.com/sign-up`, `/sign-in` | Linked | – |
 
-Not shipping: the 11 legacy pages in `website/` (see section 3).
+Not shipping: the 11 legacy `website/` pages. They now 301 to their new homes (`site/astro.config.mjs`).
 
-## 1. Dead links and missing destinations (blockers)
+## A. Code blockers (Claude, before the final production rebuild)
 
-- [x] Sign-up and sign-in point to the app (2026-11-14): every "Start free trial" button and the three
-  who-it's-for card links → `https://app.scorecardgtm.com/sign-up`; nav and footer "Sign in" → `/sign-in`.
-- [x] Contact page (2026-11-14). Footer "Contact", both FAQ "Talk to us" links and the Teams "Talk about a pilot" → `/contact`.
-- [x] Privacy and Terms drafted (2026-11-14): `legal/privacy.md` and `legal/terms.md`, published as `/privacy` and `/terms`
-  (a `prose` block; `python3 legal/to-seed.py` copies the Markdown into the seed) and linked in the footer.
-- [ ] **J** Fill in the [brackets]: legal entity name, mailing address, governing state and county, payment processor,
-  AI and data providers that receive search inputs, retention periods, trial, credit and refund rules, and the sources and
-  contact details in results. Then a lawyer review, ideally before launch, given the owner and contact data in results.
-- [ ] **J+C** Changelog: the footer link and the "See what's new in the changelog →" link both go to `#`. Either build a changelog page (a `posts`-style collection) or remove both links.
-- [ ] **J** About and Blog: in or out for launch? If in, **C** builds `/about` (landing entry) and `/blog` (a list plus
-  post template on the `posts` collection, in the homepage design).
-- [ ] **C** Run a link check on every published page once the above is in (no `#` hrefs except section anchors).
+- [x] **A1.** Blog (2026-11-14): `/blog`, `/blog/{slug}`, `/blog/tag/{tag}`; the changelog is `/blog/tag/new-feature` ("What's new"), and the footer "Changelog" and coverage card link point there. Was: Blog and Changelog: build `/blog` (list + post template on `posts`) and/or a changelog,
+  or launch without them. If without: the footer "Changelog" and the coverage card's changelog link are removed in the CMS (content).
+- [x] **A2.** A 404 page in the site design (unknown URLs return a plain "Not found" today).
+- [x] **A3.** SEO basics (sitemap and robots.txt are EmDash's built-ins; known limit: the sitemap lists `/home`, which 301s to `/`): `robots.txt`, sitemap, canonical URLs, `og:`/Twitter tags with a default share image
+  (made from the design system, J approves), `apple-touch-icon` + SVG favicon.
+- [x] **A4.** Keep workers.dev out of search engines until cutover (`noindex` on any host other than scorecardgtm.com).
+- [x] **A5.** (Dropped the rule: the texture was never visible in the approved v35 page. It's in `mockups/textures/v15/` if wanted.) Fix the missing `textures/v15/close-halftone-bg.svg` (sign-up section background): find the asset or drop the rule.
+- [x] **A6.** PostHog events (`start_trial_click`, `sign_in_click`, `form_submit`): "Start free trial" clicks, "Sign in" clicks, contact and challenge submissions.
+- [x] **A7.** Performance (CSS and scripts now static cached files: page HTML 838→96 KB home, 693→26 KB contact). Was:: pages without agent sections still inline the 175 KB d3/topojson bundle (the logo script needs it),
+  and every page inlines 465 KB of CSS. Measure with Lighthouse; trim or serve as cached files only if it matters. Homepage visuals stay identical.
+- [x] **A8.** Decided: no confirmation email for launch. Automatic confirmation email to people who submit a form.
+- [ ] **A9. C (optional)** Cloudflare Turnstile on the forms if spam appears (honeypot only today).
 
-## 1b. Forms and transactional email
+## B. Final production rebuild (Claude, after A)
 
-Built 2026-11-14: a `forms` EmDash plugin (`site/src/plugins/forms.ts`) takes contact and challenge posts, saves
-each one as a draft in the **Form submissions** collection in the CMS, and emails the team. Email goes through
-EmDash's Cloudflare provider, `cloudflareEmail()`, over Cloudflare Email Sending. The same provider sends the CMS's
-own mail: sign-in links, invites and account recovery. Tested in dev: saving, validation, honeypot, cross-origin
-blocking, and drafts not reachable without login. In dev, Wrangler writes each email to `site/.wrangler/tmp/email/`
-instead of sending it.
+- [ ] **B1. C** Fresh D1 from the final seed, deploy, J runs the setup wizard with sample content (same steps as 2026-11-14,
+  see `plan-cloudflare-emdash-migration.md`). Old DBs stay for rollback.
+- [ ] **B2. C** Verify on workers.dev: every page, redirects, both forms (CMS record + email), CMS edit → publish → page updates,
+  draft preview, Admin → Settings → Email → Send test email.
 
-- [x] Email Sending enabled for `tx.scorecardgtm.com` (2026-11-14, `wrangler email sending enable`). Cloudflare published
-  the records: bounce MX and SPF on `cf-bounce.tx`, DKIM `cf-bounce._domainkey.tx`, and DMARC `p=reject` on `_dmarc.tx`.
-  The root domain's Google MX/SPF/DKIM are untouched. Sender `notifications@tx.scorecardgtm.com`, replies and
-  notifications to `hello@scorecardgtm.com` (both in `site/astro.config.mjs`). A test email was queued to hello@.
-- [x] Test email delivered to the inbox (2026-11-14): mailed-by `cf-bounce.tx.scorecardgtm.com` (SPF), signed-by `tx.scorecardgtm.com` (DKIM, aligned).
-- [ ] **J** Add DMARC for the root domain (none today): TXT `_dmarc` = `v=DMARC1; p=none; rua=mailto:hello@scorecardgtm.com`.
-  Wrangler's login can't edit DNS, so this goes in the dashboard. Tighten it to `p=quarantine` once reports look clean.
-- [ ] **J** Keep marketing or newsletter mail off `tx.`. Use its own subdomain (e.g. `news.`) so complaints can't hurt sign-in and form mail.
-- [x] `hello@scorecardgtm.com` is an alias of justin@ (Google Workspace, 2026-11-14). Switch it to a Google Group when more people should get it.
-- [ ] **C** After deploy: Admin → Settings → Email → Send test email, then one real submission of each form.
-- [ ] **J** Decide whether submitters get an automatic confirmation email ("we got your search"). **C** adds it to the plugin if yes.
-- [ ] **C** If spam shows up: add Cloudflare Turnstile to both forms (today there's only a honeypot).
-- [ ] **C** Known limit: when validation fails without JavaScript, the redirect back clears what was typed.
-  The browser's own `required` checks catch most of it first. Add JS submit-in-place if it matters.
+## C. Content (Justin, in the production CMS, after B)
 
-## 2. Content to confirm or replace (blockers)
+- [ ] Homepage FAQ: 7 bracketed placeholders (sign-up, coverage and criteria, sources and corrections, contact data, CSV export, trial, billing).
+- [ ] Coverage card: real numbers for Signals, sources and refresh, and the source chips, or remove the card.
+- [ ] Pricing: $59/month, 14 days / 500 credits, the 10 comparison rows.
+- [ ] Challenge FAQ: what "accepted" means and the turnaround; contact and challenge success messages (reply time).
+- [ ] Acquisition search FAQ: CSV upload of an existing list, coverage.
+- [ ] Sales teams and founders pages (the old `sales-leaders.html`/`ceos-founders.html` in git history are a starting point).
+- [ ] Privacy and Terms: entity, address, governing law, payment processor, AI and data providers, retention, trial and credit rules,
+  sources and contact data in results. Lawyer review. (Review copies in `legal/`.)
+- [ ] Blog posts: replace or edit the first post; tag feature launches "New feature". Optional About page.
+- [ ] Example data in the coded visuals: confirm nothing reads as a real customer or claim (that one is code; tell Claude what to change).
+- [ ] Final copy read of every page against `docs/vision.md`.
 
-- [ ] **J** Homepage FAQ: 7 bracketed placeholders, highlighted on the page:
-  signup/first-search requirements · geographic coverage, criteria and custom Signal access · source links, checked dates and the correction workflow · contact coverage, plan access and credit costs · CSV availability and fields · trial duration, credits and feature access · card/billing rules, post-trial access and retention.
-- [ ] **J** Challenge FAQ: what "accepted" means, and the turnaround time.
-- [ ] **J** Contact and challenge success messages promise "a reply within one business day" and a list "by email". Confirm we can keep that.
-- [ ] **J** Coverage card figures, marked `data-placeholder="figures"`: "140+ Signals (+18 this quarter)", "28 data sources (+4)", "Weekly refresh, last update Nov 10". Real numbers, or drop the card.
-- [ ] **J** Pricing: confirm $59/month, 14 days / 500 credits, and the 10 comparison rows.
-- [ ] **J** Coded example data in the visuals (hero account card, the who-it's-for charts, the agent stages): it's fine as labelled examples. Confirm nothing in them reads as a real customer or a real claim.
-- [ ] **J+C** Sales teams and founders pages: write them out like `/acquisition-search` (problem, how it works, examples, FAQ). The old
-  `sales-leaders.html` and `ceos-founders.html` in git history are a starting point.
-- [ ] **J** Acquisition search FAQ: CSV upload of an existing list, and coverage details.
-- [ ] **J** Final copy read of `/`, `/challenge`, `/contact` and `/acquisition-search`, with one eye on the brand voice in `docs/vision.md`.
+## D. QA (before cutover)
 
-## 3. Legacy pages: not shipping
+- [ ] **C** Screenshots at 1440 / 1024 / 768 / 390 for every page; console clean; no asset 404s.
+- [ ] **C** Accessibility pass (axe/Lighthouse, keyboard through nav, FAQ, forms; focus rings; contrast on dark sections); reduced-motion run.
+- [ ] **J** Real devices: iPhone Safari, Mac Safari (nav blur), Chrome, Firefox; scroll every agent section through.
+- [ ] **J** A real challenge submission and a real trial sign-up end to end.
 
-Decided 2026-11-14: none of the `website/` pages go to production. The build no longer copies them
-(`sync:design-system` copies only `design-system/`). All 11 still return 200 on scorecardgtm.com today, so cutover needs redirects:
+## E. Cutover
 
-- [x] 301 redirects in `site/astro.config.mjs` (2026-11-14): `eta-search`, `eta-search-wireframe` and `private-equity` → `/acquisition-search`,
-  `sales-leaders` → `/sales-teams`, `ceos-founders` → `/founders`, `how-scorecard-works` → `/#how`, the rest and `/index.html` → `/`
-  (`.html` and extensionless).
-- [ ] **C** After cutover: delete `website/` and `.github/workflows/pages.yml`, and update `CLAUDE.md` (it still describes GitHub Pages).
+- [ ] **J** Root-domain DMARC: TXT `_dmarc` = `v=DMARC1; p=none; rua=mailto:hello@scorecardgtm.com` (dashboard; Wrangler can't edit DNS).
+- [ ] **C** Set `EMDASH_SITE_URL=https://scorecardgtm.com`; add `routes` for the apex (and `www` → apex) to `wrangler.jsonc`.
+- [ ] **J+C** Delete the apex/`www` records pointing at GitHub Pages, deploy, then register the admin passkey again on scorecardgtm.com
+  (passkeys are per hostname). Leave `app.` (Vercel) and the Google MX/TXT records alone.
+- [ ] **J+C** Check apex, `www`, HTTPS, legacy redirects, forms and email, PostHog events, admin login, and that `app.` still works.
+- [ ] **C** Remove the custom domain from GitHub Pages; delete `website/` and `.github/workflows/pages.yml`; update `CLAUDE.md`.
+- [ ] **J** Invite other CMS editors. Decide whether Workers Builds should auto-deploy `main` (not connected today).
 
-## 4. Site basics we don't have yet
+## Done
 
-- [ ] **C** A proper 404 page in the site design. `/anything` currently returns a plain "Not found".
-- [ ] **C** `robots.txt` and `sitemap.xml` (check EmDash's built-in sitemap first).
-- [ ] **J+C** Social share tags: `og:title/description/image` and Twitter card. **J** approves an OG image, **C** makes one from the design system.
-- [ ] **C** Favicons: add an `apple-touch-icon` and an SVG favicon (only `favicon-32.png` exists today).
-- [ ] **C** Canonical URL, and set `EMDASH_SITE_URL=https://scorecardgtm.com` so SEO links and passkeys use the real domain.
-- [ ] **J** Analytics: confirm PostHog on all pages, with person profiles "always" and session replay on. Add events for "Start free trial" clicks and challenge submissions. A privacy policy mention is required (see 1).
-- [ ] **C** Performance: each page inlines about 465 KB of CSS and 175 KB of d3 (`/challenge` needs neither). Measure with Lighthouse, then serve them as cached files or trim them. The homepage visuals must stay identical.
-
-## 5. Production infrastructure (in order)
-
-- [x] Fresh D1 `scorecardgtm-v2` deployed to workers.dev (2026-11-14). Pages, redirects and both forms checked in production.
-- [ ] **C** Just before cutover, rebuild the production DB from the final seed (another fresh D1 + setup), since the DB is scratch until then.
-- [ ] **J** Workers Builds isn't connected (every deploy so far came from Wrangler). Decide whether pushes to `main` should auto-deploy.
-- [ ] **C** Verify on workers.dev: both pages, the CMS edit → publish → page updates (cache), draft preview, and scheduled tasks (the cron runs every minute).
-- [ ] **J** Decide on EmDash staging mode (keeps search engines out) for workers.dev until cutover.
-- [ ] **J+C** Custom domain: set `EMDASH_SITE_URL`, delete the apex/`www` records pointing at GitHub Pages, add `routes` (apex + `www` → apex redirect) to `wrangler.jsonc`, deploy, then redo the admin passkey on scorecardgtm.com (passkeys are per hostname). Leave `app.` (Vercel) and the Google MX/TXT records alone.
-- [ ] **C** After cutover, remove the custom domain from GitHub Pages and delete `pages.yml`.
-- [ ] **J** Invite other CMS editors (Settings → Users) once the domain is live.
-- [ ] **C** Note the backup story: D1 Time Travel (30 days) plus an occasional `wrangler d1 export`. From launch on, the CMS, not `seed.json`, is the source of truth for copy.
-
-## 6. QA before cutover
-
-- [ ] **C** Screenshots at 1440 / 1024 / 768 / 390 for every page, compared with the approved v35 design.
-- [ ] **J** Real devices: iPhone Safari, Mac Safari (nav blur), Chrome, Firefox. Scroll every agent section all the way through.
-- [ ] **C** Reduced-motion run: the animations settle, and nothing is hidden.
-- [ ] **C** Accessibility: axe/Lighthouse pass, keyboard through the nav, FAQ (expand all), challenge form and buttons, focus rings, contrast on the dark sections.
-- [ ] **C** Console clean on every page. No mixed content, no 404s for assets. Known: `home.css` points at `textures/v15/close-halftone-bg.svg`, which doesn't exist, so the sign-up section's halftone background is missing. Find the asset or drop the rule.
-- [ ] **J** Submit a real challenge search end to end, and a real trial sign-up once the links exist.
-- [ ] **C** Lighthouse performance/SEO scores recorded before and after the performance work.
-- [ ] **J+C** After DNS switches: check apex, `www`, HTTPS, old legacy URLs (redirects), the PostHog events arriving, the admin login on the real domain, and that `app.` still works.
+- Sign-up and sign-in links → app; contact page; forms plugin saving to **Form submissions** and emailing hello@.
+- Email Sending on `tx.scorecardgtm.com` (Cloudflare-managed SPF/DKIM/DMARC), delivery verified; hello@ is an alias of justin@.
+- Audience pages, Privacy and Terms drafts (`legal/`), legacy redirects, EmDash 1.5.0.
+- First production deploy on a fresh D1 (`scorecardgtm-v2`), pages and forms verified on workers.dev.
+- Backups: D1 Time Travel covers 30 days. `wrangler d1 export` fails on EmDash's FTS5 tables, so record a bookmark
+  (`wrangler d1 time-travel info <db>`) before risky changes.

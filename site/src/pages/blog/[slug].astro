@@ -1,0 +1,24 @@
+---
+import { getEmDashEntry, getEntryTerms, getSeoMeta } from "emdash";
+import { Image, PortableText } from "emdash/ui";
+import Layout from "../../components/home/Layout.astro";
+import NotFound from "../../components/home/NotFound.astro";
+
+const { entry: post, cacheHint } = await getEmDashEntry("posts", Astro.params.slug!);
+if (!post) Astro.response.status = 404;
+else if (Astro.cache?.enabled) Astro.cache.set(cacheHint);
+const tags = post ? await getEntryTerms("posts", post.data.id, "tag") : [];
+const seo = post ? getSeoMeta(post, { defaultTitle: `${post.data.title} · Scorecard`, defaultDescription: post.data.excerpt }) : null;
+const date = post?.data.publishedAt ? new Date(post.data.publishedAt) : null;
+---
+{post && seo ? (
+  <Layout title={seo.title} description={seo.description} type="article" image={post.data.featured_image?.src}>
+    <article class="prose post" id="top"><div class="wrap">
+      <a class="who" href="/blog">← Blog</a>
+      <h1>{post.data.title}</h1>
+      <div class="blog-meta">{date && <time datetime={date.toISOString()}>{date.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}</time>}{tags.map((t) => <a class="soontag" href={`/blog/tag/${t.slug}`}>{t.label}</a>)}</div>
+      {post.data.featured_image && <Image image={post.data.featured_image} class="post-image" />}
+      <div class="prose-body"><PortableText value={post.data.content} /></div>
+    </div></article>
+  </Layout>
+) : <NotFound />}

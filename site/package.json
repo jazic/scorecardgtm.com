@@ -8,7 +8,7 @@
     "seed": "seed/seed.json"
   },
   "scripts": {
-    "sync:design-system": "rm -rf public && mkdir public && rsync -a --exclude=.DS_Store ../design-system/ public/design-system/",
+    "sync:design-system": "rm -rf public && mkdir -p public/site && rsync -a --exclude=.DS_Store ../design-system/ public/design-system/ && cp src/styles/home.css public/site/home.css && for f in src/components/home/scripts/*.js.txt; do cp \"$f\" \"public/site/$(basename \"$f\" .txt)\"; done",
     "predev": "npm run sync:design-system",
     "prebuild": "npm run sync:design-system",
     "dev": "astro dev",

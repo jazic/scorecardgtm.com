@@ -1,5 +1,5 @@
 ---
-import { getMenu, getSeoMeta, getSiteSettings } from "emdash";
+import { getSeoMeta, getSiteSettings } from "emdash";
 import Agents from "./Agents.astro";
 import AudienceHero from "./AudienceHero.astro";
 import Audiences from "./Audiences.astro";
@@ -7,36 +7,19 @@ import Challenge from "./Challenge.astro";
 import Contact from "./Contact.astro";
 import Faq from "./Faq.astro";
 import Features from "./Features.astro";
-import Footer from "./Footer.astro";
 import Hero from "./Hero.astro";
-import Nav from "./Nav.astro";
+import Layout from "./Layout.astro";
 import Points from "./Points.astro";
 import Pricing from "./Pricing.astro";
 import Prose from "./Prose.astro";
 import Signup from "./Signup.astro";
-// Design CSS/JS ship verbatim, inline as in website/index.html. Bundling the CSS let Lightning CSS drop
-// the unprefixed backdrop-filter (nav blur), so it bypasses Vite processing via ?raw.
-import css from "../../styles/home.css?raw";
-import d3Array from "./scripts/1-d3-array.js.txt?raw";
-import logo from "./scripts/2-logo.js.txt?raw";
-import story from "./scripts/3-story.js.txt?raw";
-import jobs from "./scripts/4-jobs.js.txt?raw";
-import score from "./scripts/5-score.js.txt?raw";
-import faq from "./scripts/6-faq.js.txt?raw";
 
 // Renders a `landing` entry: CMS copy in the block components, design CSS/JS unchanged from website/index.html.
 const { entry } = Astro.props as { entry: any };
-// Home links its own sections as "#how"; other pages point those at "/#how".
-const home = entry.id === "home";
-const [settings, primary, footer, legal] = await Promise.all([
-	getSiteSettings(),
-	getMenu("primary"),
-	getMenu("footer"),
-	getMenu("legal"),
-]);
+const settings = await getSiteSettings();
 const siteTitle = settings.title || "Scorecard";
 const seo = getSeoMeta(entry, {
-	defaultTitle: settings.tagline ? `${siteTitle}: ${settings.tagline}` : siteTitle,
+	defaultTitle: entry.id === "home" ? (settings.tagline ? `${siteTitle}: ${settings.tagline}` : siteTitle) : entry.data.title.includes(siteTitle) ? entry.data.title : `${entry.data.title} · ${siteTitle}`,
 	defaultDescription: entry.data.description,
 });
 
@@ -51,52 +34,11 @@ for (const b of entry.data.sections ?? []) {
 		groups.push({ type: "agents", intro: b._type === "how_intro" ? b : undefined, agents: b._type === "agent" ? [b] : [] });
 	else groups.push({ type: "block", value: b });
 }
-// The story script drives the hero and agent sections; pages without agents only need the logo and nav.
-const hasAgents = groups.some((g) => g.type === "agents");
 ---
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{seo.title}</title>
-{seo.description && <meta name="description" content={seo.description}>}
-  <link rel="icon" type="image/png" sizes="32x32" href="/design-system/assets/favicon-32.png" />
-  <!-- PostHog: product analytics + session replay -->
-  <script is:inline>
-    !function(t,e){var o,n,p,r;e.__SV||(window.posthog && window.posthog.__loaded)||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="Xi tn init mn Qr yn xn pn capture calculateEventProperties Tn register register_once register_for_session unregister unregister_for_session Pn getFeatureFlag getFeatureFlagPayload getFeatureFlagResult isFeatureEnabled reloadFeatureFlags updateFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey displaySurvey cancelPendingSurvey canRenderSurvey canRenderSurveyAsync On identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset setIdentity clearIdentity get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException addExceptionStep captureLog startExceptionAutocapture stopExceptionAutocapture loadToolbar get_property getSessionProperty Mn Cn createPersonProfile setInternalOrTestUser Rn vn An opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing get_explicit_consent_status is_capturing clear_opt_in_out_capturing Sn debug Kr En getPageViewId captureTraceFeedback captureTraceMetric hn".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
-    posthog.init('phc_BsMQ4wmsDxP5ooamuEMVWUSaPakZ3QzkaLTSyVSd62fy', {
-        api_host: 'https://us.i.posthog.com',
-        defaults: '2026-05-30',
-        person_profiles: 'always', // capture all visitors, anonymous included
-        session_recording: { maskAllInputs: true }, // don't record text typed into the booking form
-    })
-  </script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@500;600&family=Caveat:wght@400;500;700&display=swap" rel="stylesheet">
-<style is:inline set:html={css}></style>
-</head>
-<body data-agent="c">
-
-<Nav items={primary?.items ?? []} siteTitle={siteTitle} home={home} />
-
+<Layout title={seo.title} description={seo.description} home={entry.id === "home"} hasAgents={groups.some((g) => g.type === "agents")}>
 {groups.map((g) => {
 	if (g.type === "agents") return <Agents intro={g.intro} agents={g.agents} />;
 	const Block = blocks[g.value._type];
 	return Block ? <Block value={g.value} /> : null;
 })}
-
-<Footer links={footer?.items ?? []} legal={legal?.items ?? []} siteTitle={siteTitle} home={home} />
-
-<script is:inline set:html={d3Array}></script>
-<script is:inline set:html={logo}></script>
-{hasAgents ? <>
-<script is:inline set:html={story}></script>
-<script is:inline set:html={jobs}></script>
-<script is:inline set:html={score}></script>
-</> : <>
-<script is:inline>ScLogo.init(); const navEl = document.querySelector('nav.top'); addEventListener('scroll', () => navEl.classList.toggle('scrolled', scrollY > 8), { passive: true });</script>
-</>}
-<script is:inline set:html={faq}></script>
-</body>
-</html>
+</Layout>

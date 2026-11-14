@@ -220,20 +220,6 @@ export interface Landing {
   terms?: Record<string, TaxonomyTerm[]>;
 }
 
-export interface Page {
-  id: string;
-  slug: string | null;
-  status: string;
-  title: string;
-  content?: PortableTextBlock[];
-  createdAt: Date;
-  updatedAt: Date;
-  publishedAt: Date | null;
-  byline?: BylineSummary | null;
-  bylines?: ContentBylineCredit[];
-  terms?: Record<string, TaxonomyTerm[]>;
-}
-
 export interface Post {
   id: string;
   slug: string | null;
@@ -274,7 +260,6 @@ export interface Submission {
 declare module "emdash" {
   interface EmDashCollections {
     landing: Landing;
-    pages: Page;
     posts: Post;
     submissions: Submission;
   }

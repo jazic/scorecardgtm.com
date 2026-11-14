@@ -44,14 +44,18 @@ This template ships with `.mcp.json`, `.cursor/mcp.json`, and `.vscode/mcp.json`
 
 ## This Site
 
-Scorecard's marketing site. `/` is the homepage, rendered from the CMS by `src/pages/index.astro`
-with the components in `src/components/home/`. Its markup matches the approved static design
-(`../website/index.html`) one-to-one, so the design CSS (`src/styles/home.css`, inlined) and scripts
-(`src/components/home/scripts/*.js.txt`, inlined) run unchanged. Don't restyle or restructure the
-markup in the components; edit copy in the CMS.
+Scorecard's marketing site. Every public page renders inside `src/components/home/Layout.astro` (head with SEO,
+canonical, share tags and favicons, PostHog plus named conversion events, nav, footer, design scripts). `noindex` is
+emitted on every host except scorecardgtm.com, so workers.dev and dev stay out of search engines.
 
-`/challenge` and `/contact` are landing entries rendered the same way. `npm run dev`/`build` run `sync:design-system`,
-which copies `../design-system/` into `public/` (gitignored). The legacy pages in `../website/` are not shipped.
+`landing` entries render through `LandingPage.astro` (one component per block type in `src/components/home/`). The
+homepage markup matches the approved static design (`../website/index.html`) one-to-one: don't restyle or restructure
+it; edit copy in the CMS.
+
+The design CSS (`src/styles/home.css`) and scripts (`src/components/home/scripts/*.js.txt`) are served as static files:
+`npm run dev`/`build` run `sync:design-system`, which copies them untouched into `public/site/` (and `../design-system/`
+into `public/design-system/`). Vite never processes them (bundling the CSS dropped the unprefixed `backdrop-filter`).
+**Restart the dev server after editing them.** The legacy pages in `../website/` are not shipped; their URLs 301 (astro.config.mjs).
 
 ## Pages
 
@@ -60,6 +64,10 @@ which copies `../design-system/` into `public/` (gitignored). The legacy pages i
 | Home         | `/`       | `landing` entry `home`                                            |
 | Challenge    | `/challenge` | `landing` entry `challenge` (challenge, faq, signup blocks)    |
 | Contact      | `/contact` | `landing` entry `contact` (contact block)                         |
+| Audience pages | `/acquisition-search`, `/sales-teams`, `/founders` | `landing` entries (audience_hero, points, faq, signup) |
+| Privacy, Terms | `/privacy`, `/terms` | `landing` entries with a `prose` block (review copies in `../legal/`) |
+| Blog         | `/blog`, `/blog/{slug}`, `/blog/tag/{tag}` | `posts` collection; `/blog/tag/new-feature` is the changelog |
+| 404          | unknown URLs | `src/pages/404.astro` / `NotFound.astro` (also used by routes that find no entry) |
 | Landing page | `/[slug]` | Other `landing` entries and draft previews (`/home` redirects `/`) |
 
 ## Schema
@@ -80,7 +88,7 @@ which copies `../design-system/` into `public/` (gitignored). The legacy pages i
   `forms` plugin (`src/plugins/forms.ts`, public route `/_emdash/api/plugins/forms/submit`), which also emails
   `notifyTo` (set in `astro.config.mjs`). Email goes through `cloudflareEmail()` (Cloudflare Email Sending, the
   `EMAIL` send_email binding). In dev, Wrangler writes sent mail to `.wrangler/tmp/email/`.
-- Starter `posts` and `pages` collections and the `category`/`tag` taxonomies are kept but have no routes.
+- `posts` collection (Blog posts, `/blog/{slug}`) with the `tag` taxonomy; the `new-feature` tag is the changelog.
 
 The seed (`seed/seed.json`) carries the schema and the full homepage copy. Schema applies on the first
 request to an empty database; content applies when setup runs (admin wizard with sample content, or

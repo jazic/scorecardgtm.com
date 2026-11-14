@@ -192,7 +192,18 @@ export interface LandingSectionsSignupV1Block {
 
 export type LandingSectionsSignupBlock = LandingSectionsSignupV1Block;
 
-export type LandingSectionsBlock = LandingSectionsHeroBlock | LandingSectionsChallengeBlock | LandingSectionsContactBlock | LandingSectionsAudienceHeroBlock | LandingSectionsPointsBlock | LandingSectionsAudiencesBlock | LandingSectionsHowIntroBlock | LandingSectionsAgentBlock | LandingSectionsFeaturesBlock | LandingSectionsPricingBlock | LandingSectionsFaqBlock | LandingSectionsSignupBlock;
+export interface LandingSectionsProseV1Block {
+  _type: "prose";
+  _version: 1;
+  _key: string;
+  "heading": string;
+  "updated"?: string | null;
+  "body"?: PortableTextBlock[] | null;
+}
+
+export type LandingSectionsProseBlock = LandingSectionsProseV1Block;
+
+export type LandingSectionsBlock = LandingSectionsHeroBlock | LandingSectionsChallengeBlock | LandingSectionsContactBlock | LandingSectionsAudienceHeroBlock | LandingSectionsPointsBlock | LandingSectionsAudiencesBlock | LandingSectionsHowIntroBlock | LandingSectionsAgentBlock | LandingSectionsFeaturesBlock | LandingSectionsPricingBlock | LandingSectionsFaqBlock | LandingSectionsSignupBlock | LandingSectionsProseBlock;
 
 export interface Landing {
   id: string;

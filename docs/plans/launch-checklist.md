@@ -13,8 +13,8 @@ Written 2026-11-14 from the state of `cloudflare-astro-migration` (EmDash 1.5.0)
 | Acquisition search | `/acquisition-search` | Built 2026-11-14: the old `eta-search.html`, rewritten in the new design. Two FAQ placeholders. |
 | Sales teams | `/sales-teams` | **Placeholder**: hero from the homepage card and a sign-up close. Needs a page like acquisition search. |
 | Founders and CEOs | `/founders` | **Placeholder**: same. |
-| Privacy | `/privacy` | **Missing.** Nothing exists today (scorecardgtm.com and app.scorecardgtm.com both 404). |
-| Terms | `/terms` | **Missing.** Same. |
+| Privacy | `/privacy` | **Draft** (2026-11-14), from `legal/privacy.md`. Needs review and the [bracketed] facts. |
+| Terms | `/terms` | **Draft** (2026-11-14), from `legal/terms.md`. Same. |
 | About | `/about` | Maybe. Decide (J). |
 | Blog | `/blog`, `/blog/{slug}` | Maybe. The starter `posts` collection is ready, but it has no routes or design yet. |
 | 404 | any unknown URL | **Missing.** Needs a designed page (section 4). |
@@ -28,10 +28,11 @@ Not shipping: the 11 legacy pages in `website/` (see section 3).
 - [x] Sign-up and sign-in point to the app (2026-11-14): every "Start free trial" button and the three
   who-it's-for card links → `https://app.scorecardgtm.com/sign-up`; nav and footer "Sign in" → `/sign-in`.
 - [x] Contact page (2026-11-14). Footer "Contact", both FAQ "Talk to us" links and the Teams "Talk about a pilot" → `/contact`.
-- [ ] **J+C** Privacy and Terms are `#`, and no version exists anywhere today. **J** supplies the policy text
-  (lawyer, Termly/iubenda, or a draft from Claude for review), **C** publishes `/privacy` and `/terms`
-  and links them. Needed before taking sign-ups or form submissions, and because PostHog session replay runs
-  on every page. The privacy policy has to mention PostHog, the form data we store, and Cloudflare.
+- [x] Privacy and Terms drafted (2026-11-14): `legal/privacy.md` and `legal/terms.md`, published as `/privacy` and `/terms`
+  (a `prose` block; `python3 legal/to-seed.py` copies the Markdown into the seed) and linked in the footer.
+- [ ] **J** Fill in the [brackets]: legal entity name, mailing address, governing state and county, payment processor,
+  AI and data providers that receive search inputs, retention periods, trial, credit and refund rules, and the sources and
+  contact details in results. Then a lawyer review, ideally before launch, given the owner and contact data in results.
 - [ ] **J+C** Changelog: the footer link and the "See what's new in the changelog →" link both go to `#`. Either build a changelog page (a `posts`-style collection) or remove both links.
 - [ ] **J** About and Blog: in or out for launch? If in, **C** builds `/about` (landing entry) and `/blog` (a list plus
   post template on the `posts` collection, in the homepage design).

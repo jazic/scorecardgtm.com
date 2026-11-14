@@ -1397,3 +1397,15 @@ nav.top .btn{white-space:nowrap}@media (max-width:760px){nav.top .wrap{gap:10px}
 .pts-list h3{font-size:19px;line-height:25px;font-weight:600;padding-bottom:4px}
 .pts-list p{font-size:16px;line-height:24px;color:var(--fg2);max-width:680px}
 @media (max-width:760px){.ahero .wrap{grid-template-columns:1fr;padding:48px 0 64px}.ahero h1{font-size:38px;line-height:42px}.pts{padding:64px 0}.pts-head h2{font-size:32px;line-height:36px}}
+/* long-form text pages (privacy, terms) */
+.prose .wrap{max-width:720px;padding:88px 0 112px}
+.prose h1{font-family:var(--font-display);font-size:48px;line-height:52px;letter-spacing:-.035em;font-weight:600}
+.prose-updated{padding-top:12px;font-size:14px;color:var(--fg3)}
+.prose-body{padding-top:32px;font-size:17px;line-height:28px;color:var(--fg2)}
+.prose-body p,.prose-body ul{margin-bottom:16px}
+.prose-body h2{font-size:24px;line-height:30px;letter-spacing:-.02em;font-weight:600;color:var(--ink);margin:40px 0 12px}
+.prose-body h3{font-size:19px;line-height:26px;font-weight:600;color:var(--ink);margin:28px 0 8px}
+.prose-body ul{padding-left:22px;list-style:disc}.prose-body li{margin-bottom:8px}
+.prose-body strong{color:var(--ink);font-weight:600}
+.prose-body a{color:var(--ink);text-decoration:underline;text-underline-offset:3px}
+@media (max-width:760px){.prose .wrap{padding:48px 0 72px}.prose h1{font-size:34px;line-height:38px}}

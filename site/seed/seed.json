@@ -120,7 +120,8 @@
 							"features",
 							"pricing",
 							"faq",
-							"signup"
+							"signup",
+							"prose"
 						]
 					}
 				}
@@ -313,12 +314,12 @@
 				{
 					"type": "custom",
 					"label": "Privacy",
-					"url": "#"
+					"url": "/privacy"
 				},
 				{
 					"type": "custom",
 					"label": "Terms",
-					"url": "#"
+					"url": "/terms"
 				}
 			]
 		}
@@ -1178,6 +1179,1568 @@
 							"body": "Send us a target profile and a geography, and we’ll run it through Scorecard. Or start a free trial and run it yourself.",
 							"cta_label": "Send us your search",
 							"cta_href": "/challenge"
+						}
+					]
+				}
+			},
+			{
+				"id": "privacy",
+				"slug": "privacy",
+				"status": "published",
+				"data": {
+					"title": "Privacy Policy",
+					"description": "Scorecard privacy policy.",
+					"sections": [
+						{
+							"_type": "prose",
+							"_version": 1,
+							"_key": "privacy-prose",
+							"heading": "Privacy Policy",
+							"updated": "Last updated: [Date]",
+							"body": [
+								{
+									"_type": "block",
+									"_key": "privacy0",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "privacy0s0",
+											"text": "This policy explains what information [Scorecard legal entity name] (\"Scorecard\", \"we\", \"us\") collects through scorecardgtm.com (the \"site\") and the Scorecard app at app.scorecardgtm.com (the \"service\"), how we use it, and the choices you have. If you have questions, email hello@scorecardgtm.com.",
+											"marks": []
+										}
+									]
+								},
+								{
+									"_type": "block",
+									"_key": "privacy1",
+									"style": "h2",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "privacy1s0",
+											"text": "Information you give us",
+											"marks": []
+										}
+									]
+								},
+								{
+									"_type": "block",
+									"_key": "privacy2",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "privacy2s1",
+											"text": "Forms on the site.",
+											"marks": [
+												"strong"
+											]
+										},
+										{
+											"_type": "span",
+											"_key": "privacy2s2",
+											"text": " When you use the contact form or send us a search through the challenge form, we collect your name, email address, company (if you give it), and what you write: your message, or your search, geography and criteria.",
+											"marks": []
+										}
+									],
+									"listItem": "bullet",
+									"level": 1
+								},
+								{
+									"_type": "block",
+									"_key": "privacy3",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "privacy3s1",
+											"text": "Your account.",
+											"marks": [
+												"strong"
+											]
+										},
+										{
+											"_type": "span",
+											"_key": "privacy3s2",
+											"text": " When you sign up for the service, we collect your name, email address and sign-in details.",
+											"marks": []
+										}
+									],
+									"listItem": "bullet",
+									"level": 1
+								},
+								{
+									"_type": "block",
+									"_key": "privacy4",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "privacy4s1",
+											"text": "What you put into the service.",
+											"marks": [
+												"strong"
+											]
+										},
+										{
+											"_type": "span",
+											"_key": "privacy4s2",
+											"text": " The searches you run, the criteria and Signals you define, lists you upload, and notes you add.",
+											"marks": []
+										}
+									],
+									"listItem": "bullet",
+									"level": 1
+								},
+								{
+									"_type": "block",
+									"_key": "privacy5",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "privacy5s1",
+											"text": "Billing.",
+											"marks": [
+												"strong"
+											]
+										},
+										{
+											"_type": "span",
+											"_key": "privacy5s2",
+											"text": " If you subscribe, our payment processor, [payment processor], collects your payment details. We don't store full card numbers.",
+											"marks": []
+										}
+									],
+									"listItem": "bullet",
+									"level": 1
+								},
+								{
+									"_type": "block",
+									"_key": "privacy6",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "privacy6s1",
+											"text": "Messages.",
+											"marks": [
+												"strong"
+											]
+										},
+										{
+											"_type": "span",
+											"_key": "privacy6s2",
+											"text": " If you email us, we keep the email and our reply.",
+											"marks": []
+										}
+									],
+									"listItem": "bullet",
+									"level": 1
+								},
+								{
+									"_type": "block",
+									"_key": "privacy7",
+									"style": "h2",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "privacy7s0",
+											"text": "Information we collect automatically",
+											"marks": []
+										}
+									]
+								},
+								{
+									"_type": "block",
+									"_key": "privacy8",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "privacy8s1",
+											"text": "Analytics and session recordings.",
+											"marks": [
+												"strong"
+											]
+										},
+										{
+											"_type": "span",
+											"_key": "privacy8s2",
+											"text": " We use PostHog to understand how people use the site: pages viewed, clicks, referring site, device and browser type, and approximate location derived from your IP address. PostHog also records sessions, a reconstruction of how the page looked and what was clicked, so we can find what's confusing. Text typed into form fields is masked and is not recorded. PostHog stores an identifier in your browser's cookies or local storage to recognize return visits.",
+											"marks": []
+										}
+									],
+									"listItem": "bullet",
+									"level": 1
+								},
+								{
+									"_type": "block",
+									"_key": "privacy9",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "privacy9s1",
+											"text": "Hosting and security logs.",
+											"marks": [
+												"strong"
+											]
+										},
+										{
+											"_type": "span",
+											"_key": "privacy9s2",
+											"text": " The site runs on Cloudflare, which processes your IP address and request details to deliver pages and protect against abuse.",
+											"marks": []
+										}
+									],
+									"listItem": "bullet",
+									"level": 1
+								},
+								{
+									"_type": "block",
+									"_key": "privacy10",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "privacy10s1",
+											"text": "Fonts.",
+											"marks": [
+												"strong"
+											]
+										},
+										{
+											"_type": "span",
+											"_key": "privacy10s2",
+											"text": " The site loads fonts from Google Fonts, so your browser sends your IP address to Google when it fetches them.",
+											"marks": []
+										}
+									],
+									"listItem": "bullet",
+									"level": 1
+								},
+								{
+									"_type": "block",
+									"_key": "privacy11",
+									"style": "h2",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "privacy11s0",
+											"text": "Information about businesses and the people who run them",
+											"marks": []
+										}
+									]
+								},
+								{
+									"_type": "block",
+									"_key": "privacy12",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "privacy12s0",
+											"text": "Scorecard researches US businesses using public sources such as company websites, public records and business directories. Results can include business details and the names, roles and business contact details of owners and employees, as they appear in those sources. We use this information only to provide the service: to help customers find, research and prioritize businesses. If you appear in our results and want your information corrected or removed, email hello@scorecardgtm.com and we'll handle it promptly.",
+											"marks": []
+										}
+									]
+								},
+								{
+									"_type": "block",
+									"_key": "privacy13",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "privacy13s0",
+											"text": "[Confirm the sources used, and whether contact details (email, phone) are included.]",
+											"marks": []
+										}
+									]
+								},
+								{
+									"_type": "block",
+									"_key": "privacy14",
+									"style": "h2",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "privacy14s0",
+											"text": "How we use information",
+											"marks": []
+										}
+									]
+								},
+								{
+									"_type": "block",
+									"_key": "privacy15",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "privacy15s0",
+											"text": "To run, maintain and improve the site and the service.",
+											"marks": []
+										}
+									],
+									"listItem": "bullet",
+									"level": 1
+								},
+								{
+									"_type": "block",
+									"_key": "privacy16",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "privacy16s0",
+											"text": "To answer your messages and to process challenge searches you send us.",
+											"marks": []
+										}
+									],
+									"listItem": "bullet",
+									"level": 1
+								},
+								{
+									"_type": "block",
+									"_key": "privacy17",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "privacy17s0",
+											"text": "To send service emails, such as sign-in links, account notices and replies to your messages. We send these through Cloudflare Email Sending.",
+											"marks": []
+										}
+									],
+									"listItem": "bullet",
+									"level": 1
+								},
+								{
+									"_type": "block",
+									"_key": "privacy18",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "privacy18s0",
+											"text": "To understand usage and fix problems.",
+											"marks": []
+										}
+									],
+									"listItem": "bullet",
+									"level": 1
+								},
+								{
+									"_type": "block",
+									"_key": "privacy19",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "privacy19s0",
+											"text": "To prevent fraud and abuse, and to meet legal obligations.",
+											"marks": []
+										}
+									],
+									"listItem": "bullet",
+									"level": 1
+								},
+								{
+									"_type": "block",
+									"_key": "privacy20",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "privacy20s0",
+											"text": "We don't sell personal information, and we don't share it for cross-context behavioral advertising.",
+											"marks": []
+										}
+									]
+								},
+								{
+									"_type": "block",
+									"_key": "privacy21",
+									"style": "h2",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "privacy21s0",
+											"text": "Who we share it with",
+											"marks": []
+										}
+									]
+								},
+								{
+									"_type": "block",
+									"_key": "privacy22",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "privacy22s0",
+											"text": "We share information only with service providers that help us run Scorecard, under agreements that limit their use of it:",
+											"marks": []
+										}
+									]
+								},
+								{
+									"_type": "block",
+									"_key": "privacy23",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "privacy23s1",
+											"text": "Cloudflare",
+											"marks": [
+												"strong"
+											]
+										},
+										{
+											"_type": "span",
+											"_key": "privacy23s2",
+											"text": ": website hosting, database, file storage and email sending.",
+											"marks": []
+										}
+									],
+									"listItem": "bullet",
+									"level": 1
+								},
+								{
+									"_type": "block",
+									"_key": "privacy24",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "privacy24s1",
+											"text": "PostHog",
+											"marks": [
+												"strong"
+											]
+										},
+										{
+											"_type": "span",
+											"_key": "privacy24s2",
+											"text": ": product analytics and session recordings.",
+											"marks": []
+										}
+									],
+									"listItem": "bullet",
+									"level": 1
+								},
+								{
+									"_type": "block",
+									"_key": "privacy25",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "privacy25s1",
+											"text": "Google",
+											"marks": [
+												"strong"
+											]
+										},
+										{
+											"_type": "span",
+											"_key": "privacy25s2",
+											"text": ": email (Google Workspace) and web fonts.",
+											"marks": []
+										}
+									],
+									"listItem": "bullet",
+									"level": 1
+								},
+								{
+									"_type": "block",
+									"_key": "privacy26",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "privacy26s1",
+											"text": "Vercel",
+											"marks": [
+												"strong"
+											]
+										},
+										{
+											"_type": "span",
+											"_key": "privacy26s2",
+											"text": ": hosting for the Scorecard app.",
+											"marks": []
+										}
+									],
+									"listItem": "bullet",
+									"level": 1
+								},
+								{
+									"_type": "block",
+									"_key": "privacy27",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "privacy27s1",
+											"text": "[Payment processor]",
+											"marks": [
+												"strong"
+											]
+										},
+										{
+											"_type": "span",
+											"_key": "privacy27s2",
+											"text": ": billing.",
+											"marks": []
+										}
+									],
+									"listItem": "bullet",
+									"level": 1
+								},
+								{
+									"_type": "block",
+									"_key": "privacy28",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "privacy28s1",
+											"text": "[AI and data providers]",
+											"marks": [
+												"strong"
+											]
+										},
+										{
+											"_type": "span",
+											"_key": "privacy28s2",
+											"text": ": research and analysis performed by the service. [List the providers that receive search inputs.]",
+											"marks": []
+										}
+									],
+									"listItem": "bullet",
+									"level": 1
+								},
+								{
+									"_type": "block",
+									"_key": "privacy29",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "privacy29s0",
+											"text": "We may also disclose information if the law requires it, to protect the rights and safety of Scorecard or others, or as part of a merger, acquisition or sale of assets.",
+											"marks": []
+										}
+									]
+								},
+								{
+									"_type": "block",
+									"_key": "privacy30",
+									"style": "h2",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "privacy30s0",
+											"text": "How long we keep it",
+											"marks": []
+										}
+									]
+								},
+								{
+									"_type": "block",
+									"_key": "privacy31",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "privacy31s0",
+											"text": "We keep form submissions and messages for as long as we need them to respond and follow up, and for up to [24 months] after that. We keep account data while your account is open, and for up to [90 days] after you close it, unless the law requires longer. Analytics data is kept according to PostHog's retention settings, currently [retention period].",
+											"marks": []
+										}
+									]
+								},
+								{
+									"_type": "block",
+									"_key": "privacy32",
+									"style": "h2",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "privacy32s0",
+											"text": "Your choices and rights",
+											"marks": []
+										}
+									]
+								},
+								{
+									"_type": "block",
+									"_key": "privacy33",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "privacy33s1",
+											"text": "Access, correction and deletion.",
+											"marks": [
+												"strong"
+											]
+										},
+										{
+											"_type": "span",
+											"_key": "privacy33s2",
+											"text": " Email hello@scorecardgtm.com and we'll help. We may need to verify your identity first.",
+											"marks": []
+										}
+									],
+									"listItem": "bullet",
+									"level": 1
+								},
+								{
+									"_type": "block",
+									"_key": "privacy34",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "privacy34s1",
+											"text": "Analytics.",
+											"marks": [
+												"strong"
+											]
+										},
+										{
+											"_type": "span",
+											"_key": "privacy34s2",
+											"text": " You can block PostHog with your browser's tracking protection or an ad blocker. The site still works.",
+											"marks": []
+										}
+									],
+									"listItem": "bullet",
+									"level": 1
+								},
+								{
+									"_type": "block",
+									"_key": "privacy35",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "privacy35s1",
+											"text": "Email.",
+											"marks": [
+												"strong"
+											]
+										},
+										{
+											"_type": "span",
+											"_key": "privacy35s2",
+											"text": " Service emails are necessary to run your account. We don't send marketing email without your permission.",
+											"marks": []
+										}
+									],
+									"listItem": "bullet",
+									"level": 1
+								},
+								{
+									"_type": "block",
+									"_key": "privacy36",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "privacy36s1",
+											"text": "California residents",
+											"marks": [
+												"strong"
+											]
+										},
+										{
+											"_type": "span",
+											"_key": "privacy36s2",
+											"text": " have the right to know what personal information we collect, to ask us to delete or correct it, and to not be discriminated against for using these rights. [Confirm whether CCPA thresholds apply.]",
+											"marks": []
+										}
+									],
+									"listItem": "bullet",
+									"level": 1
+								},
+								{
+									"_type": "block",
+									"_key": "privacy37",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "privacy37s1",
+											"text": "If you're in the EU, the UK or another region with data-protection laws",
+											"marks": [
+												"strong"
+											]
+										},
+										{
+											"_type": "span",
+											"_key": "privacy37s2",
+											"text": ", you may have additional rights, including the right to object to processing and to complain to your local data-protection authority. [Confirm the legal bases and international transfer mechanism if serving these regions.]",
+											"marks": []
+										}
+									],
+									"listItem": "bullet",
+									"level": 1
+								},
+								{
+									"_type": "block",
+									"_key": "privacy38",
+									"style": "h2",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "privacy38s0",
+											"text": "Security",
+											"marks": []
+										}
+									]
+								},
+								{
+									"_type": "block",
+									"_key": "privacy39",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "privacy39s0",
+											"text": "We use service providers with strong security practices, encrypt data in transit, and limit access to the people who need it. No system is perfectly secure, so we can't guarantee absolute security.",
+											"marks": []
+										}
+									]
+								},
+								{
+									"_type": "block",
+									"_key": "privacy40",
+									"style": "h2",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "privacy40s0",
+											"text": "Children",
+											"marks": []
+										}
+									]
+								},
+								{
+									"_type": "block",
+									"_key": "privacy41",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "privacy41s0",
+											"text": "Scorecard is a business tool and isn't directed to anyone under 16. We don't knowingly collect information from children.",
+											"marks": []
+										}
+									]
+								},
+								{
+									"_type": "block",
+									"_key": "privacy42",
+									"style": "h2",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "privacy42s0",
+											"text": "Changes",
+											"marks": []
+										}
+									]
+								},
+								{
+									"_type": "block",
+									"_key": "privacy43",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "privacy43s0",
+											"text": "If we change this policy, we'll update the date at the top, and for significant changes we'll let account holders know by email.",
+											"marks": []
+										}
+									]
+								},
+								{
+									"_type": "block",
+									"_key": "privacy44",
+									"style": "h2",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "privacy44s0",
+											"text": "Contact",
+											"marks": []
+										}
+									]
+								},
+								{
+									"_type": "block",
+									"_key": "privacy45",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "privacy45s0",
+											"text": "[Scorecard legal entity name] [Mailing address] hello@scorecardgtm.com",
+											"marks": []
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			},
+			{
+				"id": "terms",
+				"slug": "terms",
+				"status": "published",
+				"data": {
+					"title": "Terms of Service",
+					"description": "Scorecard terms of service.",
+					"sections": [
+						{
+							"_type": "prose",
+							"_version": 1,
+							"_key": "terms-prose",
+							"heading": "Terms of Service",
+							"updated": "Last updated: [Date]",
+							"body": [
+								{
+									"_type": "block",
+									"_key": "terms0",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "terms0s0",
+											"text": "These terms govern your use of scorecardgtm.com and the Scorecard app at app.scorecardgtm.com (together, the \"service\"), provided by [Scorecard legal entity name] (\"Scorecard\", \"we\", \"us\"). By creating an account or using the service, you agree to these terms. If you use Scorecard for a company, you agree on its behalf and confirm you're authorized to do so.",
+											"marks": []
+										}
+									]
+								},
+								{
+									"_type": "block",
+									"_key": "terms1",
+									"style": "h2",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "terms1s0",
+											"text": "The service",
+											"marks": []
+										}
+									]
+								},
+								{
+									"_type": "block",
+									"_key": "terms2",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "terms2s0",
+											"text": "Scorecard helps you find, research and rank businesses. You describe the companies you want, and Scorecard searches public sources, checks the criteria you set, and scores what it finds. We may change, add or remove features over time.",
+											"marks": []
+										}
+									]
+								},
+								{
+									"_type": "block",
+									"_key": "terms3",
+									"style": "h2",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "terms3s0",
+											"text": "Accounts",
+											"marks": []
+										}
+									]
+								},
+								{
+									"_type": "block",
+									"_key": "terms4",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "terms4s0",
+											"text": "You need an account to use the app. Keep your sign-in details secure and tell us at hello@scorecardgtm.com if you think someone else has accessed your account. You're responsible for activity under your account. You must be at least 18 to use Scorecard.",
+											"marks": []
+										}
+									]
+								},
+								{
+									"_type": "block",
+									"_key": "terms5",
+									"style": "h2",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "terms5s0",
+											"text": "Free trial, plans and payment",
+											"marks": []
+										}
+									]
+								},
+								{
+									"_type": "block",
+									"_key": "terms6",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "terms6s1",
+											"text": "Free trial.",
+											"marks": [
+												"strong"
+											]
+										},
+										{
+											"_type": "span",
+											"_key": "terms6s2",
+											"text": " New accounts get a free trial of [14 days] with [500 credits]. [Confirm whether a card is required, and what happens when the trial ends.]",
+											"marks": []
+										}
+									],
+									"listItem": "bullet",
+									"level": 1
+								},
+								{
+									"_type": "block",
+									"_key": "terms7",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "terms7s1",
+											"text": "Monthly plan.",
+											"marks": [
+												"strong"
+											]
+										},
+										{
+											"_type": "span",
+											"_key": "terms7s2",
+											"text": " The monthly plan costs [$59 per month] plus applicable taxes. It renews automatically each month until you cancel.",
+											"marks": []
+										}
+									],
+									"listItem": "bullet",
+									"level": 1
+								},
+								{
+									"_type": "block",
+									"_key": "terms8",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "terms8s1",
+											"text": "Credits.",
+											"marks": [
+												"strong"
+											]
+										},
+										{
+											"_type": "span",
+											"_key": "terms8s2",
+											"text": " Searches, research and scoring use credits. Unused credits [expire at the end of each billing period / roll over]. Credits have no cash value. [Confirm credit rules.]",
+											"marks": []
+										}
+									],
+									"listItem": "bullet",
+									"level": 1
+								},
+								{
+									"_type": "block",
+									"_key": "terms9",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "terms9s1",
+											"text": "Cancellation.",
+											"marks": [
+												"strong"
+											]
+										},
+										{
+											"_type": "span",
+											"_key": "terms9s2",
+											"text": " You can cancel at any time. You keep access until the end of the period you've paid for. Except where the law requires otherwise, payments are non-refundable.",
+											"marks": []
+										}
+									],
+									"listItem": "bullet",
+									"level": 1
+								},
+								{
+									"_type": "block",
+									"_key": "terms10",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "terms10s1",
+											"text": "Price changes.",
+											"marks": [
+												"strong"
+											]
+										},
+										{
+											"_type": "span",
+											"_key": "terms10s2",
+											"text": " We'll give you at least 30 days' notice of a price change. It applies from your next renewal after the notice.",
+											"marks": []
+										}
+									],
+									"listItem": "bullet",
+									"level": 1
+								},
+								{
+									"_type": "block",
+									"_key": "terms11",
+									"style": "h2",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "terms11s0",
+											"text": "The challenge offer",
+											"marks": []
+										}
+									]
+								},
+								{
+									"_type": "block",
+									"_key": "terms12",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "terms12s0",
+											"text": "When we offer to run a search for you through the challenge page, we choose which searches to accept. An accepted search may be free, in exchange for honest feedback on the results. Results are delivered by email and may include fewer companies than requested when the evidence supports fewer. The offer can end at any time.",
+											"marks": []
+										}
+									]
+								},
+								{
+									"_type": "block",
+									"_key": "terms13",
+									"style": "h2",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "terms13s0",
+											"text": "How you may use Scorecard",
+											"marks": []
+										}
+									]
+								},
+								{
+									"_type": "block",
+									"_key": "terms14",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "terms14s0",
+											"text": "You may use the service and its results for your own business purposes, such as prospecting, market research and acquisition search. You agree not to:",
+											"marks": []
+										}
+									]
+								},
+								{
+									"_type": "block",
+									"_key": "terms15",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "terms15s0",
+											"text": "break any law while using the service or its results, including anti-spam, telemarketing, privacy and data-protection laws (for example CAN-SPAM, the TCPA and state privacy laws) when you contact businesses or people found through Scorecard;",
+											"marks": []
+										}
+									],
+									"listItem": "bullet",
+									"level": 1
+								},
+								{
+									"_type": "block",
+									"_key": "terms16",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "terms16s0",
+											"text": "resell, publish or redistribute results or data from the service as a list or database product;",
+											"marks": []
+										}
+									],
+									"listItem": "bullet",
+									"level": 1
+								},
+								{
+									"_type": "block",
+									"_key": "terms17",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "terms17s0",
+											"text": "scrape, copy or bulk-download the service by automated means, except through features we provide for that purpose;",
+											"marks": []
+										}
+									],
+									"listItem": "bullet",
+									"level": 1
+								},
+								{
+									"_type": "block",
+									"_key": "terms18",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "terms18s0",
+											"text": "try to get around usage limits, security measures or credit accounting;",
+											"marks": []
+										}
+									],
+									"listItem": "bullet",
+									"level": 1
+								},
+								{
+									"_type": "block",
+									"_key": "terms19",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "terms19s0",
+											"text": "use the service to harass anyone or to discriminate unlawfully;",
+											"marks": []
+										}
+									],
+									"listItem": "bullet",
+									"level": 1
+								},
+								{
+									"_type": "block",
+									"_key": "terms20",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "terms20s0",
+											"text": "reverse-engineer the service, or use it to build a competing product.",
+											"marks": []
+										}
+									],
+									"listItem": "bullet",
+									"level": 1
+								},
+								{
+									"_type": "block",
+									"_key": "terms21",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "terms21s0",
+											"text": "We may suspend or close accounts that break these rules.",
+											"marks": []
+										}
+									]
+								},
+								{
+									"_type": "block",
+									"_key": "terms22",
+									"style": "h2",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "terms22s0",
+											"text": "Accuracy of results",
+											"marks": []
+										}
+									]
+								},
+								{
+									"_type": "block",
+									"_key": "terms23",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "terms23s0",
+											"text": "Scorecard's research comes from public sources and automated analysis. It can be incomplete, out of date or wrong. Each finding shows its source so you can check it, and information we can't find is marked unknown. Check anything important before you rely on it. Scorecard doesn't tell you whether a business owner wants to sell, and nothing in the service is legal, financial or investment advice.",
+											"marks": []
+										}
+									]
+								},
+								{
+									"_type": "block",
+									"_key": "terms24",
+									"style": "h2",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "terms24s0",
+											"text": "Your content",
+											"marks": []
+										}
+									]
+								},
+								{
+									"_type": "block",
+									"_key": "terms25",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "terms25s0",
+											"text": "You own what you put into Scorecard: your searches, criteria, uploaded lists and notes (\"your content\"). You give us permission to use your content to provide and improve the service for you. We don't share your content with other customers. If you send us feedback or suggestions, we may use them without any obligation to you.",
+											"marks": []
+										}
+									]
+								},
+								{
+									"_type": "block",
+									"_key": "terms26",
+									"style": "h2",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "terms26s0",
+											"text": "Our property",
+											"marks": []
+										}
+									]
+								},
+								{
+									"_type": "block",
+									"_key": "terms27",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "terms27s0",
+											"text": "The service, including its software, design, scores and the way results are compiled, belongs to Scorecard and its licensors. These terms give you a limited, non-exclusive, non-transferable right to use the service while your account is active.",
+											"marks": []
+										}
+									]
+								},
+								{
+									"_type": "block",
+									"_key": "terms28",
+									"style": "h2",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "terms28s0",
+											"text": "Third-party services",
+											"marks": []
+										}
+									]
+								},
+								{
+									"_type": "block",
+									"_key": "terms29",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "terms29s0",
+											"text": "Scorecard relies on third-party services, such as hosting, email and payment providers. Your use of a third-party service directly is governed by that provider's terms.",
+											"marks": []
+										}
+									]
+								},
+								{
+									"_type": "block",
+									"_key": "terms30",
+									"style": "h2",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "terms30s0",
+											"text": "Ending your use",
+											"marks": []
+										}
+									]
+								},
+								{
+									"_type": "block",
+									"_key": "terms31",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "terms31s0",
+											"text": "You can stop using Scorecard and close your account at any time. We may suspend or end your access if you break these terms, if we're required to by law, or if we stop offering the service. If we end the service for reasons other than your breach, we'll refund any prepaid fees for the unused period.",
+											"marks": []
+										}
+									]
+								},
+								{
+									"_type": "block",
+									"_key": "terms32",
+									"style": "h2",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "terms32s0",
+											"text": "Disclaimers",
+											"marks": []
+										}
+									]
+								},
+								{
+									"_type": "block",
+									"_key": "terms33",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "terms33s0",
+											"text": "The service is provided \"as is\" and \"as available\". To the extent the law allows, we disclaim all warranties, whether express or implied, including merchantability, fitness for a particular purpose and non-infringement. We don't promise the service will be uninterrupted or error-free.",
+											"marks": []
+										}
+									]
+								},
+								{
+									"_type": "block",
+									"_key": "terms34",
+									"style": "h2",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "terms34s0",
+											"text": "Limitation of liability",
+											"marks": []
+										}
+									]
+								},
+								{
+									"_type": "block",
+									"_key": "terms35",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "terms35s0",
+											"text": "To the extent the law allows, Scorecard won't be liable for any indirect, incidental, special, consequential or punitive damages, or for lost profits, revenue or data. Our total liability for any claim relating to the service is limited to the greater of the amount you paid us in the 12 months before the claim and $100.",
+											"marks": []
+										}
+									]
+								},
+								{
+									"_type": "block",
+									"_key": "terms36",
+									"style": "h2",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "terms36s0",
+											"text": "Indemnity",
+											"marks": []
+										}
+									]
+								},
+								{
+									"_type": "block",
+									"_key": "terms37",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "terms37s0",
+											"text": "You agree to defend and indemnify Scorecard against claims arising from your use of the service or its results in breach of these terms or the law, including claims about how you contacted businesses or people found through Scorecard.",
+											"marks": []
+										}
+									]
+								},
+								{
+									"_type": "block",
+									"_key": "terms38",
+									"style": "h2",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "terms38s0",
+											"text": "Changes to these terms",
+											"marks": []
+										}
+									]
+								},
+								{
+									"_type": "block",
+									"_key": "terms39",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "terms39s0",
+											"text": "We may update these terms. If a change is significant, we'll tell account holders by email at least 30 days before it takes effect. If you keep using the service after that, you accept the new terms.",
+											"marks": []
+										}
+									]
+								},
+								{
+									"_type": "block",
+									"_key": "terms40",
+									"style": "h2",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "terms40s0",
+											"text": "General",
+											"marks": []
+										}
+									]
+								},
+								{
+									"_type": "block",
+									"_key": "terms41",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "terms41s0",
+											"text": "These terms are governed by the laws of [State], without regard to its conflict-of-laws rules. Disputes will be resolved in the state or federal courts in [County, State]. If any part of these terms can't be enforced, the rest still applies. These terms, together with our Privacy Policy, are the entire agreement between you and Scorecard about the service.",
+											"marks": []
+										}
+									]
+								},
+								{
+									"_type": "block",
+									"_key": "terms42",
+									"style": "h2",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "terms42s0",
+											"text": "Contact",
+											"marks": []
+										}
+									]
+								},
+								{
+									"_type": "block",
+									"_key": "terms43",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "terms43s0",
+											"text": "[Scorecard legal entity name] [Mailing address] hello@scorecardgtm.com",
+											"marks": []
+										}
+									]
+								}
+							]
 						}
 					]
 				}
@@ -2109,6 +3672,35 @@
 							"slug": "cta_href",
 							"label": "Button link",
 							"type": "string"
+						}
+					]
+				}
+			]
+		},
+		{
+			"slug": "prose",
+			"label": "Long-form text",
+			"description": "A heading and rich text, for pages like Privacy and Terms.",
+			"currentVersion": 1,
+			"versions": [
+				{
+					"version": 1,
+					"fields": [
+						{
+							"slug": "heading",
+							"label": "Heading",
+							"type": "string",
+							"required": true
+						},
+						{
+							"slug": "updated",
+							"label": "Last updated line",
+							"type": "string"
+						},
+						{
+							"slug": "body",
+							"label": "Text",
+							"type": "portableText"
 						}
 					]
 				}

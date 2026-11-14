@@ -12,6 +12,7 @@ import Hero from "./Hero.astro";
 import Nav from "./Nav.astro";
 import Points from "./Points.astro";
 import Pricing from "./Pricing.astro";
+import Prose from "./Prose.astro";
 import Signup from "./Signup.astro";
 // Design CSS/JS ship verbatim, inline as in website/index.html. Bundling the CSS let Lightning CSS drop
 // the unprefixed backdrop-filter (nav blur), so it bypasses Vite processing via ?raw.
@@ -39,7 +40,7 @@ const seo = getSeoMeta(entry, {
 	defaultDescription: entry.data.description,
 });
 
-const blocks = { hero: Hero, challenge: Challenge, contact: Contact, audience_hero: AudienceHero, points: Points, audiences: Audiences, features: Features, pricing: Pricing, faq: Faq, signup: Signup } as Record<string, any>;
+const blocks = { hero: Hero, challenge: Challenge, contact: Contact, audience_hero: AudienceHero, points: Points, prose: Prose, audiences: Audiences, features: Features, pricing: Pricing, faq: Faq, signup: Signup } as Record<string, any>;
 // how_intro + the agent blocks after it render together inside one .agents wrapper.
 type Group = { type: "agents"; intro?: any; agents: any[] } | { type: "block"; value: any };
 const groups: Group[] = [];

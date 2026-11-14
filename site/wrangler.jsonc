@@ -13,9 +13,9 @@
 			"database_id": "7b692332-97c8-4ca4-9c16-0870d81e7665",
 		},
 	],
-	// Keep workers.dev (and preview URLs) on alongside the custom domains; Wrangler turns them off when routes exist.
-	"workers_dev": true,
-	"preview_urls": true,
+	// The site lives only at scorecardgtm.com (workers.dev and preview URLs off since 2026-11-14).
+	"workers_dev": false,
+	"preview_urls": false,
 	// Custom domains (Wrangler creates the DNS records). www redirects to the apex in src/worker.ts.
 	"routes": [
 		{ "pattern": "scorecardgtm.com", "custom_domain": true },

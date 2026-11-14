@@ -49,13 +49,13 @@ canonical, share tags and favicons, PostHog plus named conversion events, nav, f
 emitted on every host except scorecardgtm.com, so workers.dev and dev stay out of search engines.
 
 `landing` entries render through `LandingPage.astro` (one component per block type in `src/components/home/`). The
-homepage markup matches the approved static design (`../website/index.html`) one-to-one: don't restyle or restructure
+homepage markup matches the approved static design (`../archive/github-pages-site/index.html`) one-to-one: don't restyle or restructure
 it; edit copy in the CMS.
 
 The design CSS (`src/styles/home.css`) and scripts (`src/components/home/scripts/*.js.txt`) are served as static files:
 `npm run dev`/`build` run `sync:design-system`, which copies them untouched into `public/site/` (and `../design-system/`
 into `public/design-system/`). Vite never processes them (bundling the CSS dropped the unprefixed `backdrop-filter`).
-**Restart the dev server after editing them.** The legacy pages in `../website/` are not shipped; their URLs 301 (astro.config.mjs).
+**Restart the dev server after editing them.** The old static pages in `../archive/github-pages-site/` are not shipped; their URLs 301 (astro.config.mjs).
 
 ## Pages
 

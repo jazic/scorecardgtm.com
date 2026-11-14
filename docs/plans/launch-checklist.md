@@ -102,11 +102,13 @@ A deploy that fails on the custom-domain step stops before it re-enables workers
 - [ ] **J** Invite other CMS editors. Decide whether Workers Builds should auto-deploy `main` (not connected today).
 
 ### After cutover
-- [ ] **J** Sign in on scorecardgtm.com/_emdash/admin with the email link, add a passkey; then Settings: staging off, Site URL `https://scorecardgtm.com`.
+- [x] Settings (2026-11-14, via API): staging **off**, Site URL `https://scorecardgtm.com` (the domain-verify endpoint can't reach its own Worker, so set through settings `url`).
+- [ ] **J** Sign in on scorecardgtm.com/_emdash/admin with the email link and add a passkey (the workers.dev passkey doesn't work on the domain).
 - [ ] **J** Cloudflare → SSL/TLS → Edge Certificates → **Always Use HTTPS** on (`http://scorecardgtm.com` serves 200 today).
-- [ ] **C** Once J can sign in on the domain: turn workers.dev off (`workers_dev: false`) so there's one copy of the site.
-- [ ] **J** GitHub → repo Settings → Pages: remove the custom domain and unpublish. **C** then deletes `.github/workflows/pages.yml` and `website/` and merges this branch to `main`.
-- [ ] **C** Delete old D1s `scorecardgtm` and `scorecardgtm-v2`; delete test entries under Form submissions.
+- [x] workers.dev and preview URLs off (2026-11-14).
+- [x] GitHub Pages unpublished (`gh api -X DELETE …/pages`), workflow removed, `website/` archived to `archive/github-pages-site/` (2026-11-14). CLAUDE.md rewritten for the new setup.
+- [ ] **J** Merge the `cloudflare-astro-migration` PR into `main`.
+- [x] Old D1s `scorecardgtm` and `scorecardgtm-v2` deleted; test form submissions deleted (2026-11-14). Prod Time Travel bookmark saved in `~/src/scorecardgtm-backups/`.
 
 ## Done
 

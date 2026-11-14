@@ -19,4 +19,6 @@ export default defineConfig({
 		}),
 	],
 	devToolbar: { enabled: false },
+	// Dev server via `tailscale serve` (https://<machine>.<tailnet>.ts.net).
+	vite: { server: { allowedHosts: [".ts.net"] } },
 });

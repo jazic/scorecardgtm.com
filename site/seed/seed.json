@@ -187,13 +187,13 @@
 				{
 					"type": "custom",
 					"label": "Sign in",
-					"url": "#",
+					"url": "https://app.scorecardgtm.com/sign-in",
 					"cssClasses": "btn btn-ghost nav-signin"
 				},
 				{
 					"type": "custom",
 					"label": "Start free trial",
-					"url": "#signup",
+					"url": "https://app.scorecardgtm.com/sign-up",
 					"cssClasses": "btn btn-coral"
 				}
 			]
@@ -230,7 +230,7 @@
 				{
 					"type": "custom",
 					"label": "Sign in",
-					"url": "#"
+					"url": "https://app.scorecardgtm.com/sign-in"
 				}
 			]
 		},
@@ -350,7 +350,7 @@
 							"heading": "Target prospects worth the extra effort.",
 							"body": "Describe the businesses you want in plain words. Scorecard finds US companies that match, checks the evidence, and ranks them by what matters to you. Find the right accounts without building a research workflow or sorting through a noisy database.",
 							"cta_label": "Start free trial",
-							"cta_href": "#signup",
+							"cta_href": "https://app.scorecardgtm.com/sign-up",
 							"more_label": "How it works →",
 							"more_href": "#how"
 						},
@@ -367,7 +367,7 @@
 									"visual": "rank",
 									"outcome": "Each rep gets the best-fit accounts in their territory, ranked, with the person to approach.",
 									"cta_label": "Find your best-fit accounts →",
-									"cta_href": "#signup"
+									"cta_href": "https://app.scorecardgtm.com/sign-up"
 								},
 								{
 									"who": "Founders and CEOs",
@@ -376,7 +376,7 @@
 									"visual": "size",
 									"outcome": "See how many businesses match, where they are and what a typical one looks like, before you commit a rep.",
 									"cta_label": "Size your market →",
-									"cta_href": "#signup"
+									"cta_href": "https://app.scorecardgtm.com/sign-up"
 								},
 								{
 									"who": "Acquisition search",
@@ -385,7 +385,7 @@
 									"visual": "years",
 									"outcome": "Owner names and founding dates from public records. We mark “wants to sell” as unknown, because no record says so.",
 									"cta_label": "Find acquisition targets →",
-									"cta_href": "#signup"
+									"cta_href": "https://app.scorecardgtm.com/sign-up"
 								}
 							]
 						},
@@ -550,7 +550,7 @@
 							"coverage_cta_href": "#",
 							"cta_heading": "Try it on your own market.",
 							"cta_label": "Start free trial",
-							"cta_href": "#signup",
+							"cta_href": "https://app.scorecardgtm.com/sign-up",
 							"challenge_label": "Have a difficult search? Challenge Scorecard →",
 							"challenge_href": "/challenge"
 						},
@@ -565,7 +565,7 @@
 									"price": "$0",
 									"price_note": "for 14 days",
 									"cta_label": "Start free trial",
-									"cta_href": "#signup",
+									"cta_href": "https://app.scorecardgtm.com/sign-up",
 									"cta_style": "line",
 									"then_note": "",
 									"highlight": false,
@@ -576,7 +576,7 @@
 									"price": "$59",
 									"price_note": "per month",
 									"cta_label": "Start free trial",
-									"cta_href": "#signup",
+									"cta_href": "https://app.scorecardgtm.com/sign-up",
 									"cta_style": "coral",
 									"then_note": "Trial first, then $59/month",
 									"highlight": true,
@@ -699,7 +699,7 @@
 							"heading": "Find accounts worth the extra effort.",
 							"body": "Free for 14 days with 500 credits.",
 							"cta_label": "Start free trial",
-							"cta_href": "#"
+							"cta_href": "https://app.scorecardgtm.com/sign-up"
 						}
 					]
 				}
@@ -780,7 +780,7 @@
 							"heading": "Rather run it yourself?",
 							"body": "Free for 14 days with 500 credits.",
 							"cta_label": "Start free trial",
-							"cta_href": "/#signup"
+							"cta_href": "https://app.scorecardgtm.com/sign-up"
 						}
 					]
 				}

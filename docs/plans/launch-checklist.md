@@ -103,12 +103,12 @@ A deploy that fails on the custom-domain step stops before it re-enables workers
 
 ### After cutover
 - [x] Settings (2026-11-14, via API): staging **off**, Site URL `https://scorecardgtm.com` (the domain-verify endpoint can't reach its own Worker, so set through settings `url`).
-- [ ] **J** Sign in on scorecardgtm.com/_emdash/admin with the email link and add a passkey (the workers.dev passkey doesn't work on the domain).
+- [x] Sign in on scorecardgtm.com/_emdash/admin with the email link and add a passkey (the workers.dev passkey doesn't work on the domain).
 - [x] Always Use HTTPS on (2026-11-14; http → https 301).
 - [x] Google Search Console: domain property verified (DNS TXT), sitemap submitted (2026-11-14). Cloudflare managed robots.txt blocks AI-training crawlers.
 - [x] workers.dev and preview URLs off (2026-11-14).
 - [x] GitHub Pages unpublished (`gh api -X DELETE …/pages`), workflow removed, `website/` archived to `archive/github-pages-site/` (2026-11-14). CLAUDE.md rewritten for the new setup.
-- [ ] **J** Merge the `cloudflare-astro-migration` PR into `main`.
+- [x] PR #3 merged into `main` (2026-11-14).
 - [x] Old D1s `scorecardgtm` and `scorecardgtm-v2` deleted; test form submissions deleted (2026-11-14). Prod Time Travel bookmark saved in `~/src/scorecardgtm-backups/`.
 
 ## Done

@@ -90,7 +90,7 @@ Gotcha (2026-11-14): adding `routes` makes Wrangler turn workers.dev off unless 
 A deploy that fails on the custom-domain step stops before it re-enables workers.dev. Fix:
 `POST /accounts/{id}/workers/scripts/scorecardgtm/subdomain {"enabled":true}`.
 
-- [ ] **J** Root-domain DMARC: TXT `_dmarc` = `v=DMARC1; p=none; rua=mailto:hello@scorecardgtm.com` (dashboard; Wrangler can't edit DNS).
+- [x] (2026-11-14) Root-domain DMARC: TXT `_dmarc` = `v=DMARC1; p=none; rua=mailto:hello@scorecardgtm.com` (dashboard; Wrangler can't edit DNS).
 - [ ] **J** Admin → Settings: turn **staging** off (the wizard turns it on; it adds `noindex` everywhere), set **Site URL** to
   `https://scorecardgtm.com` (sitemap, robots.txt and JSON-LD use it), and add the **Google Search Console** (and Bing) verification codes.
 - [x] **2026-11-14 cutover done:** apex and www are Worker custom domains (www → apex in `src/worker.ts`); all pages, redirects and forms checked on scorecardgtm.com. `EMDASH_SITE_URL` deliberately not set (it would pin passkeys to the apex and lock out workers.dev). Was: Set `EMDASH_SITE_URL=https://scorecardgtm.com`; add `routes` for the apex (and `www` → apex) to `wrangler.jsonc`.
@@ -104,7 +104,8 @@ A deploy that fails on the custom-domain step stops before it re-enables workers
 ### After cutover
 - [x] Settings (2026-11-14, via API): staging **off**, Site URL `https://scorecardgtm.com` (the domain-verify endpoint can't reach its own Worker, so set through settings `url`).
 - [ ] **J** Sign in on scorecardgtm.com/_emdash/admin with the email link and add a passkey (the workers.dev passkey doesn't work on the domain).
-- [ ] **J** Cloudflare → SSL/TLS → Edge Certificates → **Always Use HTTPS** on (`http://scorecardgtm.com` serves 200 today).
+- [x] Always Use HTTPS on (2026-11-14; http → https 301).
+- [x] Google Search Console: domain property verified (DNS TXT), sitemap submitted (2026-11-14). Cloudflare managed robots.txt blocks AI-training crawlers.
 - [x] workers.dev and preview URLs off (2026-11-14).
 - [x] GitHub Pages unpublished (`gh api -X DELETE …/pages`), workflow removed, `website/` archived to `archive/github-pages-site/` (2026-11-14). CLAUDE.md rewritten for the new setup.
 - [ ] **J** Merge the `cloudflare-astro-migration` PR into `main`.

@@ -1,0 +1,8 @@
+---
+const { value: v } = Astro.props;
+---
+<section class="close" id="signup"><div class="wrap">
+  <h2 class="h-xl">{v.heading}</h2>
+  <p>{v.body}</p>
+  <a class="btn btn-coral close-cta" href={v.cta_href}>{v.cta_label}</a>
+</div></section>

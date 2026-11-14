@@ -1,0 +1,14 @@
+---
+import art from "./visuals/hero-art.html?raw";
+
+const { value: v } = Astro.props;
+---
+<header class="hero" id="top"><div class="wrap">
+  <div class="hero-copy">
+    <h1>{v.heading}</h1>
+    <p>{v.body}</p>
+    <div class="ctas"><a class="btn btn-coral" href={v.cta_href}>{v.cta_label}</a><a class="more" href={v.more_href}>{v.more_label}</a></div>
+  </div>
+  <canvas class="hero-map" aria-hidden="true"></canvas>
+  <Fragment set:html={art} />
+</div></header>

@@ -1,0 +1,9 @@
+---
+import { getEmDashEntry } from "emdash";
+import LandingPage from "../components/home/LandingPage.astro";
+
+const { entry, cacheHint } = await getEmDashEntry("landing", "home");
+if (!entry) return new Response("Home page entry missing: create a landing entry with slug \"home\".", { status: 500 });
+if (Astro.cache?.enabled) Astro.cache.set(cacheHint);
+---
+<LandingPage entry={entry} />

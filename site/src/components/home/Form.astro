@@ -1,0 +1,23 @@
+---
+// Posts to the forms plugin (src/plugins/forms.ts), which saves the submission to the CMS and emails a notification.
+// After the redirect back, ?sent=1 swaps the form for the success message.
+interface Field { name: string; label: string; placeholder?: string; rows?: number; type?: string; optional?: boolean }
+interface Props { kind: "contact" | "challenge"; fields: Field[]; v: any }
+const { kind, fields, v } = Astro.props;
+const sent = Astro.url.searchParams.has("sent");
+const error = Astro.url.searchParams.get("error");
+---
+{sent ? (
+  <div class="chform chdone" id="form" role="status"><h2>{v.success_heading}</h2><p>{v.success_body}</p></div>
+) : (
+  <form class="chform" id="form" action="/_emdash/api/plugins/forms/submit" method="post">
+    <input type="hidden" name="kind" value={kind} />
+    <label class="hp" aria-hidden="true">Website<input name="website" tabindex="-1" autocomplete="off" /></label>
+    {error && <p class="cherr" role="alert">{v.error_text}</p>}
+    {fields.map((f) => <label>{f.label}{f.rows
+      ? <textarea name={f.name} rows={f.rows} placeholder={f.placeholder} required={!f.optional} maxlength="5000"></textarea>
+      : <input name={f.name} type={f.type ?? "text"} placeholder={f.placeholder} required={!f.optional} maxlength="300" autocomplete={f.type === "email" ? "email" : f.name === "name" ? "name" : f.name === "company" ? "organization" : undefined} />}</label>)}
+    <div class="chcta"><button class="btn btn-coral" type="submit">{v.submit_label}</button>{v.offer && <span>{v.offer}</span>}</div>
+    {v.email && <p class="chalt">{v.alt_prompt} <a href={`mailto:${v.email}`}>{v.email}</a></p>}
+  </form>
+)}

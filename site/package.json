@@ -1,0 +1,39 @@
+{
+  "name": "scorecardgtm-site",
+  "version": "0.0.3",
+  "private": true,
+  "type": "module",
+  "emdash": {
+    "label": "Scorecard",
+    "seed": "seed/seed.json"
+  },
+  "scripts": {
+    "sync:design-system": "rm -rf public && mkdir -p public/site && rsync -a --exclude=.DS_Store ../design-system/ public/design-system/ && cp src/styles/home.css public/site/home.css && for f in src/components/home/scripts/*.js.txt; do cp \"$f\" \"public/site/$(basename \"$f\" .txt)\"; done",
+    "predev": "npm run sync:design-system",
+    "prebuild": "npm run sync:design-system",
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "deploy": "npm run build && wrangler deploy",
+    "typecheck": "astro check"
+  },
+  "dependencies": {
+    "@astrojs/cloudflare": "^14.3.1",
+    "@astrojs/react": "^7.0.0",
+    "@emdash-cms/cloudflare": "^1.5.0",
+    "astro": "^7.3.2",
+    "emdash": "^1.5.0",
+    "react": "19.2.4",
+    "react-dom": "19.2.4"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.10",
+    "@cloudflare/workers-types": "^5.20260820.1",
+    "wrangler": "^4.125.0"
+  },
+  "allowScripts": {
+    "esbuild@0.28.2": true,
+    "workerd@1.20261103.1": true,
+    "workerd@1.20261110.1": true
+  }
+}

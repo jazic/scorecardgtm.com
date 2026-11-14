@@ -1,0 +1,21 @@
+---
+import rank from "./visuals/job-rank.html?raw";
+import size from "./visuals/job-size.html?raw";
+import years from "./visuals/job-years.html?raw";
+
+const visuals: Record<string, string> = { rank, size, years };
+const { value: v } = Astro.props;
+---
+<section class="jobs" id="why"><div class="wrap">
+  <h2 class="h2c">{v.heading}</h2>
+  <div class="jcols">
+    {(v.cards ?? []).map((c: any) => (
+    <article class="job">
+      <span class="who">{c.who}</span>
+      <h3>{c.title}</h3>
+      <div class="jq"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><span>{c.query}</span></div><Fragment set:html={visuals[c.visual] ?? ""} />
+      <p class="jout">{c.outcome}</p>
+    <a class="job-cta" href={c.cta_href}>{c.cta_label}</a></article>
+    ))}
+  </div>
+</div></section>

@@ -1,0 +1,9 @@
+
+(() => {
+  const items = [...document.querySelectorAll('.faq .qa')], all = document.querySelector('.faq .qall');
+  const set = (qa, on) => { qa.classList.toggle('open', on); qa.querySelector('.qb').setAttribute('aria-expanded', on); };
+  const sync = () => { if (all) all.textContent = items.every(q => q.classList.contains('open')) ? 'Collapse all' : 'Expand all'; };
+  items.forEach(qa => qa.querySelector('.qb').addEventListener('click', () => { set(qa, !qa.classList.contains('open')); sync(); }));
+  if (all) all.addEventListener('click', () => { const open = !items.every(q => q.classList.contains('open')); items.forEach(q => set(q, open)); sync(); });
+  if (items[0]) set(items[0], true); sync();
+})();

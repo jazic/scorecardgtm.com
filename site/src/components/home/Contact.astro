@@ -1,0 +1,19 @@
+---
+import Form from "./Form.astro";
+
+const { value: v } = Astro.props;
+const fields = [
+	{ name: "name", label: v.name_label },
+	{ name: "email", label: v.email_label, type: "email" },
+	{ name: "company", label: v.company_label, optional: true },
+	{ name: "message", label: v.message_label, placeholder: v.message_placeholder, rows: 6 },
+];
+---
+<section class="challenge chpage" id="top"><div class="wrap">
+  <div class="chl">
+    <h1>{v.heading}</h1>
+    <p>{v.body}</p>
+    <ul class="chpts">{(v.points ?? []).map((p: any) => <li><b>{p.title}</b> {p.body}</li>)}</ul>
+  </div>
+  <Form kind="contact" fields={fields} v={v} />
+</div></section>

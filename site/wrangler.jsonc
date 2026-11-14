@@ -1,0 +1,38 @@
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "scorecardgtm",
+	"main": "./src/worker.ts",
+	"compatibility_date": "2026-11-10",
+	"compatibility_flags": ["nodejs_compat"],
+	"d1_databases": [
+		{
+			"binding": "DB",
+			// Production DB from 2026-11-14; the CMS here is the source of truth for copy.
+			// Earlier DBs ("scorecardgtm": starter schema, "scorecardgtm-v2": test run) are kept until launch for rollback.
+			"database_name": "scorecardgtm-prod",
+			"database_id": "7b692332-97c8-4ca4-9c16-0870d81e7665",
+		},
+	],
+	// The site lives only at scorecardgtm.com (workers.dev and preview URLs off since 2026-11-14).
+	"workers_dev": false,
+	"preview_urls": false,
+	// Custom domains (Wrangler creates the DNS records). www redirects to the apex in src/worker.ts.
+	"routes": [
+		{ "pattern": "scorecardgtm.com", "custom_domain": true },
+		{ "pattern": "www.scorecardgtm.com", "custom_domain": true },
+	],
+	"r2_buckets": [
+		{
+			"binding": "MEDIA",
+			"bucket_name": "scorecardgtm-media",
+		},
+	],
+	// Cloudflare Email Sending, used by the cloudflareEmail() plugin in astro.config.mjs.
+	"send_email": [{ "name": "EMAIL" }],
+	// Sandboxed plugins require Worker Loader, available on Workers paid plans. Uncomment to enable:
+	// "worker_loaders": [{ "binding": "LOADER" }],
+	// General maintenance cron trigger
+	"triggers": {
+		"crons": ["* * * * *"],
+	},
+}

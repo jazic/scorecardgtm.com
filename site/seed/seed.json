@@ -1,0 +1,3673 @@
+{
+	"$schema": "https://emdashcms.com/seed.schema.json",
+	"version": "1",
+	"meta": {
+		"name": "Scorecard",
+		"description": "Scorecard marketing site",
+		"author": "Scorecard"
+	},
+	"settings": {
+		"title": "Scorecard",
+		"tagline": "Target prospects worth the extra effort."
+	},
+	"collections": [
+		{
+			"slug": "posts",
+			"label": "Blog posts",
+			"labelSingular": "Blog post",
+			"urlPattern": "/blog/{slug}",
+			"supports": [
+				"drafts",
+				"revisions",
+				"preview",
+				"scheduling",
+				"search",
+				"seo"
+			],
+			"fields": [
+				{
+					"slug": "title",
+					"label": "Title",
+					"type": "string",
+					"required": true,
+					"searchable": true
+				},
+				{
+					"slug": "featured_image",
+					"label": "Featured Image",
+					"type": "image"
+				},
+				{
+					"slug": "content",
+					"label": "Content",
+					"type": "portableText",
+					"searchable": true
+				},
+				{
+					"slug": "excerpt",
+					"label": "Excerpt",
+					"type": "text"
+				}
+			]
+		},
+		{
+			"slug": "landing",
+			"label": "Landing pages",
+			"labelSingular": "Landing page",
+			"description": "Marketing pages built from sections. The home entry renders at /.",
+			"urlPattern": "/{slug}",
+			"supports": [
+				"drafts",
+				"revisions",
+				"preview",
+				"seo"
+			],
+			"fields": [
+				{
+					"slug": "title",
+					"label": "Title",
+					"type": "string",
+					"required": true,
+					"searchable": true
+				},
+				{
+					"slug": "description",
+					"label": "Meta description",
+					"type": "text"
+				},
+				{
+					"slug": "sections",
+					"label": "Sections",
+					"type": "blocks",
+					"validation": {
+						"allowedTypes": [
+							"hero",
+							"challenge",
+							"contact",
+							"audience_hero",
+							"points",
+							"audiences",
+							"how_intro",
+							"agent",
+							"features",
+							"pricing",
+							"faq",
+							"signup",
+							"prose"
+						]
+					}
+				}
+			]
+		},
+		{
+			"slug": "submissions",
+			"label": "Form submissions",
+			"labelSingular": "Form submission",
+			"description": "Contact and challenge form entries, saved by /api/forms. Never published.",
+			"supports": [
+				"search"
+			],
+			"fields": [
+				{
+					"slug": "title",
+					"label": "Title",
+					"type": "string",
+					"required": true,
+					"searchable": true
+				},
+				{
+					"slug": "kind",
+					"label": "Form",
+					"type": "select",
+					"validation": {
+						"options": [
+							"contact",
+							"challenge"
+						]
+					}
+				},
+				{
+					"slug": "name",
+					"label": "Name",
+					"type": "string",
+					"searchable": true
+				},
+				{
+					"slug": "email",
+					"label": "Email",
+					"type": "string",
+					"searchable": true
+				},
+				{
+					"slug": "company",
+					"label": "Company",
+					"type": "string",
+					"searchable": true
+				},
+				{
+					"slug": "message",
+					"label": "Message",
+					"type": "text",
+					"searchable": true
+				},
+				{
+					"slug": "search",
+					"label": "Search",
+					"type": "text",
+					"searchable": true
+				},
+				{
+					"slug": "geography",
+					"label": "Geography",
+					"type": "string"
+				},
+				{
+					"slug": "fit",
+					"label": "Great fit",
+					"type": "text"
+				}
+			]
+		}
+	],
+	"taxonomies": [
+		{
+			"name": "tag",
+			"label": "Tags",
+			"labelSingular": "Tag",
+			"hierarchical": false,
+			"collections": [
+				"posts"
+			],
+			"terms": [
+				{
+					"slug": "new-feature",
+					"label": "New feature"
+				}
+			]
+		}
+	],
+	"menus": [
+		{
+			"name": "primary",
+			"label": "Primary navigation",
+			"items": [
+				{
+					"type": "custom",
+					"label": "How it works",
+					"url": "#how"
+				},
+				{
+					"type": "custom",
+					"label": "Who it’s for",
+					"url": "#why"
+				},
+				{
+					"type": "custom",
+					"label": "Pricing",
+					"url": "#pricing"
+				},
+				{
+					"type": "custom",
+					"label": "FAQ",
+					"url": "#faq"
+				},
+				{
+					"type": "custom",
+					"label": "Sign in",
+					"url": "https://app.scorecardgtm.com/sign-in",
+					"cssClasses": "btn btn-ghost nav-signin"
+				},
+				{
+					"type": "custom",
+					"label": "Start free trial",
+					"url": "https://app.scorecardgtm.com/sign-up",
+					"cssClasses": "btn btn-coral"
+				}
+			]
+		},
+		{
+			"name": "footer",
+			"label": "Footer links",
+			"items": [
+				{
+					"type": "custom",
+					"label": "How it works",
+					"url": "#how"
+				},
+				{
+					"type": "custom",
+					"label": "Who it’s for",
+					"url": "#why"
+				},
+				{
+					"type": "custom",
+					"label": "Pricing",
+					"url": "#pricing"
+				},
+				{
+					"type": "custom",
+					"label": "FAQ",
+					"url": "#faq"
+				},
+				{
+					"type": "custom",
+					"label": "Changelog",
+					"url": "/blog/tag/new-feature"
+				},
+				{
+					"type": "custom",
+					"label": "Contact",
+					"url": "/contact"
+				},
+				{
+					"type": "custom",
+					"label": "Sign in",
+					"url": "https://app.scorecardgtm.com/sign-in"
+				}
+			]
+		},
+		{
+			"name": "legal",
+			"label": "Footer legal links",
+			"items": [
+				{
+					"type": "custom",
+					"label": "Privacy",
+					"url": "/privacy"
+				},
+				{
+					"type": "custom",
+					"label": "Terms",
+					"url": "/terms"
+				}
+			]
+		}
+	],
+	"content": {
+		"posts": [
+			{
+				"id": "challenge-launch",
+				"slug": "send-us-your-hardest-search",
+				"status": "published",
+				"data": {
+					"title": "Send us your hardest search",
+					"excerpt": "Describe the companies you’re struggling to find. We’ll run the search through Scorecard and send you up to 100 candidates, with the 10 strongest highlighted.",
+					"content": [
+						{
+							"_type": "block",
+							"_key": "c0",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "c0s",
+									"text": "Some searches are hard to run in a prospect database: the companies you want are defined by what they actually do, not by an industry code. So we’re offering to run a few of them for you.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "c1",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "c1s",
+									"text": "How it works",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "c2",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "c2s",
+									"text": "Tell us the kind of company you want, the geography, and what makes one a great fit. We’ll run it through Scorecard and email you up to 100 candidates, with the 10 strongest matches highlighted and the evidence behind them. If the evidence supports fewer, we’ll say so.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "c3",
+							"style": "normal",
+							"markDefs": [
+								{
+									"_type": "link",
+									"_key": "lc",
+									"href": "/challenge"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "c3a",
+									"text": "The first 10 accepted searches are free, in exchange for honest feedback on the list. Send yours from the ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "c3b",
+									"text": "challenge page",
+									"marks": [
+										"lc"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "c3c",
+									"text": ".",
+									"marks": []
+								}
+							]
+						}
+					]
+				},
+				"taxonomies": {
+					"tag": [
+						"new-feature"
+					]
+				}
+			}
+		],
+		"landing": [
+			{
+				"id": "home",
+				"slug": "home",
+				"status": "published",
+				"data": {
+					"title": "Home",
+					"description": "Describe the businesses you want in plain words. Scorecard finds US companies that match, checks the evidence, and ranks them by what matters to you. Find the right accounts without building a research workflow or sorting through a noisy database.",
+					"sections": [
+						{
+							"_type": "hero",
+							"_version": 1,
+							"_key": "home-hero-0",
+							"heading": "Target prospects worth the extra effort.",
+							"body": "Describe the businesses you want in plain words. Scorecard finds US companies that match, checks the evidence, and ranks them by what matters to you. Find the right accounts without building a research workflow or sorting through a noisy database.",
+							"cta_label": "Start free trial",
+							"cta_href": "https://app.scorecardgtm.com/sign-up",
+							"more_label": "How it works →",
+							"more_href": "#how"
+						},
+						{
+							"_type": "audiences",
+							"_version": 1,
+							"_key": "home-audiences-1",
+							"heading": "Built for lean sales teams, founders, and acquisition searchers.",
+							"cards": [
+								{
+									"who": "Sales teams",
+									"title": "Give every rep a list worth calling.",
+									"query": "Snow-plowing landscapers in my territory",
+									"visual": "rank",
+									"outcome": "Each rep gets the best-fit accounts in their territory, ranked, with the person to approach.",
+									"cta_label": "How sales teams use Scorecard →",
+									"cta_href": "/sales-teams"
+								},
+								{
+									"who": "Founders and CEOs",
+									"title": "Size a market before you hire for it.",
+									"query": "Snow-plow landscapers vs. irrigation, US",
+									"visual": "size",
+									"outcome": "See how many businesses match, where they are and what a typical one looks like, before you commit a rep.",
+									"cta_label": "How founders use Scorecard →",
+									"cta_href": "/founders"
+								},
+								{
+									"who": "Acquisition search",
+									"title": "Find owner-run companies that fit your thesis.",
+									"query": "Owner-run landscapers, 20+ years old",
+									"visual": "years",
+									"outcome": "Owner names and founding dates from public records. We mark “wants to sell” as unknown, because no record says so.",
+									"cta_label": "How acquisition searchers use Scorecard →",
+									"cta_href": "/acquisition-search"
+								}
+							]
+						},
+						{
+							"_type": "how_intro",
+							"_version": 1,
+							"_key": "home-how_intro-2",
+							"heading": "How it works"
+						},
+						{
+							"_type": "agent",
+							"_version": 1,
+							"_key": "home-agent-3",
+							"visual": "search",
+							"nav_label": "Search",
+							"heading": "The Search agent sizes your market.",
+							"query_label": "Your search",
+							"query": "Landscapers that also plow snow · California",
+							"agent_name": "Search agent",
+							"steps": [
+								{
+									"title": "Reading your search"
+								},
+								{
+									"title": "Scanning every US business"
+								},
+								{
+									"title": "Keeping landscapers that plow snow"
+								},
+								{
+									"title": "Narrowing to California"
+								}
+							]
+						},
+						{
+							"_type": "agent",
+							"_version": 1,
+							"_key": "home-agent-4",
+							"visual": "signals",
+							"nav_label": "Research",
+							"heading": "The Research agent checks the facts and finds the owner.",
+							"query_label": "Researching",
+							"query": "Sierra Line Grounds · Truckee, CA",
+							"agent_name": "Research agent",
+							"steps": [
+								{
+									"title": "Opening its website and records"
+								},
+								{
+									"title": "Confirming snow removal"
+								},
+								{
+									"title": "Answering your Signals"
+								},
+								{
+									"title": "Finding the owner"
+								}
+							]
+						},
+						{
+							"_type": "agent",
+							"_version": 1,
+							"_key": "home-agent-5",
+							"visual": "score",
+							"nav_label": "Score",
+							"heading": "The Scoring agent puts the best fits first.",
+							"query_label": "Your priorities",
+							"query": "Snow removal + commercial clients",
+							"agent_name": "Scoring agent",
+							"steps": [
+								{
+									"title": "Collecting every Signal"
+								},
+								{
+									"title": "Weighting your priorities"
+								},
+								{
+									"title": "Grading all 412"
+								},
+								{
+									"title": "Ranking the best fits"
+								}
+							]
+						},
+						{
+							"_type": "features",
+							"_version": 1,
+							"_key": "home-features-6",
+							"heading": "More ways to use Scorecard.",
+							"cards": [
+								{
+									"visual": "lookalike",
+									"title": "Find more companies like your best customers.",
+									"body": "Upload your customer list and find companies with similar characteristics.",
+									"coming_soon": false
+								},
+								{
+									"visual": "signals",
+									"title": "Ask the questions that matter to you.",
+									"body": "Add custom Signals to check each company against your criteria, with supporting sources.",
+									"coming_soon": false
+								},
+								{
+									"visual": "export",
+									"title": "Take your research with you.",
+									"body": "Export company details, Signals, scores, and source links to CSV.",
+									"coming_soon": false
+								},
+								{
+									"visual": "crm",
+									"title": "Connect your CRM.",
+									"body": "Bring Scorecard research into your CRM workflow.",
+									"coming_soon": true
+								},
+								{
+									"visual": "mcp",
+									"title": "Use Scorecard from your AI assistant.",
+									"body": "Search and research companies through MCP access.",
+									"coming_soon": true
+								}
+							],
+							"coverage_title": "New sources every month.",
+							"coverage_stats": [
+								{
+									"value": "140+",
+									"label": "Signals you can check",
+									"note": "+18 this quarter",
+									"icon": "trending-up"
+								},
+								{
+									"value": "28",
+									"label": "Data sources",
+									"note": "+4 this quarter",
+									"icon": "trending-up"
+								},
+								{
+									"value": "Weekly",
+									"label": "Records refreshed",
+									"note": "Last update Nov 10",
+									"icon": "refresh-cw"
+								}
+							],
+							"coverage_sources": [
+								{
+									"label": "Company websites",
+									"icon": "globe"
+								},
+								{
+									"label": "Google Places",
+									"icon": "map-pin"
+								},
+								{
+									"label": "LinkedIn",
+									"icon": "linkedin"
+								},
+								{
+									"label": "State business filings",
+									"icon": "landmark"
+								}
+							],
+							"coverage_cta_label": "See what’s new in the changelog →",
+							"coverage_cta_href": "/blog/tag/new-feature",
+							"cta_heading": "Try it on your own market.",
+							"cta_label": "Start free trial",
+							"cta_href": "https://app.scorecardgtm.com/sign-up",
+							"challenge_label": "Have a difficult search? Challenge Scorecard →",
+							"challenge_href": "/challenge"
+						},
+						{
+							"_type": "pricing",
+							"_version": 1,
+							"_key": "home-pricing-7",
+							"heading": "Get a ranked list of the accounts worth your time.",
+							"plans": [
+								{
+									"name": "Free trial",
+									"price": "$0",
+									"price_note": "for 14 days",
+									"cta_label": "Start free trial",
+									"cta_href": "https://app.scorecardgtm.com/sign-up",
+									"cta_style": "line",
+									"then_note": "",
+									"highlight": false,
+									"card_features": "500 credits\nSearch, Research and scoring\nBuilt-in Signals with sources"
+								},
+								{
+									"name": "Monthly",
+									"price": "$59",
+									"price_note": "per month",
+									"cta_label": "Start free trial",
+									"cta_href": "https://app.scorecardgtm.com/sign-up",
+									"cta_style": "coral",
+									"then_note": "Trial first, then $59/month",
+									"highlight": true,
+									"card_features": "1,000 credits every month\nSearch, Research and scoring\nCustom Signals\nLinkedIn, Google Places, owner phone and email\nCRM integration and MCP access (coming soon)"
+								},
+								{
+									"name": "Teams",
+									"price": "Custom",
+									"price_note": "",
+									"cta_label": "Talk about a pilot",
+									"cta_href": "/contact",
+									"cta_style": "line-clear",
+									"then_note": "",
+									"highlight": false,
+									"card_features": "Seats for your whole team\nSetup help and a first territory scored for you\nCredits sized to your market\nCRM integration and MCP access (coming soon)"
+								}
+							],
+							"rows": [
+								{
+									"label": "Seats",
+									"note": "",
+									"coming_soon": false,
+									"values": "1\n1\nYour whole team"
+								},
+								{
+									"label": "Setup help and a first territory scored for you",
+									"note": "",
+									"coming_soon": false,
+									"values": "—\n—\nIncluded"
+								},
+								{
+									"label": "Credits",
+									"note": "You only spend credits on businesses that match your search. Premium details and recurring research use additional credits.",
+									"coming_soon": false,
+									"values": "500\n1,000 every month\nScaled to your market"
+								},
+								{
+									"label": "Extra credits",
+									"note": "",
+									"coming_soon": false,
+									"values": "—\n$10 per 100\nCustom"
+								},
+								{
+									"label": "Search: find and add businesses",
+									"note": "",
+									"coming_soon": false,
+									"values": "✓\n✓\n✓"
+								},
+								{
+									"label": "Research: built-in Signals with sources",
+									"note": "",
+									"coming_soon": false,
+									"values": "✓\n✓\n✓"
+								},
+								{
+									"label": "Custom Signals",
+									"note": "",
+									"coming_soon": false,
+									"values": "—\n✓\n✓"
+								},
+								{
+									"label": "LinkedIn, Google Places, owner phone and email",
+									"note": "",
+									"coming_soon": false,
+									"values": "—\n✓\n✓"
+								},
+								{
+									"label": "CRM integration",
+									"note": "",
+									"coming_soon": true,
+									"values": "—\n✓\n✓"
+								},
+								{
+									"label": "MCP access for AI assistants",
+									"note": "",
+									"coming_soon": true,
+									"values": "—\n✓\n✓"
+								}
+							]
+						},
+						{
+							"_type": "faq",
+							"_version": 1,
+							"_key": "home-faq-8",
+							"heading": "Frequently asked questions",
+							"contact_prompt": "Something else?",
+							"contact_label": "Talk to us",
+							"contact_href": "/contact",
+							"items": [
+								{
+									"question": "What do I need to run my first search?",
+									"answer": "Start with the kind of company you want, a geography, and the characteristics that make it a good fit. For example, landscapers in California that offer commercial snow removal."
+								},
+								{
+									"question": "Can it find companies that match my specific criteria?",
+									"answer": "Describe what a business actually does, then use Signals to check the criteria that matter to you. Acquisition searchers can describe their thesis too, but a matching company does not mean its owner wants to sell."
+								},
+								{
+									"question": "How do I check whether the research is right?",
+									"answer": "Review the source behind a finding before acting on it. Missing information should remain unknown rather than be treated as a confirmed match."
+								},
+								{
+									"question": "What owner and contact information is available?",
+									"answer": "Owner names may be available from websites and public records. Phone and email coverage varies by company; private-company revenue and willingness to sell may be unknown."
+								},
+								{
+									"question": "Can I export my results?",
+									"answer": "Yes. Download your research as a CSV for your spreadsheet or CRM. Direct CRM integration is coming soon."
+								},
+								{
+									"question": "What’s included in the trial, and what happens afterward?",
+									"answer": "The free trial runs 14 days and includes 500 credits for Search, Research and scoring."
+								}
+							]
+						},
+						{
+							"_type": "signup",
+							"_version": 1,
+							"_key": "home-signup-9",
+							"heading": "Find accounts worth the extra effort.",
+							"body": "Free for 14 days with 500 credits.",
+							"cta_label": "Start free trial",
+							"cta_href": "https://app.scorecardgtm.com/sign-up"
+						}
+					]
+				}
+			},
+			{
+				"id": "challenge",
+				"slug": "challenge",
+				"status": "published",
+				"data": {
+					"title": "Challenge Scorecard",
+					"description": "Send us a hard search: the kind of company, the geography and what makes a great fit. We'll run it through Scorecard and send up to 100 candidates, with the 10 strongest highlighted. The first 10 accepted searches are free.",
+					"sections": [
+						{
+							"_type": "challenge",
+							"_version": 1,
+							"_key": "challenge-0",
+							"heading": "What companies are you struggling to find at scale?",
+							"body": "Too much noise from prospect databases? Too much setup to build your own research workflow? Give us your query, geography and what makes a company a great fit. We’ll run it through Scorecard and send you the list.",
+							"points": [
+								{
+									"title": "Up to 100 candidates.",
+									"body": "Every company that matches your search, with the evidence behind each match."
+								},
+								{
+									"title": "The 10 strongest highlighted.",
+									"body": "Ranked by what you told us makes a great fit."
+								},
+								{
+									"title": "An honest count.",
+									"body": "If the evidence supports fewer, we’ll say so."
+								}
+							],
+							"query_label": "What kind of company?",
+							"query_placeholder": "Landscapers that offer commercial snow removal",
+							"geo_label": "Where?",
+							"geo_placeholder": "Colorado and Utah",
+							"fit_label": "What makes one a great fit?",
+							"fit_placeholder": "Owner-operated, 10–50 employees, at least five years in business, serves HOAs or property managers",
+							"submit_label": "Send us your search",
+							"offer": "First 10 accepted searches free, in exchange for honest feedback. No signup required to receive your list.",
+							"email": "hello@scorecardgtm.com",
+							"alt_prompt": "Rather write it out? Email",
+							"bridge_heading": "Keep the search going.",
+							"bridge_body": "If the results are useful, continue in Scorecard: refine your criteria, explore another territory, and research your next accounts yourself. Start with the free trial, then choose the monthly plan if it earns its place in your workflow.",
+							"name_label": "Your name",
+							"email_label": "Work email",
+							"company_label": "Company (optional)",
+							"error_text": "Something went wrong sending that. Check the fields and try again, or email us directly.",
+							"success_heading": "Got it. Your search is in.",
+							"success_body": "We read every search ourselves. If we accept it, you’ll get your list by email, with the 10 strongest matches highlighted. If we can’t run it well, we’ll tell you why."
+						},
+						{
+							"_type": "faq",
+							"_version": 1,
+							"_key": "challenge-faq-1",
+							"heading": "About the challenge",
+							"contact_prompt": "Something else?",
+							"contact_label": "Talk to us",
+							"contact_href": "/contact",
+							"items": [
+								{
+									"question": "What makes a search a good fit for the challenge?",
+									"answer": "A kind of US business you can describe in plain words, a geography, and the traits that separate a great match from an ordinary one. The harder it is to find in a prospect database, the better."
+								},
+								{
+									"question": "What does “accepted” mean?",
+									"answer": "We read every search and take the ones Scorecard can run well today. If yours isn’t one of them, we’ll tell you why."
+								},
+								{
+									"question": "What do you ask in return?",
+									"answer": "Honest feedback on the list: which companies were right, which weren’t, and what you’d do with it."
+								}
+							]
+						},
+						{
+							"_type": "signup",
+							"_version": 1,
+							"_key": "challenge-signup-2",
+							"heading": "Rather run it yourself?",
+							"body": "Free for 14 days with 500 credits.",
+							"cta_label": "Start free trial",
+							"cta_href": "https://app.scorecardgtm.com/sign-up"
+						}
+					]
+				}
+			},
+			{
+				"id": "contact",
+				"slug": "contact",
+				"status": "published",
+				"data": {
+					"title": "Contact",
+					"description": "Questions about Scorecard, a team pilot or your account? Send us a note and a person will reply.",
+					"sections": [
+						{
+							"_type": "contact",
+							"_version": 1,
+							"_key": "contact-0",
+							"heading": "Talk to us.",
+							"body": "Questions about Scorecard, a pilot for your team, or a search you’re not sure it can handle? Send us a note. A person reads every message and replies by email.",
+							"points": [
+								{
+									"title": "Team pilots.",
+									"body": "Tell us how many people would use it and the markets you cover."
+								},
+								{
+									"title": "Account help.",
+									"body": "Include the email you signed up with."
+								}
+							],
+							"message_label": "How can we help?",
+							"message_placeholder": "A few lines is plenty.",
+							"submit_label": "Send message",
+							"success_heading": "Thanks. We’ll be in touch.",
+							"success_body": "Your message reached us. Expect a reply by email within one business day.",
+							"alt_prompt": "Prefer email? Write to",
+							"name_label": "Your name",
+							"email_label": "Work email",
+							"company_label": "Company (optional)",
+							"error_text": "Something went wrong sending that. Check the fields and try again, or email us directly.",
+							"email": "hello@scorecardgtm.com"
+						}
+					]
+				}
+			},
+			{
+				"id": "sales-teams",
+				"slug": "sales-teams",
+				"status": "published",
+				"data": {
+					"title": "Scorecard for sales teams",
+					"description": "Each rep gets the best-fit accounts in their territory, ranked, with the person to approach.",
+					"sections": [
+						{
+							"_type": "audience_hero",
+							"_version": 1,
+							"_key": "sales-hero",
+							"who": "Sales teams",
+							"heading": "Give every rep a list worth calling.",
+							"body": "Each rep gets the best-fit accounts in their territory, ranked, with the person to approach.",
+							"cta_label": "Start free trial",
+							"cta_href": "https://app.scorecardgtm.com/sign-up",
+							"more_label": "Have a difficult search? Challenge Scorecard →",
+							"more_href": "/challenge",
+							"note": "",
+							"query": "Snow-plowing landscapers in my territory",
+							"visual": "rank",
+							"outcome": "Each rep gets the best-fit accounts in their territory, ranked, with the person to approach."
+						},
+						{
+							"_type": "signup",
+							"_version": 1,
+							"_key": "sales-signup",
+							"heading": "Find accounts worth the extra effort.",
+							"body": "Free for 14 days with 500 credits.",
+							"cta_label": "Start free trial",
+							"cta_href": "https://app.scorecardgtm.com/sign-up"
+						}
+					]
+				}
+			},
+			{
+				"id": "founders",
+				"slug": "founders",
+				"status": "published",
+				"data": {
+					"title": "Scorecard for founders and CEOs",
+					"description": "See how many businesses match, where they are and what a typical one looks like, before you commit a rep.",
+					"sections": [
+						{
+							"_type": "audience_hero",
+							"_version": 1,
+							"_key": "founders-hero",
+							"who": "Founders and CEOs",
+							"heading": "Size a market before you hire for it.",
+							"body": "See how many businesses match, where they are and what a typical one looks like, before you commit a rep.",
+							"cta_label": "Start free trial",
+							"cta_href": "https://app.scorecardgtm.com/sign-up",
+							"more_label": "Have a difficult search? Challenge Scorecard →",
+							"more_href": "/challenge",
+							"note": "",
+							"query": "Snow-plow landscapers vs. irrigation, US",
+							"visual": "size",
+							"outcome": "See how many businesses match, where they are and what a typical one looks like, before you commit a rep."
+						},
+						{
+							"_type": "signup",
+							"_version": 1,
+							"_key": "founders-signup",
+							"heading": "Find accounts worth the extra effort.",
+							"body": "Free for 14 days with 500 credits.",
+							"cta_label": "Start free trial",
+							"cta_href": "https://app.scorecardgtm.com/sign-up"
+						}
+					]
+				}
+			},
+			{
+				"id": "acquisition-search",
+				"slug": "acquisition-search",
+				"status": "published",
+				"data": {
+					"title": "Scorecard for acquisition search",
+					"description": "Turn your acquisition thesis into a ranked list of owner-run companies, with the evidence behind every score. For search funds, self-funded searchers, independent sponsors and small acquisition teams.",
+					"sections": [
+						{
+							"_type": "audience_hero",
+							"_version": 1,
+							"_key": "acq-hero",
+							"who": "Acquisition search",
+							"heading": "Know which owners are worth pursuing.",
+							"body": "Describe your thesis in plain words. Scorecard finds the companies that fit, checks each one against your buy box, and ranks them, so you know where to spend the personal letter, the phone call and the hundredth follow-up.",
+							"cta_label": "Start free trial",
+							"cta_href": "https://app.scorecardgtm.com/sign-up",
+							"more_label": "Have a difficult search? Challenge Scorecard →",
+							"more_href": "/challenge",
+							"note": "For search funds, self-funded searchers, independent sponsors and small acquisition teams.",
+							"query": "Owner-run landscapers, 20+ years old",
+							"visual": "years",
+							"outcome": "Owner names and founding dates from public records. We mark “wants to sell” as unknown, because no record says so."
+						},
+						{
+							"_type": "points",
+							"_version": 1,
+							"_key": "acq-problem",
+							"eyebrow": "The searcher’s problem",
+							"heading": "A list tells you who exists. It doesn’t tell you who deserves your time.",
+							"body": "Finding another thousand company names isn’t the hard part of proprietary search. Applying your judgment to every one of them, the same way, is.",
+							"layout": "columns",
+							"items": [
+								{
+									"label": "01 · Thesis fit",
+									"title": "Who actually matches the thesis?",
+									"body": "Not just the industry code: the business model, the customers, the way the company runs."
+								},
+								{
+									"label": "02 · Research",
+									"title": "Who deserves a closer look?",
+									"body": "Which companies are worth deeper work before anyone reaches out."
+								},
+								{
+									"label": "03 · Attention",
+									"title": "Who gets the handwritten letter?",
+									"body": "Which owners are worth personal outreach and months of patient follow-up."
+								}
+							]
+						},
+						{
+							"_type": "points",
+							"_version": 1,
+							"_key": "acq-how",
+							"eyebrow": "How it works",
+							"heading": "Your thesis, turned into a score.",
+							"body": "Scorecard makes the judgment calls in your buy box explicit, checks the public evidence for each company, and ranks every one against the same standard.",
+							"layout": "columns",
+							"items": [
+								{
+									"label": "01 · Define",
+									"title": "Write down the thesis",
+									"body": "Your target profile, must-haves and red flags, in plain language. Each one becomes a Signal Scorecard checks."
+								},
+								{
+									"label": "02 · Score",
+									"title": "Score the market",
+									"body": "Scorecard researches every matching company and scores it, with the source behind each finding."
+								},
+								{
+									"label": "03 · Prioritize",
+									"title": "Spend attention where it counts",
+									"body": "Separate personal targets from broader outreach, the research queue, and the companies to drop."
+								}
+							]
+						},
+						{
+							"_type": "points",
+							"_version": 1,
+							"_key": "acq-signals",
+							"eyebrow": "Example · Commercial landscaping",
+							"heading": "Signals worth checking.",
+							"body": "Signals are the questions Scorecard answers for every company. Use the standard ones, or add the detail only you know matters.",
+							"layout": "columns",
+							"items": [
+								{
+									"label": "",
+									"title": "Little digital presence",
+									"body": "Can point to an overlooked, referral-driven operator with room to professionalize."
+								},
+								{
+									"label": "",
+									"title": "Multiple locations",
+									"body": "Suggests operating scale, route density and a branch model that repeats."
+								},
+								{
+									"label": "",
+									"title": "Recurring commercial work",
+									"body": "Maintenance programs and property-manager customers suggest repeat revenue."
+								},
+								{
+									"label": "",
+									"title": "Management beyond the owner",
+									"body": "Branch managers, estimators and crew leads can mean less dependence on the owner."
+								},
+								{
+									"label": "",
+									"title": "Your own Signal",
+									"body": "Ask your own question, like “Do they serve HOAs?”, and get an answer with its source for every company."
+								},
+								{
+									"label": "",
+									"title": "Unknown stays unknown",
+									"body": "Willingness to sell isn’t in any public record. Scorecard marks it unknown instead of guessing."
+								}
+							]
+						},
+						{
+							"_type": "points",
+							"_version": 1,
+							"_key": "acq-tiers",
+							"eyebrow": "From score to outreach",
+							"heading": "Not every owner should get the same outreach.",
+							"body": "A grade turns the score into a decision about how much effort each company gets.",
+							"layout": "list",
+							"items": [
+								{
+									"label": "A",
+									"title": "Personal campaign",
+									"body": "Deep research, a personal letter, direct calls and long-term follow-up."
+								},
+								{
+									"label": "B",
+									"title": "High-touch outreach",
+									"body": "Personalized outreach across channels, with a set follow-up cadence."
+								},
+								{
+									"label": "C",
+									"title": "Test the segment",
+									"body": "Lower-cost outreach to test the segment and learn more."
+								},
+								{
+									"label": "D",
+									"title": "Hold or drop",
+									"body": "Poor fit, too little evidence, the wrong model, or a franchise or subsidiary."
+								}
+							]
+						},
+						{
+							"_type": "points",
+							"_version": 1,
+							"_key": "acq-uses",
+							"eyebrow": "When to use it",
+							"heading": "Use Scorecard when your list still leaves too much work.",
+							"body": "Databases give you a broad universe. Scorecard helps when your real buy box depends on business model, customer mix, local presence or owner dynamics that filters miss.",
+							"layout": "columns",
+							"items": [
+								{
+									"label": "Map the market",
+									"title": "Build a market you can work",
+									"body": "One consistent screen across every company in your geography, instead of another raw export."
+								},
+								{
+									"label": "Remove the lookalikes",
+									"title": "Separate real fits from near misses",
+									"body": "Commercial maintenance from residential projects, service from installation, independents from franchises."
+								},
+								{
+									"label": "Find the few",
+									"title": "Pick the owners worth pursuing",
+									"body": "The handful of companies that justify a tailored letter, a direct call and months of follow-up."
+								}
+							]
+						},
+						{
+							"_type": "faq",
+							"_version": 1,
+							"_key": "acq-faq",
+							"heading": "Questions from searchers",
+							"contact_prompt": "Something else?",
+							"contact_label": "Talk to us",
+							"contact_href": "/contact",
+							"items": [
+								{
+									"question": "Does Scorecard know which owners want to sell?",
+									"answer": "No, and nothing public does. Scorecard shows owner names and founding dates where public records and websites have them, and marks willingness to sell as unknown."
+								},
+								{
+									"question": "Which industries and geographies work?",
+									"answer": "Any kind of US business you can describe in plain words. Coverage is strongest where companies have a web presence."
+								}
+							]
+						},
+						{
+							"_type": "signup",
+							"_version": 1,
+							"_key": "acq-signup",
+							"heading": "Bring us your thesis. We’ll show you the score.",
+							"body": "Send us a target profile and a geography, and we’ll run it through Scorecard. Or start a free trial and run it yourself.",
+							"cta_label": "Send us your search",
+							"cta_href": "/challenge"
+						}
+					]
+				}
+			},
+			{
+				"id": "privacy",
+				"slug": "privacy",
+				"status": "published",
+				"data": {
+					"title": "Privacy Policy",
+					"description": "Scorecard privacy policy.",
+					"sections": [
+						{
+							"_type": "prose",
+							"_version": 1,
+							"_key": "privacy-prose",
+							"heading": "Privacy Policy",
+							"updated": "Last updated: [Date]",
+							"body": [
+								{
+									"_type": "block",
+									"_key": "privacy0",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "privacy0s0",
+											"text": "This policy explains what information [Scorecard legal entity name] (\"Scorecard\", \"we\", \"us\") collects through scorecardgtm.com (the \"site\") and the Scorecard app at app.scorecardgtm.com (the \"service\"), how we use it, and the choices you have. If you have questions, email hello@scorecardgtm.com.",
+											"marks": []
+										}
+									]
+								},
+								{
+									"_type": "block",
+									"_key": "privacy1",
+									"style": "h2",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "privacy1s0",
+											"text": "Information you give us",
+											"marks": []
+										}
+									]
+								},
+								{
+									"_type": "block",
+									"_key": "privacy2",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "privacy2s1",
+											"text": "Forms on the site.",
+											"marks": [
+												"strong"
+											]
+										},
+										{
+											"_type": "span",
+											"_key": "privacy2s2",
+											"text": " When you use the contact form or send us a search through the challenge form, we collect your name, email address, company (if you give it), and what you write: your message, or your search, geography and criteria.",
+											"marks": []
+										}
+									],
+									"listItem": "bullet",
+									"level": 1
+								},
+								{
+									"_type": "block",
+									"_key": "privacy3",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "privacy3s1",
+											"text": "Your account.",
+											"marks": [
+												"strong"
+											]
+										},
+										{
+											"_type": "span",
+											"_key": "privacy3s2",
+											"text": " When you sign up for the service, we collect your name, email address and sign-in details.",
+											"marks": []
+										}
+									],
+									"listItem": "bullet",
+									"level": 1
+								},
+								{
+									"_type": "block",
+									"_key": "privacy4",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "privacy4s1",
+											"text": "What you put into the service.",
+											"marks": [
+												"strong"
+											]
+										},
+										{
+											"_type": "span",
+											"_key": "privacy4s2",
+											"text": " The searches you run, the criteria and Signals you define, lists you upload, and notes you add.",
+											"marks": []
+										}
+									],
+									"listItem": "bullet",
+									"level": 1
+								},
+								{
+									"_type": "block",
+									"_key": "privacy5",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "privacy5s1",
+											"text": "Billing.",
+											"marks": [
+												"strong"
+											]
+										},
+										{
+											"_type": "span",
+											"_key": "privacy5s2",
+											"text": " If you subscribe, our payment processor, [payment processor], collects your payment details. We don't store full card numbers.",
+											"marks": []
+										}
+									],
+									"listItem": "bullet",
+									"level": 1
+								},
+								{
+									"_type": "block",
+									"_key": "privacy6",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "privacy6s1",
+											"text": "Messages.",
+											"marks": [
+												"strong"
+											]
+										},
+										{
+											"_type": "span",
+											"_key": "privacy6s2",
+											"text": " If you email us, we keep the email and our reply.",
+											"marks": []
+										}
+									],
+									"listItem": "bullet",
+									"level": 1
+								},
+								{
+									"_type": "block",
+									"_key": "privacy7",
+									"style": "h2",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "privacy7s0",
+											"text": "Information we collect automatically",
+											"marks": []
+										}
+									]
+								},
+								{
+									"_type": "block",
+									"_key": "privacy8",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "privacy8s1",
+											"text": "Analytics and session recordings.",
+											"marks": [
+												"strong"
+											]
+										},
+										{
+											"_type": "span",
+											"_key": "privacy8s2",
+											"text": " We use PostHog to understand how people use the site: pages viewed, clicks, referring site, device and browser type, and approximate location derived from your IP address. PostHog also records sessions, a reconstruction of how the page looked and what was clicked, so we can find what's confusing. Text typed into form fields is masked and is not recorded. PostHog stores an identifier in your browser's cookies or local storage to recognize return visits.",
+											"marks": []
+										}
+									],
+									"listItem": "bullet",
+									"level": 1
+								},
+								{
+									"_type": "block",
+									"_key": "privacy9",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "privacy9s1",
+											"text": "Hosting and security logs.",
+											"marks": [
+												"strong"
+											]
+										},
+										{
+											"_type": "span",
+											"_key": "privacy9s2",
+											"text": " The site runs on Cloudflare, which processes your IP address and request details to deliver pages and protect against abuse.",
+											"marks": []
+										}
+									],
+									"listItem": "bullet",
+									"level": 1
+								},
+								{
+									"_type": "block",
+									"_key": "privacy10",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "privacy10s1",
+											"text": "Fonts.",
+											"marks": [
+												"strong"
+											]
+										},
+										{
+											"_type": "span",
+											"_key": "privacy10s2",
+											"text": " The site loads fonts from Google Fonts, so your browser sends your IP address to Google when it fetches them.",
+											"marks": []
+										}
+									],
+									"listItem": "bullet",
+									"level": 1
+								},
+								{
+									"_type": "block",
+									"_key": "privacy11",
+									"style": "h2",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "privacy11s0",
+											"text": "Information about businesses and the people who run them",
+											"marks": []
+										}
+									]
+								},
+								{
+									"_type": "block",
+									"_key": "privacy12",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "privacy12s0",
+											"text": "Scorecard researches US businesses using public sources such as company websites, public records and business directories. Results can include business details and the names, roles and business contact details of owners and employees, as they appear in those sources. We use this information only to provide the service: to help customers find, research and prioritize businesses. If you appear in our results and want your information corrected or removed, email hello@scorecardgtm.com and we'll handle it promptly.",
+											"marks": []
+										}
+									]
+								},
+								{
+									"_type": "block",
+									"_key": "privacy13",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "privacy13s0",
+											"text": "[Confirm the sources used, and whether contact details (email, phone) are included.]",
+											"marks": []
+										}
+									]
+								},
+								{
+									"_type": "block",
+									"_key": "privacy14",
+									"style": "h2",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "privacy14s0",
+											"text": "How we use information",
+											"marks": []
+										}
+									]
+								},
+								{
+									"_type": "block",
+									"_key": "privacy15",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "privacy15s0",
+											"text": "To run, maintain and improve the site and the service.",
+											"marks": []
+										}
+									],
+									"listItem": "bullet",
+									"level": 1
+								},
+								{
+									"_type": "block",
+									"_key": "privacy16",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "privacy16s0",
+											"text": "To answer your messages and to process challenge searches you send us.",
+											"marks": []
+										}
+									],
+									"listItem": "bullet",
+									"level": 1
+								},
+								{
+									"_type": "block",
+									"_key": "privacy17",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "privacy17s0",
+											"text": "To send service emails, such as sign-in links, account notices and replies to your messages. We send these through Cloudflare Email Sending.",
+											"marks": []
+										}
+									],
+									"listItem": "bullet",
+									"level": 1
+								},
+								{
+									"_type": "block",
+									"_key": "privacy18",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "privacy18s0",
+											"text": "To understand usage and fix problems.",
+											"marks": []
+										}
+									],
+									"listItem": "bullet",
+									"level": 1
+								},
+								{
+									"_type": "block",
+									"_key": "privacy19",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "privacy19s0",
+											"text": "To prevent fraud and abuse, and to meet legal obligations.",
+											"marks": []
+										}
+									],
+									"listItem": "bullet",
+									"level": 1
+								},
+								{
+									"_type": "block",
+									"_key": "privacy20",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "privacy20s0",
+											"text": "We don't sell personal information, and we don't share it for cross-context behavioral advertising.",
+											"marks": []
+										}
+									]
+								},
+								{
+									"_type": "block",
+									"_key": "privacy21",
+									"style": "h2",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "privacy21s0",
+											"text": "Who we share it with",
+											"marks": []
+										}
+									]
+								},
+								{
+									"_type": "block",
+									"_key": "privacy22",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "privacy22s0",
+											"text": "We share information only with service providers that help us run Scorecard, under agreements that limit their use of it:",
+											"marks": []
+										}
+									]
+								},
+								{
+									"_type": "block",
+									"_key": "privacy23",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "privacy23s1",
+											"text": "Cloudflare",
+											"marks": [
+												"strong"
+											]
+										},
+										{
+											"_type": "span",
+											"_key": "privacy23s2",
+											"text": ": website hosting, database, file storage and email sending.",
+											"marks": []
+										}
+									],
+									"listItem": "bullet",
+									"level": 1
+								},
+								{
+									"_type": "block",
+									"_key": "privacy24",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "privacy24s1",
+											"text": "PostHog",
+											"marks": [
+												"strong"
+											]
+										},
+										{
+											"_type": "span",
+											"_key": "privacy24s2",
+											"text": ": product analytics and session recordings.",
+											"marks": []
+										}
+									],
+									"listItem": "bullet",
+									"level": 1
+								},
+								{
+									"_type": "block",
+									"_key": "privacy25",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "privacy25s1",
+											"text": "Google",
+											"marks": [
+												"strong"
+											]
+										},
+										{
+											"_type": "span",
+											"_key": "privacy25s2",
+											"text": ": email (Google Workspace) and web fonts.",
+											"marks": []
+										}
+									],
+									"listItem": "bullet",
+									"level": 1
+								},
+								{
+									"_type": "block",
+									"_key": "privacy26",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "privacy26s1",
+											"text": "Vercel",
+											"marks": [
+												"strong"
+											]
+										},
+										{
+											"_type": "span",
+											"_key": "privacy26s2",
+											"text": ": hosting for the Scorecard app.",
+											"marks": []
+										}
+									],
+									"listItem": "bullet",
+									"level": 1
+								},
+								{
+									"_type": "block",
+									"_key": "privacy27",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "privacy27s1",
+											"text": "[Payment processor]",
+											"marks": [
+												"strong"
+											]
+										},
+										{
+											"_type": "span",
+											"_key": "privacy27s2",
+											"text": ": billing.",
+											"marks": []
+										}
+									],
+									"listItem": "bullet",
+									"level": 1
+								},
+								{
+									"_type": "block",
+									"_key": "privacy28",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "privacy28s1",
+											"text": "[AI and data providers]",
+											"marks": [
+												"strong"
+											]
+										},
+										{
+											"_type": "span",
+											"_key": "privacy28s2",
+											"text": ": research and analysis performed by the service. [List the providers that receive search inputs.]",
+											"marks": []
+										}
+									],
+									"listItem": "bullet",
+									"level": 1
+								},
+								{
+									"_type": "block",
+									"_key": "privacy29",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "privacy29s0",
+											"text": "We may also disclose information if the law requires it, to protect the rights and safety of Scorecard or others, or as part of a merger, acquisition or sale of assets.",
+											"marks": []
+										}
+									]
+								},
+								{
+									"_type": "block",
+									"_key": "privacy30",
+									"style": "h2",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "privacy30s0",
+											"text": "How long we keep it",
+											"marks": []
+										}
+									]
+								},
+								{
+									"_type": "block",
+									"_key": "privacy31",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "privacy31s0",
+											"text": "We keep form submissions and messages for as long as we need them to respond and follow up, and for up to [24 months] after that. We keep account data while your account is open, and for up to [90 days] after you close it, unless the law requires longer. Analytics data is kept according to PostHog's retention settings, currently [retention period].",
+											"marks": []
+										}
+									]
+								},
+								{
+									"_type": "block",
+									"_key": "privacy32",
+									"style": "h2",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "privacy32s0",
+											"text": "Your choices and rights",
+											"marks": []
+										}
+									]
+								},
+								{
+									"_type": "block",
+									"_key": "privacy33",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "privacy33s1",
+											"text": "Access, correction and deletion.",
+											"marks": [
+												"strong"
+											]
+										},
+										{
+											"_type": "span",
+											"_key": "privacy33s2",
+											"text": " Email hello@scorecardgtm.com and we'll help. We may need to verify your identity first.",
+											"marks": []
+										}
+									],
+									"listItem": "bullet",
+									"level": 1
+								},
+								{
+									"_type": "block",
+									"_key": "privacy34",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "privacy34s1",
+											"text": "Analytics.",
+											"marks": [
+												"strong"
+											]
+										},
+										{
+											"_type": "span",
+											"_key": "privacy34s2",
+											"text": " You can block PostHog with your browser's tracking protection or an ad blocker. The site still works.",
+											"marks": []
+										}
+									],
+									"listItem": "bullet",
+									"level": 1
+								},
+								{
+									"_type": "block",
+									"_key": "privacy35",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "privacy35s1",
+											"text": "Email.",
+											"marks": [
+												"strong"
+											]
+										},
+										{
+											"_type": "span",
+											"_key": "privacy35s2",
+											"text": " Service emails are necessary to run your account. We don't send marketing email without your permission.",
+											"marks": []
+										}
+									],
+									"listItem": "bullet",
+									"level": 1
+								},
+								{
+									"_type": "block",
+									"_key": "privacy36",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "privacy36s1",
+											"text": "California residents",
+											"marks": [
+												"strong"
+											]
+										},
+										{
+											"_type": "span",
+											"_key": "privacy36s2",
+											"text": " have the right to know what personal information we collect, to ask us to delete or correct it, and to not be discriminated against for using these rights. [Confirm whether CCPA thresholds apply.]",
+											"marks": []
+										}
+									],
+									"listItem": "bullet",
+									"level": 1
+								},
+								{
+									"_type": "block",
+									"_key": "privacy37",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "privacy37s1",
+											"text": "If you're in the EU, the UK or another region with data-protection laws",
+											"marks": [
+												"strong"
+											]
+										},
+										{
+											"_type": "span",
+											"_key": "privacy37s2",
+											"text": ", you may have additional rights, including the right to object to processing and to complain to your local data-protection authority. [Confirm the legal bases and international transfer mechanism if serving these regions.]",
+											"marks": []
+										}
+									],
+									"listItem": "bullet",
+									"level": 1
+								},
+								{
+									"_type": "block",
+									"_key": "privacy38",
+									"style": "h2",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "privacy38s0",
+											"text": "Security",
+											"marks": []
+										}
+									]
+								},
+								{
+									"_type": "block",
+									"_key": "privacy39",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "privacy39s0",
+											"text": "We use service providers with strong security practices, encrypt data in transit, and limit access to the people who need it. No system is perfectly secure, so we can't guarantee absolute security.",
+											"marks": []
+										}
+									]
+								},
+								{
+									"_type": "block",
+									"_key": "privacy40",
+									"style": "h2",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "privacy40s0",
+											"text": "Children",
+											"marks": []
+										}
+									]
+								},
+								{
+									"_type": "block",
+									"_key": "privacy41",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "privacy41s0",
+											"text": "Scorecard is a business tool and isn't directed to anyone under 16. We don't knowingly collect information from children.",
+											"marks": []
+										}
+									]
+								},
+								{
+									"_type": "block",
+									"_key": "privacy42",
+									"style": "h2",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "privacy42s0",
+											"text": "Changes",
+											"marks": []
+										}
+									]
+								},
+								{
+									"_type": "block",
+									"_key": "privacy43",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "privacy43s0",
+											"text": "If we change this policy, we'll update the date at the top, and for significant changes we'll let account holders know by email.",
+											"marks": []
+										}
+									]
+								},
+								{
+									"_type": "block",
+									"_key": "privacy44",
+									"style": "h2",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "privacy44s0",
+											"text": "Contact",
+											"marks": []
+										}
+									]
+								},
+								{
+									"_type": "block",
+									"_key": "privacy45",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "privacy45s0",
+											"text": "[Scorecard legal entity name] [Mailing address] hello@scorecardgtm.com",
+											"marks": []
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			},
+			{
+				"id": "terms",
+				"slug": "terms",
+				"status": "published",
+				"data": {
+					"title": "Terms of Service",
+					"description": "Scorecard terms of service.",
+					"sections": [
+						{
+							"_type": "prose",
+							"_version": 1,
+							"_key": "terms-prose",
+							"heading": "Terms of Service",
+							"updated": "Last updated: [Date]",
+							"body": [
+								{
+									"_type": "block",
+									"_key": "terms0",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "terms0s0",
+											"text": "These terms govern your use of scorecardgtm.com and the Scorecard app at app.scorecardgtm.com (together, the \"service\"), provided by [Scorecard legal entity name] (\"Scorecard\", \"we\", \"us\"). By creating an account or using the service, you agree to these terms. If you use Scorecard for a company, you agree on its behalf and confirm you're authorized to do so.",
+											"marks": []
+										}
+									]
+								},
+								{
+									"_type": "block",
+									"_key": "terms1",
+									"style": "h2",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "terms1s0",
+											"text": "The service",
+											"marks": []
+										}
+									]
+								},
+								{
+									"_type": "block",
+									"_key": "terms2",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "terms2s0",
+											"text": "Scorecard helps you find, research and rank businesses. You describe the companies you want, and Scorecard searches public sources, checks the criteria you set, and scores what it finds. We may change, add or remove features over time.",
+											"marks": []
+										}
+									]
+								},
+								{
+									"_type": "block",
+									"_key": "terms3",
+									"style": "h2",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "terms3s0",
+											"text": "Accounts",
+											"marks": []
+										}
+									]
+								},
+								{
+									"_type": "block",
+									"_key": "terms4",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "terms4s0",
+											"text": "You need an account to use the app. Keep your sign-in details secure and tell us at hello@scorecardgtm.com if you think someone else has accessed your account. You're responsible for activity under your account. You must be at least 18 to use Scorecard.",
+											"marks": []
+										}
+									]
+								},
+								{
+									"_type": "block",
+									"_key": "terms5",
+									"style": "h2",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "terms5s0",
+											"text": "Free trial, plans and payment",
+											"marks": []
+										}
+									]
+								},
+								{
+									"_type": "block",
+									"_key": "terms6",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "terms6s1",
+											"text": "Free trial.",
+											"marks": [
+												"strong"
+											]
+										},
+										{
+											"_type": "span",
+											"_key": "terms6s2",
+											"text": " New accounts get a free trial of [14 days] with [500 credits]. [Confirm whether a card is required, and what happens when the trial ends.]",
+											"marks": []
+										}
+									],
+									"listItem": "bullet",
+									"level": 1
+								},
+								{
+									"_type": "block",
+									"_key": "terms7",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "terms7s1",
+											"text": "Monthly plan.",
+											"marks": [
+												"strong"
+											]
+										},
+										{
+											"_type": "span",
+											"_key": "terms7s2",
+											"text": " The monthly plan costs [$59 per month] plus applicable taxes. It renews automatically each month until you cancel.",
+											"marks": []
+										}
+									],
+									"listItem": "bullet",
+									"level": 1
+								},
+								{
+									"_type": "block",
+									"_key": "terms8",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "terms8s1",
+											"text": "Credits.",
+											"marks": [
+												"strong"
+											]
+										},
+										{
+											"_type": "span",
+											"_key": "terms8s2",
+											"text": " Searches, research and scoring use credits. Unused credits [expire at the end of each billing period / roll over]. Credits have no cash value. [Confirm credit rules.]",
+											"marks": []
+										}
+									],
+									"listItem": "bullet",
+									"level": 1
+								},
+								{
+									"_type": "block",
+									"_key": "terms9",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "terms9s1",
+											"text": "Cancellation.",
+											"marks": [
+												"strong"
+											]
+										},
+										{
+											"_type": "span",
+											"_key": "terms9s2",
+											"text": " You can cancel at any time. You keep access until the end of the period you've paid for. Except where the law requires otherwise, payments are non-refundable.",
+											"marks": []
+										}
+									],
+									"listItem": "bullet",
+									"level": 1
+								},
+								{
+									"_type": "block",
+									"_key": "terms10",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "terms10s1",
+											"text": "Price changes.",
+											"marks": [
+												"strong"
+											]
+										},
+										{
+											"_type": "span",
+											"_key": "terms10s2",
+											"text": " We'll give you at least 30 days' notice of a price change. It applies from your next renewal after the notice.",
+											"marks": []
+										}
+									],
+									"listItem": "bullet",
+									"level": 1
+								},
+								{
+									"_type": "block",
+									"_key": "terms11",
+									"style": "h2",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "terms11s0",
+											"text": "The challenge offer",
+											"marks": []
+										}
+									]
+								},
+								{
+									"_type": "block",
+									"_key": "terms12",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "terms12s0",
+											"text": "When we offer to run a search for you through the challenge page, we choose which searches to accept. An accepted search may be free, in exchange for honest feedback on the results. Results are delivered by email and may include fewer companies than requested when the evidence supports fewer. The offer can end at any time.",
+											"marks": []
+										}
+									]
+								},
+								{
+									"_type": "block",
+									"_key": "terms13",
+									"style": "h2",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "terms13s0",
+											"text": "How you may use Scorecard",
+											"marks": []
+										}
+									]
+								},
+								{
+									"_type": "block",
+									"_key": "terms14",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "terms14s0",
+											"text": "You may use the service and its results for your own business purposes, such as prospecting, market research and acquisition search. You agree not to:",
+											"marks": []
+										}
+									]
+								},
+								{
+									"_type": "block",
+									"_key": "terms15",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "terms15s0",
+											"text": "break any law while using the service or its results, including anti-spam, telemarketing, privacy and data-protection laws (for example CAN-SPAM, the TCPA and state privacy laws) when you contact businesses or people found through Scorecard;",
+											"marks": []
+										}
+									],
+									"listItem": "bullet",
+									"level": 1
+								},
+								{
+									"_type": "block",
+									"_key": "terms16",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "terms16s0",
+											"text": "resell, publish or redistribute results or data from the service as a list or database product;",
+											"marks": []
+										}
+									],
+									"listItem": "bullet",
+									"level": 1
+								},
+								{
+									"_type": "block",
+									"_key": "terms17",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "terms17s0",
+											"text": "scrape, copy or bulk-download the service by automated means, except through features we provide for that purpose;",
+											"marks": []
+										}
+									],
+									"listItem": "bullet",
+									"level": 1
+								},
+								{
+									"_type": "block",
+									"_key": "terms18",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "terms18s0",
+											"text": "try to get around usage limits, security measures or credit accounting;",
+											"marks": []
+										}
+									],
+									"listItem": "bullet",
+									"level": 1
+								},
+								{
+									"_type": "block",
+									"_key": "terms19",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "terms19s0",
+											"text": "use the service to harass anyone or to discriminate unlawfully;",
+											"marks": []
+										}
+									],
+									"listItem": "bullet",
+									"level": 1
+								},
+								{
+									"_type": "block",
+									"_key": "terms20",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "terms20s0",
+											"text": "reverse-engineer the service, or use it to build a competing product.",
+											"marks": []
+										}
+									],
+									"listItem": "bullet",
+									"level": 1
+								},
+								{
+									"_type": "block",
+									"_key": "terms21",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "terms21s0",
+											"text": "We may suspend or close accounts that break these rules.",
+											"marks": []
+										}
+									]
+								},
+								{
+									"_type": "block",
+									"_key": "terms22",
+									"style": "h2",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "terms22s0",
+											"text": "Accuracy of results",
+											"marks": []
+										}
+									]
+								},
+								{
+									"_type": "block",
+									"_key": "terms23",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "terms23s0",
+											"text": "Scorecard's research comes from public sources and automated analysis. It can be incomplete, out of date or wrong. Each finding shows its source so you can check it, and information we can't find is marked unknown. Check anything important before you rely on it. Scorecard doesn't tell you whether a business owner wants to sell, and nothing in the service is legal, financial or investment advice.",
+											"marks": []
+										}
+									]
+								},
+								{
+									"_type": "block",
+									"_key": "terms24",
+									"style": "h2",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "terms24s0",
+											"text": "Your content",
+											"marks": []
+										}
+									]
+								},
+								{
+									"_type": "block",
+									"_key": "terms25",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "terms25s0",
+											"text": "You own what you put into Scorecard: your searches, criteria, uploaded lists and notes (\"your content\"). You give us permission to use your content to provide and improve the service for you. We don't share your content with other customers. If you send us feedback or suggestions, we may use them without any obligation to you.",
+											"marks": []
+										}
+									]
+								},
+								{
+									"_type": "block",
+									"_key": "terms26",
+									"style": "h2",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "terms26s0",
+											"text": "Our property",
+											"marks": []
+										}
+									]
+								},
+								{
+									"_type": "block",
+									"_key": "terms27",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "terms27s0",
+											"text": "The service, including its software, design, scores and the way results are compiled, belongs to Scorecard and its licensors. These terms give you a limited, non-exclusive, non-transferable right to use the service while your account is active.",
+											"marks": []
+										}
+									]
+								},
+								{
+									"_type": "block",
+									"_key": "terms28",
+									"style": "h2",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "terms28s0",
+											"text": "Third-party services",
+											"marks": []
+										}
+									]
+								},
+								{
+									"_type": "block",
+									"_key": "terms29",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "terms29s0",
+											"text": "Scorecard relies on third-party services, such as hosting, email and payment providers. Your use of a third-party service directly is governed by that provider's terms.",
+											"marks": []
+										}
+									]
+								},
+								{
+									"_type": "block",
+									"_key": "terms30",
+									"style": "h2",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "terms30s0",
+											"text": "Ending your use",
+											"marks": []
+										}
+									]
+								},
+								{
+									"_type": "block",
+									"_key": "terms31",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "terms31s0",
+											"text": "You can stop using Scorecard and close your account at any time. We may suspend or end your access if you break these terms, if we're required to by law, or if we stop offering the service. If we end the service for reasons other than your breach, we'll refund any prepaid fees for the unused period.",
+											"marks": []
+										}
+									]
+								},
+								{
+									"_type": "block",
+									"_key": "terms32",
+									"style": "h2",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "terms32s0",
+											"text": "Disclaimers",
+											"marks": []
+										}
+									]
+								},
+								{
+									"_type": "block",
+									"_key": "terms33",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "terms33s0",
+											"text": "The service is provided \"as is\" and \"as available\". To the extent the law allows, we disclaim all warranties, whether express or implied, including merchantability, fitness for a particular purpose and non-infringement. We don't promise the service will be uninterrupted or error-free.",
+											"marks": []
+										}
+									]
+								},
+								{
+									"_type": "block",
+									"_key": "terms34",
+									"style": "h2",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "terms34s0",
+											"text": "Limitation of liability",
+											"marks": []
+										}
+									]
+								},
+								{
+									"_type": "block",
+									"_key": "terms35",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "terms35s0",
+											"text": "To the extent the law allows, Scorecard won't be liable for any indirect, incidental, special, consequential or punitive damages, or for lost profits, revenue or data. Our total liability for any claim relating to the service is limited to the greater of the amount you paid us in the 12 months before the claim and $100.",
+											"marks": []
+										}
+									]
+								},
+								{
+									"_type": "block",
+									"_key": "terms36",
+									"style": "h2",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "terms36s0",
+											"text": "Indemnity",
+											"marks": []
+										}
+									]
+								},
+								{
+									"_type": "block",
+									"_key": "terms37",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "terms37s0",
+											"text": "You agree to defend and indemnify Scorecard against claims arising from your use of the service or its results in breach of these terms or the law, including claims about how you contacted businesses or people found through Scorecard.",
+											"marks": []
+										}
+									]
+								},
+								{
+									"_type": "block",
+									"_key": "terms38",
+									"style": "h2",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "terms38s0",
+											"text": "Changes to these terms",
+											"marks": []
+										}
+									]
+								},
+								{
+									"_type": "block",
+									"_key": "terms39",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "terms39s0",
+											"text": "We may update these terms. If a change is significant, we'll tell account holders by email at least 30 days before it takes effect. If you keep using the service after that, you accept the new terms.",
+											"marks": []
+										}
+									]
+								},
+								{
+									"_type": "block",
+									"_key": "terms40",
+									"style": "h2",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "terms40s0",
+											"text": "General",
+											"marks": []
+										}
+									]
+								},
+								{
+									"_type": "block",
+									"_key": "terms41",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "terms41s0",
+											"text": "These terms are governed by the laws of [State], without regard to its conflict-of-laws rules. Disputes will be resolved in the state or federal courts in [County, State]. If any part of these terms can't be enforced, the rest still applies. These terms, together with our Privacy Policy, are the entire agreement between you and Scorecard about the service.",
+											"marks": []
+										}
+									]
+								},
+								{
+									"_type": "block",
+									"_key": "terms42",
+									"style": "h2",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "terms42s0",
+											"text": "Contact",
+											"marks": []
+										}
+									]
+								},
+								{
+									"_type": "block",
+									"_key": "terms43",
+									"style": "normal",
+									"markDefs": [],
+									"children": [
+										{
+											"_type": "span",
+											"_key": "terms43s0",
+											"text": "[Scorecard legal entity name] [Mailing address] hello@scorecardgtm.com",
+											"marks": []
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			}
+		]
+	},
+	"blockTypes": [
+		{
+			"slug": "hero",
+			"label": "Hero",
+			"description": "Top of the page: headline, intro and buttons. The account card on the right is a coded visual.",
+			"currentVersion": 1,
+			"versions": [
+				{
+					"version": 1,
+					"fields": [
+						{
+							"slug": "heading",
+							"label": "Heading",
+							"type": "string",
+							"required": true
+						},
+						{
+							"slug": "body",
+							"label": "Intro",
+							"type": "text"
+						},
+						{
+							"slug": "cta_label",
+							"label": "Button label",
+							"type": "string"
+						},
+						{
+							"slug": "cta_href",
+							"label": "Button link",
+							"type": "string"
+						},
+						{
+							"slug": "more_label",
+							"label": "Secondary link label",
+							"type": "string"
+						},
+						{
+							"slug": "more_href",
+							"label": "Secondary link link",
+							"type": "string"
+						}
+					]
+				}
+			]
+		},
+		{
+			"slug": "challenge",
+			"label": "Challenge offer",
+			"description": "Send-us-your-search offer and form. Submissions are saved under Form submissions and emailed to the team.",
+			"currentVersion": 1,
+			"versions": [
+				{
+					"version": 1,
+					"fields": [
+						{
+							"slug": "heading",
+							"label": "Heading",
+							"type": "string"
+						},
+						{
+							"slug": "body",
+							"label": "Intro",
+							"type": "text"
+						},
+						{
+							"slug": "points",
+							"label": "What you get",
+							"type": "repeater",
+							"validation": {
+								"subFields": [
+									{
+										"slug": "title",
+										"label": "Point",
+										"type": "string"
+									},
+									{
+										"slug": "body",
+										"label": "Detail",
+										"type": "text"
+									}
+								]
+							}
+						},
+						{
+							"slug": "query_label",
+							"label": "Search field label",
+							"type": "string"
+						},
+						{
+							"slug": "query_placeholder",
+							"label": "Search field example",
+							"type": "string"
+						},
+						{
+							"slug": "geo_label",
+							"label": "Geography field label",
+							"type": "string"
+						},
+						{
+							"slug": "geo_placeholder",
+							"label": "Geography field example",
+							"type": "string"
+						},
+						{
+							"slug": "fit_label",
+							"label": "Great-fit field label",
+							"type": "string"
+						},
+						{
+							"slug": "fit_placeholder",
+							"label": "Great-fit field example",
+							"type": "string"
+						},
+						{
+							"slug": "name_label",
+							"label": "Name field label",
+							"type": "string"
+						},
+						{
+							"slug": "email_label",
+							"label": "Email field label",
+							"type": "string"
+						},
+						{
+							"slug": "company_label",
+							"label": "Company field label (optional field)",
+							"type": "string"
+						},
+						{
+							"slug": "submit_label",
+							"label": "Button label",
+							"type": "string"
+						},
+						{
+							"slug": "success_heading",
+							"label": "Sent: heading",
+							"type": "string"
+						},
+						{
+							"slug": "success_body",
+							"label": "Sent: text",
+							"type": "text"
+						},
+						{
+							"slug": "error_text",
+							"label": "Error message",
+							"type": "text"
+						},
+						{
+							"slug": "email",
+							"label": "Fallback email address",
+							"type": "string"
+						},
+						{
+							"slug": "alt_prompt",
+							"label": "Fallback email prompt",
+							"type": "string"
+						},
+						{
+							"slug": "offer",
+							"label": "Offer note",
+							"type": "text"
+						},
+						{
+							"slug": "bridge_heading",
+							"label": "Bridge heading",
+							"type": "string"
+						},
+						{
+							"slug": "bridge_body",
+							"label": "Bridge text",
+							"type": "text"
+						}
+					]
+				}
+			]
+		},
+		{
+			"slug": "contact",
+			"label": "Contact form",
+			"description": "Contact page intro and form. Submissions are saved under Form submissions and emailed to the team.",
+			"currentVersion": 1,
+			"versions": [
+				{
+					"version": 1,
+					"fields": [
+						{
+							"slug": "heading",
+							"label": "Heading",
+							"type": "string"
+						},
+						{
+							"slug": "body",
+							"label": "Intro",
+							"type": "text"
+						},
+						{
+							"slug": "points",
+							"label": "Side notes",
+							"type": "repeater",
+							"validation": {
+								"subFields": [
+									{
+										"slug": "title",
+										"label": "Point",
+										"type": "string"
+									},
+									{
+										"slug": "body",
+										"label": "Detail",
+										"type": "text"
+									}
+								]
+							}
+						},
+						{
+							"slug": "message_label",
+							"label": "Message field label",
+							"type": "string"
+						},
+						{
+							"slug": "message_placeholder",
+							"label": "Message field example",
+							"type": "string"
+						},
+						{
+							"slug": "name_label",
+							"label": "Name field label",
+							"type": "string"
+						},
+						{
+							"slug": "email_label",
+							"label": "Email field label",
+							"type": "string"
+						},
+						{
+							"slug": "company_label",
+							"label": "Company field label (optional field)",
+							"type": "string"
+						},
+						{
+							"slug": "submit_label",
+							"label": "Button label",
+							"type": "string"
+						},
+						{
+							"slug": "success_heading",
+							"label": "Sent: heading",
+							"type": "string"
+						},
+						{
+							"slug": "success_body",
+							"label": "Sent: text",
+							"type": "text"
+						},
+						{
+							"slug": "error_text",
+							"label": "Error message",
+							"type": "text"
+						},
+						{
+							"slug": "email",
+							"label": "Fallback email address",
+							"type": "string"
+						},
+						{
+							"slug": "alt_prompt",
+							"label": "Fallback email prompt",
+							"type": "string"
+						}
+					]
+				}
+			]
+		},
+		{
+			"slug": "audience_hero",
+			"label": "Audience hero",
+			"description": "Top of an audience page. The card on the right repeats a homepage who-it's-for card; Visual picks its coded chart.",
+			"currentVersion": 1,
+			"versions": [
+				{
+					"version": 1,
+					"fields": [
+						{
+							"slug": "who",
+							"label": "Audience label",
+							"type": "string"
+						},
+						{
+							"slug": "heading",
+							"label": "Heading",
+							"type": "string",
+							"required": true
+						},
+						{
+							"slug": "body",
+							"label": "Intro",
+							"type": "text"
+						},
+						{
+							"slug": "cta_label",
+							"label": "Button label",
+							"type": "string"
+						},
+						{
+							"slug": "cta_href",
+							"label": "Button link",
+							"type": "string"
+						},
+						{
+							"slug": "more_label",
+							"label": "Secondary link label",
+							"type": "string"
+						},
+						{
+							"slug": "more_href",
+							"label": "Secondary link",
+							"type": "string"
+						},
+						{
+							"slug": "note",
+							"label": "Small print",
+							"type": "text"
+						},
+						{
+							"slug": "query",
+							"label": "Card: example search",
+							"type": "string"
+						},
+						{
+							"slug": "visual",
+							"label": "Card: visual",
+							"type": "select",
+							"validation": {
+								"options": [
+									"rank",
+									"size",
+									"years"
+								]
+							}
+						},
+						{
+							"slug": "outcome",
+							"label": "Card: outcome",
+							"type": "text"
+						}
+					]
+				}
+			]
+		},
+		{
+			"slug": "points",
+			"label": "Points",
+			"description": "A heading and a set of items: three-up columns, or a list with a badge per item (use the badge for tiers like A–D).",
+			"currentVersion": 1,
+			"versions": [
+				{
+					"version": 1,
+					"fields": [
+						{
+							"slug": "eyebrow",
+							"label": "Small label above the heading",
+							"type": "string"
+						},
+						{
+							"slug": "heading",
+							"label": "Heading",
+							"type": "string"
+						},
+						{
+							"slug": "body",
+							"label": "Intro",
+							"type": "text"
+						},
+						{
+							"slug": "layout",
+							"label": "Layout",
+							"type": "select",
+							"validation": {
+								"options": [
+									"columns",
+									"list"
+								]
+							}
+						},
+						{
+							"slug": "items",
+							"label": "Items",
+							"type": "repeater",
+							"validation": {
+								"subFields": [
+									{
+										"slug": "label",
+										"label": "Label or badge",
+										"type": "string"
+									},
+									{
+										"slug": "title",
+										"label": "Title",
+										"type": "string"
+									},
+									{
+										"slug": "body",
+										"label": "Text",
+										"type": "text"
+									}
+								]
+							}
+						}
+					]
+				}
+			]
+		},
+		{
+			"slug": "audiences",
+			"label": "Who it's for",
+			"description": "Audience cards. Each card picks one coded mini-visual.",
+			"currentVersion": 1,
+			"versions": [
+				{
+					"version": 1,
+					"fields": [
+						{
+							"slug": "heading",
+							"label": "Heading",
+							"type": "string"
+						},
+						{
+							"slug": "cards",
+							"label": "Cards",
+							"type": "repeater",
+							"validation": {
+								"subFields": [
+									{
+										"slug": "who",
+										"label": "Audience",
+										"type": "string"
+									},
+									{
+										"slug": "title",
+										"label": "Title",
+										"type": "string"
+									},
+									{
+										"slug": "query",
+										"label": "Example search",
+										"type": "string"
+									},
+									{
+										"slug": "visual",
+										"label": "Visual",
+										"type": "select",
+										"options": [
+											"rank",
+											"size",
+											"years"
+										]
+									},
+									{
+										"slug": "outcome",
+										"label": "Outcome",
+										"type": "text"
+									},
+									{
+										"slug": "cta_label",
+										"label": "Link label",
+										"type": "string"
+									},
+									{
+										"slug": "cta_href",
+										"label": "Link",
+										"type": "string"
+									}
+								]
+							}
+						}
+					]
+				}
+			]
+		},
+		{
+			"slug": "how_intro",
+			"label": "How it works intro",
+			"description": "Heading above the agent stories. Following Agent story blocks share its step bar.",
+			"currentVersion": 1,
+			"versions": [
+				{
+					"version": 1,
+					"fields": [
+						{
+							"slug": "heading",
+							"label": "Heading",
+							"type": "string"
+						}
+					]
+				}
+			]
+		},
+		{
+			"slug": "agent",
+			"label": "Agent story",
+			"description": "One scroll-driven agent section. Visual picks the coded animation (search, signals or score); keep 4 steps, the animation timing is coded per visual.",
+			"currentVersion": 1,
+			"versions": [
+				{
+					"version": 1,
+					"fields": [
+						{
+							"slug": "visual",
+							"label": "Visual",
+							"type": "select",
+							"validation": {
+								"options": [
+									"search",
+									"signals",
+									"score"
+								]
+							},
+							"required": true
+						},
+						{
+							"slug": "nav_label",
+							"label": "Step bar label",
+							"type": "string"
+						},
+						{
+							"slug": "heading",
+							"label": "Heading",
+							"type": "string"
+						},
+						{
+							"slug": "query_label",
+							"label": "Query label",
+							"type": "string"
+						},
+						{
+							"slug": "query",
+							"label": "Query text",
+							"type": "string"
+						},
+						{
+							"slug": "agent_name",
+							"label": "Agent name",
+							"type": "string"
+						},
+						{
+							"slug": "steps",
+							"label": "Thinking steps",
+							"type": "repeater",
+							"validation": {
+								"subFields": [
+									{
+										"slug": "title",
+										"label": "Step",
+										"type": "string"
+									}
+								]
+							}
+						}
+					]
+				}
+			]
+		},
+		{
+			"slug": "features",
+			"label": "Features grid",
+			"description": "Feature cards, the coverage card and the try-it CTA. Card visuals are coded.",
+			"currentVersion": 1,
+			"versions": [
+				{
+					"version": 1,
+					"fields": [
+						{
+							"slug": "heading",
+							"label": "Heading",
+							"type": "string"
+						},
+						{
+							"slug": "cards",
+							"label": "Cards",
+							"type": "repeater",
+							"validation": {
+								"subFields": [
+									{
+										"slug": "visual",
+										"label": "Visual",
+										"type": "select",
+										"options": [
+											"lookalike",
+											"signals",
+											"export",
+											"crm",
+											"mcp"
+										]
+									},
+									{
+										"slug": "title",
+										"label": "Title",
+										"type": "string"
+									},
+									{
+										"slug": "body",
+										"label": "Body",
+										"type": "text"
+									},
+									{
+										"slug": "coming_soon",
+										"label": "Coming soon",
+										"type": "boolean"
+									}
+								]
+							}
+						},
+						{
+							"slug": "coverage_title",
+							"label": "Coverage card title",
+							"type": "string"
+						},
+						{
+							"slug": "coverage_stats",
+							"label": "Coverage figures",
+							"type": "repeater",
+							"validation": {
+								"subFields": [
+									{
+										"slug": "value",
+										"label": "Figure",
+										"type": "string"
+									},
+									{
+										"slug": "label",
+										"label": "Label",
+										"type": "string"
+									},
+									{
+										"slug": "note",
+										"label": "Note",
+										"type": "string"
+									},
+									{
+										"slug": "icon",
+										"label": "Note icon",
+										"type": "select",
+										"options": [
+											"upload",
+											"snowflake",
+											"truck",
+											"user-round",
+											"file-spreadsheet",
+											"sheet",
+											"sparkles",
+											"bot",
+											"plug",
+											"trending-up",
+											"refresh-cw",
+											"globe",
+											"map-pin",
+											"linkedin",
+											"landmark"
+										]
+									}
+								]
+							}
+						},
+						{
+							"slug": "coverage_sources",
+							"label": "Coverage sources",
+							"type": "repeater",
+							"validation": {
+								"subFields": [
+									{
+										"slug": "label",
+										"label": "Source",
+										"type": "string"
+									},
+									{
+										"slug": "icon",
+										"label": "Icon",
+										"type": "select",
+										"options": [
+											"upload",
+											"snowflake",
+											"truck",
+											"user-round",
+											"file-spreadsheet",
+											"sheet",
+											"sparkles",
+											"bot",
+											"plug",
+											"trending-up",
+											"refresh-cw",
+											"globe",
+											"map-pin",
+											"linkedin",
+											"landmark"
+										]
+									}
+								]
+							}
+						},
+						{
+							"slug": "coverage_cta_label",
+							"label": "Coverage link label",
+							"type": "string"
+						},
+						{
+							"slug": "coverage_cta_href",
+							"label": "Coverage link link",
+							"type": "string"
+						},
+						{
+							"slug": "cta_heading",
+							"label": "CTA heading",
+							"type": "string"
+						},
+						{
+							"slug": "cta_label",
+							"label": "CTA button label",
+							"type": "string"
+						},
+						{
+							"slug": "cta_href",
+							"label": "CTA button link",
+							"type": "string"
+						},
+						{
+							"slug": "challenge_label",
+							"label": "Challenge link label",
+							"type": "string"
+						},
+						{
+							"slug": "challenge_href",
+							"label": "Challenge link link",
+							"type": "string"
+						}
+					]
+				}
+			]
+		},
+		{
+			"slug": "pricing",
+			"label": "Pricing",
+			"description": "Plan table (desktop) and plan cards (mobile, highlighted plan first).",
+			"currentVersion": 1,
+			"versions": [
+				{
+					"version": 1,
+					"fields": [
+						{
+							"slug": "heading",
+							"label": "Heading",
+							"type": "string"
+						},
+						{
+							"slug": "plans",
+							"label": "Plans (table column order)",
+							"type": "repeater",
+							"validation": {
+								"subFields": [
+									{
+										"slug": "name",
+										"label": "Name",
+										"type": "string"
+									},
+									{
+										"slug": "price",
+										"label": "Price",
+										"type": "string"
+									},
+									{
+										"slug": "price_note",
+										"label": "Price note",
+										"type": "string"
+									},
+									{
+										"slug": "cta_label",
+										"label": "Button label",
+										"type": "string"
+									},
+									{
+										"slug": "cta_href",
+										"label": "Button link",
+										"type": "string"
+									},
+									{
+										"slug": "cta_style",
+										"label": "Button style",
+										"type": "select",
+										"options": [
+											"coral",
+											"line",
+											"line-clear"
+										]
+									},
+									{
+										"slug": "then_note",
+										"label": "Note under button",
+										"type": "string"
+									},
+									{
+										"slug": "highlight",
+										"label": "Highlighted plan",
+										"type": "boolean"
+									},
+									{
+										"slug": "card_features",
+										"label": "Mobile card bullets (one per line)",
+										"type": "text"
+									}
+								]
+							}
+						},
+						{
+							"slug": "rows",
+							"label": "Comparison rows",
+							"type": "repeater",
+							"validation": {
+								"subFields": [
+									{
+										"slug": "label",
+										"label": "Feature",
+										"type": "string"
+									},
+									{
+										"slug": "note",
+										"label": "Small print",
+										"type": "text"
+									},
+									{
+										"slug": "coming_soon",
+										"label": "Coming soon",
+										"type": "boolean"
+									},
+									{
+										"slug": "values",
+										"label": "Values, one line per plan (✓ = included, — = not included)",
+										"type": "text"
+									}
+								]
+							}
+						}
+					]
+				}
+			]
+		},
+		{
+			"slug": "faq",
+			"label": "FAQ",
+			"description": "Questions and answers. Text in [square brackets] renders as a highlighted placeholder.",
+			"currentVersion": 1,
+			"versions": [
+				{
+					"version": 1,
+					"fields": [
+						{
+							"slug": "heading",
+							"label": "Heading",
+							"type": "string"
+						},
+						{
+							"slug": "contact_prompt",
+							"label": "Contact prompt",
+							"type": "string"
+						},
+						{
+							"slug": "contact_label",
+							"label": "Contact link label",
+							"type": "string"
+						},
+						{
+							"slug": "contact_href",
+							"label": "Contact link link",
+							"type": "string"
+						},
+						{
+							"slug": "items",
+							"label": "Questions",
+							"type": "repeater",
+							"validation": {
+								"subFields": [
+									{
+										"slug": "question",
+										"label": "Question",
+										"type": "string"
+									},
+									{
+										"slug": "answer",
+										"label": "Answer",
+										"type": "text"
+									}
+								]
+							}
+						}
+					]
+				}
+			]
+		},
+		{
+			"slug": "signup",
+			"label": "Sign-up close",
+			"description": "Closing call to action.",
+			"currentVersion": 1,
+			"versions": [
+				{
+					"version": 1,
+					"fields": [
+						{
+							"slug": "heading",
+							"label": "Heading",
+							"type": "string"
+						},
+						{
+							"slug": "body",
+							"label": "Body",
+							"type": "text"
+						},
+						{
+							"slug": "cta_label",
+							"label": "Button label",
+							"type": "string"
+						},
+						{
+							"slug": "cta_href",
+							"label": "Button link",
+							"type": "string"
+						}
+					]
+				}
+			]
+		},
+		{
+			"slug": "prose",
+			"label": "Long-form text",
+			"description": "A heading and rich text, for pages like Privacy and Terms.",
+			"currentVersion": 1,
+			"versions": [
+				{
+					"version": 1,
+					"fields": [
+						{
+							"slug": "heading",
+							"label": "Heading",
+							"type": "string",
+							"required": true
+						},
+						{
+							"slug": "updated",
+							"label": "Last updated line",
+							"type": "string"
+						},
+						{
+							"slug": "body",
+							"label": "Text",
+							"type": "portableText"
+						}
+					]
+				}
+			]
+		}
+	]
+}

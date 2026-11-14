@@ -1,0 +1,11 @@
+---
+import { PortableText } from "emdash/ui";
+
+// Long-form text pages (Privacy, Terms): heading, last-updated line, rich text.
+const { value: v } = Astro.props;
+---
+<article class="prose" id="top"><div class="wrap">
+  <h1>{v.heading}</h1>
+  {v.updated && <p class="prose-updated">{v.updated}</p>}
+  <div class="prose-body"><PortableText value={v.body} /></div>
+</div></article>

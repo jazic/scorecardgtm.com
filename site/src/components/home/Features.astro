@@ -1,0 +1,20 @@
+---
+import lookalike from "./visuals/feature-lookalike.html?raw";
+import signals from "./visuals/feature-signals.html?raw";
+import exportFx from "./visuals/feature-export.html?raw";
+import crmFx from "./visuals/feature-crm.html?raw";
+import mcp from "./visuals/feature-mcp.html?raw";
+import icons from "./visuals/icons.json";
+import salesforce from "../../assets/crm/salesforce.svg?url";
+import hubspot from "../../assets/crm/hubspot.svg?url";
+import pipedrive from "../../assets/crm/pipedrive.svg?url";
+import zoho from "../../assets/crm/zoho.svg?url";
+import dynamics365 from "../../assets/crm/dynamics365.svg?url";
+
+const logos: Record<string, string> = { salesforce, hubspot, pipedrive, zoho, dynamics365 };
+const crm = crmFx.replace(/assets\/crm\/(\w+)\.svg/g, (_, n: string) => logos[n]);
+const fx: Record<string, string> = { lookalike, signals, export: exportFx, crm, mcp };
+const icon = (name: string) => `--i:url('${(icons as Record<string, string>)[name] ?? ""}')`;
+const { value: v } = Astro.props;
+---
+<section class="andmore2" id="features"><div class="wrap"><h2>{v.heading}</h2><div class="feature-grid">{(v.cards ?? []).map((c: any) => <article class="feature-card"><Fragment set:html={fx[c.visual] ?? ""} />{c.coming_soon && <span class="soontag">Coming soon</span>}<h3>{c.title}</h3><p>{c.body}</p></article>)}<article class="feature-card cov-card" data-placeholder="figures"><h3>{v.coverage_title}</h3><div class="cr-list">{(v.coverage_stats ?? []).map((s: any) => <div class="cr"><b>{s.value}</b><span>{s.label}</span><em><span class="lc" style={icon(s.icon)}></span>{s.note}</em></div>)}</div><div class="cr-src">{(v.coverage_sources ?? []).map((s: any) => <span class="chip"><i><span class="lc" style={icon(s.icon)}></span></i>{s.label}</span>)}</div><a class="cov-cta" href={v.coverage_cta_href}>{v.coverage_cta_label}</a></article></div><div class="feature-cta"><h3>{v.cta_heading}</h3><a class="btn btn-coral" href={v.cta_href}>{v.cta_label}</a><a class="challenge-link" href={v.challenge_href}>{v.challenge_label}</a></div></div></section>

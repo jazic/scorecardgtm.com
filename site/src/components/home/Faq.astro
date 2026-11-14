@@ -1,0 +1,10 @@
+---
+const { value: v } = Astro.props;
+const items: { question: string; answer: string }[] = v.items ?? [];
+// "[Verify …]" in an answer renders as a highlighted placeholder.
+const parts = (s: string) => (s ?? "").split(/(\[[^\]]*\])/).filter(Boolean);
+---
+<section class="faq" id="faq"><div class="wrap">
+  <div class="side"><h2>{v.heading}</h2><p>{v.contact_prompt} <a href={v.contact_href}>{v.contact_label}</a>.</p></div>
+  <div class="faq-main"><button type="button" class="qall">Expand all</button><dl>{items.map((q, i) => <div class="qa"><dt><button type="button" class="qb" aria-expanded="false" aria-controls={`faq-a${i + 1}`} id={`faq-q${i + 1}`}><span>{q.question}</span><i aria-hidden="true"></i></button></dt><dd id={`faq-a${i + 1}`} role="region" aria-labelledby={`faq-q${i + 1}`}><div>{parts(q.answer).map((p) => (p.startsWith("[") ? <span class="ph">{p}</span> : p))}</div></dd></div>)}</dl></div>
+</div></section>

@@ -1,0 +1,13 @@
+---
+import { getEmDashEntry } from "emdash";
+import LandingPage from "../components/home/LandingPage.astro";
+import NotFound from "../components/home/NotFound.astro";
+
+// Other landing entries, and draft previews of every entry (the collection's urlPattern is /{slug}).
+const { slug } = Astro.params;
+const { entry, isPreview, cacheHint } = await getEmDashEntry("landing", slug!);
+if (!entry) Astro.response.status = 404;
+if (slug === "home" && !isPreview) return Astro.redirect("/", 301);
+if (entry && Astro.cache?.enabled) Astro.cache.set(cacheHint);
+---
+{entry ? <LandingPage entry={entry} /> : <NotFound />}

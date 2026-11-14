@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Scorecard — Target prospects worth the extra effort</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Caveat:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1C1C1A; --fg2:#5F5E5A; --fg3:#6E6D69; --fg4:#6F6E69; --fg5:#77766F;
+    --paper:#F7F6F4; --card:#FFFFFF; --line:#E6E4E0; --hair:#EDEBE7;
+    --a:#0F6FC0; --a-fill:#1A8FE8; --b:#7CBDF2; --b-ink:#0B3A63; --c:#C4E0F8; --d:#E2E1DE;
+    --tint:#EEF6FD; --tint-ink:#3F6A8F;
+    --coral:#FF4A3D;
+    --ease: cubic-bezier(.16,1,.3,1);
+    --shadow: 0 0 0 1px var(--line), 0 24px 48px -28px rgba(0,0,0,.35);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:auto}
+  html,body{overflow-x:clip}
+  body{font-family:Geist,system-ui,sans-serif;color:var(--ink);background:var(--paper);-webkit-font-smoothing:antialiased}
+  ::selection{background:var(--c);color:var(--b-ink)}
+
+
+  /* sticky sections */
+  .sec{position:relative}
+  .sec[data-steps="4"]{height:420vh}
+  .sec[data-steps="5"]{height:500vh}
+  .sec.blue{background:#EAF2FB}
+  .sec.blue::before{content:"";position:absolute;inset:0;background:url(textures/ht2-map-blue-920.svg) center/cover no-repeat;opacity:.5;pointer-events:none}
+  .pin{position:sticky;top:68px;height:calc(100vh - 68px);display:flex;align-items:center;justify-content:center;padding:0 32px}
+  .row{display:flex;align-items:center;gap:72px;width:1184px;max-width:100%;position:relative}
+  .copy{width:472px;flex-shrink:0;display:flex;flex-direction:column;gap:18px}
+  .rail{display:flex;align-items:center;gap:10px;font-size:14px;font-weight:500;color:var(--fg4);padding-bottom:6px}
+  .rail i{width:28px;height:1px;background:#B9B8B3}
+  .rail b{color:var(--ink);font-weight:600}
+  .copy h2{font-size:48px;line-height:52px;font-weight:600;letter-spacing:-.035em;text-wrap:balance}
+  .copy p{font-size:19px;line-height:29px;color:var(--fg2);max-width:44ch}
+  .copy p.strong{color:var(--ink);font-weight:500}
+
+  .stagecol{width:640px;display:flex;flex-direction:column;gap:14px}
+  .agent{align-self:flex-start;display:flex;align-items:center;gap:8px;padding:7px 14px 7px 11px;border-radius:999px;background:var(--ink);color:#fff;font-size:13px}
+  .agent .dot{width:8px;height:8px;border-radius:50%;background:var(--b);animation:pulse 1.6s ease-in-out infinite}
+  .agent b{font-weight:500}
+  .agent .status{color:#B9B8B3;transition:opacity .25s}
+  @keyframes pulse{50%{opacity:.35}}
+  .stage{position:relative;height:460px}
+  .scene{position:absolute;inset:0;opacity:0;transform:translateY(14px) scale(.985);filter:blur(6px);transition:opacity .5s var(--ease),transform .7s var(--ease),filter .5s var(--ease);pointer-events:none}
+  .scene.on{opacity:1;transform:none;filter:none;pointer-events:auto}
+  .ticks{display:flex;gap:6px;align-items:center}
+  .ticks span{flex:1;height:3px;border-radius:2px;background:#D6D4CF;position:relative;overflow:hidden}
+  .ticks span::after{content:"";position:absolute;inset:0;background:var(--ink);transform:scaleX(var(--f,0));transform-origin:left}
+  .tickcap{font-size:13px;color:var(--fg3);min-height:18px}
+
+  /* shared bits */
+  .card{background:var(--card);border-radius:16px;box-shadow:var(--shadow)}
+  .pad{padding:22px 24px}
+  .lab{font-size:12px;color:var(--fg4)}
+  .h{font-size:17px;font-weight:600}
+  .sub{font-size:13px;color:var(--fg3)}
+  .g{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-size:13px;font-weight:600;flex-shrink:0}
+  .gA{background:var(--a);color:#fff}.gB{background:var(--b);color:var(--b-ink)}.gC{background:var(--c);color:var(--b-ink)}.gD{background:var(--d);color:var(--fg2)}
+  .chip{padding:5px 11px;border-radius:999px;background:#fff;box-shadow:inset 0 0 0 1px #D6E6F5;font-size:13px;color:var(--tint-ink)}
+  .pill{padding:4px 10px;border-radius:999px;font-size:12px;font-weight:600}
+  .r{display:flex;align-items:center;gap:12px;padding:11px 12px;border-radius:10px;background:var(--paper);font-size:14px}
+  .r .grow{flex:1}
+  .r.keep{background:var(--tint)}
+  .r.drop{color:var(--fg5)}
+  .r.unsure{background:#fff;box-shadow:inset 0 0 0 1px #D6D4CF;border:0;outline:1px dashed #B9B8B3;outline-offset:-1px}
+  .tag{width:52px;font-size:12px;font-weight:600}
+  .keep .tag{color:var(--a)} .drop .tag{color:var(--fg4)} .unsure .tag{color:var(--fg2)}
+  .hand{font-family:Caveat,cursive;font-size:27px;line-height:1;color:var(--coral)}
+  .search{display:flex;align-items:center;gap:12px;height:56px;padding:0 20px;border-radius:14px;background:#fff;box-shadow:0 0 0 1.5px var(--ink),0 12px 24px -16px rgba(0,0,0,.3);font-size:17px}
+  .search .grow{flex:1}
+  .caret{display:inline-block;width:2px;height:20px;background:var(--a-fill);vertical-align:-4px;margin-left:2px;animation:blink 1s steps(1) infinite}
+  @keyframes blink{50%{opacity:0}}
+  mark{background:var(--c);color:var(--b-ink);border-radius:4px;padding:1px 3px;font-weight:500}
+  .big{font-size:88px;line-height:1;font-weight:600;letter-spacing:-.045em;font-variant-numeric:tabular-nums}
+  .center{padding:44px 24px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px}
+
+  /* stagger in when scene turns on */
+  .st > *{opacity:0;transform:translateY(8px)}
+  .scene.on .st > *{animation:rowIn .55s var(--ease) both;animation-delay:calc(var(--i,0) * 140ms + 150ms)}
+  @keyframes rowIn{to{opacity:1;transform:none}}
+
+  /* log typing */
+  .log{background:var(--ink);border-radius:16px;padding:24px;display:flex;flex-direction:column;gap:12px;font-family:"Geist Mono",monospace;font-size:13.5px;line-height:20px;color:#E6E4E0}
+  .log .ln{white-space:nowrap;overflow:hidden;clip-path:inset(0 100% 0 0)}
+  .scene.on .log .ln{animation:type .7s steps(28) both;animation-delay:calc(var(--i) * 420ms + 200ms)}
+  @keyframes type{to{clip-path:inset(0 0 0 0)}}
+  .log .live{color:var(--b)}
+
+  /* strike-through draws in */
+  .strike{position:relative}
+  .strike::after{content:"";position:absolute;left:0;top:52%;height:1.5px;background:var(--fg4);width:0;transition:width .5s var(--ease) .9s}
+  .scene.on .strike::after{width:100%}
+
+  /* bars grow */
+  .bar{height:9px;border-radius:5px;background:var(--hair);overflow:hidden}
+  .bar i{display:block;height:100%;border-radius:5px;width:0;transition:width 1s var(--ease)}
+  .scene.on .bar i{width:var(--w)}
+
+  /* grid card */
+  .grid2{display:grid;grid-template-columns:1fr 1fr}
+  .grid2 > div{padding:18px 24px;display:flex;flex-direction:column;gap:11px}
+  .grid2 > div:nth-child(odd){border-right:1px solid var(--hair)}
+  .grid2 > div:nth-child(-n+2){border-bottom:1px solid var(--hair)}
+  .fact b{display:block;font-size:15px;font-weight:400}
+  .fact span{font-size:12px;color:var(--fg3)}
+
+  /* ranked list */
+  .rank{display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid var(--hair)}
+  .rank:last-child{border-bottom:0}
+  .rank .grow{flex:1;display:flex;flex-direction:column}
+  .rank .why{font-size:12px;color:var(--fg3)}
+  .up{font-size:13px;font-weight:500;color:var(--a)}
+  .dn{font-size:13px;color:var(--fg4)}
+
+  .soon{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--fg2);padding:0 4px}
+  .soon span:first-child{padding:3px 9px;border-radius:999px;box-shadow:inset 0 0 0 1px #D6D4CF;font-size:12px;font-weight:500}
+
+  .divider{height:1px;background:var(--line);width:1184px;max-width:calc(100% - 64px);margin:0 auto}
+
+  @media (max-width:1100px){
+    .row{flex-direction:column;gap:28px;align-items:stretch}
+    .copy,.stagecol{width:100%}
+    .copy h2{font-size:34px;line-height:38px}
+    .copy p{font-size:17px;line-height:26px}
+    .stage{height:420px}
+    .pin{align-items:flex-start;padding-top:40px}
+  }
+  body.review > *:not(.review-on){display:none!important}
+  body.review .sec{height:auto!important}
+  body.review .pin{position:relative}
+  body.review *,body.review *::after{animation:none!important;transition:none!important}
+  body.review .st > *{opacity:1;transform:none}
+  body.review .log .ln{clip-path:none}
+
+  @media (prefers-reduced-motion:reduce){
+    .scene,.scene *{transition:none!important;animation:none!important}
+    .st > *{opacity:1;transform:none}
+    .log .ln{clip-path:none}
+    .agent .dot{animation:none}
+  }
+
+  /* ---------- full page ---------- */
+  a{color:inherit;text-decoration:none}
+  .wrap{width:1184px;max-width:calc(100% - 64px);margin:0 auto}
+  .btn{display:inline-flex;align-items:center;justify-content:center;height:48px;padding:0 22px;border-radius:11px;font-size:15px;font-weight:500;transition:transform .2s var(--ease),box-shadow .2s var(--ease)}
+  .btn:hover{transform:translateY(-1px)}
+  .btn:focus-visible,a:focus-visible,summary:focus-visible,input:focus-visible{outline:2px solid var(--a-fill);outline-offset:3px}
+  .btn-coral{background:var(--coral);color:#fff}
+  .btn-line{box-shadow:inset 0 0 0 1px var(--ink);color:var(--ink);background:#fff}
+  .h-xl{font-size:54px;line-height:56px;letter-spacing:-.04em;font-weight:600;text-wrap:balance}
+
+  nav.top{position:sticky;top:0;z-index:20;background:rgba(247,246,244,.86);backdrop-filter:saturate(1.4) blur(12px);-webkit-backdrop-filter:saturate(1.4) blur(12px);border-bottom:1px solid transparent;transition:border-color .2s}
+  nav.top.scrolled{border-bottom-color:var(--line)}
+  nav.top .wrap{display:flex;align-items:center;gap:28px;height:68px}
+  .logo{display:flex;align-items:center;gap:9px;flex:1;font-size:21px;font-weight:700;letter-spacing:-.035em}
+  nav.top .links a{font-size:15px;font-weight:500;color:var(--fg2)}
+  nav.top .links{display:flex;gap:28px}
+  nav.top .links a:hover{color:var(--ink)}
+  nav.top .btn{height:40px;padding:0 16px;font-size:14px}
+
+  .hero .wrap{display:flex;align-items:center;gap:32px;padding:72px 0 56px}
+  .hero-copy{width:480px;flex-shrink:0}
+  .hero h1{font-size:76px;line-height:74px;letter-spacing:-.04em;font-weight:600;width:440px}
+  .hero p{font-size:19px;line-height:29.5px;color:var(--fg2);padding:26px 0 32px;max-width:470px}
+  .hero .ctas{display:flex;align-items:center;gap:22px}
+  .hero .ctas a.more{font-size:17px;font-weight:500}
+  .hero-art{position:relative;width:688px;height:400px;flex-shrink:0}
+  .hero-art .map{position:absolute;left:-34px;top:-20px;width:757px;height:440px;background:url(textures/hero-halftone-map7-white.svg) center/100% 100% no-repeat}
+  .hero-art .ring{position:absolute;left:354px;top:74px;width:154px;height:143px}
+  .hero-art .note{position:absolute;left:494px;top:106px;font-family:Caveat,cursive;font-size:30px;font-weight:700;color:var(--coral);transform:rotate(-6deg);transform-origin:0 0;white-space:nowrap}
+  .acct{position:absolute;left:90px;top:175px;width:280px;background:#fff;border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:12px;box-shadow:0 0 0 1px var(--line),0 18px 40px -18px rgba(0,0,0,.28)}
+  .acct .top{display:flex;justify-content:space-between;align-items:center}
+  .acct ul{list-style:none;border-top:1px solid var(--line);padding-top:12px;display:flex;flex-direction:column;gap:6px}
+  .acct li{display:flex;gap:8px;font-size:14px;line-height:21px;color:var(--fg2)}
+  .acct li::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--a-fill);margin-top:8px;flex-shrink:0}
+  .acct .who{display:flex;align-items:center;gap:10px;border-top:1px solid var(--line);padding-top:12px}
+  .av{width:30px;height:30px;border-radius:50%;background:#EFEEEB;color:var(--fg2);display:grid;place-items:center;font-size:12px;font-weight:600;flex-shrink:0}
+  .mini-btn{height:30px;padding:0 12px;border-radius:8px;background:var(--ink);color:#fff;font-size:13px;font-weight:500;display:inline-flex;align-items:center}
+
+  .stories{position:relative;background:#EAF3FC;padding:120px 0}
+  .stories::before{content:"";position:absolute;inset:0;background:url(textures/ht2-map-blue-704.svg) center/100% 100% no-repeat;pointer-events:none}
+  .stories .wrap{position:relative}
+  .stories h2{text-align:center;padding-bottom:48px}
+  .ex{display:grid;grid-template-columns:repeat(4,1fr);background:#fff;border-radius:16px;box-shadow:0 0 0 1px var(--line)}
+  .ex > div{padding:28px 26px;display:flex;flex-direction:column}
+  .ex > div + div{border-left:1px solid var(--line)}
+  .ex h3{font-size:14px;font-weight:600}
+  .ex .q{font-size:16px;line-height:24px;color:var(--fg2);padding-top:10px;min-height:106px}
+  .ex .n{display:flex;align-items:baseline;gap:8px;padding:16px 0;border-block:1px solid var(--line)}
+  .ex .n b{font-size:36px;line-height:36px;letter-spacing:-.04em;font-weight:600}
+  .ex .n span{font-size:14px;color:var(--fg2)}
+  .ex .tm{font-size:13px;font-weight:500;color:var(--fg3);padding-top:16px}
+  .ex .co{display:flex;align-items:center;gap:10px;padding-top:8px;font-size:14px;font-weight:500}
+  .ex .co .g{width:26px;height:26px;font-size:12px}
+  .ex .co span:not(.g){flex:1}
+  .ex .co i{font-style:normal;font-family:"Geist Mono",monospace;font-weight:600;color:var(--a)}
+  .ex .why{font-size:13px;line-height:19px;color:var(--fg3);padding:6px 0 0 36px}
+
+  .pricing{padding:120px 0;border-top:1px solid var(--line)}
+  .pricing h2{text-align:center;padding-bottom:56px}
+  .ptable{position:relative;background:#fff;border-radius:16px;box-shadow:0 0 0 1px var(--line);overflow:hidden}
+  .ptable .hl{position:absolute;left:calc(100% - 512px);top:0;width:240px;height:100%;background:#EAF3FC;border-top:3px solid var(--a-fill)}
+  .prow{position:relative;display:grid;grid-template-columns:1fr 240px 240px 240px;padding:0 32px}
+  .prow > div{padding:0 12px}
+  .prow > div:first-child{padding-left:0}
+  .phead{align-items:end;padding-top:32px;padding-bottom:28px;border-bottom:1px solid var(--line)}
+  .phead .col{display:flex;flex-direction:column;gap:14px}
+  .phead .name{font-size:16px;font-weight:600}
+  .phead .price{display:flex;align-items:baseline;gap:6px}
+  .phead .price b{font-size:44px;line-height:44px;letter-spacing:-.04em;font-weight:600}
+  .phead .price span{font-size:15px;color:var(--fg2)}
+  .phead .btn{height:44px;border-radius:10px}
+  .badge{align-self:flex-start;height:24px;padding:0 9px;border-radius:999px;background:var(--a);color:#fff;font-size:12px;font-weight:600;display:inline-flex;align-items:center}
+  .pbody{padding:8px 0 16px}
+  .pbody .prow{align-items:center;min-height:52px}
+  .pbody .prow > div{display:flex;align-items:center;min-height:52px;font-size:15px;border-bottom:1px solid var(--hair)}
+  .pbody .prow:last-child > div{border-bottom:0}
+  .pbody .prow.sep > div{border-top:1px solid var(--hair)}
+  .pbody b{font-weight:600}
+  .dash{color:var(--fg3)}
+  .soonpill{padding:4px 9px;border-radius:999px;background:#EFEEEB;font-size:13px;font-weight:500}
+  .pnote{text-align:center;padding-top:20px;font-size:15px;color:var(--fg2)}
+
+  .faq{padding:120px 0;border-top:1px solid var(--line)}
+  .faq .wrap{display:flex;gap:72px}
+  .faq .side{width:380px;flex-shrink:0;display:flex;flex-direction:column;gap:20px}
+  .faq .side h2{font-size:42px;line-height:44.5px;letter-spacing:-.04em;font-weight:600}
+  .faq .side p{font-size:17px;line-height:26px;color:var(--fg2)}
+  .faq .side p a{color:var(--ink);font-weight:500;text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
+  .faq .list{flex:1;border-top:1px solid var(--line)}
+  .faq details{border-bottom:1px solid var(--line);padding:24px 0}
+  .faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;font-size:17px;font-weight:600;line-height:22px}
+  .faq summary::-webkit-details-marker{display:none}
+  .faq summary::after{content:"";width:10px;height:10px;border-right:1.6px solid var(--fg2);border-bottom:1.6px solid var(--fg2);transform:rotate(45deg) translateY(-3px);transition:transform .25s var(--ease);flex-shrink:0}
+  .faq details[open] summary::after{transform:rotate(-135deg) translateY(-3px)}
+  .faq details p{font-size:16px;line-height:25px;color:var(--fg2);padding-top:8px;max-width:62ch}
+
+  .close{position:relative;background:#121211;padding:120px 0;text-align:center;color:#F2F1EE}
+  .close::before{content:"";position:absolute;inset:0;background:url(textures/ht2-map-dark-510.svg) center/100% 100% no-repeat;pointer-events:none}
+  .close .wrap{position:relative;display:flex;flex-direction:column;align-items:center}
+  .close h2{width:720px;max-width:100%}
+  .close p{font-size:19px;line-height:29.5px;color:#B5B4AE;padding-top:18px}
+  .close form{display:flex;gap:10px;padding-top:28px}
+  .close input{width:340px;height:48px;padding:0 16px;border-radius:11px;background:#121211;border:1px solid #45453F;color:#F2F1EE;font:inherit;font-size:17px}
+  .close input::placeholder{color:#8A8984}
+  .close .after{padding-top:16px;font-size:14px;color:#B5B4AE}
+
+  footer.foot{border-top:1px solid var(--line);padding:80px 0 32px}
+  .foot .cols{display:flex;gap:48px}
+  .foot .brand{width:265px;flex-shrink:0;display:flex;flex-direction:column;gap:14px}
+  .foot .brand p{font-size:15px;line-height:23px;color:var(--fg3);width:260px}
+  .foot .col{flex:1;display:flex;flex-direction:column;gap:11px;font-size:15px;color:var(--fg2)}
+  .foot .col h4{font-family:"Geist Mono",monospace;font-size:12px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--fg3);padding-bottom:4px}
+  .foot .col a:hover{color:var(--ink)}
+  .foot .legal{margin-top:48px;padding-top:20px;border-top:1px solid var(--line);font-size:14px;color:var(--fg3)}
+
+  @media (max-width:1100px){
+    nav.top .links{display:none}
+    .hero .wrap{flex-direction:column;align-items:flex-start}
+    .hero h1{font-size:52px;line-height:52px;width:auto}
+    .hero-copy{width:auto}
+    .hero-art{width:100%;max-width:688px;transform-origin:0 0}
+    .ex{grid-template-columns:1fr 1fr}
+    .ex > div:nth-child(3){border-left:0}
+    .ex > div:nth-child(n+3){border-top:1px solid var(--line)}
+    .ptable{overflow-x:auto}
+    .prow{min-width:1000px}
+    .faq .wrap,.foot .cols{flex-direction:column;gap:32px}
+    .faq .side{width:auto}
+    .close form{flex-direction:column;width:100%;max-width:340px}
+    .close input{width:100%}
+    .h-xl{font-size:38px;line-height:42px}
+  }
+</style>
+</head>
+<body>
+
+<nav class="top" aria-label="Main"><div class="wrap">
+  <a class="logo" href="#top"><svg width="22" height="27" viewBox="0 -4 24 30" aria-hidden="true"><g fill="#1C1C1A"><circle cx="3" cy="23" r="2.3"/><circle cx="11" cy="23" r="2.3"/><circle cx="19" cy="23" r="2.3"/><circle cx="11" cy="15" r="2.3"/><circle cx="19" cy="15" r="2.3"/><circle cx="19" cy="7" r="2.3"/></g><circle cx="19" cy="-1" r="2.3" fill="#FF4A3D"/></svg>Scorecard</a>
+  <div class="links"><a href="#s1">How it works</a><a href="#">For sales teams</a><a href="#">For acquisition search</a><a href="#pricing">Pricing</a><a href="#">Sign in</a></div>
+  <a class="btn btn-coral" href="#signup">Sign up free</a>
+</div></nav>
+
+<header class="hero" id="top"><div class="wrap">
+  <div class="hero-copy">
+    <h1>Target prospects worth the extra effort.</h1>
+    <p>Most of your market isn’t worth a call. Scorecard researches every company and finds the few that are, with the reasons why.</p>
+    <div class="ctas"><a class="btn btn-coral" href="#signup">Sign up free</a><a class="more" href="#s1">How it works →</a></div>
+  </div>
+  <div class="hero-art" aria-hidden="true">
+    <div class="map"></div>
+    <svg class="ring" viewBox="0 0 140 130"><path d="M27.8,31.2 L33.1,26.7 L39.3,22.5 L46.6,19.5 L54.8,19.1 L62.8,20.1 L70.1,23.2 L77.4,24.7 L85.1,26.1 L92.4,29.0 L99.2,32.8 L102.8,38.8 L105.5,44.9 L106.4,51.3 L107.9,57.2 L109.3,63.4 L109.2,69.8 L108.1,76.3 L104.1,82.0 L99.1,87.0 L92.5,90.7 L85.8,93.7 L80.1,98.2 L72.9,100.9 L65.3,103.4 L57.1,102.6 L49.6,100.4 L42.3,98.6 L36.0,95.2 L29.0,92.7 L21.4,90.0 L15.8,85.2 L13.3,79.0 L11.3,72.9 L11.9,66.6 L11.7,60.6 L12.1,54.6 L11.7,48.0 L14.8,42.0 L19.7,36.8 L26.5,33.2 L34.0,31.0 L40.7,28.3 L47.5,25.6 L54.9,23.2" transform="translate(10,20)" fill="none" stroke="#FF4A3D" stroke-width="2.4" stroke-linecap="round"/></svg>
+    <span class="note">your top accounts.</span>
+    <div class="acct">
+      <div class="top"><div style="display:flex;flex-direction:column"><b style="font-size:14px;font-weight:600;line-height:21px">Prairie Line Grounds</b><span class="sub">Peoria, IL · 42 employees</span></div><span class="g gA" style="width:34px;height:34px;font-size:14px">A</span></div>
+      <ul><li>Opened a second yard in March</li><li>Hiring three crew leads this month</li><li>Looks like your last four closed deals</li></ul>
+      <div class="who"><span class="av">DK</span><div style="display:flex;flex-direction:column;flex:1"><b style="font-size:14px;font-weight:600">Dana Kessler, owner</b><span class="sub">Direct line and email</span></div><span class="mini-btn">Call</span></div>
+    </div>
+  </div>
+</div></header>
+
+
+<!-- ============ 1 SEARCH ============ -->
+<section class="sec blue" id="s1" data-steps="4">
+  <div class="pin"><div class="row">
+    <div class="copy">
+      <div class="rail"><b>1 Search</b><i></i><span>2 Signals</span><i></i><span>3 Score</span></div>
+      <h2>Search every business in the US the way you’d describe it.</h2>
+      <p>Location, category, and details from public records like state licenses, SBA loans, OSHA filings and permits. More sources every week.</p>
+    </div>
+    <div class="stagecol">
+      <div class="agent"><span class="dot"></span><b>Prospecting agent</b><span class="status" data-status='["reading your ask","gathering candidates","checking each website","412 matches found"]'></span></div>
+      <div class="stage">
+        <!-- 0 read the ask -->
+        <div class="scene">
+          <div class="search"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="8" cy="8" r="5.5" stroke="#1C1C1A" stroke-width="1.6"/><path d="M12 12l4 4" stroke="#1C1C1A" stroke-width="1.6" stroke-linecap="round"/></svg><span class="grow"><span class="typed" data-text="landscapers that also plow snow"></span><span class="caret"></span></span></div>
+          <div class="card pad" style="margin-top:18px;display:flex;flex-direction:column;gap:10px">
+            <span class="lab">Turned into 3 checks</span>
+            <div class="st" style="display:flex;flex-direction:column;gap:8px">
+              <div class="r" style="--i:3"><span class="grow">Type of business</span><b style="color:var(--a);font-weight:500">Landscaping</b></div>
+              <div class="r" style="--i:4"><span class="grow">Must offer</span><b style="color:var(--a);font-weight:500">Snow removal</b></div>
+              <div class="r" style="--i:5"><span class="grow">Where</span><b style="color:var(--a);font-weight:500">Your territory, Illinois</b></div>
+            </div>
+          </div>
+        </div>
+        <!-- 1 gather -->
+        <div class="scene">
+          <div class="card center">
+            <span class="big" data-count="9840">0</span>
+            <span class="sub" style="font-size:16px">landscaping businesses in Illinois</span>
+            <div class="st" style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center;max-width:460px">
+              <span class="chip" style="--i:0">State registry</span><span class="chip" style="--i:1">Google Places</span><span class="chip" style="--i:2">State licenses</span><span class="chip" style="--i:3">SBA and PPP loans</span><span class="chip" style="--i:4">OSHA records</span><span class="chip" style="--i:5">Permits</span>
+            </div>
+          </div>
+        </div>
+        <!-- 2 check each -->
+        <div class="scene">
+          <div class="card pad" style="display:flex;flex-direction:column;gap:9px">
+            <span class="lab">Reading websites…</span>
+            <div class="st" style="display:flex;flex-direction:column;gap:9px">
+              <div class="r keep" style="--i:0"><span class="tag">Keep</span><span class="grow">Prairie Line Grounds</span><span style="font-size:13px;color:var(--tint-ink)">“snow removal”</span></div>
+              <div class="r drop" style="--i:1"><span class="tag">Drop</span><span class="grow">Greenleaf Lawn Co.</span><span style="font-size:13px">mowing only</span></div>
+              <div class="r keep" style="--i:2"><span class="tag">Keep</span><span class="grow">Oak &amp; Stone Outdoor</span><span style="font-size:13px;color:var(--tint-ink)">“plowing”</span></div>
+              <div class="r unsure" style="--i:3"><span class="tag">Unsure</span><span class="grow">Riverbend Lawn</span><span style="font-size:13px;color:var(--fg3)">no website, sent to research</span></div>
+              <div class="r drop" style="--i:4"><span class="tag">Drop</span><span class="grow">Sunnyside Grounds</span><span style="font-size:13px">homeowners only</span></div>
+              <div class="r keep" style="--i:5"><span class="tag">Keep</span><span class="grow">Ridgeway Turf &amp; Tree</span><span style="font-size:13px;color:var(--tint-ink)">“winter services”</span></div>
+            </div>
+          </div>
+        </div>
+        <!-- 3 proof (end frame) -->
+        <div class="scene">
+          <div class="search" style="box-shadow:0 0 0 1px #D6D4CF"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="8" cy="8" r="5.5" stroke="#1C1C1A" stroke-width="1.6"/><path d="M12 12l4 4" stroke="#1C1C1A" stroke-width="1.6" stroke-linecap="round"/></svg><span class="grow">landscapers that also <mark>plow snow</mark></span><span class="sub">412 found</span></div>
+          <div style="width:2px;height:28px;background:var(--a-fill);margin:0 auto"></div>
+          <div class="card pad" style="display:flex;flex-direction:column;gap:14px">
+            <div style="display:flex;align-items:center;gap:12px"><span class="g gA">A</span><div style="display:flex;flex-direction:column"><span class="h">Prairie Line Grounds</span><span class="sub">Peoria, IL · Ranked #1</span></div></div>
+            <div style="padding:14px 16px;border-radius:10px;background:var(--paper);display:flex;flex-direction:column;gap:8px">
+              <span style="font-size:16px;line-height:25px;color:var(--fg2)">“We keep commercial properties sharp all year. Mowing and planting in summer, and <mark>commercial snow removal, November through March</mark>.”</span>
+              <span class="sub">From prairielinegrounds.com/services</span>
+            </div>
+            <div style="display:flex;justify-content:flex-end"><span class="hand">found on their own website</span></div>
+          </div>
+          <div style="width:94%;margin:0 auto;padding:12px 22px;border-radius:0 0 14px 14px;background:#fff;opacity:.7;box-shadow:0 0 0 1px var(--line);display:flex;align-items:center;gap:12px;font-size:14px;color:var(--fg2)"><span class="g gA" style="width:24px;height:24px;font-size:11px">A</span>Oak &amp; Stone Outdoor</div>
+        </div>
+      </div>
+      <div class="ticks"><span></span><span></span><span></span><span></span></div>
+      <div class="tickcap" data-caps='["Read the ask","Gather candidates","Check each one","Show the proof"]'></div>
+    </div>
+  </div></div>
+</section>
+
+<!-- ============ 2 SIGNALS ============ -->
+<section class="sec" id="s2" data-steps="5">
+  <div class="pin"><div class="row">
+    <div class="copy">
+      <div class="rail"><span>1 Search</span><i></i><b>2 Signals</b><i></i><span>3 Score</span></div>
+      <h2>See what’s true about each one.</h2>
+      <p>Agents read websites, social posts, government records and the news. Then they note size, fit, timing and who’s in charge.</p>
+    </div>
+    <div class="stagecol">
+      <div class="agent"><span class="dot"></span><b>Research agent</b><span class="status" data-status='["planning where to look","reading 7 sources","checking what’s still true","settling a conflict","read 7 sources"]'></span></div>
+      <div class="stage">
+        <!-- 0 plan -->
+        <div class="scene">
+          <div class="card pad" style="display:flex;flex-direction:column;gap:10px">
+            <span class="h">Prairie Line Grounds</span><span class="lab">To check, based on what you care about</span>
+            <div class="st" style="display:flex;flex-direction:column;gap:9px">
+              <div class="r" style="--i:0"><span class="grow">Company website</span><span class="sub">services, team</span></div>
+              <div class="r" style="--i:1"><span class="grow">County permits</span><span class="sub">new sites</span></div>
+              <div class="r" style="--i:2"><span class="grow">LinkedIn and job posts</span><span class="sub">size, hiring</span></div>
+              <div class="r" style="--i:3"><span class="grow">State filings</span><span class="sub">owner</span></div>
+              <div class="r drop" style="--i:4"><span class="grow"><span class="strike">Social media ads</span></span><span class="sub">not useful here</span></div>
+            </div>
+          </div>
+        </div>
+        <!-- 1 read -->
+        <div class="scene">
+          <div class="log">
+            <span style="color:var(--fg4)">research log · Prairie Line Grounds</span>
+            <span class="ln" style="--i:0">Reading /services … found “snow removal”</span>
+            <span class="ln" style="--i:1">County permits … permit filed Nov 4</span>
+            <span class="ln" style="--i:2">Job posts … 3 crew lead roles</span>
+            <span class="ln" style="--i:3">State filing … owner: Dana Kessler</span>
+            <span class="ln" style="--i:4">State licenses … certified applicator</span>
+            <span class="ln live" style="--i:5">LinkedIn … reading</span>
+          </div>
+        </div>
+        <!-- 2 stale -->
+        <div class="scene">
+          <div class="card pad" style="display:flex;flex-direction:column;gap:9px">
+            <span class="lab">Is it still true?</span>
+            <div class="st" style="display:flex;flex-direction:column;gap:9px">
+              <div class="r keep" style="--i:0"><span class="tag">Use</span><span class="grow">Permit for a second yard</span><span class="sub">Nov 2026</span></div>
+              <div class="r keep" style="--i:1"><span class="tag">Use</span><span class="grow">Hiring 3 crew leads</span><span class="sub">this month</span></div>
+              <div class="r drop" style="--i:2"><span class="tag">Skip</span><span class="grow"><span class="strike">Hiring a sales rep</span></span><span class="sub">2021</span></div>
+              <div class="r drop" style="--i:3"><span class="tag">Skip</span><span class="grow"><span class="strike">Old address, Pekin</span></span><span class="sub">moved</span></div>
+            </div>
+          </div>
+        </div>
+        <!-- 3 conflict -->
+        <div class="scene">
+          <div class="card pad center" style="align-items:stretch;gap:12px">
+            <span class="lab">Two sources disagree on size</span>
+            <div class="st" style="display:flex;flex-direction:column;gap:10px">
+              <div class="r drop" style="--i:0"><span class="grow"><span class="strike">“Over 60 team members”</span></span><span class="sub">Website, 2022</span></div>
+              <div class="r keep" style="--i:1"><span class="grow" style="font-weight:500">42 employees</span><span style="font-size:13px;color:var(--tint-ink)">LinkedIn, this week</span></div>
+              <span style="--i:3;font-size:16px;padding:6px 2px">Picked LinkedIn. It’s newer.</span>
+            </div>
+          </div>
+        </div>
+        <!-- 4 card (end frame) -->
+        <div class="scene">
+          <div class="card">
+            <div style="display:flex;align-items:center;padding:18px 24px;border-bottom:1px solid var(--hair)"><div style="display:flex;flex-direction:column"><span class="h">Prairie Line Grounds</span><span class="sub">Peoria, IL</span></div></div>
+            <div class="grid2 st">
+              <div style="--i:0"><span style="font-size:13px;font-weight:600">Size</span><div class="fact"><b>42 employees</b><span>LinkedIn</span></div><div class="fact"><b>2 yards, Peoria and Morton</b><span>County records</span></div></div>
+              <div style="--i:1"><span style="font-size:13px;font-weight:600">Fit</span><div class="fact"><b>Commercial snow removal</b><span>Company website</span></div><div class="fact"><b>State-certified applicator</b><span>State license lookup</span></div></div>
+              <div style="--i:2"><span style="font-size:13px;font-weight:600">Timing</span><div class="fact"><b>Filed a permit for a second yard</b><span>County permits · Nov 4</span></div><div class="fact"><b>Hiring 3 crew leads</b><span>Job posts · this month</span></div></div>
+              <div style="--i:3"><span style="font-size:13px;font-weight:600">People</span><div class="fact"><b>Dana Kessler, owner</b><span>State business filing</span></div><div class="fact"><b>New ops manager, hired in October</b><span>LinkedIn</span></div></div>
+            </div>
+          </div>
+          <div class="soon" style="margin-top:14px"><span>Coming soon</span><span>Agents re-check every month and alert you when something changes.</span></div>
+        </div>
+      </div>
+      <div class="ticks"><span></span><span></span><span></span><span></span><span></span></div>
+      <div class="tickcap" data-caps='["Plan where to look","Read and pull facts","Throw out what’s stale","Settle conflicts","Sort into the card"]'></div>
+    </div>
+  </div></div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ============ 3 SCORE ============ -->
+<section class="sec" id="s3" data-steps="5">
+  <div class="pin"><div class="row">
+    <div class="copy">
+      <div class="rail"><span>1 Search</span><i></i><span>2 Signals</span><i></i><b>3 Score</b></div>
+      <h2>Tell it what you want. It ranks the rest.</h2>
+      <p>Mark a few good and bad fits. Scoring gets sharper the more you use it.</p>
+      <p class="strong">Then your reps do the talking, starting with the A’s.</p>
+    </div>
+    <div class="stagecol">
+      <div class="agent"><span class="dot"></span><b>Scoring agent</b><span class="status" data-status='["reading your marks","finding the pattern","weighing what matters","re-ranking 412","re-ranked 412 from 14 marks"]'></span></div>
+      <div class="stage">
+        <!-- 0 marks -->
+        <div class="scene">
+          <div class="card pad" style="display:flex;flex-direction:column;gap:10px">
+            <span class="lab">You marked</span>
+            <div class="st" style="display:flex;flex-direction:column;gap:9px">
+              <div class="r" style="--i:0"><span class="grow">Oak &amp; Stone Outdoor</span><span class="pill" style="background:var(--a);color:#fff">Good fit</span></div>
+              <div class="r" style="--i:1"><span class="grow">Prairie Line Grounds</span><span class="pill" style="background:var(--a);color:#fff">Good fit</span></div>
+              <div class="r" style="--i:2"><span class="grow">Greenleaf Lawn Co.</span><span class="pill" style="background:var(--d);color:var(--fg2)">Not a fit</span></div>
+              <div class="r" style="--i:3"><span class="grow">Sunnyside Grounds</span><span class="pill" style="background:var(--d);color:var(--fg2)">Not a fit</span></div>
+              <div class="r" style="--i:4"><span class="grow">Midstate Mowing</span><span class="pill" style="background:var(--d);color:var(--fg2)">Not a fit</span></div>
+            </div>
+          </div>
+        </div>
+        <!-- 1 difference -->
+        <div class="scene">
+          <div class="card pad center" style="align-items:stretch;gap:12px">
+            <div class="st" style="display:flex;flex-direction:column;gap:12px">
+              <span class="lab" style="--i:0">What your good fits share</span>
+              <div style="--i:1;padding:16px;border-radius:10px;background:var(--tint);display:flex;flex-direction:column;gap:10px;color:var(--b-ink);font-size:16px"><span>Work for businesses, not homeowners</span><span>Run year-round, including snow</span></div>
+              <span class="lab" style="--i:2">What your bad fits share</span>
+              <div style="--i:3;padding:16px;border-radius:10px;background:var(--paper);font-size:16px;color:var(--fg2)">Homeowners only</div>
+            </div>
+          </div>
+        </div>
+        <!-- 2 weights -->
+        <div class="scene">
+          <div class="card pad center" style="align-items:stretch;gap:22px">
+            <div><div style="display:flex;justify-content:space-between;font-size:15px;margin-bottom:8px"><span>Commercial clients</span><span style="font-size:13px;color:var(--a)">matters a lot</span></div><div class="bar"><i style="--w:88%;background:var(--a-fill)"></i></div></div>
+            <div><div style="display:flex;justify-content:space-between;font-size:15px;margin-bottom:8px"><span>Snow removal</span><span style="font-size:13px;color:var(--a)">matters</span></div><div class="bar"><i style="--w:64%;background:#4DA6EE;transition-delay:.15s"></i></div></div>
+            <div><div style="display:flex;justify-content:space-between;font-size:15px;margin-bottom:8px"><span>Hiring now</span><span style="font-size:13px;color:var(--a)">a little</span></div><div class="bar"><i style="--w:30%;background:#9ACBF5;transition-delay:.3s"></i></div></div>
+            <div><div style="display:flex;justify-content:space-between;font-size:15px;margin-bottom:8px"><span>Homeowners only</span><span style="font-size:13px;color:var(--fg2)">counts against</span></div><div class="bar"><i style="--w:72%;background:#B9B8B3;transition-delay:.45s"></i></div></div>
+          </div>
+        </div>
+        <!-- 3 re-rank -->
+        <div class="scene">
+          <div class="card center">
+            <span class="big" data-count="412">0</span>
+            <span class="sub" style="font-size:16px">businesses re-scored</span>
+            <div class="st" style="display:flex;gap:8px">
+              <span class="pill" style="--i:3;background:var(--a);color:#fff;font-size:13px;padding:6px 12px">38 A</span>
+              <span class="pill" style="--i:4;background:var(--b);color:var(--b-ink);font-size:13px;padding:6px 12px">71 B</span>
+              <span class="pill" style="--i:5;background:var(--c);color:var(--b-ink);font-size:13px;padding:6px 12px">120 C</span>
+              <span class="pill" style="--i:6;background:var(--d);color:var(--fg2);font-size:13px;padding:6px 12px">183 D</span>
+            </div>
+          </div>
+        </div>
+        <!-- 4 explain (end frame) -->
+        <div class="scene">
+          <div class="card pad" style="display:flex;flex-direction:column">
+            <span class="lab" style="padding-bottom:4px">Ranked for you</span>
+            <div class="st">
+              <div class="rank" style="--i:0"><span class="g gA">A</span><span class="grow"><b style="font-weight:600">Prairie Line Grounds</b><span class="why">Commercial clients and snow removal</span></span><span class="up">Up 6, now A</span></div>
+              <div class="rank" style="--i:1"><span class="g gA">A</span><span class="grow"><span>Oak &amp; Stone Outdoor</span><span class="why">You marked it a good fit</span></span><span class="dn">Same</span></div>
+              <div class="rank" style="--i:2"><span class="g gB">B</span><span class="grow"><span>Ridgeway Turf &amp; Tree</span><span class="why">Snow removal, mostly residential</span></span><span class="up">Up 2</span></div>
+              <div class="rank" style="--i:3"><span class="g gD">D</span><span class="grow"><span style="color:var(--fg5)">Sunnyside Grounds</span><span class="why">Homeowners only</span></span><span class="dn">Down 31, now D</span></div>
+            </div>
+            <div style="display:flex;justify-content:flex-end;padding-top:8px"><span class="hand">gets sharper as you go</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="ticks"><span></span><span></span><span></span><span></span><span></span></div>
+      <div class="tickcap" data-caps='["Look at your marks","Spot the difference","Weigh what matters","Re-rank everyone","Explain each move"]'></div>
+    </div>
+  </div></div>
+</section>
+
+<section class="stories"><div class="wrap">
+  <h2 class="h-xl">Example searches by industry</h2>
+  <div class="ex">
+    <div><h3>Distribution</h3><p class="q">Hose and fitting distributors in the Mountain West that sell to contractors.</p><div class="n"><b>74</b><span>match, of 5,417 checked</span></div><span class="tm">Top match</span><div class="co"><span class="g gA">A</span><span>Hartwell Industrial Supply</span><i>94</i></div><p class="why">New Provo branch, hiring counter staff</p></div>
+    <div><h3>SaaS</h3><p class="q">B2B software companies with usage-based pricing and a new head of engineering.</p><div class="n"><b>52</b><span>match, of 18,240 checked</span></div><span class="tm">Top match</span><div class="co"><span class="g gA">A</span><span>Tallyline</span><i>93</i></div><p class="why">New VP Engineering, pricing page changed in May</p></div>
+    <div><h3>Healthcare</h3><p class="q">Med spa groups in the Sun Belt with three or more locations, hiring injectors.</p><div class="n"><b>41</b><span>match, of 9,860 checked</span></div><span class="tm">Top match</span><div class="co"><span class="g gA">A</span><span>Lumen Aesthetics</span><i>92</i></div><p class="why">Fourth location opening in Mesa</p></div>
+    <div><h3>Acquisition search</h3><p class="q">Pest control companies in Texas, founder-run for 20+ years.</p><div class="n"><b>31</b><span>match, of 2,614 checked</span></div><span class="tm">Top match</span><div class="co"><span class="g gA">A</span><span>Hill Country Pest Control</span><i>94</i></div><p class="why">Founder since 1998, no successor named</p></div>
+  </div>
+</div></section>
+
+<section class="pricing" id="pricing"><div class="wrap">
+  <h2 class="h-xl">Pricing</h2>
+  <div class="ptable">
+    <div class="hl" aria-hidden="true"></div>
+    <div class="prow phead"><div></div>
+      <div class="col"><span class="name">Free trial</span><div class="price"><b>$0</b><span>for 14 days</span></div><a class="btn btn-coral" href="#signup">Sign up free</a></div>
+      <div class="col"><span class="badge">Most teams</span><span class="name">Monthly</span><div class="price"><b>$59</b><span>per month</span></div><a class="btn btn-line" href="#signup">Start with the free trial</a></div>
+      <div class="col"><span class="name">Done for you</span><div class="price"><b>Custom</b></div><a class="btn btn-line" href="#">Book a demo</a></div>
+    </div>
+    <div class="pbody"><div class="prow"><div>Credits</div><div><b>500</b></div><div><b>1,000 every month</b></div><div><b>Scaled to your market</b></div></div><div class="prow"><div>Extra credits</div><div><span class="dash">—</span></div><div><b>$10 per 100</b></div><div><b>Included</b></div></div><div class="prow"><div>Search and add companies</div><div><svg width="16" height="16" viewBox="0 0 16 16" aria-label="Included"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="#1C1C1A" stroke-width="1.8"/></svg></div><div><svg width="16" height="16" viewBox="0 0 16 16" aria-label="Included"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="#0F6FC0" stroke-width="1.8"/></svg></div><div><svg width="16" height="16" viewBox="0 0 16 16" aria-label="Included"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="#1C1C1A" stroke-width="1.8"/></svg></div></div><div class="prow"><div>Scores with reasons, from standard data</div><div><svg width="16" height="16" viewBox="0 0 16 16" aria-label="Included"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="#1C1C1A" stroke-width="1.8"/></svg></div><div><svg width="16" height="16" viewBox="0 0 16 16" aria-label="Included"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="#0F6FC0" stroke-width="1.8"/></svg></div><div><svg width="16" height="16" viewBox="0 0 16 16" aria-label="Included"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="#1C1C1A" stroke-width="1.8"/></svg></div></div><div class="prow"><div>Your own signals</div><div><svg width="16" height="16" viewBox="0 0 16 16" aria-label="Included"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="#1C1C1A" stroke-width="1.8"/></svg></div><div><svg width="16" height="16" viewBox="0 0 16 16" aria-label="Included"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="#0F6FC0" stroke-width="1.8"/></svg></div><div><svg width="16" height="16" viewBox="0 0 16 16" aria-label="Included"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="#1C1C1A" stroke-width="1.8"/></svg></div></div><div class="prow"><div>LinkedIn, Google Places and owner contacts</div><div><span class="dash">—</span></div><div><svg width="16" height="16" viewBox="0 0 16 16" aria-label="Included"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="#0F6FC0" stroke-width="1.8"/></svg></div><div><svg width="16" height="16" viewBox="0 0 16 16" aria-label="Included"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="#1C1C1A" stroke-width="1.8"/></svg></div></div><div class="prow"><div>Web research agents re-check accounts each month</div><div><span class="dash">—</span></div><div><span class="soonpill">Coming soon</span></div><div><span class="soonpill">Coming soon</span></div></div><div class="prow sep"><div>We set up, run and tune it for you</div><div><span class="dash">—</span></div><div><span class="dash">—</span></div><div><svg width="16" height="16" viewBox="0 0 16 16" aria-label="Included"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="#1C1C1A" stroke-width="1.8"/></svg></div></div></div>
+  </div>
+  <p class="pnote">Credits add companies to your list and pay for premium enrichment and research.</p>
+</div></section>
+
+<section class="faq"><div class="wrap">
+  <div class="side"><h2>Questions</h2><p>Something else? <a href="#">Book a demo</a> and ask us.</p></div>
+  <div class="list"><details open><summary>What happens after the 14-day trial?</summary><p>Pick the monthly plan to keep going. The trial covers search, scoring and standard data. Premium enrichment and research agents need the monthly plan.</p></details><details><summary>Where does the data come from?</summary><p>Standard data comes from company websites, job posts and permits. Premium adds LinkedIn, Google Places and web research agents. Every point in a score shows its source.</p></details><details><summary>How is this different from buying a list?</summary><p>A list gives you companies in an industry code. Scorecard ranks them against what your best deals have in common, and keeps the scores current as companies change.</p></details><details><summary>Does it work with my CRM?</summary><p>Ranked accounts go into the CRM and Slack you already use.</p></details><details><summary>What if I run out of credits?</summary><p>Add more any time at $10 per 100.</p></details></div>
+</div></section>
+
+<section class="close" id="signup"><div class="wrap">
+  <h2 class="h-xl">Stop spending time on accounts that won’t buy.</h2>
+  <p>Try it free for 14 days with 500 credits.</p>
+  <form onsubmit="event.preventDefault()"><label class="sr" for="em" style="position:absolute;left:-9999px">Work email</label><input id="em" type="email" placeholder="Work email" autocomplete="email" required><button class="btn btn-coral" style="border:0;font:inherit;font-weight:500;cursor:pointer">Sign up free</button></form>
+  <span class="after">Next, you’ll describe your best customers.</span>
+</div></section>
+
+<footer class="foot"><div class="wrap">
+  <div class="cols">
+    <div class="brand"><a class="logo" href="#top"><svg width="22" height="27" viewBox="0 -4 24 30" aria-hidden="true"><g fill="#1C1C1A"><circle cx="3" cy="23" r="2.3"/><circle cx="11" cy="23" r="2.3"/><circle cx="19" cy="23" r="2.3"/><circle cx="11" cy="15" r="2.3"/><circle cx="19" cy="15" r="2.3"/><circle cx="19" cy="7" r="2.3"/></g><circle cx="19" cy="-1" r="2.3" fill="#FF4A3D"/></svg>Scorecard</a><p>Target prospects worth the extra effort.</p></div>
+    <div class="col"><h4>Product</h4><a href="#s1">How it works</a><a href="#">For sales teams</a><a href="#">For acquisition search</a><a href="#pricing">Pricing</a><a href="#">Sign in</a></div>
+    <div class="col"><h4>Company</h4><a href="#">About</a><a href="#">Careers</a><a href="#">Contact</a></div>
+    <div class="col"><h4>Resources</h4><a href="#">Guides</a><a href="#">Data sources</a><a href="#">Changelog</a><a href="#">Help center</a></div>
+    <div class="col"><h4>Legal</h4><a href="#">Privacy policy</a><a href="#">Terms of service</a><a href="#">Security</a><a href="#">Cookie settings</a></div>
+  </div>
+  <div class="legal">© 2026 Scorecard</div>
+</div></footer>
+
+
+<script>
+(() => {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const ease = t => 1 - Math.pow(2, -10 * t);
+
+  function countUp(el) {
+    const to = +el.dataset.count, t0 = performance.now(), dur = 1400;
+    cancelAnimationFrame(el._raf);
+    const tick = now => {
+      const t = Math.min(1, (now - t0) / dur);
+      el.textContent = Math.round(to * ease(t)).toLocaleString();
+      if (t < 1) el._raf = requestAnimationFrame(tick);
+    };
+    el._raf = requestAnimationFrame(tick);
+  }
+  function typeOut(el) {
+    const s = el.dataset.text; let i = 0;
+    clearInterval(el._iv); el.textContent = '';
+    el._iv = setInterval(() => { el.textContent = s.slice(0, ++i); if (i >= s.length) clearInterval(el._iv); }, 45);
+  }
+
+  const secs = [...document.querySelectorAll('.sec')].map(sec => ({
+    sec, n: +sec.dataset.steps, step: -1,
+    scenes: [...sec.querySelectorAll('.scene')],
+    ticks: [...sec.querySelectorAll('.ticks span')],
+    cap: sec.querySelector('.tickcap'), caps: JSON.parse(sec.querySelector('.tickcap').dataset.caps),
+    status: sec.querySelector('.status'), statuses: JSON.parse(sec.querySelector('.status').dataset.status),
+  }));
+
+  function setStep(s, step) {
+    if (step === s.step) return;
+    s.step = step;
+    s.scenes.forEach((el, i) => el.classList.toggle('on', i === step));
+    s.cap.textContent = s.caps[step];
+    s.status.textContent = s.statuses[step];
+    if (reduce) return;
+    const on = s.scenes[step];
+    on.querySelectorAll('[data-count]').forEach(countUp);
+    on.querySelectorAll('.typed').forEach(typeOut);
+  }
+
+  function update() {
+    const vh = innerHeight;
+    for (const s of secs) {
+      const r = s.sec.getBoundingClientRect();
+      const total = s.sec.offsetHeight - vh;
+      const p = Math.min(1, Math.max(0, -r.top / total));
+      const f = p * s.n;
+      const step = reduce ? s.n - 1 : Math.min(s.n - 1, Math.floor(f));
+      s.ticks.forEach((t, i) => t.style.setProperty('--f', Math.min(1, Math.max(0, f - i))));
+      setStep(s, step);
+    }
+  }
+  addEventListener('scroll', () => { update(); document.querySelector('nav.top').classList.toggle('scrolled', scrollY > 8); }, { passive: true });
+  addEventListener('resize', update);
+
+  // #s2-3 jumps to section 2, keyframe 3 (for reviewing/screenshots)
+  // #s2-3 = review mode: show only section 2, frozen on keyframe 3 (no scrolling needed)
+  const m = location.hash.match(/^#s(\d)-(\d)$/);
+  if (m) {
+    const s = secs[m[1] - 1], k = +m[2];
+    document.body.classList.add('review');
+    s.sec.classList.add('review-on');
+    s.ticks.forEach((t, i) => t.style.setProperty('--f', i <= k ? 1 : 0));
+    setStep(s, k);
+    s.sec.querySelectorAll('[data-count]').forEach(el => { cancelAnimationFrame(el._raf); el.textContent = (+el.dataset.count).toLocaleString(); });
+    s.sec.querySelectorAll('.typed').forEach(el => { clearInterval(el._iv); el.textContent = el.dataset.text; });
+    return;
+  }
+  update();
+})();
+</script>
+</body>
+</html>

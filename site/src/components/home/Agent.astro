@@ -1,0 +1,16 @@
+---
+import search from "./visuals/stage-search.html?raw";
+import signals from "./visuals/stage-signals.html?raw";
+import score from "./visuals/stage-score.html?raw";
+
+// Scroll timing belongs to each coded visual, not to the copy.
+const VISUALS: Record<string, { stage: string; at: string; done: string; c: string[] }> = {
+	search: { stage: search, at: "0,0.12,0.3,0.72", done: "0.92", c: ["0.06", "0.2", "0.52", "0.84"] },
+	signals: { stage: signals, at: "0,0.16,0.38,0.58", done: "0.9", c: ["0.08", "0.28", "0.5", "0.7"] },
+	score: { stage: score, at: "0,0.1,0.34,0.74", done: "0.92", c: ["0.05", "0.22", "0.48", "0.76"] },
+};
+const { value: v } = Astro.props;
+const t = VISUALS[v.visual] ?? VISUALS.search;
+const steps: { title: string }[] = v.steps ?? [];
+---
+<section class="sec story v32" id={v.visual}><div class="wrap sgrid"><div class="v-head"><h2>{v.heading}</h2><div class="console"><div class="visual-query"><svg class="qi" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><span>{v.query_label}</span><b class="typed" data-text={v.query}>{v.query}</b></div><div class="agent-panel trace" data-at={t.at} data-done={t.done}><div class="ahead"><svg class="mk" viewBox="0 -4 24 30"></svg><b>{v.agent_name}</b><span class="st"><span class="thinking">Thinking…</span><span class="did">Done</span></span></div><div class="ssteps">{steps.map((s, i) => <div class="step" data-c={t.c[Math.min(i, t.c.length - 1)]}><i></i><div><h3 class="sx">{s.title}</h3></div></div>)}</div></div></div></div><Fragment set:html={t.stage} /></div></section>

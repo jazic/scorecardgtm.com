@@ -1,0 +1,44 @@
+---
+import { getSeoMeta, getSiteSettings } from "emdash";
+import Agents from "./Agents.astro";
+import AudienceHero from "./AudienceHero.astro";
+import Audiences from "./Audiences.astro";
+import Challenge from "./Challenge.astro";
+import Contact from "./Contact.astro";
+import Faq from "./Faq.astro";
+import Features from "./Features.astro";
+import Hero from "./Hero.astro";
+import Layout from "./Layout.astro";
+import Points from "./Points.astro";
+import Pricing from "./Pricing.astro";
+import Prose from "./Prose.astro";
+import Signup from "./Signup.astro";
+
+// Renders a `landing` entry: CMS copy in the block components, design CSS/JS unchanged from website/index.html.
+const { entry } = Astro.props as { entry: any };
+const settings = await getSiteSettings();
+const siteTitle = settings.title || "Scorecard";
+const seo = getSeoMeta(entry, {
+	defaultTitle: entry.id === "home" ? (settings.tagline ? `${siteTitle}: ${settings.tagline}` : siteTitle) : entry.data.title.includes(siteTitle) ? entry.data.title : `${entry.data.title} · ${siteTitle}`,
+	defaultDescription: entry.data.description,
+});
+
+const blocks = { hero: Hero, challenge: Challenge, contact: Contact, audience_hero: AudienceHero, points: Points, prose: Prose, audiences: Audiences, features: Features, pricing: Pricing, faq: Faq, signup: Signup } as Record<string, any>;
+// how_intro + the agent blocks after it render together inside one .agents wrapper.
+type Group = { type: "agents"; intro?: any; agents: any[] } | { type: "block"; value: any };
+const groups: Group[] = [];
+for (const b of entry.data.sections ?? []) {
+	const last = groups.at(-1);
+	if (b._type === "agent" && last?.type === "agents") last.agents.push(b);
+	else if (b._type === "how_intro" || b._type === "agent")
+		groups.push({ type: "agents", intro: b._type === "how_intro" ? b : undefined, agents: b._type === "agent" ? [b] : [] });
+	else groups.push({ type: "block", value: b });
+}
+---
+<Layout title={seo.title} description={seo.description} content={{ collection: "landing", id: entry.data.id, slug: entry.id }} home={entry.id === "home"} hasAgents={groups.some((g) => g.type === "agents")}>
+{groups.map((g) => {
+	if (g.type === "agents") return <Agents intro={g.intro} agents={g.agents} />;
+	const Block = blocks[g.value._type];
+	return Block ? <Block value={g.value} /> : null;
+})}
+</Layout>

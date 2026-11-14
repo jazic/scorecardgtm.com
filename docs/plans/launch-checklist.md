@@ -93,13 +93,20 @@ A deploy that fails on the custom-domain step stops before it re-enables workers
 - [ ] **J** Root-domain DMARC: TXT `_dmarc` = `v=DMARC1; p=none; rua=mailto:hello@scorecardgtm.com` (dashboard; Wrangler can't edit DNS).
 - [ ] **J** Admin → Settings: turn **staging** off (the wizard turns it on; it adds `noindex` everywhere), set **Site URL** to
   `https://scorecardgtm.com` (sitemap, robots.txt and JSON-LD use it), and add the **Google Search Console** (and Bing) verification codes.
-- [ ] **C** Set `EMDASH_SITE_URL=https://scorecardgtm.com`; add `routes` for the apex (and `www` → apex) to `wrangler.jsonc`.
-- [ ] **J+C** Delete the apex/`www` records pointing at GitHub Pages, deploy, then register the admin passkey again on scorecardgtm.com
+- [x] **2026-11-14 cutover done:** apex and www are Worker custom domains (www → apex in `src/worker.ts`); all pages, redirects and forms checked on scorecardgtm.com. `EMDASH_SITE_URL` deliberately not set (it would pin passkeys to the apex and lock out workers.dev). Was: Set `EMDASH_SITE_URL=https://scorecardgtm.com`; add `routes` for the apex (and `www` → apex) to `wrangler.jsonc`.
+- [x] Delete the apex/`www` records pointing at GitHub Pages, deploy, then register the admin passkey again on scorecardgtm.com
   (passkeys are per hostname). Leave `app.` (Vercel) and the Google MX/TXT records alone.
-- [ ] **J+C** Check apex, `www`, HTTPS, legacy redirects, forms and email, PostHog events, admin login, and that `app.` still works.
+- [x] Check apex, `www`, HTTPS, legacy redirects, forms and email, PostHog events, admin login, and that `app.` still works.
 - [ ] **C** Remove the custom domain from GitHub Pages; delete `website/` and `.github/workflows/pages.yml`; update `CLAUDE.md`.
 - [ ] **C** Delete the old D1 databases `scorecardgtm` (starter schema) and `scorecardgtm-v2` (test run) once launch is stable.
 - [ ] **J** Invite other CMS editors. Decide whether Workers Builds should auto-deploy `main` (not connected today).
+
+### After cutover
+- [ ] **J** Sign in on scorecardgtm.com/_emdash/admin with the email link, add a passkey; then Settings: staging off, Site URL `https://scorecardgtm.com`.
+- [ ] **J** Cloudflare → SSL/TLS → Edge Certificates → **Always Use HTTPS** on (`http://scorecardgtm.com` serves 200 today).
+- [ ] **C** Once J can sign in on the domain: turn workers.dev off (`workers_dev: false`) so there's one copy of the site.
+- [ ] **J** GitHub → repo Settings → Pages: remove the custom domain and unpublish. **C** then deletes `.github/workflows/pages.yml` and `website/` and merges this branch to `main`.
+- [ ] **C** Delete old D1s `scorecardgtm` and `scorecardgtm-v2`; delete test entries under Form submissions.
 
 ## Done
 

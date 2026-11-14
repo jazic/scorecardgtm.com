@@ -3,6 +3,7 @@ import { getMenu, getSeoMeta, getSiteSettings } from "emdash";
 import Agents from "./Agents.astro";
 import Audiences from "./Audiences.astro";
 import Challenge from "./Challenge.astro";
+import Contact from "./Contact.astro";
 import Faq from "./Faq.astro";
 import Features from "./Features.astro";
 import Footer from "./Footer.astro";
@@ -36,7 +37,7 @@ const seo = getSeoMeta(entry, {
 	defaultDescription: entry.data.description,
 });
 
-const blocks = { hero: Hero, challenge: Challenge, audiences: Audiences, features: Features, pricing: Pricing, faq: Faq, signup: Signup } as Record<string, any>;
+const blocks = { hero: Hero, challenge: Challenge, contact: Contact, audiences: Audiences, features: Features, pricing: Pricing, faq: Faq, signup: Signup } as Record<string, any>;
 // how_intro + the agent blocks after it render together inside one .agents wrapper.
 type Group = { type: "agents"; intro?: any; agents: any[] } | { type: "block"; value: any };
 const groups: Group[] = [];

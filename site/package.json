@@ -8,9 +8,9 @@
     "seed": "seed/seed.json"
   },
   "scripts": {
-    "sync:legacy": "rm -rf public && mkdir public && rsync -a --exclude=design-system --exclude=.DS_Store --exclude=/index.html ../website/ public/ && rsync -a --exclude=.DS_Store ../design-system/ public/design-system/",
-    "predev": "npm run sync:legacy",
-    "prebuild": "npm run sync:legacy",
+    "sync:design-system": "rm -rf public && mkdir public && rsync -a --exclude=.DS_Store ../design-system/ public/design-system/",
+    "predev": "npm run sync:design-system",
+    "prebuild": "npm run sync:design-system",
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",

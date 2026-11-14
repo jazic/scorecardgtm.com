@@ -3,40 +3,76 @@
 Written 2026-11-14 from the state of `cloudflare-astro-migration` (EmDash 1.5.0). Each item says who acts:
 **J** = Justin decides or supplies, **C** = Claude can do it, **J+C** = Justin decides, Claude builds.
 
+## Pages going to production
+
+| Page | URL | Status |
+| --- | --- | --- |
+| Home | `/` | Built (`landing` entry `home`). Copy placeholders to resolve (section 2). |
+| Challenge | `/challenge` | Built. Form saves to the CMS and emails the team. Two FAQ answers to confirm. |
+| Contact | `/contact` | Built 2026-11-14. Form saves to the CMS and emails the team. |
+| Privacy | `/privacy` | **Missing.** Nothing exists today (scorecardgtm.com and app.scorecardgtm.com both 404). |
+| Terms | `/terms` | **Missing.** Same. |
+| About | `/about` | Maybe. Decide (J). |
+| Blog | `/blog`, `/blog/{slug}` | Maybe. The starter `posts` collection is ready, but it has no routes or design yet. |
+| 404 | any unknown URL | **Missing.** Needs a designed page (section 4). |
+| App sign-up | `https://app.scorecardgtm.com/sign-up` | Linked from every "Start free trial". |
+| App sign-in | `https://app.scorecardgtm.com/sign-in` | Linked from nav and footer "Sign in". |
+
+Not shipping: the 11 legacy pages in `website/` (see section 3).
+
 ## 1. Dead links and missing destinations (blockers)
 
 - [x] Sign-up and sign-in point to the app (2026-11-14): every "Start free trial" button and the three
   who-it's-for card links → `https://app.scorecardgtm.com/sign-up`; nav and footer "Sign in" → `/sign-in`.
-- [ ] **J** The Teams plan's "Talk about a pilot" link is still `#`. Calendly, mailto or a form?
-- [ ] **J** "Contact" and "Talk to us" (homepage FAQ): mailto:hello@scorecardgtm.com, or a page?
+- [x] Contact page (2026-11-14). Footer "Contact", both FAQ "Talk to us" links and the Teams "Talk about a pilot" → `/contact`.
+- [ ] **J+C** Privacy and Terms are `#`, and no version exists anywhere today. **J** supplies the policy text
+  (lawyer, Termly/iubenda, or a draft from Claude for review), **C** publishes `/privacy` and `/terms`
+  and links them. Needed before taking sign-ups or form submissions, and because PostHog session replay runs
+  on every page. The privacy policy has to mention PostHog, the form data we store, and Cloudflare.
 - [ ] **J+C** Changelog: the footer link and the "See what's new in the changelog →" link both go to `#`. Either build a changelog page (a `posts`-style collection) or remove both links.
-- [ ] **J+C** Privacy and Terms are `#`. Write them, or supply them, and publish as `/privacy` and `/terms` (the `pages` collection or a landing entry). Needed before taking sign-ups or running PostHog session replay.
+- [ ] **J** About and Blog: in or out for launch? If in, **C** builds `/about` (landing entry) and `/blog` (a list plus
+  post template on the `posts` collection, in the homepage design).
 - [ ] **C** Run a link check on every published page once the above is in (no `#` hrefs except section anchors).
+
+## 1b. Forms and transactional email
+
+Built 2026-11-14: a `forms` EmDash plugin (`site/src/plugins/forms.ts`) takes contact and challenge posts, saves
+each one as a draft in the **Form submissions** collection in the CMS, and emails the team. Email goes through
+EmDash's Cloudflare provider, `cloudflareEmail()`, over Cloudflare Email Sending. The same provider sends the CMS's
+own mail: sign-in links, invites and account recovery. Tested in dev: saving, validation, honeypot, cross-origin
+blocking, and drafts not reachable without login. In dev, Wrangler writes each email to `site/.wrangler/tmp/email/`
+instead of sending it.
+
+- [ ] **J** Onboard `scorecardgtm.com` in Cloudflare → Email → Email Sending (adds SPF/DKIM records; leaves the Google MX alone).
+  Confirm the sender `notifications@scorecardgtm.com` and the notification recipient `hello@scorecardgtm.com`.
+  Both are set in `site/astro.config.mjs`.
+- [ ] **J** Check that `hello@scorecardgtm.com` is a real inbox (Google Workspace) that someone reads.
+- [ ] **C** After deploy: Admin → Settings → Email → Send test email, then one real submission of each form.
+- [ ] **J** Decide whether submitters get an automatic confirmation email ("we got your search"). **C** adds it to the plugin if yes.
+- [ ] **C** If spam shows up: add Cloudflare Turnstile to both forms (today there's only a honeypot).
+- [ ] **C** Known limit: when validation fails without JavaScript, the redirect back clears what was typed.
+  The browser's own `required` checks catch most of it first. Add JS submit-in-place if it matters.
 
 ## 2. Content to confirm or replace (blockers)
 
 - [ ] **J** Homepage FAQ: 7 bracketed placeholders, highlighted on the page:
   signup/first-search requirements · geographic coverage, criteria and custom Signal access · source links, checked dates and the correction workflow · contact coverage, plan access and credit costs · CSV availability and fields · trial duration, credits and feature access · card/billing rules, post-trial access and retention.
 - [ ] **J** Challenge FAQ: what "accepted" means, and the turnaround time.
+- [ ] **J** Contact and challenge success messages promise "a reply within one business day" and a list "by email". Confirm we can keep that.
 - [ ] **J** Coverage card figures, marked `data-placeholder="figures"`: "140+ Signals (+18 this quarter)", "28 data sources (+4)", "Weekly refresh, last update Nov 10". Real numbers, or drop the card.
 - [ ] **J** Pricing: confirm $59/month, 14 days / 500 credits, and the 10 comparison rows.
 - [ ] **J** Coded example data in the visuals (hero account card, the who-it's-for charts, the agent stages): it's fine as labelled examples. Confirm nothing in them reads as a real customer or a real claim.
-- [ ] **J** Final copy read of `/` and `/challenge`, with one eye on the brand voice in `docs/vision.md`.
-- [ ] **J+C** Challenge form intake: keep mailto (it fails silently for webmail users without a mail app), or **C** builds a small API route that saves submissions to D1 and emails or notifies you. Recommended: the route, so no submission is lost.
+- [ ] **J** Final copy read of `/`, `/challenge` and `/contact`, with one eye on the brand voice in `docs/vision.md`.
 
-## 3. Legacy pages (decide each)
+## 3. Legacy pages: not shipping
 
-None of these is linked from the new homepage. Each one ships at its old URL because `sync:legacy` copies it.
+Decided 2026-11-14: none of the `website/` pages go to production. The build no longer copies them
+(`sync:design-system` copies only `design-system/`). All 11 still return 200 on scorecardgtm.com today, so cutover needs redirects:
 
-| Page | Decision (J) | Then (C) |
-| --- | --- | --- |
-| `eta-search.html` | keep / rebuild / drop | rebuild as a landing entry, or redirect to `/` |
-| `private-equity.html`, `sales-leaders.html`, `ceos-founders.html`, `fractional-outbound.html`, `growth-strategy.html`, `account-scoring.html` | | |
-| `how-scorecard-works.html` | probably redirect to `/#how` | |
-| `solutions-coming-soon.html`, `what-we-do-coming-soon.html`, `eta-search-wireframe.html` | probably drop | |
-
-- [ ] **C** For anything dropped or rebuilt, add redirects (EmDash redirects or Worker rules) so old URLs and any links already out there don't 404. That includes `/index.html` → `/`.
-- [ ] **C** Once `website/` is empty: delete it, `sync:legacy` and `.github/workflows/pages.yml`, and update `CLAUDE.md` (it still describes GitHub Pages).
+- [ ] **C** 301 redirects to `/` (or a better match) for `account-scoring`, `ceos-founders`, `eta-search`, `eta-search-wireframe`,
+  `fractional-outbound`, `growth-strategy`, `private-equity`, `sales-leaders`, `solutions-coming-soon`, `what-we-do-coming-soon`
+  (`.html` and extensionless), plus `how-scorecard-works` → `/#how` and `/index.html` → `/`.
+- [ ] **C** After cutover: delete `website/` and `.github/workflows/pages.yml`, and update `CLAUDE.md` (it still describes GitHub Pages).
 
 ## 4. Site basics we don't have yet
 
@@ -65,7 +101,7 @@ None of these is linked from the new homepage. Each one ships at its old URL bec
 - [ ] **J** Real devices: iPhone Safari, Mac Safari (nav blur), Chrome, Firefox. Scroll every agent section all the way through.
 - [ ] **C** Reduced-motion run: the animations settle, and nothing is hidden.
 - [ ] **C** Accessibility: axe/Lighthouse pass, keyboard through the nav, FAQ (expand all), challenge form and buttons, focus rings, contrast on the dark sections.
-- [ ] **C** Console clean on every page. No mixed content, no 404s for assets (`/design-system/...`, CRM logos, textures).
+- [ ] **C** Console clean on every page. No mixed content, no 404s for assets. Known: `home.css` points at `textures/v15/close-halftone-bg.svg`, which doesn't exist, so the sign-up section's halftone background is missing. Find the asset or drop the rule.
 - [ ] **J** Submit a real challenge search end to end, and a real trial sign-up once the links exist.
 - [ ] **C** Lighthouse performance/SEO scores recorded before and after the performance work.
 - [ ] **J+C** After DNS switches: check apex, `www`, HTTPS, old legacy URLs (redirects), the PostHog events arriving, the admin login on the real domain, and that `app.` still works.

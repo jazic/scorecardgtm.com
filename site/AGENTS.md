@@ -50,8 +50,8 @@ with the components in `src/components/home/`. Its markup matches the approved s
 (`src/components/home/scripts/*.js.txt`, inlined) run unchanged. Don't restyle or restructure the
 markup in the components; edit copy in the CMS.
 
-Every other page is still legacy static HTML: `npm run dev`/`build` run `sync:legacy`, which copies
-`../website/` (minus `index.html`) and `../design-system/` into `public/` (gitignored).
+`/challenge` and `/contact` are landing entries rendered the same way. `npm run dev`/`build` run `sync:design-system`,
+which copies `../design-system/` into `public/` (gitignored). The legacy pages in `../website/` are not shipped.
 
 ## Pages
 
@@ -59,8 +59,8 @@ Every other page is still legacy static HTML: `npm run dev`/`build` run `sync:le
 | ------------ | --------- | ----------------------------------------------------------------- |
 | Home         | `/`       | `landing` entry `home`                                            |
 | Challenge    | `/challenge` | `landing` entry `challenge` (challenge, faq, signup blocks)    |
+| Contact      | `/contact` | `landing` entry `contact` (contact block)                         |
 | Landing page | `/[slug]` | Other `landing` entries and draft previews (`/home` redirects `/`) |
-| Legacy pages | `/*.html` | Static files from `../website/`                                   |
 
 ## Schema
 
@@ -76,6 +76,10 @@ Every other page is still legacy static HTML: `npm run dev`/`build` run `sync:le
 - Menus: `primary` (items with CSS classes render as buttons), `footer`, `legal`. On pages other than home,
   `#section` links render as `/#section`.
 - Site settings: `title` (logo, ©) and `tagline` (default `<title>` is "title: tagline").
+- `submissions` collection (Form submissions): contact and challenge form entries, saved as drafts by the
+  `forms` plugin (`src/plugins/forms.ts`, public route `/_emdash/api/plugins/forms/submit`), which also emails
+  `notifyTo` (set in `astro.config.mjs`). Email goes through `cloudflareEmail()` (Cloudflare Email Sending, the
+  `EMAIL` send_email binding). In dev, Wrangler writes sent mail to `.wrangler/tmp/email/`.
 - Starter `posts` and `pages` collections and the `category`/`tag` taxonomies are kept but have no routes.
 
 The seed (`seed/seed.json`) carries the schema and the full homepage copy. Schema applies on the first

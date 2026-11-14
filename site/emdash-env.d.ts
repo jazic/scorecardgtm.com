@@ -32,16 +32,43 @@ export interface LandingSectionsChallengeV1Block {
   "geo_placeholder"?: string | null;
   "fit_label"?: string | null;
   "fit_placeholder"?: string | null;
+  "name_label"?: string | null;
+  "email_label"?: string | null;
+  "company_label"?: string | null;
   "submit_label"?: string | null;
-  "offer"?: string | null;
+  "success_heading"?: string | null;
+  "success_body"?: string | null;
+  "error_text"?: string | null;
   "email"?: string | null;
-  "email_subject"?: string | null;
   "alt_prompt"?: string | null;
+  "offer"?: string | null;
   "bridge_heading"?: string | null;
   "bridge_body"?: string | null;
 }
 
 export type LandingSectionsChallengeBlock = LandingSectionsChallengeV1Block;
+
+export interface LandingSectionsContactV1Block {
+  _type: "contact";
+  _version: 1;
+  _key: string;
+  "heading"?: string | null;
+  "body"?: string | null;
+  "points"?: { "title"?: string | null; "body"?: string | null }[] | null;
+  "message_label"?: string | null;
+  "message_placeholder"?: string | null;
+  "name_label"?: string | null;
+  "email_label"?: string | null;
+  "company_label"?: string | null;
+  "submit_label"?: string | null;
+  "success_heading"?: string | null;
+  "success_body"?: string | null;
+  "error_text"?: string | null;
+  "email"?: string | null;
+  "alt_prompt"?: string | null;
+}
+
+export type LandingSectionsContactBlock = LandingSectionsContactV1Block;
 
 export interface LandingSectionsAudiencesV1Block {
   _type: "audiences";
@@ -133,7 +160,7 @@ export interface LandingSectionsSignupV1Block {
 
 export type LandingSectionsSignupBlock = LandingSectionsSignupV1Block;
 
-export type LandingSectionsBlock = LandingSectionsHeroBlock | LandingSectionsChallengeBlock | LandingSectionsAudiencesBlock | LandingSectionsHowIntroBlock | LandingSectionsAgentBlock | LandingSectionsFeaturesBlock | LandingSectionsPricingBlock | LandingSectionsFaqBlock | LandingSectionsSignupBlock;
+export type LandingSectionsBlock = LandingSectionsHeroBlock | LandingSectionsChallengeBlock | LandingSectionsContactBlock | LandingSectionsAudiencesBlock | LandingSectionsHowIntroBlock | LandingSectionsAgentBlock | LandingSectionsFeaturesBlock | LandingSectionsPricingBlock | LandingSectionsFaqBlock | LandingSectionsSignupBlock;
 
 export interface Landing {
   id: string;
@@ -180,10 +207,32 @@ export interface Post {
   terms?: Record<string, TaxonomyTerm[]>;
 }
 
+export interface Submission {
+  id: string;
+  slug: string | null;
+  status: string;
+  title: string;
+  kind?: "contact" | "challenge";
+  name?: string;
+  email?: string;
+  company?: string;
+  message?: string;
+  search?: string;
+  geography?: string;
+  fit?: string;
+  createdAt: Date;
+  updatedAt: Date;
+  publishedAt: Date | null;
+  byline?: BylineSummary | null;
+  bylines?: ContentBylineCredit[];
+  terms?: Record<string, TaxonomyTerm[]>;
+}
+
 declare module "emdash" {
   interface EmDashCollections {
     landing: Landing;
     pages: Page;
     posts: Post;
+    submissions: Submission;
   }
 }

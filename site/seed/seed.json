@@ -111,6 +111,7 @@
 						"allowedTypes": [
 							"hero",
 							"challenge",
+							"contact",
 							"audiences",
 							"how_intro",
 							"agent",
@@ -120,6 +121,75 @@
 							"signup"
 						]
 					}
+				}
+			]
+		},
+		{
+			"slug": "submissions",
+			"label": "Form submissions",
+			"labelSingular": "Form submission",
+			"description": "Contact and challenge form entries, saved by /api/forms. Never published.",
+			"supports": [
+				"search"
+			],
+			"fields": [
+				{
+					"slug": "title",
+					"label": "Title",
+					"type": "string",
+					"required": true,
+					"searchable": true
+				},
+				{
+					"slug": "kind",
+					"label": "Form",
+					"type": "select",
+					"validation": {
+						"options": [
+							"contact",
+							"challenge"
+						]
+					}
+				},
+				{
+					"slug": "name",
+					"label": "Name",
+					"type": "string",
+					"searchable": true
+				},
+				{
+					"slug": "email",
+					"label": "Email",
+					"type": "string",
+					"searchable": true
+				},
+				{
+					"slug": "company",
+					"label": "Company",
+					"type": "string",
+					"searchable": true
+				},
+				{
+					"slug": "message",
+					"label": "Message",
+					"type": "text",
+					"searchable": true
+				},
+				{
+					"slug": "search",
+					"label": "Search",
+					"type": "text",
+					"searchable": true
+				},
+				{
+					"slug": "geography",
+					"label": "Geography",
+					"type": "string"
+				},
+				{
+					"slug": "fit",
+					"label": "Great fit",
+					"type": "text"
 				}
 			]
 		}
@@ -225,7 +295,7 @@
 				{
 					"type": "custom",
 					"label": "Contact",
-					"url": "#"
+					"url": "/contact"
 				},
 				{
 					"type": "custom",
@@ -587,7 +657,7 @@
 									"price": "Custom",
 									"price_note": "",
 									"cta_label": "Talk about a pilot",
-									"cta_href": "#",
+									"cta_href": "/contact",
 									"cta_style": "line-clear",
 									"then_note": "",
 									"highlight": false,
@@ -664,7 +734,7 @@
 							"heading": "Frequently asked questions",
 							"contact_prompt": "Something else?",
 							"contact_label": "Talk to us",
-							"contact_href": "#",
+							"contact_href": "/contact",
 							"items": [
 								{
 									"question": "What do I need to run my first search?",
@@ -741,10 +811,15 @@
 							"submit_label": "Send us your search",
 							"offer": "First 10 accepted searches free, in exchange for honest feedback. No signup required to receive your list.",
 							"email": "hello@scorecardgtm.com",
-							"email_subject": "Challenge Scorecard: my search",
-							"alt_prompt": "Button not opening your email? Write to",
+							"alt_prompt": "Rather write it out? Email",
 							"bridge_heading": "Keep the search going.",
-							"bridge_body": "If the results are useful, continue in Scorecard: refine your criteria, explore another territory, and research your next accounts yourself. Start with the free trial, then choose the monthly plan if it earns its place in your workflow."
+							"bridge_body": "If the results are useful, continue in Scorecard: refine your criteria, explore another territory, and research your next accounts yourself. Start with the free trial, then choose the monthly plan if it earns its place in your workflow.",
+							"name_label": "Your name",
+							"email_label": "Work email",
+							"company_label": "Company (optional)",
+							"error_text": "Something went wrong sending that. Check the fields and try again, or email us directly.",
+							"success_heading": "Got it. Your search is in.",
+							"success_body": "We read every search ourselves. If we accept it, you’ll get your list by email, with the 10 strongest matches highlighted. If we can’t run it well, we’ll tell you why."
 						},
 						{
 							"_type": "faq",
@@ -753,7 +828,7 @@
 							"heading": "About the challenge",
 							"contact_prompt": "Something else?",
 							"contact_label": "Talk to us",
-							"contact_href": "mailto:hello@scorecardgtm.com",
+							"contact_href": "/contact",
 							"items": [
 								{
 									"question": "What makes a search a good fit for the challenge?",
@@ -781,6 +856,45 @@
 							"body": "Free for 14 days with 500 credits.",
 							"cta_label": "Start free trial",
 							"cta_href": "https://app.scorecardgtm.com/sign-up"
+						}
+					]
+				}
+			},
+			{
+				"id": "contact",
+				"slug": "contact",
+				"status": "published",
+				"data": {
+					"title": "Contact",
+					"description": "Questions about Scorecard, a team pilot or your account? Send us a note and a person will reply.",
+					"sections": [
+						{
+							"_type": "contact",
+							"_version": 1,
+							"_key": "contact-0",
+							"heading": "Talk to us.",
+							"body": "Questions about Scorecard, a pilot for your team, or a search you’re not sure it can handle? Send us a note. A person reads every message and replies by email.",
+							"points": [
+								{
+									"title": "Team pilots.",
+									"body": "Tell us how many people would use it and the markets you cover."
+								},
+								{
+									"title": "Account help.",
+									"body": "Include the email you signed up with."
+								}
+							],
+							"message_label": "How can we help?",
+							"message_placeholder": "A few lines is plenty.",
+							"submit_label": "Send message",
+							"success_heading": "Thanks. We’ll be in touch.",
+							"success_body": "Your message reached us. Expect a reply by email within one business day.",
+							"alt_prompt": "Prefer email? Write to",
+							"name_label": "Your name",
+							"email_label": "Work email",
+							"company_label": "Company (optional)",
+							"error_text": "Something went wrong sending that. Check the fields and try again, or email us directly.",
+							"email": "hello@scorecardgtm.com"
 						}
 					]
 				}
@@ -835,7 +949,7 @@
 		{
 			"slug": "challenge",
 			"label": "Challenge offer",
-			"description": "Send-us-your-search offer with its form. The form opens the visitor's email app addressed to Email, with their answers filled in.",
+			"description": "Send-us-your-search offer and form. Submissions are saved under Form submissions and emailed to the team.",
 			"currentVersion": 1,
 			"versions": [
 				{
@@ -901,29 +1015,54 @@
 							"type": "string"
 						},
 						{
+							"slug": "name_label",
+							"label": "Name field label",
+							"type": "string"
+						},
+						{
+							"slug": "email_label",
+							"label": "Email field label",
+							"type": "string"
+						},
+						{
+							"slug": "company_label",
+							"label": "Company field label (optional field)",
+							"type": "string"
+						},
+						{
 							"slug": "submit_label",
 							"label": "Button label",
+							"type": "string"
+						},
+						{
+							"slug": "success_heading",
+							"label": "Sent: heading",
+							"type": "string"
+						},
+						{
+							"slug": "success_body",
+							"label": "Sent: text",
+							"type": "text"
+						},
+						{
+							"slug": "error_text",
+							"label": "Error message",
+							"type": "text"
+						},
+						{
+							"slug": "email",
+							"label": "Fallback email address",
+							"type": "string"
+						},
+						{
+							"slug": "alt_prompt",
+							"label": "Fallback email prompt",
 							"type": "string"
 						},
 						{
 							"slug": "offer",
 							"label": "Offer note",
 							"type": "text"
-						},
-						{
-							"slug": "email",
-							"label": "Email (where searches go)",
-							"type": "string"
-						},
-						{
-							"slug": "email_subject",
-							"label": "Email subject",
-							"type": "string"
-						},
-						{
-							"slug": "alt_prompt",
-							"label": "Email-us prompt",
-							"type": "string"
 						},
 						{
 							"slug": "bridge_heading",
@@ -934,6 +1073,103 @@
 							"slug": "bridge_body",
 							"label": "Bridge text",
 							"type": "text"
+						}
+					]
+				}
+			]
+		},
+		{
+			"slug": "contact",
+			"label": "Contact form",
+			"description": "Contact page intro and form. Submissions are saved under Form submissions and emailed to the team.",
+			"currentVersion": 1,
+			"versions": [
+				{
+					"version": 1,
+					"fields": [
+						{
+							"slug": "heading",
+							"label": "Heading",
+							"type": "string"
+						},
+						{
+							"slug": "body",
+							"label": "Intro",
+							"type": "text"
+						},
+						{
+							"slug": "points",
+							"label": "Side notes",
+							"type": "repeater",
+							"validation": {
+								"subFields": [
+									{
+										"slug": "title",
+										"label": "Point",
+										"type": "string"
+									},
+									{
+										"slug": "body",
+										"label": "Detail",
+										"type": "text"
+									}
+								]
+							}
+						},
+						{
+							"slug": "message_label",
+							"label": "Message field label",
+							"type": "string"
+						},
+						{
+							"slug": "message_placeholder",
+							"label": "Message field example",
+							"type": "string"
+						},
+						{
+							"slug": "name_label",
+							"label": "Name field label",
+							"type": "string"
+						},
+						{
+							"slug": "email_label",
+							"label": "Email field label",
+							"type": "string"
+						},
+						{
+							"slug": "company_label",
+							"label": "Company field label (optional field)",
+							"type": "string"
+						},
+						{
+							"slug": "submit_label",
+							"label": "Button label",
+							"type": "string"
+						},
+						{
+							"slug": "success_heading",
+							"label": "Sent: heading",
+							"type": "string"
+						},
+						{
+							"slug": "success_body",
+							"label": "Sent: text",
+							"type": "text"
+						},
+						{
+							"slug": "error_text",
+							"label": "Error message",
+							"type": "text"
+						},
+						{
+							"slug": "email",
+							"label": "Fallback email address",
+							"type": "string"
+						},
+						{
+							"slug": "alt_prompt",
+							"label": "Fallback email prompt",
+							"type": "string"
 						}
 					]
 				}

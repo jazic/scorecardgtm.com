@@ -19,9 +19,9 @@ export default defineConfig({
 			database: d1({ binding: "DB", session: "auto", coalesce: true }),
 			storage: r2({ binding: "MEDIA" }),
 			// CMS mail (form notifications, sign-in links, invites) via Cloudflare Email Sending.
-			// The sender's domain must be onboarded in Cloudflare Email Sending before production sends work.
+			// Sender subdomain tx.scorecardgtm.com is onboarded in Cloudflare Email Sending (SPF/DKIM/DMARC set by Cloudflare).
 			plugins: [
-				cloudflareEmail({ from: { email: "notifications@scorecardgtm.com", name: "Scorecard" }, replyTo: "hello@scorecardgtm.com" }),
+				cloudflareEmail({ from: { email: "notifications@tx.scorecardgtm.com", name: "Scorecard" }, replyTo: "hello@scorecardgtm.com" }),
 				// Contact and challenge forms: save to Form submissions, email the team.
 				forms({ notifyTo: "hello@scorecardgtm.com" }),
 			],

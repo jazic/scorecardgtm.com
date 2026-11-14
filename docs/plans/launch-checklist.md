@@ -46,9 +46,14 @@ own mail: sign-in links, invites and account recovery. Tested in dev: saving, va
 blocking, and drafts not reachable without login. In dev, Wrangler writes each email to `site/.wrangler/tmp/email/`
 instead of sending it.
 
-- [ ] **J** Onboard `scorecardgtm.com` in Cloudflare → Email → Email Sending (adds SPF/DKIM records; leaves the Google MX alone).
-  Confirm the sender `notifications@scorecardgtm.com` and the notification recipient `hello@scorecardgtm.com`.
-  Both are set in `site/astro.config.mjs`.
+- [x] Email Sending enabled for `tx.scorecardgtm.com` (2026-11-14, `wrangler email sending enable`). Cloudflare published
+  the records: bounce MX and SPF on `cf-bounce.tx`, DKIM `cf-bounce._domainkey.tx`, and DMARC `p=reject` on `_dmarc.tx`.
+  The root domain's Google MX/SPF/DKIM are untouched. Sender `notifications@tx.scorecardgtm.com`, replies and
+  notifications to `hello@scorecardgtm.com` (both in `site/astro.config.mjs`). A test email was queued to hello@.
+- [ ] **J** Confirm the test email arrived (not in spam), and use Gmail "Show original" to check SPF, DKIM and DMARC = PASS.
+- [ ] **J** Add DMARC for the root domain (none today): TXT `_dmarc` = `v=DMARC1; p=none; rua=mailto:hello@scorecardgtm.com`.
+  Wrangler's login can't edit DNS, so this goes in the dashboard. Tighten it to `p=quarantine` once reports look clean.
+- [ ] **J** Keep marketing or newsletter mail off `tx.`. Use its own subdomain (e.g. `news.`) so complaints can't hurt sign-in and form mail.
 - [ ] **J** Check that `hello@scorecardgtm.com` is a real inbox (Google Workspace) that someone reads.
 - [ ] **C** After deploy: Admin → Settings → Email → Send test email, then one real submission of each form.
 - [ ] **J** Decide whether submitters get an automatic confirmation email ("we got your search"). **C** adds it to the plugin if yes.

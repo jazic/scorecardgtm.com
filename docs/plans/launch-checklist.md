@@ -43,12 +43,14 @@ Not shipping: the 11 legacy `website/` pages. They now 301 to their new homes (`
 
 ## B. Final production rebuild (Claude, after A)
 
-- [ ] **B1. C** Fresh D1 from the final seed, deploy, J runs the setup wizard with sample content (same steps as 2026-11-14,
+- [x] **B1.** (2026-11-14: `scorecardgtm-prod`, `7b692332-97c8-4ca4-9c16-0870d81e7665`. Pick **"Sample content"** in the wizard; "Empty site" loads menus only.) Fresh D1 from the final seed, deploy, J runs the setup wizard with sample content (same steps as 2026-11-14,
   see `plan-cloudflare-emdash-migration.md`). Old DBs stay for rollback.
-- [ ] **B2. C** Verify on workers.dev: every page, redirects, both forms (CMS record + email), CMS edit → publish → page updates,
+- [x] **B2.** (2026-11-14: all pages, blog, 404, redirects, sitemap, noindex, both forms saved and emailed, console clean. CMS publish flow and Settings → Email test left for J while editing.) Verify on workers.dev: every page, redirects, both forms (CMS record + email), CMS edit → publish → page updates,
   draft preview, Admin → Settings → Email → Send test email.
 
-## C. Content (Justin, in the production CMS, after B)
+## C. Content (Justin, in the production CMS: https://scorecardgtm.justinziccardi.workers.dev/_emdash/admin/)
+
+Delete the two "Claude (launch check)" entries under Form submissions when convenient.
 
 - [ ] Homepage FAQ: 7 bracketed placeholders (sign-up, coverage and criteria, sources and corrections, contact data, CSV export, trial, billing).
 - [ ] Coverage card: real numbers for Signals, sources and refresh, and the source chips, or remove the card.
@@ -77,6 +79,7 @@ Not shipping: the 11 legacy `website/` pages. They now 301 to their new homes (`
   (passkeys are per hostname). Leave `app.` (Vercel) and the Google MX/TXT records alone.
 - [ ] **J+C** Check apex, `www`, HTTPS, legacy redirects, forms and email, PostHog events, admin login, and that `app.` still works.
 - [ ] **C** Remove the custom domain from GitHub Pages; delete `website/` and `.github/workflows/pages.yml`; update `CLAUDE.md`.
+- [ ] **C** Delete the old D1 databases `scorecardgtm` (starter schema) and `scorecardgtm-v2` (test run) once launch is stable.
 - [ ] **J** Invite other CMS editors. Decide whether Workers Builds should auto-deploy `main` (not connected today).
 
 ## Done

@@ -13,6 +13,14 @@
 			"database_id": "7b692332-97c8-4ca4-9c16-0870d81e7665",
 		},
 	],
+	// Keep workers.dev (and preview URLs) on alongside the custom domains; Wrangler turns them off when routes exist.
+	"workers_dev": true,
+	"preview_urls": true,
+	// Custom domains (Wrangler creates the DNS records). www redirects to the apex in src/worker.ts.
+	"routes": [
+		{ "pattern": "scorecardgtm.com", "custom_domain": true },
+		{ "pattern": "www.scorecardgtm.com", "custom_domain": true },
+	],
 	"r2_buckets": [
 		{
 			"binding": "MEDIA",

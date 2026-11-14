@@ -84,6 +84,12 @@ Delete the two "Claude (launch check)" entries under Form submissions when conve
 
 ## E. Cutover
 
+Rollback for DNS: GitHub Pages used the standard records, apex `A` 185.199.108.153 / .109 / .110 / .111 (proxied) and
+`www` CNAME `jazic.github.io`. Removing the Worker custom domains and recreating those records puts the old site back.
+Gotcha (2026-11-14): adding `routes` makes Wrangler turn workers.dev off unless `workers_dev: true` is set. It's set now.
+A deploy that fails on the custom-domain step stops before it re-enables workers.dev. Fix:
+`POST /accounts/{id}/workers/scripts/scorecardgtm/subdomain {"enabled":true}`.
+
 - [ ] **J** Root-domain DMARC: TXT `_dmarc` = `v=DMARC1; p=none; rua=mailto:hello@scorecardgtm.com` (dashboard; Wrangler can't edit DNS).
 - [ ] **J** Admin → Settings: turn **staging** off (the wizard turns it on; it adds `noindex` everywhere), set **Site URL** to
   `https://scorecardgtm.com` (sitemap, robots.txt and JSON-LD use it), and add the **Google Search Console** (and Bing) verification codes.

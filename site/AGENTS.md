@@ -93,7 +93,9 @@ those entries are ignored until the pages move to CMS blocks (open item in `docs
   people and industry pills (in `Audiences.astro`). The card's `query` and `outcome` fields are no longer shown.
 - Text conventions: pricing row `values` and plan `card_features` are one item per line (`✓`/`—` in
   values render the check/dash); FAQ `[bracketed text]` renders as a placeholder highlight.
-- Menus: `primary` (items with CSS classes render as buttons), `footer`, `legal`. On pages other than home,
+- Menus: `primary` (items with CSS classes render as buttons), `footer`, `legal`. The footer renders link columns: nest
+  the `footer` menu (top-level items = column headings, children = links) to control them; while it is flat, `Footer.astro`
+  shows default columns (Product, Who it’s for, Company) that link every public page. On pages other than home,
   `#section` links render as `/#section`.
 - Site settings: `title` (logo, ©) and `tagline` (default `<title>` is "title: tagline").
 - `submissions` collection (Form submissions): contact and challenge form entries, saved as drafts by the

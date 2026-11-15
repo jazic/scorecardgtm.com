@@ -10,9 +10,36 @@ interface Props {
 const { links, legal, siteTitle, home } = Astro.props;
 const href = (url: string) => (!home && url.length > 1 && url.startsWith("#") ? `/${url}` : url);
 const year = new Date().getFullYear();
+
+// Columns: a nested Footer menu (Admin → Menus → Footer links: top-level items are column headings, their children
+// the links) wins. While the menu is flat, these default columns link every public page, so each one is crawlable.
+type Col = { label: string; items: { label: string; url: string }[] };
+const DEFAULT: Col[] = [
+	{ label: "Product", items: [
+		{ label: "How it works", url: "#how" },
+		{ label: "Pricing", url: "#pricing" },
+		{ label: "FAQ", url: "#faq" },
+		{ label: "Changelog", url: "/blog/tag/new-feature" },
+	] },
+	{ label: "Who it’s for", items: [
+		{ label: "Sales teams", url: "/sales-teams" },
+		{ label: "Founders", url: "/founders" },
+		{ label: "Acquisition search", url: "/acquisition-search" },
+	] },
+	{ label: "Company", items: [
+		{ label: "Blog", url: "/blog" },
+		{ label: "Challenge Scorecard", url: "/challenge" },
+		{ label: "Contact", url: "/contact" },
+		{ label: "Sign in", url: "https://app.scorecardgtm.com/sign-in" },
+	] },
+];
+const nested = links.some((i) => i.children?.length);
+const cols: Col[] = nested ? links.filter((i) => i.children?.length).map((i) => ({ label: i.label, items: i.children })) : DEFAULT;
 ---
-<footer class="foot"><div class="wrap foot-min">
-  <a class="logo" href={home ? "#top" : "/"}><svg data-sc-logo="none" viewBox="0 -4 24 30" role="img" aria-label={`${siteTitle} logo, click to replay`}></svg>{siteTitle}</a>
-  <nav class="foot-nav" aria-label="Footer">{links.map((i) => <a href={href(i.url)}>{i.label}</a>)}</nav>
+<footer class="foot"><div class="wrap">
+  <div class="cols">
+    <div class="brand"><a class="logo" href={home ? "#top" : "/"}><svg data-sc-logo="none" viewBox="0 -4 24 30" role="img" aria-label={`${siteTitle} logo, click to replay`}></svg>{siteTitle}</a></div>
+    {cols.map((c) => <nav class="fc" aria-label={c.label}><h4>{c.label}</h4>{c.items.map((i) => <a href={href(i.url)}>{i.label}</a>)}</nav>)}
+  </div>
   <div class="legal">{legal.map((i) => <a href={href(i.url)}>{i.label}</a>)}<span>© {year} {siteTitle}</span></div>
 </div></footer>

@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1200" viewBox="0 0 1600 1200">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#F8FAFD"/><stop offset="1" stop-color="#EEF4FD"/></linearGradient>
+    <filter id="shadow" x="-30%" y="-50%" width="170%" height="220%"><feDropShadow dx="0" dy="24" stdDeviation="22" flood-color="#03153A" flood-opacity=".18"/></filter>
+    <clipPath id="p1"><path d="M800 100L1300 256L800 414L300 256Z"/></clipPath>
+    <clipPath id="p2"><path d="M800 278L1300 434L800 592L300 434Z"/></clipPath>
+    <clipPath id="p3"><path d="M800 456L1300 612L800 770L300 612Z"/></clipPath>
+    <clipPath id="p4"><path d="M800 634L1300 790L800 948L300 790Z"/></clipPath>
+    <clipPath id="p5"><path d="M800 812L1300 968L800 1126L300 968Z"/></clipPath>
+  </defs>
+  <rect width="1600" height="1200" fill="url(#bg)"/>
+  <!-- plate 5: mosaic -->
+  <g filter="url(#shadow)">
+    <path d="M800 100L1300 256L1300 278L800 436L300 278V256Z" fill="#D4E8A8"/>
+    <path d="M800 100L1300 256L800 414L300 256Z" fill="#FFFFFF" stroke="#A8D862" stroke-width="4"/>
+    <g clip-path="url(#p1)" transform="rotate(17.4 800 256)">
+      <rect x="642" y="176" width="70" height="70" rx="9" fill="#FCAF0F"/><rect x="720" y="176" width="70" height="70" rx="9" fill="#A8D862"/><rect x="798" y="176" width="70" height="70" rx="9" fill="#649BE4"/><rect x="876" y="176" width="70" height="70" rx="9" fill="#B493EA"/>
+      <rect x="680" y="254" width="70" height="70" rx="9" fill="#649BE4"/><rect x="758" y="254" width="70" height="70" rx="9" fill="#B493EA"/><rect x="836" y="254" width="70" height="70" rx="9" fill="#FCAF0F"/><rect x="914" y="254" width="70" height="70" rx="9" fill="#A8D862"/>
+    </g>
+  </g>
+  <!-- plate 4: signal -->
+  <g filter="url(#shadow)">
+    <path d="M800 278L1300 434L1300 456L800 614L300 456V434Z" fill="#D9C6F7"/>
+    <path d="M800 278L1300 434L800 592L300 434Z" fill="#FFFFFF" stroke="#B493EA" stroke-width="4"/>
+    <g clip-path="url(#p2)" fill="none" stroke="#B493EA" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M430 454L560 402L680 450L820 362L952 410L1170 334"/>
+      <g fill="#FFFFFF" stroke-width="6"><circle cx="430" cy="454" r="14"/><circle cx="560" cy="402" r="14"/><circle cx="680" cy="450" r="14"/><circle cx="820" cy="362" r="14"/><circle cx="952" cy="410" r="14"/><circle cx="1170" cy="334" r="14"/></g>
+    </g>
+  </g>
+  <!-- plate 3: graph -->
+  <g filter="url(#shadow)">
+    <path d="M800 456L1300 612L1300 634L800 792L300 634V612Z" fill="#B8D3F6"/>
+    <path d="M800 456L1300 612L800 770L300 612Z" fill="#FFFFFF" stroke="#649BE4" stroke-width="4"/>
+    <g clip-path="url(#p3)" stroke="#649BE4" stroke-width="4" fill="#FFFFFF">
+      <path d="M460 624L610 548L760 638L914 530L1120 626M610 548L690 492M760 638L870 692M914 530L1062 478" fill="none" stroke-opacity=".64"/>
+      <circle cx="460" cy="624" r="18"/><circle cx="610" cy="548" r="18"/><circle cx="760" cy="638" r="18"/><circle cx="914" cy="530" r="18"/><circle cx="1120" cy="626" r="18"/><circle cx="690" cy="492" r="18"/><circle cx="870" cy="692" r="18"/><circle cx="1062" cy="478" r="18"/>
+    </g>
+  </g>
+  <!-- plate 2: grid -->
+  <g filter="url(#shadow)">
+    <path d="M800 634L1300 790L1300 812L800 970L300 812V790Z" fill="#F0C665"/>
+    <path d="M800 634L1300 790L800 948L300 790Z" fill="#FFFFFF" stroke="#FCAF0F" stroke-width="4"/>
+    <g clip-path="url(#p4)" transform="rotate(17.4 800 790)" fill="#FCAF0F">
+      <rect x="580" y="706" width="92" height="66" rx="9" opacity=".28"/><rect x="686" y="706" width="92" height="66" rx="9" opacity=".55"/><rect x="792" y="706" width="92" height="66" rx="9" opacity=".82"/><rect x="898" y="706" width="92" height="66" rx="9"/>
+      <rect x="624" y="790" width="92" height="66" rx="9" opacity=".82"/><rect x="730" y="790" width="92" height="66" rx="9" opacity=".28"/><rect x="836" y="790" width="92" height="66" rx="9"/><rect x="942" y="790" width="92" height="66" rx="9" opacity=".55"/>
+    </g>
+  </g>
+  <!-- plate 1: ports -->
+  <g filter="url(#shadow)">
+    <path d="M800 812L1300 968L1300 990L800 1148L300 990V968Z" fill="#9CAFCB"/>
+    <path d="M800 812L1300 968L800 1126L300 968Z" fill="#03153A" stroke="#294A7E" stroke-width="4"/>
+    <g fill="#FFFFFF">
+      <rect x="446" y="934" width="72" height="72" rx="13" transform="rotate(17.4 482 970)"/><rect x="604" y="884" width="72" height="72" rx="13" transform="rotate(17.4 640 920)"/>
+      <rect x="764" y="934" width="72" height="72" rx="13" transform="rotate(17.4 800 970)"/><rect x="922" y="884" width="72" height="72" rx="13" transform="rotate(17.4 958 920)"/>
+      <rect x="1080" y="934" width="72" height="72" rx="13" transform="rotate(17.4 1116 970)"/>
+    </g>
+    <g fill="#649BE4"><circle cx="482" cy="970" r="12"/><circle cx="640" cy="920" r="12"/><circle cx="800" cy="970" r="12"/><circle cx="958" cy="920" r="12"/><circle cx="1116" cy="970" r="12"/></g>
+  </g>
+</svg>

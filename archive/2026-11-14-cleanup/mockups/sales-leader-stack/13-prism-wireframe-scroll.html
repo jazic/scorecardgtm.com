@@ -1,0 +1,552 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Prism Wireframe — Scroll Prototype</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #17171b;
+      --body: #55545d;
+      --muted: #85838d;
+      --paper: #f8f8f6;
+      --line: rgba(23, 23, 27, .13);
+      --ease: cubic-bezier(.22, 1, .36, 1);
+      --spectrum: linear-gradient(135deg, #00d8ff 0%, #4b66ff 24%, #a749ff 50%, #ff3aa7 74%, #ff8a2a 100%);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 50% 30%, rgba(167, 73, 255, .05), transparent 34%),
+        var(--paper);
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .intro,
+    .outro {
+      min-height: 72svh;
+      display: grid;
+      place-items: center;
+      padding: 72px 28px;
+      text-align: center;
+    }
+
+    .intro-inner,
+    .outro-inner { max-width: 760px; }
+    .eyebrow {
+      margin: 0 0 20px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 750;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+    h1 {
+      margin: 0;
+      font-size: clamp(48px, 7vw, 88px);
+      line-height: .95;
+      letter-spacing: -.055em;
+    }
+    .intro p,
+    .outro p {
+      max-width: 620px;
+      margin: 26px auto 0;
+      color: var(--body);
+      font-size: clamp(17px, 2vw, 21px);
+      line-height: 1.6;
+    }
+    .scroll-cue {
+      width: 28px;
+      height: 44px;
+      margin: 36px auto 0;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      position: relative;
+    }
+    .scroll-cue::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 9px;
+      width: 4px;
+      height: 8px;
+      border-radius: 99px;
+      background: var(--ink);
+      transform: translateX(-50%);
+      animation: cue 1.8s ease-in-out infinite;
+    }
+    @keyframes cue {
+      0%, 100% { opacity: .24; transform: translate(-50%, 0); }
+      50% { opacity: 1; transform: translate(-50%, 13px); }
+    }
+
+    .story { position: relative; }
+    .sticky-visual {
+      position: sticky;
+      top: 0;
+      z-index: 1;
+      height: 100svh;
+      margin-bottom: -100svh;
+      display: grid;
+      place-items: center;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    .visual-shell {
+      width: min(58vw, 820px);
+      aspect-ratio: 4 / 3;
+      position: relative;
+    }
+    .visual-shell::before {
+      content: "";
+      position: absolute;
+      inset: 14% 9%;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(167, 73, 255, .1), rgba(0, 216, 255, .035) 44%, transparent 72%);
+      filter: blur(28px);
+    }
+    .visual-shell svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+      overflow: visible;
+    }
+
+    .layer {
+      opacity: .14;
+      transform-box: fill-box;
+      transform-origin: center;
+      transition:
+        opacity .65s ease,
+        transform .85s var(--ease),
+        filter .65s ease;
+      will-change: opacity, transform, filter;
+    }
+    .layer.is-before { opacity: .34; }
+    .layer.is-after { opacity: .1; }
+    .layer.is-active {
+      opacity: 1;
+      transform: translateY(-14px) scale(1.015);
+      filter: url(#active-glow);
+    }
+    .layer-plane {
+      fill: url(#mist);
+      stroke: url(#spectrum);
+      stroke-width: 6;
+      stroke-linejoin: round;
+      vector-effect: non-scaling-stroke;
+    }
+    .layer-node {
+      fill: #fff;
+      stroke: url(#spectrum);
+      stroke-width: 5;
+      vector-effect: non-scaling-stroke;
+    }
+    .layer-number {
+      fill: #242428;
+      font: 800 25px/1 Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      text-anchor: middle;
+      dominant-baseline: middle;
+    }
+    .layer-name {
+      opacity: 0;
+      transform: translateX(-10px);
+      transform-box: fill-box;
+      transform-origin: center;
+      transition: opacity .45s ease .08s, transform .65s var(--ease) .08s;
+    }
+    .layer.is-active .layer-name { opacity: 1; transform: none; }
+    .layer-name rect {
+      fill: rgba(255,255,255,.94);
+      stroke: rgba(23,23,27,.12);
+      stroke-width: 2;
+    }
+    .layer-name text {
+      fill: #242428;
+      font: 750 20px/1 Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .datum {
+      stroke: #222225;
+      stroke-opacity: .16;
+      stroke-width: 2;
+      stroke-dasharray: 7 13;
+    }
+
+    .chapters { position: relative; z-index: 2; }
+    .chapter {
+      min-height: 100svh;
+      display: grid;
+      grid-template-columns: minmax(270px, 1fr) minmax(460px, 1.42fr) minmax(270px, 1fr);
+      gap: clamp(24px, 4vw, 70px);
+      align-items: center;
+      padding: 10svh clamp(28px, 5vw, 88px);
+    }
+    .chapter-card {
+      width: min(100%, 390px);
+      padding: 30px 30px 32px;
+      position: relative;
+      opacity: .24;
+      transform: translateY(26px);
+      border: 1px solid rgba(23,23,27,.1);
+      border-radius: 18px;
+      background: rgba(255,255,255,.74);
+      box-shadow: 0 28px 90px -54px rgba(28, 25, 43, .42);
+      backdrop-filter: blur(18px) saturate(120%);
+      transition: opacity .6s ease, transform .8s var(--ease), border-color .5s ease;
+    }
+    .chapter.is-active .chapter-card {
+      opacity: 1;
+      transform: none;
+      border-color: rgba(167,73,255,.22);
+    }
+    .chapter:nth-child(odd) .chapter-card { grid-column: 1; justify-self: end; }
+    .chapter:nth-child(even) .chapter-card { grid-column: 3; justify-self: start; }
+    .chapter-card::after {
+      content: "";
+      position: absolute;
+      top: 52px;
+      width: clamp(30px, 5vw, 84px);
+      height: 1px;
+      background: var(--spectrum);
+      opacity: 0;
+      transition: opacity .45s ease .15s;
+    }
+    .chapter.is-active .chapter-card::after { opacity: .72; }
+    .chapter:nth-child(odd) .chapter-card::after { right: calc(clamp(30px, 5vw, 84px) * -1); }
+    .chapter:nth-child(even) .chapter-card::after { left: calc(clamp(30px, 5vw, 84px) * -1); }
+    .chapter-index {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      margin: 0 0 22px;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+    }
+    .chapter-index::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--spectrum);
+    }
+    .chapter h2 {
+      margin: 0;
+      font-size: clamp(34px, 3.4vw, 52px);
+      line-height: .98;
+      letter-spacing: -.045em;
+    }
+    .chapter p {
+      margin: 20px 0 0;
+      color: var(--body);
+      font-size: 16px;
+      line-height: 1.6;
+    }
+    .chapter ul {
+      list-style: none;
+      margin: 24px 0 0;
+      padding: 20px 0 0;
+      display: grid;
+      gap: 11px;
+      border-top: 1px solid var(--line);
+    }
+    .chapter li {
+      display: grid;
+      grid-template-columns: 8px 1fr;
+      gap: 11px;
+      color: #3f3e46;
+      font-size: 14px;
+      line-height: 1.45;
+    }
+    .chapter li::before {
+      content: "";
+      width: 5px;
+      height: 5px;
+      margin-top: 7px;
+      border-radius: 50%;
+      background: #a749ff;
+    }
+
+    .layer-nav {
+      position: fixed;
+      z-index: 5;
+      right: 22px;
+      top: 50%;
+      display: grid;
+      gap: 12px;
+      transform: translateY(-50%);
+    }
+    .layer-nav button {
+      width: 10px;
+      height: 10px;
+      padding: 0;
+      border: 0;
+      border-radius: 50%;
+      background: #bbb9c0;
+      box-shadow: 0 0 0 0 rgba(167,73,255,0);
+      cursor: pointer;
+      transition: background .3s ease, box-shadow .3s ease, transform .3s ease;
+    }
+    .layer-nav button[aria-current="step"] {
+      background: #a749ff;
+      box-shadow: 0 0 0 6px rgba(167,73,255,.12);
+      transform: scale(1.15);
+    }
+    .layer-nav button:focus-visible { outline: 2px solid #4b66ff; outline-offset: 5px; }
+
+    @media (max-width: 980px) {
+      .intro { min-height: 64svh; }
+      .sticky-visual { align-items: start; padding-top: 6svh; }
+      .visual-shell { width: min(94vw, 680px); }
+      .chapter {
+        min-height: 110svh;
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        padding: 46svh 20px 8svh 50px;
+      }
+      .chapter-card,
+      .chapter:nth-child(odd) .chapter-card,
+      .chapter:nth-child(even) .chapter-card {
+        width: min(100%, 540px);
+        justify-self: auto;
+      }
+      .chapter-card::after { display: none; }
+      .layer-nav { right: auto; left: 12px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
+      .layer.is-active { transform: none; }
+    }
+  </style>
+</head>
+<body data-active-layer="1">
+  <header class="intro">
+    <div class="intro-inner">
+      <p class="eyebrow">Five-layer operating stack</p>
+      <h1>Build the number from the bottom up.</h1>
+      <p>Scroll through the system. Each chapter brings one layer forward while preserving its place in the whole stack.</p>
+      <div class="scroll-cue" aria-hidden="true"></div>
+    </div>
+  </header>
+
+  <nav class="layer-nav" aria-label="Stack layers">
+    <button type="button" data-go-layer="1" aria-label="Go to layer 1: The math" aria-current="step"></button>
+    <button type="button" data-go-layer="2" aria-label="Go to layer 2: Systems"></button>
+    <button type="button" data-go-layer="3" aria-label="Go to layer 3: Team"></button>
+    <button type="button" data-go-layer="4" aria-label="Go to layer 4: Reporting"></button>
+    <button type="button" data-go-layer="5" aria-label="Go to layer 5: Tools"></button>
+  </nav>
+
+  <main class="story" aria-label="Sales leader operating stack">
+    <div class="sticky-visual" aria-hidden="false">
+      <div class="visual-shell">
+        <svg viewBox="0 0 1600 1200" role="img" aria-labelledby="stack-title stack-desc">
+          <title id="stack-title">Five-layer prism wireframe operating stack</title>
+          <desc id="stack-desc">A five-layer isometric stack. Scrolling highlights the math, systems, team, reporting, and tools in order.</desc>
+          <defs>
+            <linearGradient id="spectrum" x1="0" y1="0" x2="1" y2="1">
+              <stop stop-color="#00d8ff"/><stop offset=".22" stop-color="#4b66ff"/><stop offset=".48" stop-color="#a749ff"/><stop offset=".72" stop-color="#ff3aa7"/><stop offset="1" stop-color="#ff8a2a"/>
+            </linearGradient>
+            <linearGradient id="mist" x1="0" y1="0" x2="1" y2="1">
+              <stop stop-color="#00d8ff" stop-opacity=".09"/><stop offset=".5" stop-color="#a749ff" stop-opacity=".035"/><stop offset="1" stop-color="#ff8a2a" stop-opacity=".075"/>
+            </linearGradient>
+            <filter id="active-glow" x="-45%" y="-75%" width="190%" height="250%">
+              <feDropShadow dx="0" dy="18" stdDeviation="22" flood-color="#7f4fff" flood-opacity=".28"/>
+            </filter>
+            <path id="layer-plane-shape" d="M800 92L1320 254L800 416L280 254Z"/>
+          </defs>
+
+          <path class="datum" d="M800 124V1080"/>
+
+          <g class="layer is-after" data-layer="5">
+            <use class="layer-plane" href="#layer-plane-shape"/>
+            <circle class="layer-node" cx="800" cy="254" r="27"/>
+            <text class="layer-number" x="800" y="255">5</text>
+            <g class="layer-name"><rect x="858" y="244" width="112" height="50" rx="25"/><text x="880" y="277">Tools</text></g>
+          </g>
+          <g class="layer is-after" data-layer="4">
+            <use class="layer-plane" href="#layer-plane-shape" transform="translate(0 178)"/>
+            <circle class="layer-node" cx="800" cy="432" r="27"/>
+            <text class="layer-number" x="800" y="433">4</text>
+            <g class="layer-name"><rect x="858" y="422" width="164" height="50" rx="25"/><text x="880" y="455">Reporting</text></g>
+          </g>
+          <g class="layer is-after" data-layer="3">
+            <use class="layer-plane" href="#layer-plane-shape" transform="translate(0 356)"/>
+            <circle class="layer-node" cx="800" cy="610" r="27"/>
+            <text class="layer-number" x="800" y="611">3</text>
+            <g class="layer-name"><rect x="858" y="600" width="108" height="50" rx="25"/><text x="880" y="633">Team</text></g>
+          </g>
+          <g class="layer is-after" data-layer="2">
+            <use class="layer-plane" href="#layer-plane-shape" transform="translate(0 534)"/>
+            <circle class="layer-node" cx="800" cy="788" r="27"/>
+            <text class="layer-number" x="800" y="789">2</text>
+            <g class="layer-name"><rect x="858" y="778" width="136" height="50" rx="25"/><text x="880" y="811">Systems</text></g>
+          </g>
+          <g class="layer is-active" data-layer="1">
+            <use class="layer-plane" href="#layer-plane-shape" transform="translate(0 712)"/>
+            <circle class="layer-node" cx="800" cy="966" r="27"/>
+            <text class="layer-number" x="800" y="967">1</text>
+            <g class="layer-name"><rect x="858" y="956" width="118" height="50" rx="25"/><text x="880" y="989">Math</text></g>
+          </g>
+        </svg>
+      </div>
+    </div>
+
+    <div class="chapters">
+      <article class="chapter is-active" id="layer-1" data-layer="1">
+        <div class="chapter-card">
+          <p class="chapter-index">Layer 01 / Foundation</p>
+          <h2>The math</h2>
+          <p>Start with a number the team can explain—not a target detached from the model.</p>
+          <ul>
+            <li>Bottom-up revenue model</li>
+            <li>Segments and ideal customer profile</li>
+            <li>Pricing, packaging, and the pitch</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="chapter" id="layer-2" data-layer="2">
+        <div class="chapter-card">
+          <p class="chapter-index">Layer 02 / Operating system</p>
+          <h2>Systems</h2>
+          <p>Turn the model into visible operating rules the team can follow and maintain.</p>
+          <ul>
+            <li>CRM stages and exit criteria</li>
+            <li>Fields that match the plan</li>
+            <li>One definition of qualified</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="chapter" id="layer-3" data-layer="3">
+        <div class="chapter-card">
+          <p class="chapter-index">Layer 03 / Capacity</p>
+          <h2>Team</h2>
+          <p>Translate the target into the people, coverage, and incentives required to carry it.</p>
+          <ul>
+            <li>Hiring and ramp plan</li>
+            <li>Territories and account lists</li>
+            <li>Quotas and pay</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="chapter" id="layer-4" data-layer="4">
+        <div class="chapter-card">
+          <p class="chapter-index">Layer 04 / Weekly read</p>
+          <h2>Reporting</h2>
+          <p>Create a reliable weekly view that shows whether the system is working.</p>
+          <ul>
+            <li>Funnel and activity reporting</li>
+            <li>Forecast and board pack</li>
+            <li>Win and loss reasons</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="chapter" id="layer-5" data-layer="5">
+        <div class="chapter-card">
+          <p class="chapter-index">Layer 05 / Leverage</p>
+          <h2>Tools</h2>
+          <p>Give reps more of the week back to selling and make the operating system easier to run.</p>
+          <ul>
+            <li>Account scoring</li>
+            <li>Call preparation and research</li>
+            <li>Playbooks in the moment</li>
+            <li>Administration that runs itself</li>
+          </ul>
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <footer class="outro">
+    <div class="outro-inner">
+      <p class="eyebrow">The complete stack</p>
+      <h1>One system. Five connected layers.</h1>
+      <p>Scroll back up to inspect any layer again. The interaction is fully reversible.</p>
+    </div>
+  </footer>
+
+  <script>
+    (() => {
+      const chapters = [...document.querySelectorAll('.chapter')];
+      const layers = [...document.querySelectorAll('.layer')];
+      const navButtons = [...document.querySelectorAll('[data-go-layer]')];
+      let ticking = false;
+
+      const setActive = next => {
+        if (document.body.dataset.activeLayer === String(next)) return;
+        document.body.dataset.activeLayer = String(next);
+
+        chapters.forEach(chapter => {
+          chapter.classList.toggle('is-active', Number(chapter.dataset.layer) === next);
+        });
+
+        layers.forEach(layer => {
+          const number = Number(layer.dataset.layer);
+          layer.classList.toggle('is-active', number === next);
+          layer.classList.toggle('is-before', number < next);
+          layer.classList.toggle('is-after', number > next);
+        });
+
+        navButtons.forEach(button => {
+          if (Number(button.dataset.goLayer) === next) button.setAttribute('aria-current', 'step');
+          else button.removeAttribute('aria-current');
+        });
+      };
+
+      const updateFromScroll = () => {
+        ticking = false;
+        const viewportTarget = window.innerHeight * .5;
+        let nearest = chapters[0];
+        let nearestDistance = Infinity;
+
+        chapters.forEach(chapter => {
+          const rect = chapter.getBoundingClientRect();
+          const center = rect.top + rect.height / 2;
+          const distance = Math.abs(center - viewportTarget);
+          if (distance < nearestDistance) {
+            nearest = chapter;
+            nearestDistance = distance;
+          }
+        });
+
+        setActive(Number(nearest.dataset.layer));
+      };
+
+      const requestUpdate = () => {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(updateFromScroll);
+      };
+
+      navButtons.forEach(button => {
+        button.addEventListener('click', () => {
+          const target = document.getElementById(`layer-${button.dataset.goLayer}`);
+          if (target) target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        });
+      });
+
+      window.addEventListener('scroll', requestUpdate, { passive: true });
+      window.addEventListener('resize', requestUpdate, { passive: true });
+      window.addEventListener('load', requestUpdate, { once: true });
+      requestUpdate();
+    })();
+  </script>
+</body>
+</html>

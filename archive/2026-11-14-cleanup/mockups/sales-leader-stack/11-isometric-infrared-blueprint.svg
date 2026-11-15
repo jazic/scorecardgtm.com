@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1200" viewBox="0 0 1600 1200">
+  <defs>
+    <radialGradient id="bg" cx="52%" cy="45%" r="75%"><stop stop-color="#292020"/><stop offset=".55" stop-color="#121112"/><stop offset="1" stop-color="#070708"/></radialGradient>
+    <linearGradient id="heat" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#FFF4E8"/><stop offset=".28" stop-color="#FFB13B"/><stop offset=".62" stop-color="#FF4D2E"/><stop offset="1" stop-color="#B31237"/></linearGradient>
+    <filter id="glow" x="-45%" y="-60%" width="190%" height="220%"><feGaussianBlur stdDeviation="7" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#FFFFFF" stroke-opacity=".028"/></pattern>
+  </defs>
+  <rect width="1600" height="1200" fill="url(#bg)"/><rect width="1600" height="1200" fill="url(#grid)"/>
+  <path d="M800 126V1090" stroke="#FF5A36" stroke-opacity=".45" stroke-width="2" stroke-dasharray="5 11" filter="url(#glow)"/>
+  <g fill="none" stroke="url(#heat)" stroke-linejoin="round">
+    <path d="M760 106L1288 270L760 434L232 270Z" fill="#FF3F2E" fill-opacity=".035" stroke-width="4" filter="url(#glow)"/><path d="M776 124L1272 278L776 432L280 278Z" stroke-opacity=".24" stroke-width="2"/>
+    <path d="M780 282L1308 446L780 610L252 446Z" fill="#FF3F2E" fill-opacity=".025" stroke-width="4" filter="url(#glow)"/><path d="M796 300L1292 454L796 608L300 454Z" stroke-opacity=".22" stroke-width="2"/>
+    <path d="M800 458L1328 622L800 786L272 622Z" fill="#FF3F2E" fill-opacity=".02" stroke-width="4" filter="url(#glow)"/><path d="M816 476L1312 630L816 784L320 630Z" stroke-opacity=".2" stroke-width="2"/>
+    <path d="M820 634L1348 798L820 962L292 798Z" fill="#FF3F2E" fill-opacity=".016" stroke-width="4" filter="url(#glow)"/><path d="M836 652L1332 806L836 960L340 806Z" stroke-opacity=".18" stroke-width="2"/>
+    <path d="M840 810L1368 974L840 1138L312 974Z" fill="#FF3F2E" fill-opacity=".012" stroke-width="4" filter="url(#glow)"/><path d="M856 828L1352 982L856 1136L360 982Z" stroke-opacity=".16" stroke-width="2"/>
+  </g>
+  <g fill="#080809" stroke="url(#heat)" stroke-width="3">
+    <circle cx="760" cy="270" r="18"/><circle cx="780" cy="446" r="18"/><circle cx="800" cy="622" r="18"/><circle cx="820" cy="798" r="18"/><circle cx="840" cy="974" r="18"/>
+  </g>
+  <g fill="#FFF1E4"><circle cx="760" cy="270" r="5"/><circle cx="780" cy="446" r="5"/><circle cx="800" cy="622" r="5"/><circle cx="820" cy="798" r="5"/><circle cx="840" cy="974" r="5"/></g>
+</svg>

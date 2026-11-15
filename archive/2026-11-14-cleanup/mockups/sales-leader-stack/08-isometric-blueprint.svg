@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1200" viewBox="0 0 1600 1200">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="72%"><stop stop-color="#12346B"/><stop offset="1" stop-color="#03153A"/></radialGradient>
+    <pattern id="minor" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#649BE4" stroke-opacity=".055"/></pattern>
+    <pattern id="major" width="120" height="120" patternUnits="userSpaceOnUse"><path d="M120 0H0V120" fill="none" stroke="#649BE4" stroke-opacity=".12" stroke-width="1.5"/></pattern>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <rect width="1600" height="1200" fill="url(#bg)"/><rect width="1600" height="1200" fill="url(#minor)"/><rect width="1600" height="1200" fill="url(#major)"/>
+  <g fill="none" stroke-linejoin="round">
+    <!-- vertical datum -->
+    <path d="M800 116V1084" stroke="#A8D862" stroke-opacity=".7" stroke-width="2" stroke-dasharray="8 12" filter="url(#glow)"/>
+    <!-- five planes -->
+    <path d="M800 124L1290 278L800 432L310 278Z" fill="#A8D862" fill-opacity=".045" stroke="#A8D862" stroke-width="4" filter="url(#glow)"/>
+    <path d="M800 300L1290 454L800 608L310 454Z" fill="#B493EA" fill-opacity=".035" stroke="#B493EA" stroke-width="3"/>
+    <path d="M800 476L1290 630L800 784L310 630Z" fill="#649BE4" fill-opacity=".035" stroke="#649BE4" stroke-width="3"/>
+    <path d="M800 652L1290 806L800 960L310 806Z" fill="#FCAF0F" fill-opacity=".03" stroke="#FCAF0F" stroke-width="3"/>
+    <path d="M800 828L1290 982L800 1136L310 982Z" fill="#FFFFFF" fill-opacity=".02" stroke="#FFFFFF" stroke-opacity=".7" stroke-width="3"/>
+    <!-- connecting columns -->
+    <path d="M310 278V982M1290 278V982M800 432V1136" stroke="#649BE4" stroke-opacity=".2" stroke-width="2" stroke-dasharray="5 10"/>
+    <!-- crosshair geometry -->
+    <g stroke="#FFFFFF" stroke-opacity=".35" stroke-width="2">
+      <path d="M770 278H830M800 248V308"/><circle cx="800" cy="278" r="18"/>
+      <path d="M770 454H830M800 424V484"/><circle cx="800" cy="454" r="18"/>
+      <path d="M770 630H830M800 600V660"/><circle cx="800" cy="630" r="18"/>
+      <path d="M770 806H830M800 776V836"/><circle cx="800" cy="806" r="18"/>
+      <path d="M770 982H830M800 952V1012"/><circle cx="800" cy="982" r="18"/>
+    </g>
+    <!-- measured corner brackets -->
+    <g stroke="#649BE4" stroke-opacity=".6" stroke-width="3">
+      <path d="M288 262V294M294 250H326M1274 250H1306M1312 262V294"/>
+      <path d="M288 966V998M294 1010H326M1274 1010H1306M1312 966V998"/>
+    </g>
+  </g>
+  <g fill="#FFFFFF">
+    <circle cx="800" cy="278" r="6" fill="#A8D862"/><circle cx="800" cy="454" r="6" fill="#B493EA"/><circle cx="800" cy="630" r="6" fill="#649BE4"/><circle cx="800" cy="806" r="6" fill="#FCAF0F"/><circle cx="800" cy="982" r="6"/>
+  </g>
+  <g transform="translate(130 1060)" opacity=".68" fill="#649BE4"><rect width="14" height="14"/><rect x="18" width="14" height="14"/><rect y="18" width="14" height="14"/><rect x="18" y="18" width="14" height="14"/></g>
+</svg>

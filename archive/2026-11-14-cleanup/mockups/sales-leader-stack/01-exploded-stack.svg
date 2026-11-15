@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1200" viewBox="0 0 1600 1200">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#03153A"/>
+      <stop offset="1" stop-color="#102B5D"/>
+    </linearGradient>
+    <linearGradient id="top" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#EEF4FD"/>
+    </linearGradient>
+    <filter id="shadow" x="-30%" y="-40%" width="160%" height="190%">
+      <feDropShadow dx="0" dy="22" stdDeviation="18" flood-color="#000514" flood-opacity=".35"/>
+    </filter>
+    <pattern id="grid" width="30" height="30" patternUnits="userSpaceOnUse">
+      <path d="M30 0H0V30" fill="none" stroke="#FFFFFF" stroke-opacity=".045" stroke-width="1"/>
+    </pattern>
+    <style>
+      text{font-family:Inter,Arial,sans-serif}.eyebrow{font-size:18px;font-weight:700;letter-spacing:3px}.title{font-size:62px;font-weight:750;letter-spacing:-2.5px}.label{font-size:25px;font-weight:650;letter-spacing:-.4px}.num{font-size:64px;font-weight:800}.micro{font-size:14px;font-weight:700;letter-spacing:2px}
+    </style>
+  </defs>
+  <rect width="1600" height="1200" fill="url(#bg)"/>
+  <rect width="1600" height="1200" fill="url(#grid)"/>
+  <g opacity=".16" fill="none" stroke="#649BE4">
+    <circle cx="1432" cy="162" r="92"/><circle cx="1432" cy="162" r="62"/><circle cx="1432" cy="162" r="32"/>
+  </g>
+  <g transform="translate(92 90)">
+    <g transform="translate(0 4)">
+      <rect width="18" height="18" rx="2" fill="#FCAF0F"/><rect x="20" width="18" height="18" rx="2" fill="#A8D862"/>
+      <rect y="20" width="18" height="18" rx="2" fill="#649BE4"/><rect x="20" y="20" width="18" height="18" rx="2" fill="#B493EA"/>
+    </g>
+    <text x="58" y="19" fill="#FFFFFF" class="eyebrow">SCORECARD / SYSTEM DIAGRAM</text>
+    <text x="0" y="112" fill="#FFFFFF" class="title">The sales leader stack</text>
+    <text x="2" y="153" fill="#A9B7CF" font-size="21">Five layers. Built from the math up.</text>
+  </g>
+
+  <!-- connectors and labels -->
+  <g fill="none" stroke="#A9B7CF" stroke-opacity=".48" stroke-width="2" stroke-dasharray="7 10">
+    <path d="M515 310H666"/><path d="M515 476H666"/><path d="M515 642H666"/><path d="M515 808H666"/><path d="M515 974H666"/>
+  </g>
+  <g fill="#FFFFFF">
+    <text x="92" y="289" class="micro" fill="#A8D862">LEVEL 05</text><text x="92" y="330" class="label">Tools that move the number</text>
+    <text x="92" y="455" class="micro" fill="#B493EA">LEVEL 04</text><text x="92" y="496" class="label">A weekly read on the number</text>
+    <text x="92" y="621" class="micro" fill="#649BE4">LEVEL 03</text><text x="92" y="662" class="label">A team that can carry the number</text>
+    <text x="92" y="787" class="micro" fill="#FCAF0F">LEVEL 02</text><text x="92" y="828" class="label">A system that tracks the number</text>
+    <text x="92" y="953" class="micro" fill="#FFFFFF">LEVEL 01</text><text x="92" y="994" class="label">The math behind the number</text>
+  </g>
+
+  <!-- layer 5 -->
+  <g filter="url(#shadow)">
+    <path d="M1065 168L1450 292L1450 312L1065 438L680 312V292Z" fill="#356ECA"/>
+    <path d="M1065 148L1450 272L1065 398L680 272Z" fill="#A8D862" stroke="#D4F0A9" stroke-width="2"/>
+    <g transform="translate(1065 273)"><circle r="56" fill="#03153A"/><text text-anchor="middle" y="20" fill="#A8D862" class="num">5</text></g>
+  </g>
+  <!-- layer 4 -->
+  <g filter="url(#shadow)">
+    <path d="M1065 334L1450 458L1450 478L1065 604L680 478V458Z" fill="#6E4BAA"/>
+    <path d="M1065 314L1450 438L1065 564L680 438Z" fill="#B493EA" stroke="#D8C5F5" stroke-width="2"/>
+    <g transform="translate(1065 439)"><circle r="56" fill="#03153A"/><text text-anchor="middle" y="20" fill="#B493EA" class="num">4</text></g>
+  </g>
+  <!-- layer 3 -->
+  <g filter="url(#shadow)">
+    <path d="M1065 500L1450 624L1450 644L1065 770L680 644V624Z" fill="#1A4FB8"/>
+    <path d="M1065 480L1450 604L1065 730L680 604Z" fill="#649BE4" stroke="#A9CBF6" stroke-width="2"/>
+    <g transform="translate(1065 605)"><circle r="56" fill="#03153A"/><text text-anchor="middle" y="20" fill="#649BE4" class="num">3</text></g>
+  </g>
+  <!-- layer 2 -->
+  <g filter="url(#shadow)">
+    <path d="M1065 666L1450 790L1450 810L1065 936L680 810V790Z" fill="#B86E0C"/>
+    <path d="M1065 646L1450 770L1065 896L680 770Z" fill="#FCAF0F" stroke="#FFD979" stroke-width="2"/>
+    <g transform="translate(1065 771)"><circle r="56" fill="#03153A"/><text text-anchor="middle" y="20" fill="#FCAF0F" class="num">2</text></g>
+  </g>
+  <!-- layer 1 -->
+  <g filter="url(#shadow)">
+    <path d="M1065 832L1450 956L1450 976L1065 1102L680 976V956Z" fill="#CAD5E6"/>
+    <path d="M1065 812L1450 936L1065 1062L680 936Z" fill="url(#top)" stroke="#FFFFFF" stroke-width="2"/>
+    <g transform="translate(1065 937)"><circle r="56" fill="#03153A"/><text text-anchor="middle" y="20" fill="#FFFFFF" class="num">1</text></g>
+  </g>
+  <text x="1505" y="1094" text-anchor="end" fill="#7F91AE" class="micro">DIRECTION 01 / EXPLODED STACK</text>
+</svg>

@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1200" viewBox="0 0 1600 1200">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="1" x2="1" y2="0"><stop stop-color="#03153A"/><stop offset="1" stop-color="#174A8F"/></linearGradient>
+    <pattern id="grid" width="42" height="42" patternUnits="userSpaceOnUse"><path d="M42 0H0V42" fill="none" stroke="#FFFFFF" stroke-opacity=".05"/></pattern>
+    <filter id="shadow" x="-20%" y="-30%" width="150%" height="180%"><feDropShadow dx="0" dy="22" stdDeviation="18" flood-color="#000514" flood-opacity=".32"/></filter>
+    <style>text{font-family:Inter,Arial,sans-serif}.eyebrow{font-size:17px;font-weight:750;letter-spacing:3px}.title{font-size:64px;font-weight:760;letter-spacing:-2.8px}.label{font-size:25px;font-weight:700;letter-spacing:-.5px}.num{font-size:72px;font-weight:820}.micro{font-size:14px;font-weight:750;letter-spacing:2.2px}</style>
+  </defs>
+  <rect width="1600" height="1200" fill="url(#bg)"/><rect width="1600" height="1200" fill="url(#grid)"/>
+  <g transform="translate(88 78)">
+    <g transform="translate(0 3)"><rect width="18" height="18" rx="2" fill="#FCAF0F"/><rect x="20" width="18" height="18" rx="2" fill="#A8D862"/><rect y="20" width="18" height="18" rx="2" fill="#649BE4"/><rect x="20" y="20" width="18" height="18" rx="2" fill="#B493EA"/></g>
+    <text x="58" y="19" fill="#FFFFFF" class="eyebrow">SCORECARD / SYSTEM DIAGRAM</text>
+    <text x="0" y="112" fill="#FFFFFF" class="title">The system rises in five moves.</text>
+  </g>
+  <g filter="url(#shadow)">
+    <!-- step 1 -->
+    <g transform="translate(108 780)">
+      <path d="M0 60L246 60L288 18H42Z" fill="#FFFFFF"/>
+      <path d="M0 60L246 60V272H0Z" fill="#D8E1EE"/>
+      <path d="M246 60L288 18V230L246 272Z" fill="#AAB9CE"/>
+      <text x="28" y="127" fill="#03153A" class="num">01</text><text x="28" y="173" fill="#03153A" class="label"><tspan x="28">The math behind</tspan><tspan x="28" dy="31">the number</tspan></text>
+    </g>
+    <!-- step 2 -->
+    <g transform="translate(366 650)">
+      <path d="M0 60L246 60L288 18H42Z" fill="#FCAF0F"/>
+      <path d="M0 60L246 60V402H0Z" fill="#D88900"/>
+      <path d="M246 60L288 18V360L246 402Z" fill="#A96700"/>
+      <text x="28" y="127" fill="#03153A" class="num">02</text><text x="28" y="173" fill="#03153A" class="label"><tspan x="28">A system that</tspan><tspan x="28" dy="31">tracks the number</tspan></text>
+    </g>
+    <!-- step 3 -->
+    <g transform="translate(624 520)">
+      <path d="M0 60L246 60L288 18H42Z" fill="#649BE4"/>
+      <path d="M0 60L246 60V532H0Z" fill="#1A4FB8"/>
+      <path d="M246 60L288 18V490L246 532Z" fill="#123C8B"/>
+      <text x="28" y="127" fill="#FFFFFF" class="num">03</text><text x="28" y="173" fill="#FFFFFF" class="label"><tspan x="28">A team that can</tspan><tspan x="28" dy="31">carry the number</tspan></text>
+    </g>
+    <!-- step 4 -->
+    <g transform="translate(882 390)">
+      <path d="M0 60L246 60L288 18H42Z" fill="#B493EA"/>
+      <path d="M0 60L246 60V662H0Z" fill="#7652AF"/>
+      <path d="M246 60L288 18V620L246 662Z" fill="#563D81"/>
+      <text x="28" y="127" fill="#FFFFFF" class="num">04</text><text x="28" y="173" fill="#FFFFFF" class="label"><tspan x="28">A weekly read on</tspan><tspan x="28" dy="31">the number</tspan></text>
+    </g>
+    <!-- step 5 -->
+    <g transform="translate(1140 260)">
+      <path d="M0 60L246 60L288 18H42Z" fill="#A8D862"/>
+      <path d="M0 60L246 60V792H0Z" fill="#6A9E2C"/>
+      <path d="M246 60L288 18V750L246 792Z" fill="#48721A"/>
+      <text x="28" y="127" fill="#03153A" class="num">05</text><text x="28" y="173" fill="#03153A" class="label"><tspan x="28">Tools that move</tspan><tspan x="28" dy="31">the number</tspan></text>
+      <g transform="translate(172 88)"><rect width="20" height="20" rx="3" fill="#FCAF0F"/><rect x="23" width="20" height="20" rx="3" fill="#03153A"/><rect y="23" width="20" height="20" rx="3" fill="#649BE4"/><rect x="23" y="23" width="20" height="20" rx="3" fill="#B493EA"/></g>
+    </g>
+  </g>
+  <path d="M130 1100H1480" stroke="#FFFFFF" stroke-opacity=".18" stroke-width="2"/>
+  <text x="92" y="1144" fill="#9EB0CB" class="micro">MATH</text>
+  <text x="1508" y="1144" text-anchor="end" fill="#A8D862" class="micro">TOOLS / DIRECTION 04</text>
+</svg>

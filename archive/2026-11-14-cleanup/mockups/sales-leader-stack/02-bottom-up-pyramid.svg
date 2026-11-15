@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1200" viewBox="0 0 1600 1200">
+  <defs>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="160%"><feDropShadow dx="0" dy="18" stdDeviation="24" flood-color="#03153A" flood-opacity=".13"/></filter>
+    <linearGradient id="paper" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#FFFFFF"/><stop offset="1" stop-color="#F2F6FB"/></linearGradient>
+    <pattern id="dots" width="32" height="32" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.5" fill="#03153A" opacity=".08"/></pattern>
+    <style>text{font-family:Inter,Arial,sans-serif}.eyebrow{font-size:17px;font-weight:750;letter-spacing:3px}.title{font-size:64px;font-weight:760;letter-spacing:-2.8px}.tier{font-size:29px;font-weight:700;letter-spacing:-.6px}.n{font-size:20px;font-weight:800}.micro{font-size:14px;font-weight:750;letter-spacing:2.4px}</style>
+  </defs>
+  <rect width="1600" height="1200" fill="url(#paper)"/>
+  <rect width="1600" height="1200" fill="url(#dots)"/>
+  <g transform="translate(88 82)">
+    <g transform="translate(0 2)"><rect width="18" height="18" rx="2" fill="#FCAF0F"/><rect x="20" width="18" height="18" rx="2" fill="#A8D862"/><rect y="20" width="18" height="18" rx="2" fill="#649BE4"/><rect x="20" y="20" width="18" height="18" rx="2" fill="#B493EA"/></g>
+    <text x="58" y="19" fill="#475569" class="eyebrow">SCORECARD / SYSTEM DIAGRAM</text>
+    <text x="0" y="112" fill="#03153A" class="title">Build from the number up.</text>
+  </g>
+  <g filter="url(#shadow)">
+    <!-- bottom -->
+    <path d="M250 1000L1350 1000L1260 858L340 858Z" fill="#03153A"/>
+    <circle cx="385" cy="929" r="27" fill="#FFFFFF" fill-opacity=".12"/><text x="385" y="937" text-anchor="middle" fill="#FFFFFF" class="n">1</text>
+    <text x="800" y="940" text-anchor="middle" fill="#FFFFFF" class="tier">The math behind the number</text>
+    <!-- level 2 -->
+    <path d="M350 844L1250 844L1168 702L432 702Z" fill="#1A4FB8"/>
+    <circle cx="474" cy="773" r="27" fill="#FFFFFF" fill-opacity=".14"/><text x="474" y="781" text-anchor="middle" fill="#FFFFFF" class="n">2</text>
+    <text x="800" y="784" text-anchor="middle" fill="#FFFFFF" class="tier">A system that tracks the number</text>
+    <!-- level 3 -->
+    <path d="M442 688L1158 688L1086 546L514 546Z" fill="#649BE4"/>
+    <circle cx="552" cy="617" r="27" fill="#03153A" fill-opacity=".16"/><text x="552" y="625" text-anchor="middle" fill="#FFFFFF" class="n">3</text>
+    <text x="800" y="628" text-anchor="middle" fill="#FFFFFF" class="tier">A team that can carry the number</text>
+    <!-- level 4 -->
+    <path d="M524 532L1076 532L1010 390L590 390Z" fill="#B493EA"/>
+    <circle cx="568" cy="461" r="27" fill="#03153A" fill-opacity=".18"/><text x="568" y="469" text-anchor="middle" fill="#FFFFFF" class="n">4</text>
+    <text x="820" y="472" text-anchor="middle" fill="#FFFFFF" class="tier">A weekly read on the number</text>
+    <!-- top -->
+    <path d="M604 376L996 376L938 234L662 234Z" fill="#A8D862"/>
+    <circle cx="692" cy="305" r="27" fill="#03153A" fill-opacity=".13"/><text x="692" y="313" text-anchor="middle" fill="#03153A" class="n">5</text>
+    <text x="820" y="294" text-anchor="middle" fill="#03153A" class="tier"><tspan x="820" dy="0">Tools that move</tspan><tspan x="820" dy="36">the number</tspan></text>
+  </g>
+  <g transform="translate(1416 454)">
+    <path d="M0 466V0" stroke="#03153A" stroke-opacity=".28" stroke-width="2"/>
+    <path d="M-8 16L0 0L8 16" fill="none" stroke="#03153A" stroke-opacity=".5" stroke-width="2"/>
+    <text transform="rotate(-90)" x="-356" y="-18" fill="#64748B" class="micro">BUILT FROM THE MATH UP</text>
+  </g>
+  <text x="1510" y="1110" text-anchor="end" fill="#64748B" class="micro">DIRECTION 02 / BOTTOM-UP PYRAMID</text>
+</svg>

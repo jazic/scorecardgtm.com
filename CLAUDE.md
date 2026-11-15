@@ -21,12 +21,12 @@ This repo is the marketing surface for **Scorecard** — public website, design 
 │
 ├── archive/github-pages-site/      ← the retired GitHub Pages site (reference only, not deployed)
 │
-└── docs/                           ← vision.md, plans/, tasks/, app/ (→ ../scorecardGTM/docs, the app repo)
+└── docs/                           ← dated vision, plans/, tasks/, app/ (→ ../scorecardGTM/docs, the app repo)
 ```
 
 ## How to work in here
 
-- **Start from `docs/vision.md`** for what Scorecard is and who it's for. Anything in `site/` or `design-system/` should serve that.
+- **Start from `docs/2026-11-14-vision.md`** for what Scorecard is and who it's for. Anything in `site/` or `design-system/` should serve that.
 - **Copy lives in the CMS**, not in the repo: https://scorecardgtm.com/_emdash/admin (Landing pages, Blog posts, menus, site
   settings; form entries under Form submissions). Since launch the production database is the source of truth for content;
   `site/seed/seed.json` only seeds a fresh database (local dev, a rebuild).
@@ -35,7 +35,7 @@ This repo is the marketing surface for **Scorecard** — public website, design 
 - **Design tokens live in `design-system/tokens.css`**. Logos, favicons and the default share image live in `design-system/assets/`
   and are served at `/design-system/...`.
 - **Plans go in `docs/plans/`, tasks in `docs/tasks/`.** Don't drop loose plan files at the repo root.
-  Open work is in `docs/tasks/todo.md`; `docs/plans/launch-checklist.md` is the launch record (deploy, DNS, rollback).
+  Open work is in `docs/tasks/2026-11-14-todo.md`; `docs/plans/2026-11-14-launch-checklist.md` is the launch record (deploy, DNS, rollback).
 
 ## Deploy
 
@@ -64,3 +64,7 @@ When new surfaces arrive, slot them into this layout. Don't pre-create empty fol
 - **`pricing/`** — if pricing becomes more than a single line on the site (tiers, bundles, calculators), it gets its own folder with the source-of-truth doc and the page that renders it.
 
 Each of these is a real surface with real content. None of them exist yet. Don't create the folder until there's a file to put in it.
+
+## Historical prototypes
+
+The homepage mockup project is complete. All prototypes are archived in `archive/2026-11-14-cleanup/mockups/`; current implementation lives in `site/`.

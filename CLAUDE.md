@@ -21,7 +21,7 @@ This repo is the marketing surface for **Scorecard** — public website, design 
 │
 ├── archive/github-pages-site/      ← the retired GitHub Pages site (reference only, not deployed)
 │
-└── docs/                           ← vision, plans (docs/plans/), tasks (docs/tasks/)
+└── docs/                           ← vision.md, plans/, tasks/, app/ (→ ../scorecardGTM/docs, the app repo)
 ```
 
 ## How to work in here
@@ -35,7 +35,7 @@ This repo is the marketing surface for **Scorecard** — public website, design 
 - **Design tokens live in `design-system/tokens.css`**. Logos, favicons and the default share image live in `design-system/assets/`
   and are served at `/design-system/...`.
 - **Plans go in `docs/plans/`, tasks in `docs/tasks/`.** Don't drop loose plan files at the repo root.
-  The launch checklist is `docs/plans/launch-checklist.md`.
+  Open work is in `docs/tasks/todo.md`; `docs/plans/launch-checklist.md` is the launch record (deploy, DNS, rollback).
 
 ## Deploy
 

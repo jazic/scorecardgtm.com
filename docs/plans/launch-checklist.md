@@ -1,5 +1,7 @@
 # Launch checklist: EmDash site → scorecardgtm.com
 
+> **Closed 2026-11-14: launched.** Open items moved to [`docs/tasks/todo.md`](../tasks/todo.md); positioning and pages live in [`docs/vision.md`](../vision.md). Kept as the launch record (deploy, DNS and rollback notes).
+
 Updated 2026-11-14 (`cloudflare-astro-migration`, EmDash 1.5.0). **J** = Justin decides or supplies, **C** = Claude builds.
 
 **Order:** finish the code blockers (A), rebuild the production DB once from the final seed (B), then Justin edits content

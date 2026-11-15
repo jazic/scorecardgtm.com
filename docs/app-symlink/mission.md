@@ -1,1 +1,0 @@
-../../../scorecard/agent-os/product/mission.md

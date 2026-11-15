@@ -1,5 +1,7 @@
 # Scorecard website brief
 
+> **Superseded (14 Nov 2026) by [`vision.md`](vision.md).** This brief describes a managed service; Scorecard is self-serve SaaS. Kept for history only.
+
 **Date:** July 16, 2026
 **Status:** Strategic direction for the next homepage and supporting site
 **Primary conversion:** A qualified conversation that begins with the Growth Planning Intensive

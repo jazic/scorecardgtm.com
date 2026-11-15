@@ -1429,3 +1429,67 @@ nav.top .links{padding-right:28px;border-right:1px solid var(--border-default);l
 .faq-main{flex:1;display:flex;flex-direction:column;gap:16px}
 .faq .faq-main .qall{align-self:flex-end}
 .faq{scroll-margin-top:88px}
+
+/* ===== Who it's for, icon + pills (approved 2026-11-15): no visuals; who uses it and the industries they work in ===== */
+.aud .job{gap:16px}
+.aud .aud-ic{display:grid;place-items:center;width:44px;height:44px;border-radius:12px;background:var(--paper-2);color:var(--text-primary);margin-bottom:4px}
+.aud .aud-ic .aud-i{width:22px;height:22px;stroke-width:1.75}
+.aud-i{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.aud .pills{list-style:none;display:flex;flex-wrap:wrap;gap:6px;margin:0;padding:0}
+.aud .pills.ppl{border-top:1px solid var(--line);padding-top:18px}
+.aud .pill{display:inline-flex;align-items:center;gap:6px;height:28px;padding:0 11px;border-radius:999px;font:500 13px/1 var(--font-sans);color:var(--text-primary);background:var(--paper-2);white-space:nowrap}
+.aud .pills.ppl .pill{background:none;box-shadow:inset 0 0 0 1px var(--border-default);color:var(--text-secondary)}
+.aud .pills.ppl .aud-i{color:var(--text-tertiary)}
+.aud .job-cta{margin-top:auto;padding-top:20px}
+
+/* ===== How it works, layout B (approved 2026-11-15): centred headline, one-line search bar, one loading signal, numbers reveal as found, Score chips rise into their rows, plain text step tabs ===== */
+body[data-agent] .hiw{padding-bottom:4px}
+body[data-agent] .hiw .h2c{padding-bottom:0}
+body[data-agent] .v32 .v-head h2{text-align:left;margin-left:0}
+body[data-agent] .sec.story.v32 .sgrid{padding:20px 0 28px}
+body[data-agent] .v32 .console .agent-panel .ahead .mk,body[data-agent] .v32 .console .agent-panel .st{display:none}
+body[data-agent] .v32 .console{box-shadow:inset 0 0 0 1px var(--paper-4),0 12px 28px -20px rgba(28,28,26,.3)}
+body[data-agent] .v32 .console .agent-panel.trace{box-shadow:inset 0 1px 0 var(--paper-3)}
+body[data-agent] .sec.story.v32 .sgrid{gap:12px}
+body[data-agent] .v32 .v-head{flex-direction:column;align-items:center;gap:22px}
+body[data-agent] .v32 .v-head h2{text-align:center;margin:0 auto;max-width:none}
+body[data-agent] .v32 .console{flex:none;width:min(820px,100%);flex-direction:row;align-items:stretch;border-radius:999px}
+body[data-agent] .v32 .console .visual-query{flex:1 1 auto;min-width:0;height:60px;padding:0 8px 0 24px}
+body[data-agent] .v32 .console .agent-panel.trace{flex:0 0 300px;display:flex;align-items:center;min-height:0;padding:0 24px 0 18px;margin:0;background:none;box-shadow:inset 1px 0 0 var(--paper-3)}
+body[data-agent] .v32 .console .agent-panel .ahead{display:none}
+body[data-agent] .v32 .console .agent-panel .ssteps{min-height:0;width:100%}
+body[data-agent] .v32 .console .agent-panel .step .sx{font-size:14px;font-weight:500;color:var(--text-secondary)}
+body[data-agent] .v32 .v-body{gap:6px}
+body[data-agent] .v32 .v-stagebox{max-width:760px;margin:0 auto}
+@media (min-width:1101px) and (max-height:860px){
+  body[data-agent] .v32 .stage{zoom:.78}
+}
+body[data-agent] .v32 .console .agent-panel .ssteps{display:grid;align-items:center;align-self:stretch}
+body[data-agent] .v32 .console .agent-panel .step{align-items:center;align-self:center}
+body[data-agent] .v32 .console .agent-panel .step i{margin:0}
+body[data-agent] .v32 .console .agent-panel.trace{flex-direction:column;justify-content:center;align-items:stretch}
+body[data-agent] .v32 .v-body .fs,body[data-agent] .v32 .v-body .fa{opacity:var(--t);transform:translateY(calc((1 - var(--t))*10px))}
+body[data-agent] .scr .sp{--r0:0deg!important}
+body[data-agent] .scr .sp:nth-of-type(4){--x0:150px!important;--y0:76px!important}
+body[data-agent] .scr .sp:nth-of-type(5){--x0:350px!important;--y0:76px!important}
+body[data-agent] .scr .sp:nth-of-type(6){--x0:150px!important;--y0:196px!important}
+body[data-agent] .scr .sp:nth-of-type(7){--x0:300px!important;--y0:196px!important}
+body[data-agent] .scr .sp:nth-of-type(8){--x0:150px!important;--y0:316px!important}
+body[data-agent] .scr .sp:nth-of-type(9){--x0:300px!important;--y0:316px!important}
+body[data-agent] .scr .tl{left:22px}
+body[data-agent] .agentbar nav{gap:36px;padding:0;background:none;box-shadow:inset 0 -1px 0 var(--paper-4);border-radius:0}
+body[data-agent] .agentbar a{height:44px;padding:0 2px;gap:8px;border-radius:0;background:none!important;color:var(--text-secondary)}
+body[data-agent] .agentbar a i{width:auto;height:auto;background:none!important;color:inherit;font:500 12px/1 var(--font-mono)}
+body[data-agent] .agentbar a.done i .n{display:inline}
+body[data-agent] .agentbar a.done i svg{display:none}
+body[data-agent] .agentbar a::after{content:"";position:absolute;left:0;bottom:0;height:2px;width:calc(var(--f,0)*100%);background:var(--ink-1)}
+body[data-agent] .agentbar a.on,body[data-agent] .agentbar a.done{color:var(--text-primary)}
+body[data-agent] .agentbar a.on{font-weight:600}
+body[data-agent] .agentbar nav{box-shadow:none}
+body[data-agent] .agentbar a i{display:none}
+@media (max-width:760px){
+  body[data-agent] .v32 .console{border-radius:16px;flex-direction:column;width:100%}
+  body[data-agent] .v32 .console .visual-query{height:auto;min-height:54px;padding:12px 16px;flex-wrap:wrap;row-gap:4px}
+  body[data-agent] .v32 .console .visual-query b{white-space:normal}
+  body[data-agent] .v32 .console .agent-panel.trace{flex:none;padding:12px 16px;box-shadow:inset 0 1px 0 var(--paper-3)}
+}

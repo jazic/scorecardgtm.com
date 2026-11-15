@@ -77,8 +77,9 @@ into `public/design-system/`). Vite never processes them (bundling the CSS dropp
 - Block types, one per homepage section: `hero`, `audiences`, `how_intro`, `agent`, `features`,
   `pricing`, `faq`, `signup`, plus `challenge` (the Send-us-your-search offer and form; the form opens the
   visitor's mail app addressed to the block's `email`). `how_intro` and the `agent` blocks after it render inside one
-  `.agents` wrapper with the step bar. `agent.visual` (search|signals|score), `audiences` card
-  `visual` and `features` card `visual` pick coded visuals in `src/components/home/visuals/`.
+  `.agents` wrapper with the step bar. `agent.visual` (search|signals|score) and `features` card `visual` pick coded visuals in
+  `src/components/home/visuals/`; `audiences` card `visual` (rank|size|years) picks the card's coded icon and its
+  people and industry pills (in `Audiences.astro`). The card's `query` and `outcome` fields are no longer shown.
 - Text conventions: pricing row `values` and plan `card_features` are one item per line (`✓`/`—` in
   values render the check/dash); FAQ `[bracketed text]` renders as a placeholder highlight.
 - Menus: `primary` (items with CSS classes render as buttons), `footer`, `legal`. On pages other than home,

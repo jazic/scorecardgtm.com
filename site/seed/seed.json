@@ -3126,7 +3126,7 @@
 		{
 			"slug": "audiences",
 			"label": "Who it's for",
-			"description": "Audience cards. Each card picks one coded mini-visual.",
+			"description": "Audience cards. Each card's visual (rank, size, years) picks its coded icon and pills: who uses it and the industries they work in.",
 			"currentVersion": 1,
 			"versions": [
 				{

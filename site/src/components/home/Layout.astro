@@ -21,8 +21,10 @@ interface Props {
 	/** The CMS entry this page renders, so EmDashHead applies its SEO panel (description, image, canonical, noindex). */
 	content?: { collection: string; id: string; slug: string };
 	publishedTime?: string;
+	/** Extra static stylesheets after home.css (audience pages add /site/audience.css). */
+	styles?: string[];
 }
-const { title, description, home = false, hasAgents = false, image, type = "website", content, publishedTime } = Astro.props;
+const { title, description, home = false, hasAgents = false, image, type = "website", content, publishedTime, styles = [] } = Astro.props;
 
 const SITE = "https://scorecardgtm.com";
 const [settings, primary, footer, legal] = await Promise.all([getSiteSettings(), getMenu("primary"), getMenu("footer"), getMenu("legal")]);
@@ -81,6 +83,7 @@ const page = createPublicPageContext({
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@500;600&family=Caveat:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/site/home.css">
+{styles.map((href) => <link rel="stylesheet" href={href} />)}
 </head>
 <body data-agent="c">
 <EmDashBodyStart page={page} />

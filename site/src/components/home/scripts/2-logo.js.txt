@@ -304,6 +304,117 @@ window.ScLattice = (() => {
     }
     return { draw, resize };
   }
-  return { hero, search };
+  // ───────── Audience-page Search stages, drawn the same way as search() but national.
+  // cfg.mode 'zones': scan → 4 time zones pull apart → Pacific+Mountain merge into West → accounts stamp in → the fits turn blue.
+  // cfg.mode 'national': scan → businesses stamp in → the fits turn blue, weighted toward cfg.hot states. No zoom.
+  function story2(canvas, cfg) {
+    let C = colors(canvas); const Wd = 640, Hd = 440, P = 6, DR = 0.41 * P;
+    const ZN = { P: ['53', '41', '06', '32'], M: ['16', '30', '56', '49', '08', '04', '35'],
+      C: ['38', '46', '31', '20', '40', '48', '27', '19', '29', '05', '22', '55', '17', '28', '01', '47'] };
+    const zoneOf = id => ZN.P.includes(id) ? 'P' : ZN.M.includes(id) ? 'M' : ZN.C.includes(id) ? 'C' : 'E';
+    const Z = ['P', 'M', 'C', 'E'];
+    const fc = z => ({ type: 'FeatureCollection', features: states.filter(s => zoneOf(s.id) === z) });
+    const zf = Object.fromEntries(Z.map(z => [z, fc(z)]));
+    const p0 = d3.geoAlbers().rotate([96, 0]).fitExtent([[18, 34], [622, 420]], l48);
+    const s0 = p0.scale(), t0 = p0.translate(), CX = 320, CY = 227;
+    const proj = d3.geoAlbers().rotate([96, 0]);
+    const zb = Object.fromEntries(Z.map(z => [z, d3.geoPath(p0).bounds(zf[z])]));
+    const T = makeTone(P, 0, 0, Wd, Hd);
+    const rnd = rng(cfg.seed || 29), toneUS = T.sample(p0), biz = [];
+    // land cells, sampled once; each belongs to the zone whose shape covers it most (no double-drawn seams)
+    const zt = Object.fromEntries(Z.map(q => [q, T.sample(p0, zf[q]).slice()])), cells = [];
+    for (let gy = 0; gy < T.gh; gy++) for (let gx = 0; gx < T.gw; gx++) {
+      const i = (gy * T.gw + gx) * 4 + 3, av = toneUS[i] / 255; if (av < 0.03) continue;
+      let best = 'E', bv = -1; Z.forEach(q => { if (zt[q][i] > bv) { bv = zt[q][i]; best = q; } });
+      cells.push({ x: gx * P, y: gy * P, av, z: best });
+    }
+    for (let gy = 0; gy < T.gh; gy++) for (let gx = 0; gx < T.gw; gx++) {
+      if (toneUS[(gy * T.gw + gx) * 4 + 3] < 170 || rnd() > cfg.density) continue;
+      const ll = p0.invert([gx * P, gy * P]); if (!ll) continue;
+      const st = states.find(s => d3.geoContains(s, ll)); if (!st) continue;
+      const w = (cfg.hot && cfg.hot[st.id]) || 1;
+      const fr = rnd(); let fct = 0, acc = 0; if (cfg.facets) for (let q = 0; q < cfg.facets.length; q++) { acc += cfg.facets[q][2]; if (fr < acc) { fct = q; break; } }
+      biz.push({ ll, s: [gx * P, gy * P], x: gx * P / Wd, z: zoneOf(st.id), fit: rnd() < cfg.fit * w, f: fct });
+    }
+    // facet blocks: each fit business gets a slot in its facet's block
+    const FB = [[175, 120], [465, 120], [175, 290], [465, 290]], fcount = [0, 0, 0, 0];
+    if (cfg.facets) biz.forEach(b => { if (b.fit) { const i = fcount[b.f]++; b.tx = FB[b.f][0] - 72 + (i % 17) * 9; b.ty = FB[b.f][1] + Math.floor(i / 17) * 9; } });
+    let dpr = 0, z = 1, lastP = null;
+    function resize(zoom) { const nz = zoom || 1; if (dpr && nz === z) return; z = nz; dpr = (devicePixelRatio || 1) * z; canvas.width = Wd * dpr; canvas.height = Hd * dpr; if (lastP != null) draw(lastP); }
+    resize(1);
+    const snap = (x, y) => [Math.round(x / P) * P, Math.round(y / P) * P];
+    const G = 13;
+    // per-zone shrink k and x offset at progress p
+    function xf(zn, p) {
+      if (cfg.mode !== 'zones') return [1, 0];
+      // one move only: the three territories pull straight apart, never back
+      const a = eio((p - 0.68) / 0.14), k = 1 - 0.2 * a;
+      return [k, { P: -50, M: -50, C: 0, E: 50 }[zn] * a];
+    }
+    const setProj = (k, dx) => proj.scale(s0 * k).translate([k * t0[0] + CX * (1 - k) + dx, k * t0[1] + CY * (1 - k)]);
+    const tx = (x, k, dx) => CX + (x - CX) * k + dx, ty = (y, k) => CY + (y - CY) * k;
+    function label(t, x, y, op, strong) {
+      if (op <= 0.01) return; const ctx = canvas.getContext('2d');
+      ctx.globalAlpha = op; ctx.fillStyle = strong ? C.ink : C.mid; ctx.textAlign = 'center';
+      ctx.font = (strong ? '600 ' : '500 ') + '12px Geist, system-ui, sans-serif'; ctx.fillText(t, x, y);
+    }
+    function draw(p) {
+      lastP = p; C = colors(canvas);
+      const ctx = canvas.getContext('2d'); ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, Wd, Hd);
+      const scan = cl((p - 0.1) / 0.18), mv0 = cfg.facets ? cfg.facetAt : 9, landA = 1 - 0.85 * cl((p - mv0 - 0.06) / 0.08);
+      ctx.fillStyle = C.ink;
+      const XF = Object.fromEntries(Z.map(q => [q, xf(q, p)]));
+      for (const c of cells) {
+        const [k, dx] = XF[c.z];
+        const lit = scan > 0 && scan < 1 ? Math.max(0, 1 - Math.abs(c.x / Wd - scan) * 9) : 0;
+        ctx.globalAlpha = (0.05 + c.av * 0.09) * (1.3 + lit * 2.2) * landA; ctx.beginPath(); ctx.arc(tx(c.x, k, dx), ty(c.y, k), DR * (0.3 + 0.32 * c.av + lit * 0.25), 0, 6.2832); ctx.fill();
+      }
+      const used = new Set();
+      const dot = (x, y, r, col, op) => { const sx = x, sy = y, k = Math.round(x) + ',' + Math.round(y); if (used.has(k) || op <= 0.01) return; used.add(k); ctx.globalAlpha = op; ctx.fillStyle = col; ctx.beginPath(); ctx.arc(sx, sy, r, 0, 6.2832); ctx.fill(); };
+      const [st0, fi0] = cfg.at;            // when businesses stamp in, when the fits turn blue
+      const fi = cl((p - fi0) / 0.12);
+      for (const pass of [false, true]) for (const b of biz) {
+        if (b.fit !== pass) continue;
+        const a = (p - st0 - b.x * 0.12) / 0.05; if (a <= 0) continue;
+        const [k, dx] = XF[b.z], [bx, by] = b.s;
+        const [sc, op0] = stamp(a), xy = [tx(bx, k, dx), ty(by, k)];
+        let op = op0, col = C.ink, r = DR * sc * 0.85;
+        if (!b.fit) { op *= 1 - fi * 0.72; col = fi > 0.5 ? C.pale : C.ink; r *= 1 - fi * 0.2; }
+        else { r *= 1 + fi * 0.15; if (fi > 0.5) col = C.blue; }
+        if (cfg.facets) {
+          if (!b.fit) { op *= 1 - cl((p - mv0 + 0.04) / 0.06); dot(xy[0], xy[1], r, col, op); continue; }
+          const m = eio((p - mv0 - b.x * 0.06) / 0.14);
+          if (m > 0) {
+            const hi = b.f === cfg.focus, k2 = cl((p - mv0 - 0.16) / 0.06);
+            ctx.globalAlpha = op * (hi ? 1 : 1 - 0.5 * k2); ctx.fillStyle = hi || k2 < 0.5 ? C.blue : C.ink;
+            ctx.beginPath(); ctx.arc(xy[0] + (b.tx - xy[0]) * m, xy[1] + (b.ty - xy[1]) * m, DR * 0.95, 0, 6.2832); ctx.fill(); continue;
+          }
+        }
+        dot(xy[0], xy[1], r, col, op);
+      }
+      if (cfg.facets) {
+        const la = cl((p - mv0 - 0.14) / 0.06), ca = cl((p - mv0 - 0.2) / 0.06);
+        cfg.facets.forEach(([n, c], i) => { ctx.textAlign = 'left'; const x = FB[i][0] - 72, y = FB[i][1] - 22;
+          if (la > 0.01) { ctx.globalAlpha = la; ctx.fillStyle = i === cfg.focus ? C.ink : C.mid; ctx.font = '600 12px Geist, system-ui, sans-serif'; ctx.fillText(n, x, y); }
+          if (ca > 0.01) { ctx.globalAlpha = ca; ctx.fillStyle = C.mid; ctx.font = '500 12px Geist, system-ui, sans-serif'; ctx.fillText(c, x + ctx.measureText(n).width + 16, y); } });
+      }
+      if (cfg.mode === 'zones') {
+        const a = cl((p - 0.74) / 0.04) * (1 - cl((p - 0.81) / 0.03)), b = cl((p - 0.84) / 0.04);
+        const tz = ['Pacific & Mountain', 'Central time', 'Eastern time'];
+        const terr = [['West', ['P', 'M']], ['Central', ['C']], ['East', ['E']]];
+        terr.forEach(([n, zs], i) => {
+          const [k, dx] = xf(zs[0], p), x0 = Math.min(...zs.map(q => zb[q][0][0])), x1 = Math.max(...zs.map(q => zb[q][1][0]));
+          const cx = tx((x0 + x1) / 2, k, dx);
+          label(tz[i], cx, 44, a, false);
+          label(n + ' · ' + cfg.reps[i], cx, 36, b, true);
+          label(cfg.counts[i], cx, 52, cl((p - 0.88) / 0.04), false);
+        });
+      }
+      ctx.globalAlpha = 1;
+    }
+    window.__mapRedraw = () => { if (lastP != null) draw(lastP); };
+    return { draw, resize };
+  }
+  return { hero, search, story2 };
 })();
 

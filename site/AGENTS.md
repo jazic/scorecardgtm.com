@@ -64,11 +64,22 @@ into `public/design-system/`). Vite never processes them (bundling the CSS dropp
 | Home         | `/`       | `landing` entry `home`                                            |
 | Challenge    | `/challenge` | `landing` entry `challenge` (challenge, faq, signup blocks)    |
 | Contact      | `/contact` | `landing` entry `contact` (contact block)                         |
-| Audience pages | `/acquisition-search`, `/sales-teams`, `/founders` | `landing` entries (audience_hero, points, faq, signup) |
+| Audience pages | `/acquisition-search`, `/sales-teams`, `/founders` | Coded pages in `src/components/audience/` (see below); the `landing` entry supplies title, description and SEO only |
 | Privacy, Terms | `/privacy`, `/terms` | `landing` entries with a `prose` block (review copies in `../legal/`) |
 | Blog         | `/blog`, `/blog/{slug}`, `/blog/tag/{tag}` | `posts` collection; `/blog/tag/new-feature` is the changelog |
 | 404          | unknown URLs | `src/pages/404.astro` / `NotFound.astro` (also used by routes that find no entry) |
 | Landing page | `/[slug]` | Other `landing` entries and draft previews (`/home` redirects `/`) |
+
+## Audience pages
+
+`/sales-teams`, `/founders` and `/acquisition-search` render the approved audience mockup (November 2026), not CMS blocks:
+`src/components/audience/pages.ts` maps each slug to its HTML (`*.html`, copy included) and the config for its Search
+map, and `AudiencePage.astro` renders it inside `Layout` with `/site/audience.css`. Each page replays the homepage
+How it works story with audience copy. The map is `ScLattice.story2` in `scripts/2-logo.js.txt` (`window.SC_CFG`:
+`zones` splits the US into rep territories, `national` stamps fits nationally, `facets` then groups them by Signals);
+`3-story.js` uses it when `SC_CFG` is set, and `5-score.js` moves three rep columns when the Score stage has `.rows3`.
+The homepage doesn't set `SC_CFG`, so it is unchanged. To edit audience copy, edit the HTML files; the CMS sections on
+those entries are ignored until the pages move to CMS blocks (open item in `docs/tasks/2026-11-14-todo.md`).
 
 ## Schema
 

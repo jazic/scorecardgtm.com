@@ -21,7 +21,7 @@ window.ScoreFlow = (stage) => {
   const grp = dots.map(d => (d.c.getAttribute('style').match(/--gc:([^;]+)/) || [])[1]);
   const firsts = []; grp.forEach((g, i) => { if (i === 0 || g !== grp[i - 1]) firsts.push(i); });
   // the five dots that become the list's badges: A, A, B, B, C
-  const movers = [0, 1, firsts[1], firsts[1] + 1, firsts[2]];
+  const movers = document.querySelector('.rows3') ? [0, 1, 2, firsts[1], firsts[2]] : [0, 1, firsts[1], firsts[1] + 1, firsts[2]];
   const seed = document.createElementNS(NS, 'circle'); seed.style.fill = 'var(--grade-a)'; svg.appendChild(seed);
   const start = i => 0.46 + (i / N) * 0.17;
   return function draw(p) {

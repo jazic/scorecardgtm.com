@@ -1,6 +1,8 @@
 ---
 import { getSeoMeta, getSiteSettings } from "emdash";
 import Agents from "./Agents.astro";
+import AudiencePage from "../audience/AudiencePage.astro";
+import { AUDIENCE_PAGES } from "../audience/pages";
 import AudienceHero from "./AudienceHero.astro";
 import Audiences from "./Audiences.astro";
 import Challenge from "./Challenge.astro";
@@ -35,6 +37,7 @@ for (const b of entry.data.sections ?? []) {
 	else groups.push({ type: "block", value: b });
 }
 ---
+{entry.id in AUDIENCE_PAGES ? <AudiencePage entry={entry} title={seo.title} description={seo.description} /> :
 <Layout title={seo.title} description={seo.description} content={{ collection: "landing", id: entry.data.id, slug: entry.id }} home={entry.id === "home"} hasAgents={groups.some((g) => g.type === "agents")}>
 {groups.map((g) => {
 	if (g.type === "agents") return <Agents intro={g.intro} agents={g.agents} />;
@@ -42,3 +45,4 @@ for (const b of entry.data.sections ?? []) {
 	return Block ? <Block value={g.value} /> : null;
 })}
 </Layout>
+}

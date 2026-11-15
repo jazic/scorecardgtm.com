@@ -1,0 +1,12 @@
+---
+import Layout from "../home/Layout.astro";
+import { AUDIENCE_PAGES } from "./pages";
+
+// Renders an audience landing entry with its coded page (see pages.ts) inside the site layout.
+const { entry, title, description } = Astro.props as { entry: any; title: string; description?: string };
+const page = AUDIENCE_PAGES[entry.id]!;
+---
+<Layout title={title} description={description} content={{ collection: "landing", id: entry.data.id, slug: entry.id }} hasAgents styles={["/site/audience.css"]}>
+<script is:inline set:html={`window.SC_CFG=${JSON.stringify(page.story)};`} />
+<Fragment set:html={page.html} />
+</Layout>

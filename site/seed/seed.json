@@ -385,7 +385,7 @@
 				"status": "published",
 				"data": {
 					"title": "Home",
-					"description": "Describe the businesses you want in plain words. Scorecard finds US companies that match, checks the evidence, and ranks them by what matters to you. Find the right accounts without building a research workflow or sorting through a noisy database.",
+					"description": "Scorecard is B2B account research and scoring software. Describe the companies you want, and it researches US businesses, checks the evidence and ranks them by fit.",
 					"sections": [
 						{
 							"_type": "hero",
@@ -578,12 +578,12 @@
 									"icon": "globe"
 								},
 								{
-									"label": "Google Places",
+									"label": "Business directories",
 									"icon": "map-pin"
 								},
 								{
-									"label": "LinkedIn",
-									"icon": "linkedin"
+									"label": "Licensed data providers",
+									"icon": "file-spreadsheet"
 								},
 								{
 									"label": "State business filings",
@@ -624,7 +624,7 @@
 									"cta_style": "coral",
 									"then_note": "Trial first, then $59/month",
 									"highlight": true,
-									"card_features": "1,000 credits every month\nSearch, Research and scoring\nCustom Signals\nLinkedIn, Google Places, owner phone and email\nCRM integration and MCP access (coming soon)"
+									"card_features": "1,000 credits every month\nSearch, Research and scoring\nCustom Signals\nPremium research sources\nCRM integration and MCP access (coming soon)"
 								},
 								{
 									"name": "Teams",
@@ -682,7 +682,7 @@
 									"values": "—\n✓\n✓"
 								},
 								{
-									"label": "LinkedIn, Google Places, owner phone and email",
+									"label": "Premium research sources",
 									"note": "",
 									"coming_soon": false,
 									"values": "—\n✓\n✓"
@@ -723,8 +723,8 @@
 									"answer": "Review the source behind a finding before acting on it. Missing information should remain unknown rather than be treated as a confirmed match."
 								},
 								{
-									"question": "What owner and contact information is available?",
-									"answer": "Owner names may be available from websites and public records. Phone and email coverage varies by company; private-company revenue and willingness to sell may be unknown."
+									"question": "What does Scorecard tell me about a company?",
+									"answer": "What it does, who it serves, how long it has operated and who runs it, with a source for each finding. Private-company revenue and willingness to sell may be unknown."
 								},
 								{
 									"question": "Can I export my results?",
@@ -784,7 +784,7 @@
 							"fit_placeholder": "Owner-operated, 10–50 employees, at least five years in business, serves HOAs or property managers",
 							"submit_label": "Send us your search",
 							"offer": "First 10 accepted searches free, in exchange for honest feedback. No signup required to receive your list.",
-							"email": "hello@scorecardgtm.com",
+							"email": "support@scorecardgtm.com",
 							"alt_prompt": "Rather write it out? Email",
 							"bridge_heading": "Keep the search going.",
 							"bridge_body": "If the results are useful, continue in Scorecard: refine your criteria, explore another territory, and research your next accounts yourself. Start with the free trial, then choose the monthly plan if it earns its place in your workflow.",
@@ -864,7 +864,7 @@
 							"email_label": "Work email",
 							"company_label": "Company (optional)",
 							"error_text": "Something went wrong sending that. Check the fields and try again, or email us directly.",
-							"email": "hello@scorecardgtm.com"
+							"email": "support@scorecardgtm.com"
 						}
 					]
 				}
@@ -1170,7 +1170,7 @@
 										{
 											"_type": "span",
 											"_key": "privacy0s0",
-											"text": "This policy explains what information [Scorecard legal entity name] (\"Scorecard\", \"we\", \"us\") collects through scorecardgtm.com (the \"site\") and the Scorecard app at app.scorecardgtm.com (the \"service\"), how we use it, and the choices you have. If you have questions, email hello@scorecardgtm.com.",
+											"text": "This policy explains what information [Scorecard legal entity name] (\"Scorecard\", \"we\", \"us\") collects through scorecardgtm.com (the \"site\") and the Scorecard app at app.scorecardgtm.com (the \"service\"), how we use it, and the choices you have. If you have questions, email support@scorecardgtm.com.",
 											"marks": []
 										}
 									]
@@ -1418,7 +1418,7 @@
 										{
 											"_type": "span",
 											"_key": "privacy12s0",
-											"text": "Scorecard researches US businesses using public sources such as company websites, public records and business directories. Results can include business details and the names, roles and business contact details of owners and employees, as they appear in those sources. We use this information only to provide the service: to help customers find, research and prioritize businesses. If you appear in our results and want your information corrected or removed, email hello@scorecardgtm.com and we'll handle it promptly.",
+											"text": "Scorecard researches US businesses using public sources such as company websites, public records and business directories. Results can include business details and the names, roles and business contact details of owners and employees, as they appear in those sources. We use this information only to provide the service: to help customers find, research and prioritize businesses. If you appear in our results and want your information corrected or removed, email support@scorecardgtm.com and we'll handle it promptly.",
 											"marks": []
 										}
 									]
@@ -1790,7 +1790,7 @@
 										{
 											"_type": "span",
 											"_key": "privacy33s2",
-											"text": " Email hello@scorecardgtm.com and we'll help. We may need to verify your identity first.",
+											"text": " Email support@scorecardgtm.com and we'll help. We may need to verify your identity first.",
 											"marks": []
 										}
 									],
@@ -2000,7 +2000,7 @@
 										{
 											"_type": "span",
 											"_key": "privacy45s0",
-											"text": "[Scorecard legal entity name] [Mailing address] hello@scorecardgtm.com",
+											"text": "[Scorecard legal entity name] [Mailing address] support@scorecardgtm.com",
 											"marks": []
 										}
 									]
@@ -2090,7 +2090,7 @@
 										{
 											"_type": "span",
 											"_key": "terms4s0",
-											"text": "You need an account to use the app. Keep your sign-in details secure and tell us at hello@scorecardgtm.com if you think someone else has accessed your account. You're responsible for activity under your account. You must be at least 18 to use Scorecard.",
+											"text": "You need an account to use the app. Keep your sign-in details secure and tell us at support@scorecardgtm.com if you think someone else has accessed your account. You're responsible for activity under your account. You must be at least 18 to use Scorecard.",
 											"marks": []
 										}
 									]
@@ -2698,7 +2698,7 @@
 										{
 											"_type": "span",
 											"_key": "terms43s0",
-											"text": "[Scorecard legal entity name] [Mailing address] hello@scorecardgtm.com",
+											"text": "[Scorecard legal entity name] [Mailing address] support@scorecardgtm.com",
 											"marks": []
 										}
 									]

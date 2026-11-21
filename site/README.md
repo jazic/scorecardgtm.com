@@ -41,10 +41,8 @@ Open http://localhost:4321/_emdash/admin and complete the setup wizard. EmDash r
 
 ## Deploying
 
-```bash
-npx wrangler login
-npm run deploy
-```
+Merging `dev` into `main` deploys (GitHub Actions, `.github/workflows/deploy.yml`). `npm run deploy` only runs inside
+that workflow. See the Deploy section of the root `CLAUDE.md`.
 
 The first deployment provisions the named D1 database and R2 bucket from `wrangler.jsonc`. See [Deploy to Cloudflare](https://docs.emdashcms.com/deployment/cloudflare/) for production setup, or use the deploy button above.
 

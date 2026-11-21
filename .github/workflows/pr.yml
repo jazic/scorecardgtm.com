@@ -1,0 +1,26 @@
+# Checks on every pull request. Branch protection requires both on main.
+name: PR checks
+on:
+  pull_request:
+    branches: [main, dev]
+
+jobs:
+  source-is-dev:
+    runs-on: ubuntu-latest
+    steps:
+      - name: main only takes PRs from dev
+        if: github.base_ref == 'main' && github.head_ref != 'dev'
+        run: |
+          echo "::error::PRs into main must come from dev (this one is from ${{ github.head_ref }}). Open it against dev instead."
+          exit 1
+      - run: echo ok
+
+  build:
+    runs-on: ubuntu-latest
+    defaults: { run: { working-directory: site } }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version-file: site/.node-version, cache: npm, cache-dependency-path: site/package-lock.json }
+      - run: npm ci
+      - run: npm run build

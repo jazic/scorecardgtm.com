@@ -41,5 +41,5 @@ const cols: Col[] = nested ? links.filter((i) => i.children?.length).map((i) => 
     <div class="brand"><a class="logo" href={home ? "#top" : "/"}><svg data-sc-logo="none" viewBox="0 -4 24 30" role="img" aria-label={`${siteTitle} logo, click to replay`}></svg>{siteTitle}</a></div>
     {cols.map((c) => <nav class="fc" aria-label={c.label}><h4>{c.label}</h4>{c.items.map((i) => <a href={href(i.url)}>{i.label}</a>)}</nav>)}
   </div>
-  <div class="legal">{legal.map((i) => <a href={href(i.url)}>{i.label}</a>)}<span>© {year} {siteTitle}</span></div>
+  <div class="legal">{legal.map((i) => <a href={href(i.url)}>{i.label}</a>)}<a href="/terms">Refunds &amp; cancellation</a><span>© {year} {siteTitle}</span></div>
 </div></footer>

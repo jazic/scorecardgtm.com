@@ -39,8 +39,11 @@ This repo is the marketing surface for **Scorecard** — public website, design 
 
 ## Deploy
 
-From `site/`, with Node 24 (`mise exec node@24 --`): `npm run deploy` (build + `wrangler deploy`). There is no CI deploy;
-pushing to GitHub doesn't publish anything. The Worker serves scorecardgtm.com and www (→ apex); workers.dev is off.
+Two branches. **All work goes to `dev`** (push to it, or PR a feature branch into it). **`main` is what's live**: it only
+takes PRs from `dev` (the `source-is-dev` and `build` checks must pass), and every push to `main` deploys through
+`.github/workflows/deploy.yml`. `npm run deploy` refuses to run outside that workflow; don't run `wrangler deploy` by hand.
+Roll back with `npx wrangler rollback <version-id>` (list: `npx wrangler deployments list`), then revert on `dev` and ship it.
+The Worker serves scorecardgtm.com and www (→ apex); workers.dev is off.
 Production D1 is `scorecardgtm-prod`. Email goes out from `notifications@tx.scorecardgtm.com` (Cloudflare Email Sending).
 
 ## Local dev

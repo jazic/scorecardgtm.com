@@ -14,7 +14,7 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "deploy": "npm run build && wrangler deploy",
+    "deploy": "node -e \"if(!process.env.CI_DEPLOY){console.error('Deploys run from GitHub Actions when dev is merged into main. Open a PR dev -> main.');process.exit(1)}\" && npm run build && wrangler deploy",
     "typecheck": "astro check"
   },
   "dependencies": {
